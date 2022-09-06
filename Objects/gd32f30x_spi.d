@@ -7,7 +7,7 @@
 .\objects\gd32f30x_spi.o: .\CMSIS\core_cmFunc.h
 .\objects\gd32f30x_spi.o: .\CMSIS\core_cm4_simd.h
 .\objects\gd32f30x_spi.o: .\CMSIS\GD32F30x\Include\system_gd32f30x.h
-.\objects\gd32f30x_spi.o: ..\GD32F303VCT6\gd32f30x_libopt.h
+.\objects\gd32f30x_spi.o: ..\Robot-APP\gd32f30x_libopt.h
 .\objects\gd32f30x_spi.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h
 .\objects\gd32f30x_spi.o: .\CMSIS\GD32F30x\Include\gd32f30x.h
 .\objects\gd32f30x_spi.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_adc.h

@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F30X_HD,__TARGET_FPU_VFP</Define>
               <Undefine></Undefine>
-              <IncludePath>..\GD32F303VCT6;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API</IncludePath>
+              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>

@@ -8,7 +8,7 @@
 .\objects\main.o: .\CMSIS\core_cmFunc.h
 .\objects\main.o: .\CMSIS\core_cm4_simd.h
 .\objects\main.o: .\CMSIS\GD32F30x\Include\system_gd32f30x.h
-.\objects\main.o: ..\GD32F303VCT6\gd32f30x_libopt.h
+.\objects\main.o: ..\Robot-APP\gd32f30x_libopt.h
 .\objects\main.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_adc.h
 .\objects\main.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_can.h
 .\objects\main.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_crc.h
