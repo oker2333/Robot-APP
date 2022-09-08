@@ -17,6 +17,8 @@
 
 #include "fifo.h"
 
+#include "app_config.h"
+
 #define FIFO_BUFFER_SIZE 1024
 FIFO_BUFFER FIFO_Queue;
 FIFO_BUFFER *Queue_PTR = &FIFO_Queue;
@@ -41,6 +43,9 @@ static void VL6180xTask( void *pvParameters );
 
 int main(void)
 {
+	  nvic_vector_table_set(NVIC_VECTTAB_FLASH, APP_OFFSET);
+	  __enable_irq();
+	  
 	  FIFO_Callback_Init(usart0_dma_send,usart0_dma_recv);
 		FIFO_Init(Queue_PTR,FIFO_Buffer,FIFO_BUFFER_SIZE);
 		

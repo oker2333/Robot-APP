@@ -392,6 +392,11 @@
               <FileType>1</FileType>
               <FilePath>.\gd32f30x_it.c</FilePath>
             </File>
+            <File>
+              <FileName>app_config.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\app_config.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

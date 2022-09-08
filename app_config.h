@@ -1,0 +1,26 @@
+#ifndef IAP_CONFIG_H_
+#define IAP_CONFIG_H_
+
+/* 
+	256KB FLASH
+	#define FMC_PAGE_NUM           	((uint16_t)0x80U)
+	#define FMC_PAGE_SIZE           ((uint16_t)0x800U)
+	#define FMC_WRITE_START_ADDR    ((uint32_t)0x08000000U)
+	#define FMC_WRITE_END_ADDR      ((uint32_t)0x0803FFFFU)
+*/
+
+#define FLASH_BASE_ADDR 	((uint32_t)0x08000000U)
+#define FLASH_TOTAL_SIZE 	((uint32_t)0x0x8000U)
+#define IAP_ADDRESS 			(FLASH_BASE_ADDR + IAP_OFFSET)
+#define APP_ADDRESS 			(FLASH_BASE_ADDR + APP_OFFSET)
+#define INF_ADDRESS 			(FLASH_BASE_ADDR + INF_OFFSET)
+
+#define IAP_FLASH_SIZE (APP_OFFSET)
+#define APP_FLASH_SIZE (INF_OFFSET-APP_OFFSET)
+#define INF_FLASH_SIZE (INF_OFFSET-APP_OFFSET)
+
+#define IAP_OFFSET ((uint32_t)0x00000000U)
+#define APP_OFFSET ((uint32_t)0x00008000U)
+#define INF_OFFSET ((uint32_t)0x0003F800U)
+
+#endif
