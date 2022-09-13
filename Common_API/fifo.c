@@ -156,13 +156,10 @@ bool FIFO_Available(
     return ret;
 }
 
-static txCallback_t tx_callback = NULL;
-static rxCallback_t rx_callback = NULL;
-
-void FIFO_Callback_Init(txCallback_t tx_cb,rxCallback_t rx_cb)
+void FIFO_Callback_Init(FIFO_BUFFER *b, txCallback_t tx_cb,rxCallback_t rx_cb)
 {
-	 tx_callback = tx_cb;
-	 rx_callback = rx_cb;
+	 b->tx_callback = tx_cb;
+	 b->rx_callback = rx_cb;
 }
 
 void FIFO_Tansmit(FIFO_BUFFER *b)
@@ -175,10 +172,10 @@ void FIFO_Tansmit(FIFO_BUFFER *b)
 	 {
 		  if(head < tail)
 			{
-				 tx_callback(&b->buffer[tail],b->buffer_len - tail);
+				 b->tx_callback(&b->buffer[tail],b->buffer_len - tail);
 				 tail = 0;
 			}
-			tx_callback(&b->buffer[tail],head - tail);
+			b->tx_callback(&b->buffer[tail],head - tail);
 			b->head = 0;
 			b->tail = b->head;
 	 }
@@ -191,7 +188,7 @@ void FIFO_Recv(FIFO_BUFFER *b)
 	 uint16_t rx_len = 0,free_len = 0;
 	 uint8_t rx_buffer[1024];
 	 
-	 rx_len = rx_callback(rx_buffer);
+	 rx_len = b->rx_callback(rx_buffer);
 	 
    fifoENTER_CRITICAL_FROM_ISR();
    free_len = b->buffer_len - FIFO_Count(b);

@@ -46,10 +46,10 @@ int main(void)
 	  nvic_vector_table_set(NVIC_VECTTAB_FLASH, APP_OFFSET);
 	  __enable_irq();
 	  
-	  FIFO_Callback_Init(usart0_dma_send,usart0_dma_recv);
+	  FIFO_Callback_Init(Queue_PTR,usart0_dma_send,usart0_dma_recv);
 		FIFO_Init(Queue_PTR,FIFO_Buffer,FIFO_BUFFER_SIZE);
 		
-		bsp_usart_init(230400);
+		bsp_usart_init(115200);
 		bsp_iic_init(I2C0);
 	
 		/* led gpio init */

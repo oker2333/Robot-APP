@@ -17,6 +17,9 @@
 *
 * @{
 */
+typedef void (*txCallback_t)(uint8_t *buffer,uint16_t len);
+typedef uint16_t (*rxCallback_t)(uint8_t *buffer);
+
 struct fifo_buffer_t {
     /** first byte of data */
     unsigned head;
@@ -26,17 +29,17 @@ struct fifo_buffer_t {
     uint8_t *buffer;
     /** length of the data */
     unsigned buffer_len;
+	  txCallback_t tx_callback;
+	  rxCallback_t rx_callback;
 };
+
 typedef struct fifo_buffer_t FIFO_BUFFER;
 /** @} */
 
 #define fifoENTER_CRITICAL_FROM_ISR() uint32_t ulReturn = taskENTER_CRITICAL_FROM_ISR()
 #define fifoEXIT_CRITICAL_FROM_ISR() taskEXIT_CRITICAL_FROM_ISR(ulReturn)
 
-typedef void (*txCallback_t)(uint8_t *buffer,uint16_t len);
-typedef uint16_t (*rxCallback_t)(uint8_t *buffer);
-
-void FIFO_Callback_Init(txCallback_t tx_cb,rxCallback_t rx_cb);
+void FIFO_Callback_Init(FIFO_BUFFER *b,txCallback_t tx_cb,rxCallback_t rx_cb);
 void FIFO_Tansmit(FIFO_BUFFER *b);
 void FIFO_Recv(FIFO_BUFFER *b);
 

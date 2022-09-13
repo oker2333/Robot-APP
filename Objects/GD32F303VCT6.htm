@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\GD32F303VCT6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\GD32F303VCT6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Sep 14 00:06:59 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Sep 14 00:15:02 2022
 <BR><P>
 <H3>Maximum Stack Usage =       1120 bytes + Unknown(Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -674,7 +674,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FIFO_Add
 </UL>
 
-<P><STRONG><a name="[e8]"></a>FIFO_Callback_Init</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, fifo.o(i.FIFO_Callback_Init))
+<P><STRONG><a name="[e8]"></a>FIFO_Callback_Init</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, fifo.o(i.FIFO_Callback_Init))
 <BR><BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
@@ -691,7 +691,7 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[80]"></a>FIFO_Recv</STRONG> (Thumb, 88 bytes, Stack size 1048 bytes, fifo.o(i.FIFO_Recv))
+<P><STRONG><a name="[80]"></a>FIFO_Recv</STRONG> (Thumb, 86 bytes, Stack size 1048 bytes, fifo.o(i.FIFO_Recv))
 <BR><BR>[Stack]<UL><LI>Max Depth = 1112<LI>Call Chain = FIFO_Recv &rArr; FIFO_Add &rArr; FIFO_Available &rArr; FIFO_Count
 </UL>
 <BR>[Calls]<UL><LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;FIFO_Count
@@ -1403,7 +1403,7 @@ Global Symbols
 <LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VL6180_Read_Multiple_Register
 </UL>
 
-<P><STRONG><a name="[66]"></a>main</STRONG> (Thumb, 160 bytes, Stack size 16 bytes, main.o(i.main))
+<P><STRONG><a name="[66]"></a>main</STRONG> (Thumb, 164 bytes, Stack size 16 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 184 + Unknown Stack Size
 <LI>Call Chain = main &rArr; vTaskStartScheduler &rArr; xTimerCreateTimerTask &rArr; xTaskCreate &rArr; pvPortMalloc &rArr; xTaskResumeAll &rArr; xTaskIncrementTick
 </UL>
