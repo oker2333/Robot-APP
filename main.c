@@ -19,6 +19,8 @@
 
 #include "app_config.h"
 
+#include "print.h"
+
 #define FIFO_BUFFER_SIZE 1024
 FIFO_BUFFER FIFO_Queue;
 FIFO_BUFFER *Queue_log = &FIFO_Queue;
@@ -97,9 +99,7 @@ static void VL6180xTask( void *pvParameters )
         VL6180x_RangeGetMeasurement(theVL6180xDev, &RangeData);
         if( RangeData.errorStatus == 0){
             MyDev_ShowRange(theVL6180xDev, RangeData.range_mm, 0);
-						uint8_t buffer[12] = {0};
-						sprintf((char*)buffer,"%d\n",RangeData.range_mm);
-						usart0_dma_send(buffer,4);
+						printf("range_mm = %d\r\n",RangeData.range_mm);
         }
         else{
             MyDev_ShowErr(theVL6180xDev, RangeData.errorStatus);
