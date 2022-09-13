@@ -143,11 +143,11 @@ void DMA0_Channel3_IRQHandler(void)
 }
 
 /*DMA RX*/
-extern FIFO_BUFFER *Queue_PTR;
+extern FIFO_BUFFER *Queue_log;
 void DMA0_Channel4_IRQHandler(void)
 {
     if(dma_interrupt_flag_get(DMA0, DMA_CH4, DMA_INT_FLAG_FTF)){     
-			 FIFO_Recv(Queue_PTR);
+			 FIFO_Recv(Queue_log);
 			 dma_interrupt_flag_clear(DMA0, DMA_CH4, DMA_INT_FLAG_G);
     }
 }
@@ -156,7 +156,7 @@ void DMA0_Channel4_IRQHandler(void)
 void USART0_IRQHandler(void)
 {
     if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_IDLE)){
-			  FIFO_Recv(Queue_PTR);
+			  FIFO_Recv(Queue_log);
 				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_IDLE);
         USART_STAT0(USART0);
 			  USART_DATA(USART0);

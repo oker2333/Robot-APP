@@ -29,7 +29,7 @@ Section Cross References
     main.o(i.main) refers to tasks.o(i.vTaskStartScheduler) for vTaskStartScheduler
     main.o(i.main) refers to usart.o(i.usart0_dma_recv) for usart0_dma_recv
     main.o(i.main) refers to usart.o(i.usart0_dma_send) for usart0_dma_send
-    main.o(i.main) refers to main.o(.data) for Queue_PTR
+    main.o(i.main) refers to main.o(.data) for Queue_log
     main.o(i.main) refers to main.o(.bss) for FIFO_Buffer
     main.o(i.main) refers to main.o(i.ledTestTask) for ledTestTask
     main.o(i.main) refers to main.o(i.VL6180xTask) for VL6180xTask
@@ -625,12 +625,12 @@ Section Cross References
     usart.o(i.DMA0_Channel4_IRQHandler) refers to gd32f30x_dma.o(i.dma_interrupt_flag_get) for dma_interrupt_flag_get
     usart.o(i.DMA0_Channel4_IRQHandler) refers to fifo.o(i.FIFO_Recv) for FIFO_Recv
     usart.o(i.DMA0_Channel4_IRQHandler) refers to gd32f30x_dma.o(i.dma_interrupt_flag_clear) for dma_interrupt_flag_clear
-    usart.o(i.DMA0_Channel4_IRQHandler) refers to main.o(.data) for Queue_PTR
+    usart.o(i.DMA0_Channel4_IRQHandler) refers to main.o(.data) for Queue_log
     usart.o(i.USART0_IRQHandler) refers to gd32f30x_usart.o(i.usart_interrupt_flag_get) for usart_interrupt_flag_get
     usart.o(i.USART0_IRQHandler) refers to fifo.o(i.FIFO_Recv) for FIFO_Recv
     usart.o(i.USART0_IRQHandler) refers to gd32f30x_usart.o(i.usart_interrupt_flag_clear) for usart_interrupt_flag_clear
     usart.o(i.USART0_IRQHandler) refers to queue.o(i.xQueueGiveFromISR) for xQueueGiveFromISR
-    usart.o(i.USART0_IRQHandler) refers to main.o(.data) for Queue_PTR
+    usart.o(i.USART0_IRQHandler) refers to main.o(.data) for Queue_log
     usart.o(i.USART0_IRQHandler) refers to usart.o(.data) for UsartxSemaphore
     usart.o(i.bsp_usart_init) refers to queue.o(i.xQueueGenericCreate) for xQueueGenericCreate
     usart.o(i.bsp_usart_init) refers to usart.o(i.nvic_config) for nvic_config
@@ -1844,11 +1844,11 @@ Removing Unused input sections from the image.
     Removing fifo.o(i.FIFO_Full), (66 bytes).
     Removing fifo.o(i.FIFO_Get), (74 bytes).
     Removing fifo.o(i.FIFO_Peek), (62 bytes).
-    Removing fifo.o(i.FIFO_Pull), (110 bytes).
+    Removing fifo.o(i.FIFO_Pull), (114 bytes).
     Removing fifo.o(i.FIFO_Put), (80 bytes).
     Removing fifo.o(i.FIFO_Tansmit), (110 bytes).
 
-766 unused section(s) (total 35444 bytes) removed from the image.
+766 unused section(s) (total 35448 bytes) removed from the image.
 
 ==============================================================================
 
@@ -2783,7 +2783,7 @@ Image Symbol Table
     __fplib_config_pureend_doubles           0x0800d891   Thumb Code     0  fpinit.o(x$fpl$fpinit)
     Region$$Table$$Base                      0x0800da24   Number         0  anon$$obj.o(Region$$Table)
     Region$$Table$$Limit                     0x0800da44   Number         0  anon$$obj.o(Region$$Table)
-    Queue_PTR                                0x20000000   Data           4  main.o(.data)
+    Queue_log                                0x20000000   Data           4  main.o(.data)
     LedTestTaskHanle                         0x20000004   Data           4  main.o(.data)
     VL6180xTaskHanle                         0x20000008   Data           4  main.o(.data)
     VL6180xSemaphore                         0x2000000c   Data           4  main.o(.data)
@@ -3155,7 +3155,7 @@ Image component sizes
 
          0          0          0          0          0      12180   event_groups.o
        144         18          0          0          0       1024   exti.o
-       370          0          0          0          0       8906   fifo.o
+       370          0          0          0          0       8902   fifo.o
          0          0          0          0          0       1428   gd32f30x_can.o
        970          6          0          0          0      10193   gd32f30x_dma.o
        232         16          0          0          0       1982   gd32f30x_exti.o
@@ -3181,7 +3181,7 @@ Image component sizes
        168          8          0          1          0       2595   vl6180x_range_interrupt.o
 
     ----------------------------------------------------------------------
-     20770       1278        752        460       8520     289620   Object Totals
+     20770       1278        752        460       8520     289616   Object Totals
          0          0         32          0          0          0   (incl. Generated)
         30          0          1          3          0          0   (incl. Padding)
 
@@ -3248,8 +3248,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-     22338       1326        770        460       8620     270148   Grand Totals
-     22338       1326        770         92       8620     270148   ELF Image Totals (compressed)
+     22338       1326        770        460       8620     270144   Grand Totals
+     22338       1326        770         92       8620     270144   ELF Image Totals (compressed)
      22338       1326        770         92          0          0   ROM Totals
 
 ==============================================================================

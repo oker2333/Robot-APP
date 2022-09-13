@@ -288,9 +288,7 @@ unsigned FIFO_Pull(
     uint8_t data_byte;
     unsigned index;
 
-		
-    
-    count = FIFO_Count(b);
+		count = FIFO_Count(b);
     if (count > length) {
         /* adjust to limit the number of bytes pulled */
         count = length;
@@ -299,18 +297,19 @@ unsigned FIFO_Pull(
         /* adjust the return value */
         length = count;
     }
+		
+		fifoENTER_CRITICAL_FROM_ISR();
     while (count) {
-			  fifoENTER_CRITICAL_FROM_ISR();
         index = b->tail % b->buffer_len;
         data_byte = b->buffer[index];
         b->tail++;
-			  fifoEXIT_CRITICAL_FROM_ISR();
         if (buffer) {
             *buffer = data_byte;
             buffer++;
         }
         count--;
     }
+		fifoEXIT_CRITICAL_FROM_ISR();
 		
     return length;
 }
@@ -364,15 +363,15 @@ bool FIFO_Add(
 	
     /* limit the buffer to prevent overwriting */
     if (FIFO_Available(b, count) && buffer) {
+			  fifoENTER_CRITICAL_FROM_ISR();
         while (count) {
-					  fifoENTER_CRITICAL_FROM_ISR();
             index = b->head % b->buffer_len;
             b->buffer[index] = *buffer;
             b->head++;
-					  fifoEXIT_CRITICAL_FROM_ISR();
             buffer++;
             count--;
         }
+				fifoEXIT_CRITICAL_FROM_ISR();
         status = true;
     }
 		
