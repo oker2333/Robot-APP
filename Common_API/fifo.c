@@ -105,17 +105,16 @@ unsigned FIFO_Count(
     FIFO_BUFFER const *b)
 {
     unsigned head, tail, ret;        /* used to avoid volatile decision */
-
-		fifoENTER_CRITICAL_FROM_ISR();
-	
+		
     if (b) {
+			  fifoENTER_CRITICAL_FROM_ISR();
         head = b->head;
         tail = b->tail;
         ret = head - tail;
+			  fifoEXIT_CRITICAL_FROM_ISR();
     } else {
         ret = 0;
     }
-		fifoEXIT_CRITICAL_FROM_ISR();
 		
 		return ret;
 }
@@ -234,15 +233,13 @@ uint8_t FIFO_Peek(
 {
     unsigned index;
 		uint8_t ret = 0;
-	
-		fifoENTER_CRITICAL_FROM_ISR();
-	
+		
     if (b) {
+			  fifoENTER_CRITICAL_FROM_ISR();
         index = b->tail % b->buffer_len;
         ret = (b->buffer[index]);
+			  fifoEXIT_CRITICAL_FROM_ISR();
     }
-
-		fifoEXIT_CRITICAL_FROM_ISR();
 		
     return ret;
 }
@@ -262,17 +259,15 @@ uint8_t FIFO_Get(
 {
     uint8_t data_byte = 0;
     unsigned index;
-	
-		fifoENTER_CRITICAL_FROM_ISR();
-	
+		
     if (!FIFO_Empty(b)) {
+			  fifoENTER_CRITICAL_FROM_ISR();
         index = b->tail % b->buffer_len;
         data_byte = b->buffer[index];
         b->tail++;
+			  fifoEXIT_CRITICAL_FROM_ISR();
     }
-		
-		fifoEXIT_CRITICAL_FROM_ISR();
-		
+				
     return data_byte;
 }
 
@@ -296,7 +291,7 @@ unsigned FIFO_Pull(
     uint8_t data_byte;
     unsigned index;
 
-		fifoENTER_CRITICAL_FROM_ISR();
+		
     
     count = FIFO_Count(b);
     if (count > length) {
@@ -308,9 +303,11 @@ unsigned FIFO_Pull(
         length = count;
     }
     while (count) {
+			  fifoENTER_CRITICAL_FROM_ISR();
         index = b->tail % b->buffer_len;
         data_byte = b->buffer[index];
         b->tail++;
+			  fifoEXIT_CRITICAL_FROM_ISR();
         if (buffer) {
             *buffer = data_byte;
             buffer++;
@@ -318,8 +315,6 @@ unsigned FIFO_Pull(
         count--;
     }
 		
-		fifoEXIT_CRITICAL_FROM_ISR();
-
     return length;
 }
 
@@ -337,21 +332,19 @@ bool FIFO_Put(
 {
     bool status = false;        /* return value */
     unsigned index;
-
-		fifoENTER_CRITICAL_FROM_ISR();
 	
     if (b) {
         /* limit the buffer to prevent overwriting */
         if (!FIFO_Full(b)) {
+					  fifoENTER_CRITICAL_FROM_ISR();
             index = b->head % b->buffer_len;
             b->buffer[index] = data_byte;
             b->head++;
+					  fifoEXIT_CRITICAL_FROM_ISR();
             status = true;
         }
     }
 		
-		fifoEXIT_CRITICAL_FROM_ISR();
-
     return status;
 }
 
@@ -371,23 +364,21 @@ bool FIFO_Add(
 {
     bool status = false;        /* return value */
     unsigned index;
-
-		fifoENTER_CRITICAL_FROM_ISR();
 	
     /* limit the buffer to prevent overwriting */
     if (FIFO_Available(b, count) && buffer) {
         while (count) {
+					  fifoENTER_CRITICAL_FROM_ISR();
             index = b->head % b->buffer_len;
             b->buffer[index] = *buffer;
             b->head++;
+					  fifoEXIT_CRITICAL_FROM_ISR();
             buffer++;
             count--;
         }
         status = true;
     }
 		
-		fifoEXIT_CRITICAL_FROM_ISR();
-
     return status;
 }
 
@@ -403,14 +394,12 @@ void FIFO_Flush(
 {
     unsigned head;      /* used to avoid volatile decision */
 
-		fifoENTER_CRITICAL_FROM_ISR();
-	
 	  if (b) {
+			  fifoENTER_CRITICAL_FROM_ISR();
         head = b->head;
         b->tail = head;
-    }
-		
-		fifoEXIT_CRITICAL_FROM_ISR();
+			  fifoEXIT_CRITICAL_FROM_ISR();
+    }	
 }
 
 /**
@@ -427,15 +416,15 @@ void FIFO_Init(
     uint8_t * buffer,
     unsigned buffer_len)
 {
-		fifoENTER_CRITICAL_FROM_ISR();
+		
 	
 		if (b && buffer && buffer_len) {
+			  fifoENTER_CRITICAL_FROM_ISR();
         b->head = 0;
         b->tail = 0;
         b->buffer = buffer;
         b->buffer_len = buffer_len;
+			  fifoEXIT_CRITICAL_FROM_ISR();
     }
-		
-		fifoEXIT_CRITICAL_FROM_ISR();
 }
 
