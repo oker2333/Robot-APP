@@ -32,10 +32,15 @@ static uint8_t FIFO_Buffer[FIFO_BUFFER_SIZE] = {0};
 TaskHandle_t LedTestTaskHanle;
 static void ledTestTask( void *pvParameters );
 
-#define VL6180x_TASK_PRIORITY 0
+#define VL6180x_TASK_PRIORITY 5
 #define VL6180x_TASK_STK_SIZE 130
 TaskHandle_t VL6180xTaskHanle;
 static void VL6180xTask( void *pvParameters );
+
+#define LOG_TASK_PRIORITY 2
+#define LOG_TASK_STK_SIZE 130
+TaskHandle_t LogTaskHanle;
+static void LogTask( void *pvParameters );
 
 /*
 	FLASH:256KB,start:0x8000000,size:0x40000
@@ -66,6 +71,7 @@ int main(void)
 	
 		xTaskCreate(ledTestTask, "ledTestTask", LED_TEST_TASK_STK_SIZE, NULL, LED_TEST_TASK_PRIORITY, &LedTestTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
+		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 	
 		vTaskStartScheduler();
 
@@ -105,4 +111,13 @@ static void VL6180xTask( void *pvParameters )
             MyDev_ShowErr(theVL6180xDev, RangeData.errorStatus);
         } 
 	 }
+}
+
+static void LogTask(void *pvParameters)
+{
+	  while(1)
+		{
+			 print_logs();
+			 vTaskDelay(pdMS_TO_TICKS(100));
+		}
 }
