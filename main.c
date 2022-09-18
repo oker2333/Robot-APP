@@ -56,7 +56,7 @@ int main(void)
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,usart0_dma_recv);
 		FIFO_Init(Queue_log,FIFO_Buffer,FIFO_BUFFER_SIZE);
 		
-		bsp_usart_init(115200);
+		bsp_usart_init(460800);
 		bsp_iic_init(I2C0);
 	
 		/* led gpio init */
