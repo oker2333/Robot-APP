@@ -1,5 +1,8 @@
 #include "iic.h"
 
+#define POLLING_COUNT 1000
+static uint32_t delay_counts = 0;
+
 void bsp_iic_init(I2C_TypeDef I2Cx)
 {
     /* enable GPIOB clock */
@@ -25,21 +28,24 @@ uint8_t VL6180_Read_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint
 {
 		uint8_t value = 0xFF;
     /* wait until I2C bus is idle */
-    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY));
+		delay_counts = POLLING_COUNT;
+    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY) && delay_counts--);
 		
 		/* 1.开始*/
     /* send a start condition to I2C bus */
     i2c_start_on_bus(I2Cx);		
 
     /* wait until SBSEND bit is set */
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND));		
+	  delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND) && delay_counts--);		
 		
 		/* 2.设备地址 */
     /* send slave address to I2C bus*/
     i2c_master_addressing(I2Cx, SlaveAddress, I2C_TRANSMITTER);
 
     /* wait until ADDSEND bit is set*/
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND));
+	  delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND) && delay_counts--);
 		
     /* clear ADDSEND bit */
     i2c_flag_clear(I2Cx, I2C_FLAG_ADDSEND);		
@@ -47,11 +53,13 @@ uint8_t VL6180_Read_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint
 		/* 3.寄存器地址*/
 		/* send address 15...8*/
 		i2c_data_transmit(I2Cx, Reg_Address >> 8);
-		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE));
+		delay_counts = POLLING_COUNT;
+		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE) && delay_counts--);
 		
 		/* send address 7...0*/
 		i2c_data_transmit(I2Cx, Reg_Address & 0xFF);
-		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE)){}
+		delay_counts = POLLING_COUNT;
+		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE) && delay_counts--){}
 		
 		/* 4.停止 */
     /* send a stop condition to I2C bus*/
@@ -59,38 +67,45 @@ uint8_t VL6180_Read_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint
 
 		/* 5.开始 */
     /* wait until stop condition generate */ 
-    while(I2C_CTL0(I2Cx)&0x0200);				
+		delay_counts = POLLING_COUNT;
+    while(I2C_CTL0(I2Cx)&0x0200 && delay_counts--);				
 		
     /* wait until I2C bus is idle */
-    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY));
+		delay_counts = POLLING_COUNT;
+    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY) && delay_counts--);
     /* send a start condition to I2C bus */
     i2c_start_on_bus(I2Cx);
     /* wait until SBSEND bit is set */
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND));
+		delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND) && delay_counts--);
 
 		/* 6.设备地址 */
     /* send slave address to I2C bus */
     i2c_master_addressing(I2Cx, SlaveAddress, I2C_RECEIVER);
 
     /* wait until ADDSEND bit is set */
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND));
+		delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND) && delay_counts--);
     /* clear ADDSEND bit */
     i2c_flag_clear(I2Cx, I2C_FLAG_ADDSEND);
 		
 		/* 7.读取数据 */
 		/* wait until the second last data byte is received into the shift register */
-		while(!i2c_flag_get(I2Cx, I2C_FLAG_BTC));
+		delay_counts = POLLING_COUNT;
+		while(!i2c_flag_get(I2Cx, I2C_FLAG_BTC) && delay_counts--);
 		/* disable acknowledge */
 		i2c_ack_config(I2Cx, I2C_ACK_DISABLE);
 		/* wait until the RBNE bit is set */
-		while(!i2c_flag_get(I2Cx, I2C_FLAG_RBNE));
+		delay_counts = POLLING_COUNT;
+		while(!i2c_flag_get(I2Cx, I2C_FLAG_RBNE) && delay_counts--);
 		value = i2c_data_receive(I2Cx);
 
 		/* 8.结束 */
     /* send a stop condition to I2C bus */
     i2c_stop_on_bus(I2Cx);
     /* wait until stop condition generate */
-    while(I2C_CTL0(I2Cx)&0x0200);
+		delay_counts = POLLING_COUNT;
+    while(I2C_CTL0(I2Cx)&0x0200 && delay_counts--);
     /* enable acknowledge */
     i2c_ack_config(I2Cx, I2C_ACK_ENABLE);
 		
@@ -100,28 +115,32 @@ uint8_t VL6180_Read_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint
 void VL6180_Write_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint16_t Reg_Address,uint8_t WriteValue)
 {
     /* wait until I2C bus is idle */
-    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY));
+		delay_counts = POLLING_COUNT;
+    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY) && delay_counts--);
 		
 		/* 1.开始*/
     /* send a start condition to I2C bus */
     i2c_start_on_bus(I2Cx);		
 
     /* wait until SBSEND bit is set */
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND));
+		delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND) && delay_counts--);
 		
 		/* 2.设备地址 */
     /* send slave address to I2C bus*/
     i2c_master_addressing(I2Cx, SlaveAddress, I2C_TRANSMITTER);
 
     /* wait until ADDSEND bit is set*/
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND));
+	  delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND) && delay_counts--);
 
     /* clear ADDSEND bit */
     i2c_flag_clear(I2Cx, I2C_FLAG_ADDSEND);
 		
 		/* 3.寄存器地址*/
 		i2c_data_transmit(I2Cx, Reg_Address >> 8);
-		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE)){}
+		delay_counts = POLLING_COUNT;
+		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE) && delay_counts--){}
 		
 		i2c_data_transmit(I2Cx, Reg_Address & 0xFF);
 		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE)){}
@@ -131,34 +150,39 @@ void VL6180_Write_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint16
 		i2c_data_transmit(I2Cx,WriteValue);
 	
 		/* wait until the transmission data register is empty*/
-		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE)){}
+		delay_counts = POLLING_COUNT;
+		while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE) && delay_counts--){}
 		
 		/* 5.停止 */
     /* send a stop condition to I2C bus*/
     i2c_stop_on_bus(I2Cx);
 
     /* wait until stop condition generate */ 
-    while(I2C_CTL0(I2Cx)&0x0200);		
+		delay_counts = POLLING_COUNT;
+    while(I2C_CTL0(I2Cx)&0x0200 && delay_counts--);		
 }
 
 uint8_t VL6180_Write_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint8_t *pBuffer,uint8_t NumByteToWrite)
 {
     /* wait until I2C bus is idle */
-    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY));
+		delay_counts = POLLING_COUNT;
+    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY) && delay_counts--);
 		
 		/* 1.开始*/
     /* send a start condition to I2C bus */
     i2c_start_on_bus(I2Cx);		
 
     /* wait until SBSEND bit is set */
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND));
+	  delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND) && delay_counts--);
 		
 		/* 2.设备地址 */
     /* send slave address to I2C bus*/
     i2c_master_addressing(I2Cx, SlaveAddress, I2C_TRANSMITTER);
 
     /* wait until ADDSEND bit is set*/
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND));
+	  delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND) && delay_counts--);
 
     /* clear ADDSEND bit */
     i2c_flag_clear(I2Cx, I2C_FLAG_ADDSEND);
@@ -170,7 +194,8 @@ uint8_t VL6180_Write_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, u
 			i2c_data_transmit(I2Cx,*pBuffer);
 		
 			/* wait until the transmission data register is empty*/
-			while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE)){}
+			delay_counts = POLLING_COUNT;
+			while(!i2c_flag_get(I2Cx, I2C_FLAG_TBE) && delay_counts--){}
       pBuffer++;
     }
 		
@@ -179,7 +204,8 @@ uint8_t VL6180_Write_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, u
     i2c_stop_on_bus(I2Cx);
 
     /* wait until stop condition generate */ 
-    while(I2C_CTL0(I2Cx)&0x0200);
+		delay_counts = POLLING_COUNT;
+    while(I2C_CTL0(I2Cx)&0x0200 && delay_counts--);
 		return 0;
 }
 
@@ -187,21 +213,25 @@ uint8_t VL6180_Read_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, ui
 {
 		/* 1.开始 */
     /* wait until stop condition generate */ 
-    while(I2C_CTL0(I2Cx)&0x0200);				
+		delay_counts = POLLING_COUNT;
+    while(I2C_CTL0(I2Cx)&0x0200 && delay_counts--);				
 		
     /* wait until I2C bus is idle */
-    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY));
+		delay_counts = POLLING_COUNT;
+    while(i2c_flag_get(I2Cx, I2C_FLAG_I2CBSY) && delay_counts--);
     /* send a start condition to I2C bus */
     i2c_start_on_bus(I2Cx);
     /* wait until SBSEND bit is set */
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND));
+		delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_SBSEND) && delay_counts--);
 
 		/* 2.设备地址 */
     /* send slave address to I2C bus */
     i2c_master_addressing(I2Cx, SlaveAddress, I2C_RECEIVER);
 
     /* wait until ADDSEND bit is set */
-    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND));
+		delay_counts = POLLING_COUNT;
+    while(!i2c_flag_get(I2Cx, I2C_FLAG_ADDSEND) && delay_counts--);
     /* clear ADDSEND bit */
     i2c_flag_clear(I2Cx, I2C_FLAG_ADDSEND);
 		
@@ -210,11 +240,13 @@ uint8_t VL6180_Read_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, ui
     {
         if(NumByteToRead==1)
         {
-						while(!i2c_flag_get(I2Cx, I2C_FLAG_BTC));
+					  delay_counts = POLLING_COUNT;
+						while(!i2c_flag_get(I2Cx, I2C_FLAG_BTC) && delay_counts--);
 						/* disable acknowledge */
 						i2c_ack_config(I2Cx, I2C_ACK_DISABLE);
         }
-				while(!i2c_flag_get(I2Cx, I2C_FLAG_RBNE));
+				delay_counts = POLLING_COUNT;
+				while(!i2c_flag_get(I2Cx, I2C_FLAG_RBNE) && delay_counts--);
 				*pBuffer++ = i2c_data_receive(I2Cx);
         NumByteToRead--;
     }
@@ -223,7 +255,8 @@ uint8_t VL6180_Read_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, ui
     /* send a stop condition to I2C bus */
     i2c_stop_on_bus(I2Cx);
     /* wait until stop condition generate */
-    while(I2C_CTL0(I2Cx)&0x0200);
+		delay_counts = POLLING_COUNT;
+    while(I2C_CTL0(I2Cx)&0x0200 && delay_counts--);
     /* enable acknowledge */
     i2c_ack_config(I2Cx, I2C_ACK_ENABLE);
 		
