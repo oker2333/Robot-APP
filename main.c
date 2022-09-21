@@ -42,6 +42,11 @@ static void VL6180xTask( void *pvParameters );
 TaskHandle_t LogTaskHanle;
 static void LogTask( void *pvParameters );
 
+#define EMERGENCY_TASK_PRIORITY 3
+#define EMERGENCY_TASK_STK_SIZE 130
+TaskHandle_t EmergencyTaskHanle;
+static void EmergencyTask( void *pvParameters );
+
 /*
 	FLASH:256KB,start:0x8000000,size:0x40000
 	RAM:48KB,start:0x20000000,size:0xC000
@@ -72,6 +77,7 @@ int main(void)
 		xTaskCreate(ledTestTask, "ledTestTask", LED_TEST_TASK_STK_SIZE, NULL, LED_TEST_TASK_PRIORITY, &LedTestTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
+		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
 	
 		vTaskStartScheduler();
 
@@ -118,6 +124,16 @@ static void LogTask(void *pvParameters)
 	  while(1)
 		{
 			 print_logs();
+			 vTaskDelay(pdMS_TO_TICKS(100));
+		}
+}
+
+static void EmergencyTask(void *pvParameters)
+{
+	  while(1)
+		{
+			 //Reset the Breakdown Sensors
+			 
 			 vTaskDelay(pdMS_TO_TICKS(100));
 		}
 }
