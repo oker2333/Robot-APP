@@ -31,7 +31,7 @@ void EXTI1_IRQHandler(void)
     if (RESET != exti_interrupt_flag_get(EXTI_1)) {
 			BaseType_t pxHigherPriorityTaskWoken;
 			xSemaphoreGiveFromISR(VL6180xSemaphore,&pxHigherPriorityTaskWoken);
-			VL6180x_RangeClearInterrupt(theVL6180xDev);
+			VL6180x_INT_Disable();
 			exti_interrupt_flag_clear(EXTI_1);
 			portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
     }
