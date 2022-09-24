@@ -10,3 +10,4 @@
 .\objects\port.o: .\FreeRTOS-Kernel\include\mpu_wrappers.h
 .\objects\port.o: .\FreeRTOS-Kernel\include\task.h
 .\objects\port.o: .\FreeRTOS-Kernel\include\list.h
+.\objects\port.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
