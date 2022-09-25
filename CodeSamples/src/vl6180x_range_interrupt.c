@@ -64,9 +64,6 @@ void Sample_Interrupt(void) {
     // if fastest reaction is required then set 0  that will set minimal possible
     VL6180x_RangeSetInterMeasPeriod(theVL6180xDev, 50);
 
-    // we don't care of high threshold as we don't use it , group hold is managed externaly
-    VL6180x_RangeSetThresholds(theVL6180xDev, 100, 00, 0);
-
     VL6180x_ClearAllInterrupt(theVL6180xDev);
     VL6180x_RangeStartContinuousMode(theVL6180xDev);
 
