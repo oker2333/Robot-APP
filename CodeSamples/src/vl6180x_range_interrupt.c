@@ -62,7 +62,7 @@ void Sample_Interrupt(void) {
 		VL6180x_SetGroupParamHold(theVL6180xDev, 1);
     // if slow reaction is enough then set a high time like 100 ms (up to 2550 msec)
     // if fastest reaction is required then set 0  that will set minimal possible
-    VL6180x_RangeSetInterMeasPeriod(theVL6180xDev, 50);
+    VL6180x_RangeSetInterMeasPeriod(theVL6180xDev, 0);
 
     VL6180x_ClearAllInterrupt(theVL6180xDev);
     VL6180x_RangeStartContinuousMode(theVL6180xDev);

@@ -108,7 +108,6 @@ static void VL6180xTask( void *pvParameters )
 	 while(1)
 	 {
 		    xSemaphoreTake(VL6180xSemaphore, portMAX_DELAY);
-		    VL6180x_RangeClearInterrupt(theVL6180xDev);
         VL6180x_RangeGetMeasurement(theVL6180xDev, &RangeData);
         if( RangeData.errorStatus == 0){
             MyDev_ShowRange(theVL6180xDev, RangeData.range_mm, 0);
@@ -117,6 +116,7 @@ static void VL6180xTask( void *pvParameters )
         else{
             MyDev_ShowErr(theVL6180xDev, RangeData.errorStatus);
         }
+				VL6180x_RangeClearInterrupt(theVL6180xDev);
 				VL6180x_INT_Enable();
 	 }
 }

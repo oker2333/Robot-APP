@@ -11,11 +11,11 @@ Section Cross References
     main.o(i.VL6180xTask) refers to vl6180x_range_interrupt.o(i.Sample_Interrupt) for Sample_Interrupt
     main.o(i.VL6180xTask) refers to exti.o(i.bsp_gpio_exti_init) for bsp_gpio_exti_init
     main.o(i.VL6180xTask) refers to queue.o(i.xQueueSemaphoreTake) for xQueueSemaphoreTake
-    main.o(i.VL6180xTask) refers to vl6180x_api.o(i.VL6180x_ClearInterrupt) for VL6180x_ClearInterrupt
     main.o(i.VL6180xTask) refers to vl6180x_api.o(i.VL6180x_RangeGetMeasurement) for VL6180x_RangeGetMeasurement
     main.o(i.VL6180xTask) refers to printf6.o(i.__0sprintf$6) for __2sprintf
     main.o(i.VL6180xTask) refers to port.o(i.PowerOn_Time) for PowerOn_Time
     main.o(i.VL6180xTask) refers to printf6.o(i.__0printf$6) for __2printf
+    main.o(i.VL6180xTask) refers to vl6180x_api.o(i.VL6180x_ClearInterrupt) for VL6180x_ClearInterrupt
     main.o(i.VL6180xTask) refers to gd32f30x_misc.o(i.nvic_irq_enable) for nvic_irq_enable
     main.o(i.VL6180xTask) refers to main.o(.data) for VL6180xSemaphore
     main.o(i.VL6180xTask) refers to vl6180x_range_interrupt.o(.data) for theVL6180xDev
