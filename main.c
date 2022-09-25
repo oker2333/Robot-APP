@@ -32,11 +32,6 @@ static uint8_t FIFO_Buffer[FIFO_BUFFER_SIZE] = {0};
 TaskHandle_t LedTestTaskHanle;
 static void ledTestTask( void *pvParameters );
 
-#define VL6180x_TASK_PRIORITY 5
-#define VL6180x_TASK_STK_SIZE 130
-TaskHandle_t VL6180xTaskHanle;
-static void VL6180xTask( void *pvParameters );
-
 #define LOG_TASK_PRIORITY 2
 #define LOG_TASK_STK_SIZE 130
 TaskHandle_t LogTaskHanle;
@@ -46,6 +41,11 @@ static void LogTask( void *pvParameters );
 #define EMERGENCY_TASK_STK_SIZE 130
 TaskHandle_t EmergencyTaskHanle;
 static void EmergencyTask( void *pvParameters );
+
+#define VL6180x_TASK_PRIORITY 4
+#define VL6180x_TASK_STK_SIZE 130
+TaskHandle_t VL6180xTaskHanle;
+static void VL6180xTask( void *pvParameters );
 
 /*
 	FLASH:256KB,start:0x8000000,size:0x40000
