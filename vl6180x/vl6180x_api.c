@@ -84,6 +84,7 @@ static const uint16_t UpperLimitLookUP[]  ROMABLE_DATA = {185, 370, 580}; /* loo
 /**
  * Als Code gain to fix point gain lookup
  */
+#if VL6180x_ALS_SUPPORT
 static const uint16_t AlsGainLookUp[8]    ROMABLE_DATA = {
 	(uint16_t)(20.0f * AN_GAIN_MULT),
 	(uint16_t)(10.0f * AN_GAIN_MULT),
@@ -94,7 +95,7 @@ static const uint16_t AlsGainLookUp[8]    ROMABLE_DATA = {
 	(uint16_t)(1.0f  * AN_GAIN_MULT),
 	(uint16_t)(40.0f * AN_GAIN_MULT),
 };
-
+#endif
 
 #if VL6180x_RANGE_STATUS_ERRSTRING
 const char *ROMABLE_DATA VL6180x_RangeStatusErrString[] = {

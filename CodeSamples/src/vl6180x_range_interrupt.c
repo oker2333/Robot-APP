@@ -1,5 +1,5 @@
 /*******************************************************************************
-Copyright © 2014, STMicroelectronics International N.V.
+Copyright ï¿½ 2014, STMicroelectronics International N.V.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -52,7 +52,13 @@ void Sample_Interrupt(void) {
 
     VL6180x_Prepare(theVL6180xDev);     // default vl6180x init
 
-    VL6180x_UpscaleSetScaling(theVL6180xDev, 2); // set scaling  by 2  to get ranging in range 0 to 400mm
+		/*
+			Upscale support - Extended range
+			* Upscale factor = 1, VL6180 measures distances up to 20 cm with a granularity of 1 mm.
+			* Upscale factor = 2, VL6180 measures distances up to 40 cm with a granularity of 2 mm.
+			* Upscale factor = 3, VL6180 measures distances up to 60 cm with a granularity of 3 mm.
+		*/
+    VL6180x_UpscaleSetScaling(theVL6180xDev, 1);
 		VL6180x_SetGroupParamHold(theVL6180xDev, 1);
     // if slow reaction is enough then set a high time like 100 ms (up to 2550 msec)
     // if fastest reaction is required then set 0  that will set minimal possible
