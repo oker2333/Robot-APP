@@ -53,9 +53,12 @@ static void VL6180xTask( void *pvParameters );
 	CPU:120MHz
 */
 
+#define APP_ADDR_OFFSET 			(uint32_t)(*((volatile uint32_t*)0x0803E800U) - FLASH_BASE_ADDR)
+
 int main(void)
 {
-	  nvic_vector_table_set(NVIC_VECTTAB_FLASH, APP_OFFSET);
+	  uint32_t offset = APP_ADDR_OFFSET;
+	  nvic_vector_table_set(NVIC_VECTTAB_FLASH, offset);
 	  __enable_irq();
 	  
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,usart0_dma_recv);
@@ -73,6 +76,8 @@ int main(void)
 		rcu_periph_clock_enable(RCU_GPIOB);
 		gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_8);
 		GPIO_BC(GPIOB) = GPIO_PIN_8;
+	
+		printf("APP Current Address = 0x%x\n",APP_ADDR_OFFSET);
 	
 		xTaskCreate(ledTestTask, "ledTestTask", LED_TEST_TASK_STK_SIZE, NULL, LED_TEST_TASK_PRIORITY, &LedTestTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
