@@ -55,8 +55,6 @@ static void VL6180xTask( void *pvParameters );
 
 int main(void)
 {
-	  uint32_t offset = *((volatile uint32_t*)APP_ADDR_ADDRESS) - FLASH_BASE_ADDR;
-	  nvic_vector_table_set(NVIC_VECTTAB_FLASH, offset);
 	  __enable_irq();
 	  
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,usart0_dma_recv);
