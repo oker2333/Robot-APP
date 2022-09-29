@@ -164,6 +164,9 @@ void FIFO_Callback_Init(FIFO_BUFFER *b, txCallback_t tx_cb,rxCallback_t rx_cb)
 
 void FIFO_Tansmit(FIFO_BUFFER *b)
 {
+	 if(b->tx_callback == NULL)
+		 return;
+	 
 	 if(FIFO_Count(b))		/*turn around*/
 	 {
 		  fifoENTER_CRITICAL_FROM_ISR();
@@ -184,6 +187,9 @@ void FIFO_Tansmit(FIFO_BUFFER *b)
 
 void FIFO_Recv(FIFO_BUFFER *b)
 {
+	 if(b->rx_callback == NULL)
+		 return;
+	 
 	 uint16_t rx_len = 0,free_len = 0;
 	 uint8_t rx_buffer[1024];
 	 

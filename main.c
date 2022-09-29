@@ -47,6 +47,11 @@ static void EmergencyTask( void *pvParameters );
 TaskHandle_t VL6180xTaskHanle;
 static void VL6180xTask( void *pvParameters );
 
+#define IAP_TASK_PRIORITY 5
+#define IAP_TASK_STK_SIZE 130
+TaskHandle_t IAPTaskHanle;
+static void IAPTask( void *pvParameters );
+
 /*
 	FLASH:256KB,start:0x8000000,size:0x40000
 	RAM:48KB,start:0x20000000,size:0xC000
@@ -57,9 +62,12 @@ int main(void)
 {
 	  __enable_irq();
 	  
-	  FIFO_Callback_Init(Queue_log,usart0_dma_send,usart0_dma_recv);
+		nvic_priority_group_set(NVIC_PRIGROUP_PRE4_SUB0);
+	
+	  FIFO_Callback_Init(Queue_log,usart0_dma_send,NULL);
 		FIFO_Init(Queue_log,FIFO_Buffer,FIFO_BUFFER_SIZE);
-		
+	  
+		dma_usart1_init(115200);
 		bsp_usart_init(460800);
 		bsp_iic_init(I2C0);
 	
@@ -79,6 +87,7 @@ int main(void)
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
+		xTaskCreate(IAPTask, "IAPTask", IAP_TASK_STK_SIZE, NULL, IAP_TASK_PRIORITY, &IAPTaskHanle);
 	
 		vTaskStartScheduler();
 
@@ -95,6 +104,14 @@ static void ledTestTask( void *pvParameters )
 				GPIO_BOP(GPIOC) = GPIO_PIN_13;
 				vTaskDelay(pdMS_TO_TICKS(1000));
 		}		
+}
+
+static void IAPTask( void *pvParameters )
+{
+		while(1)
+		{
+			  
+		}
 }
 
 SemaphoreHandle_t VL6180xSemaphore;

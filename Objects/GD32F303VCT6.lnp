@@ -40,6 +40,7 @@
 ".\objects\exti.o"
 ".\objects\pwm.o"
 ".\objects\iic.o"
+".\objects\flash_rw.o"
 ".\objects\vl6180x_api.o"
 ".\objects\vl6180x_i2c.o"
 ".\objects\vl6180x_simple_ranging.o"

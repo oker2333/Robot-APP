@@ -1,14 +1,8 @@
-#ifndef IAP_CONFIG_H_
-#define IAP_CONFIG_H_
+#ifndef APP_CONFIG_H_
+#define APP_CONFIG_H_
 
-/* 
-	256KB FLASH
-	#define FMC_PAGE_NUM           	((uint16_t)0x80U)
-	#define FMC_PAGE_SIZE           ((uint16_t)0x800U)
-	#define FMC_WRITE_START_ADDR    ((uint32_t)0x08000000U)
-	#define FMC_WRITE_END_ADDR      ((uint32_t)0x0803FFFFU)
-*/
-
+#define FMC_PAGE_NUM					((uint16_t)0x80U)
+#define FMC_PAGE_SIZE					((uint32_t)0x00000800U)
 
 #define FLASH_TOTAL_SIZE 			((uint32_t)0x40000U)
 
