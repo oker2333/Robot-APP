@@ -28,14 +28,6 @@ int32_t Jump_to_APP(void)
 		return 1;
 }
 
-int fputc(int ch, FILE *f)
-{
-	  (void)f;
-    usart_data_transmit(IAP_Port, ch);
-    while(RESET == usart_flag_get(IAP_Port, USART_FLAG_TBE));
-	  return 0;
-}
-
 uint32_t IAP_ReadFlag(void)
 {
 	 return flash_read_word(IAP_FLAG_ADDR);

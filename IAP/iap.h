@@ -6,7 +6,7 @@
 #include <stdint.h>
 #include "flash_rw.h"
 #include "ymodem.h"
-#include "iap_config.h"
+#include "app_config.h"
 
 #define IAP_FLAG_ADDR ((uint32_t)(0x0803F800U))
 

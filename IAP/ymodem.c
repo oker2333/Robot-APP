@@ -13,7 +13,7 @@
 
 //Includes 
 #include "ymodem.h"
-#include "iap_config.h"
+#include "app_config.h"
 #include "flash_rw.h"
 
 //extern variables
