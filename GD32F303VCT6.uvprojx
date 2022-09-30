@@ -630,6 +630,9 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>Communicate</GroupName>
+        </Group>
+        <Group>
           <GroupName>VL6180xAPI</GroupName>
           <Files>
             <File>
@@ -686,6 +689,11 @@
               <FileName>print.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Common_API\print.c</FilePath>
+            </File>
+            <File>
+              <FileName>lib_mem_a.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Common_API\lib_mem_a.asm</FilePath>
             </File>
           </Files>
         </Group>

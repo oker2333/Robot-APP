@@ -128,7 +128,7 @@ static void CommunicationTask( void *pvParameters )
 {
 		while(1)
 		{
-			 
+			 vTaskDelay(pdMS_TO_TICKS(1000));
 		}
 }
 
@@ -172,6 +172,6 @@ static void EmergencyTask(void *pvParameters)
 		{
 			 //Reset the Breakdown Sensors
 			 
-			 vTaskDelay(pdMS_TO_TICKS(100));
+			 vTaskDelay(pdMS_TO_TICKS(1000));
 		}
 }
