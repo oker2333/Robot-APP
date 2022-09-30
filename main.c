@@ -47,7 +47,12 @@ static void EmergencyTask( void *pvParameters );
 TaskHandle_t VL6180xTaskHanle;
 static void VL6180xTask( void *pvParameters );
 
-#define IAP_TASK_PRIORITY 5
+#define COMMUNICATION_TASK_PRIORITY 5
+#define COMMUNICATION_TASK_STK_SIZE 130
+TaskHandle_t CommunicationTaskHanle;
+static void CommunicationTask( void *pvParameters );
+
+#define IAP_TASK_PRIORITY 6
 #define IAP_TASK_STK_SIZE 130
 TaskHandle_t IAPTaskHanle;
 static void IAPTask( void *pvParameters );
@@ -87,6 +92,7 @@ int main(void)
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
+		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
 		xTaskCreate(IAPTask, "IAPTask", IAP_TASK_STK_SIZE, NULL, IAP_TASK_PRIORITY, &IAPTaskHanle);
 	
 		vTaskStartScheduler();
@@ -106,11 +112,23 @@ static void ledTestTask( void *pvParameters )
 		}		
 }
 
+SemaphoreHandle_t IAPSemaphore;
+
 static void IAPTask( void *pvParameters )
+{
+	  IAPSemaphore = xSemaphoreCreateBinary();
+		while(1)
+		{
+			 xSemaphoreTake(IAPSemaphore, portMAX_DELAY);
+			 
+		}
+}
+
+static void CommunicationTask( void *pvParameters )
 {
 		while(1)
 		{
-			  
+			 
 		}
 }
 

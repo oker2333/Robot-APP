@@ -146,16 +146,16 @@ void DMA0_Channel4_IRQHandler(void)
     }
 }
 
-/* USART RX */
+/* USART  */
 void USART0_IRQHandler(void)
 {
-    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_IDLE)){
+    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_IDLE)){   //RX
 			  FIFO_Recv(Queue_log);
 				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_IDLE);
         USART_STAT0(USART0);
 			  USART_DATA(USART0);
     }
-    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_TC)){
+    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_TC)){   //TX
 				BaseType_t pxHigherPriorityTaskWoken;
 				xSemaphoreGiveFromISR(Usar0txSemaphore,&pxHigherPriorityTaskWoken);
 				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_TC);
@@ -306,15 +306,15 @@ void DMA0_Channel5_IRQHandler(void)
     }
 }
 
-/* USART RX */
+/* USART */
 void USART1_IRQHandler(void)
 {
-    if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_IDLE)){
+    if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_IDLE)){		//RX
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_IDLE);
         USART_STAT0(USART1);
 			  USART_DATA(USART1);
     }
-    if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_TC)){
+    if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_TC)){			//TX
 				BaseType_t pxHigherPriorityTaskWoken;
 				xSemaphoreGiveFromISR(Usar1txSemaphore,&pxHigherPriorityTaskWoken);
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_TC);
