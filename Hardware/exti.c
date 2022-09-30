@@ -3,6 +3,7 @@
 #include "semphr.h"
 #include "vl6180x_api.h"
 #include "vl6180x_sample_plat.h"
+#include "app_config.h"
 
 void bsp_gpio_exti_init(void)
 {
@@ -23,8 +24,6 @@ void bsp_gpio_exti_init(void)
 		exti_init(EXTI_1, EXTI_INTERRUPT, EXTI_TRIG_FALLING);
 		exti_interrupt_flag_clear(EXTI_1);		
 }
-
-extern SemaphoreHandle_t VL6180xSemaphore;
 
 void EXTI1_IRQHandler(void)
 {

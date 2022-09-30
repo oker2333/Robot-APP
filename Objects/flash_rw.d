@@ -36,3 +36,17 @@
 .\objects\flash_rw.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h
 .\objects\flash_rw.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h
 .\objects\flash_rw.o: ..\Robot-APP\app_config.h
+.\objects\flash_rw.o: .\Common_API\fifo.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\FreeRTOS.h
+.\objects\flash_rw.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\FreeRTOSConfig.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\projdefs.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\portable.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\deprecated_definitions.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\mpu_wrappers.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\task.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\list.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\timers.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\semphr.h
+.\objects\flash_rw.o: .\FreeRTOS-Kernel\include\queue.h

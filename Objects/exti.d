@@ -54,3 +54,7 @@
 .\objects\exti.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\exti.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
 .\objects\exti.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\objects\exti.o: ..\Robot-APP\app_config.h
+.\objects\exti.o: .\Common_API\fifo.h
+.\objects\exti.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\exti.o: .\FreeRTOS-Kernel\include\timers.h

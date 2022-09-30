@@ -39,3 +39,17 @@
 .\objects\ota.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h
 .\objects\ota.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h
 .\objects\ota.o: ..\Robot-APP\app_config.h
+.\objects\ota.o: .\Common_API\fifo.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\FreeRTOS.h
+.\objects\ota.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+.\objects\ota.o: .\FreeRTOS-Kernel\FreeRTOSConfig.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\projdefs.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\portable.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\deprecated_definitions.h
+.\objects\ota.o: .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F\portmacro.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\mpu_wrappers.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\task.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\list.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\timers.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\semphr.h
+.\objects\ota.o: .\FreeRTOS-Kernel\include\queue.h

@@ -3,11 +3,7 @@
 #include "usart.h"
 #include "fifo.h"
 #include "gd32f30x_libopt.h"
-
-#include "FreeRTOS.h"
-#include "task.h"
-#include "timers.h"
-#include "semphr.h"
+#include "app_config.h"
 
 static SemaphoreHandle_t Usar0txSemaphore;
 
@@ -137,7 +133,6 @@ void DMA0_Channel3_IRQHandler(void)
 }
 
 /*DMA RX*/
-extern FIFO_BUFFER *Queue_log;
 void DMA0_Channel4_IRQHandler(void)
 {
     if(dma_interrupt_flag_get(DMA0, DMA_CH4, DMA_INT_FLAG_FTF)){     
@@ -162,8 +157,6 @@ void USART0_IRQHandler(void)
 				portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
     }
 }
-
-
 
 /************************************IAP USART******************************************************/
 
@@ -289,9 +282,6 @@ void dma_usart1_init(uint32_t baudval)
     iap_usart_config(baudval);
     isp_usart_dma_config();
 }
-
-extern FIFO_BUFFER *Queue_Communicate_RX;
-extern SemaphoreHandle_t CommunicationSemaphore;
 
 /*DMA TX*/
 void DMA0_Channel6_IRQHandler(void)

@@ -1,13 +1,12 @@
 #ifndef IAP_CONFIG_H_
 #define IAP_CONFIG_H_
 
-/* 
-	256KB FLASH
-	#define FMC_PAGE_NUM           	((uint16_t)0x80U)
-	#define FMC_PAGE_SIZE           ((uint16_t)0x800U)
-	#define FMC_WRITE_START_ADDR    ((uint32_t)0x08000000U)
-	#define FMC_WRITE_END_ADDR      ((uint32_t)0x0803FFFFU)
-*/
+#include "fifo.h"
+
+#include "FreeRTOS.h"
+#include "task.h"
+#include "timers.h"
+#include "semphr.h"
 
 #define FMC_PAGE_NUM					((uint16_t)0x80U)
 #define FMC_PAGE_SIZE					((uint32_t)0x00000800U)
@@ -31,5 +30,10 @@
 #define APP_ADDR_FLASH_SIZE 	((uint32_t)(INFO_ADDRESS - APP_ADDR_ADDRESS))
 #define INFO_FLASH_SIZE 			((uint32_t)(FLASH_END_ADDR - INFO_ADDRESS + 1))
 
+extern FIFO_BUFFER *Queue_Communicate_RX;
+extern FIFO_BUFFER *Queue_log;
+extern FIFO_BUFFER *Queue_Communicate_RX;
+extern SemaphoreHandle_t CommunicationSemaphore;
+extern SemaphoreHandle_t VL6180xSemaphore;
 
 #endif
