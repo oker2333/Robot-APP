@@ -321,7 +321,7 @@
             <PlainCh>0</PlainCh>
             <Ropi>0</Ropi>
             <Rwpi>0</Rwpi>
-            <wLevel>2</wLevel>
+            <wLevel>1</wLevel>
             <uThumb>0</uThumb>
             <uSurpInc>0</uSurpInc>
             <uC99>1</uC99>
@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F30X_HD,__TARGET_FPU_VFP</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\IAP</IncludePath>
+              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\MsgHandler</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -630,9 +630,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>Communicate</GroupName>
-        </Group>
-        <Group>
           <GroupName>VL6180xAPI</GroupName>
           <Files>
             <File>
@@ -663,17 +660,17 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>IAP</GroupName>
+          <GroupName>MsgHandler</GroupName>
           <Files>
             <File>
-              <FileName>iap.c</FileName>
+              <FileName>ota.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\IAP\iap.c</FilePath>
+              <FilePath>.\MsgHandler\ota.c</FilePath>
             </File>
             <File>
-              <FileName>ymodem.c</FileName>
+              <FileName>fms.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\IAP\ymodem.c</FilePath>
+              <FilePath>.\MsgHandler\fms.c</FilePath>
             </File>
           </Files>
         </Group>

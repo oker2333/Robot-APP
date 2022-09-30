@@ -17,14 +17,29 @@
 
 #include "fifo.h"
 
+#include "fms.h"
+
 #include "app_config.h"
 
 #include "print.h"
 
-#define FIFO_BUFFER_SIZE 1024
-FIFO_BUFFER FIFO_Queue;
-FIFO_BUFFER *Queue_log = &FIFO_Queue;
-static uint8_t FIFO_Buffer[FIFO_BUFFER_SIZE] = {0};
+SemaphoreHandle_t VL6180xSemaphore;
+SemaphoreHandle_t CommunicationSemaphore;
+
+#define LOG_BUFFER_SIZE 1024
+FIFO_BUFFER log_queue;
+FIFO_BUFFER *Queue_log = &log_queue;
+static uint8_t LOG_Buffer[LOG_BUFFER_SIZE] = {0};
+
+#define COMMUNICATE_RX_BUFFER_SIZE 1024
+FIFO_BUFFER communicate_rx_queue;
+FIFO_BUFFER *Queue_Communicate_RX = &communicate_rx_queue;
+static uint8_t Communicate_RX_Buffer[COMMUNICATE_RX_BUFFER_SIZE] = {0};
+
+#define COMMUNICATE_TX_BUFFER_SIZE 1024
+FIFO_BUFFER communicate_tx_queue;
+FIFO_BUFFER *Queue_Communicate_TX = &communicate_tx_queue;
+static uint8_t Communicate_TX_Buffer[COMMUNICATE_TX_BUFFER_SIZE] = {0};
 
 /* Task Configure. */
 #define LED_TEST_TASK_PRIORITY 1
@@ -52,17 +67,6 @@ static void VL6180xTask( void *pvParameters );
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
 
-#define IAP_TASK_PRIORITY 6
-#define IAP_TASK_STK_SIZE 130
-TaskHandle_t IAPTaskHanle;
-static void IAPTask( void *pvParameters );
-
-/*
-	FLASH:256KB,start:0x8000000,size:0x40000
-	RAM:48KB,start:0x20000000,size:0xC000
-	CPU:120MHz
-*/
-
 int main(void)
 {
 	  __enable_irq();
@@ -70,8 +74,14 @@ int main(void)
 		nvic_priority_group_set(NVIC_PRIGROUP_PRE4_SUB0);
 	
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,NULL);
-		FIFO_Init(Queue_log,FIFO_Buffer,FIFO_BUFFER_SIZE);
-	  
+		FIFO_Init(Queue_log,LOG_Buffer,LOG_BUFFER_SIZE);
+
+	  FIFO_Callback_Init(Queue_Communicate_RX,NULL,usart1_dma_recv);
+		FIFO_Init(Queue_Communicate_RX,Communicate_RX_Buffer,COMMUNICATE_RX_BUFFER_SIZE);	
+	
+	  FIFO_Callback_Init(Queue_Communicate_TX,usart1_dma_send,NULL);
+		FIFO_Init(Queue_Communicate_TX,Communicate_TX_Buffer,COMMUNICATE_TX_BUFFER_SIZE);
+		
 		dma_usart1_init(115200);
 		bsp_usart_init(460800);
 		bsp_iic_init(I2C0);
@@ -87,13 +97,15 @@ int main(void)
 		GPIO_BC(GPIOB) = GPIO_PIN_8;
 	
 		printf("APP Current Address = 0x%x\n",*((volatile uint32_t*)APP_ADDR_ADDRESS));
+		
+		VL6180xSemaphore = xSemaphoreCreateBinary();
+		CommunicationSemaphore = xSemaphoreCreateBinary();
 	
 		xTaskCreate(ledTestTask, "ledTestTask", LED_TEST_TASK_STK_SIZE, NULL, LED_TEST_TASK_PRIORITY, &LedTestTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
-		xTaskCreate(IAPTask, "IAPTask", IAP_TASK_STK_SIZE, NULL, IAP_TASK_PRIORITY, &IAPTaskHanle);
 	
 		vTaskStartScheduler();
 
@@ -109,18 +121,6 @@ static void ledTestTask( void *pvParameters )
 				vTaskDelay(pdMS_TO_TICKS(1000));
 				GPIO_BOP(GPIOC) = GPIO_PIN_13;
 				vTaskDelay(pdMS_TO_TICKS(1000));
-		}		
-}
-
-SemaphoreHandle_t IAPSemaphore;
-
-static void IAPTask( void *pvParameters )
-{
-	  IAPSemaphore = xSemaphoreCreateBinary();
-		while(1)
-		{
-			 xSemaphoreTake(IAPSemaphore, portMAX_DELAY);
-			 
 		}
 }
 
@@ -128,16 +128,15 @@ static void CommunicationTask( void *pvParameters )
 {
 		while(1)
 		{
-			 vTaskDelay(pdMS_TO_TICKS(1000));
+			 xSemaphoreTake(CommunicationSemaphore, portMAX_DELAY);
+			 FIFO_Recv(Queue_Communicate_RX);
+			 DataFrame_Handle();
 		}
 }
-
-SemaphoreHandle_t VL6180xSemaphore;
 
 static void VL6180xTask( void *pvParameters )
 {
 	 VL6180x_RangeData_t RangeData;
-	 VL6180xSemaphore = xSemaphoreCreateBinary();
 	 Sample_Interrupt();
 	 bsp_gpio_exti_init();
 	 

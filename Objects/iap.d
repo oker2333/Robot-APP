@@ -38,6 +38,4 @@
 .\objects\iap.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h
 .\objects\iap.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h
 .\objects\iap.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h
-.\objects\iap.o: IAP\ymodem.h
-.\objects\iap.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\iap.o: ..\Robot-APP\app_config.h

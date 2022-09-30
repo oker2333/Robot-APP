@@ -119,7 +119,7 @@ uint16_t usart0_dma_recv(uint8_t *buffer)
 	dma_channel_disable(DMA0, DMA_CH4);
 	
 	uint16_t rx_len = ARRAYNUM(rxbuffer) - dma_transfer_number_get(DMA0, DMA_CH4);
-	memcpy(buffer,rxbuffer,rx_len);
+	Mem_Copy(buffer,rxbuffer,rx_len);
 	
 	dma_memory_address_config(DMA0, DMA_CH4,(uint32_t)rxbuffer);
 	dma_transfer_number_config(DMA0, DMA_CH4, ARRAYNUM(rxbuffer));	
@@ -274,7 +274,7 @@ uint16_t usart1_dma_recv(uint8_t *buffer)
 	dma_channel_disable(DMA0, DMA_CH5);
 	
 	uint16_t rx_len = ARRAYNUM(IAP_Buffer) - dma_transfer_number_get(DMA0, DMA_CH5);
-	memcpy(buffer,IAP_Buffer,rx_len);
+	Mem_Copy(buffer,IAP_Buffer,rx_len);
 	
 	dma_memory_address_config(DMA0, DMA_CH5,(uint32_t)IAP_Buffer);
 	dma_transfer_number_config(DMA0, DMA_CH5, ARRAYNUM(IAP_Buffer));	
@@ -289,6 +289,9 @@ void dma_usart1_init(uint32_t baudval)
     iap_usart_config(baudval);
     isp_usart_dma_config();
 }
+
+extern FIFO_BUFFER *Queue_Communicate_RX;
+extern SemaphoreHandle_t CommunicationSemaphore;
 
 /*DMA TX*/
 void DMA0_Channel6_IRQHandler(void)
@@ -310,9 +313,12 @@ void DMA0_Channel5_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_IDLE)){		//RX
+				BaseType_t pxHigherPriorityTaskWoken;
+				xSemaphoreGiveFromISR(CommunicationSemaphore,&pxHigherPriorityTaskWoken);
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_IDLE);
         USART_STAT0(USART1);
 			  USART_DATA(USART1);
+				portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
     }
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_TC)){			//TX
 				BaseType_t pxHigherPriorityTaskWoken;
