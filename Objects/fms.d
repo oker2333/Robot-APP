@@ -14,6 +14,7 @@
 .\objects\fms.o: .\FreeRTOS-Kernel\include\mpu_wrappers.h
 .\objects\fms.o: .\FreeRTOS-Kernel\include\task.h
 .\objects\fms.o: .\FreeRTOS-Kernel\include\list.h
+.\objects\fms.o: .\Common_API\print.h
 .\objects\fms.o: ..\Robot-APP\app_config.h
 .\objects\fms.o: .\FreeRTOS-Kernel\include\timers.h
 .\objects\fms.o: .\FreeRTOS-Kernel\include\semphr.h

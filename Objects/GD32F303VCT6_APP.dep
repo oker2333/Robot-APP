@@ -1495,7 +1495,7 @@ I (.\FreeRTOS-Kernel\include\list.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\timers.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\semphr.h)(0x6326FFD5)
 I (.\FreeRTOS-Kernel\include\queue.h)(0x6316A267)
-F (.\MsgHandler\fms.c)(0x6337C903)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\fms.o --omf_browse .\objects\fms.crf --depend .\objects\fms.d)
+F (.\MsgHandler\fms.c)(0x6337D823)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\fms.o --omf_browse .\objects\fms.crf --depend .\objects\fms.d)
 I (MsgHandler\fms.h)(0x6337C8FD)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
@@ -1511,6 +1511,7 @@ I (.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F\portmacro.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\mpu_wrappers.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\task.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\list.h)(0x6316A267)
+I (.\Common_API\print.h)(0x632F0C55)
 I (..\Robot-APP\app_config.h)(0x6337A762)
 I (.\FreeRTOS-Kernel\include\timers.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\semphr.h)(0x6326FFD5)
@@ -1546,7 +1547,7 @@ I (.\FreeRTOS-Kernel\include\mpu_wrappers.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\task.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\list.h)(0x6316A267)
 F (.\Common_API\lib_mem_a.asm)(0x532A60E2)(--cpu Cortex-M4.fp.sp -g --apcs=interwork --pd "__MICROLIB SETA 1"-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include--pd "__UVISION_VERSION SETA 529" --pd "GD32F30X_HD SETA 1"--list .\listings\lib_mem_a.lst --xref -o .\objects\lib_mem_a.o --depend .\objects\lib_mem_a.d)
-F (.\Common_API\crc.c)(0x4F7F7B3B)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\crc.o --omf_browse .\objects\crc.crf --depend .\objects\crc.d)
+F (.\Common_API\crc.c)(0x6337D57D)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\crc.o --omf_browse .\objects\crc.crf --depend .\objects\crc.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
