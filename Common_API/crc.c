@@ -169,6 +169,49 @@ uint16_t CRC_Calc_Data(
 }
 #endif
 
+uint16_t CRC16_Check(uint8_t wChar,uint16_t wCRCin)
+{
+	  uint16_t wCPoly = 0x1021;
+	
+		wCRCin ^= (wChar <<8);
+		for(int i= 0;i < 8;i++)
+		{
+			if(wCRCin & 0x8000)
+			{
+				wCRCin = (wCRCin << 1)^ wCPoly;
+			} 
+			else
+			{
+				wCRCin = wCRCin << 1;
+			}
+		}
+		return wCRCin;
+}
+
+uint16_t CRC16_CCITT_FALSE(uint8_t *puchMsg, uint32_t usDataLen)
+{
+	unsigned short wCRCin = 0xFFFF; //初值 0xFFFF
+	unsigned short wCPoly = 0x1021; //多项式 x16+x12+x5+1
+	unsigned char wChar = 0;
+	while(usDataLen--)
+	{
+		wChar = *(puchMsg++);
+		wCRCin ^= (wChar <<8);
+		for(int i= 0;i < 8;i++)
+		{
+			if(wCRCin & 0x8000)
+			{
+				wCRCin = (wCRCin << 1)^ wCPoly;
+			} 
+			else
+			{
+				wCRCin = wCRCin << 1;
+			}
+		}
+	} 
+	return wCRCin;
+}
+
 #ifdef TEST
 #include <assert.h>
 #include <string.h>

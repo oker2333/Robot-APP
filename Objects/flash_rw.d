@@ -47,6 +47,7 @@
 .\objects\flash_rw.o: .\FreeRTOS-Kernel\include\mpu_wrappers.h
 .\objects\flash_rw.o: .\FreeRTOS-Kernel\include\task.h
 .\objects\flash_rw.o: .\FreeRTOS-Kernel\include\list.h
+.\objects\flash_rw.o: .\MsgHandler\handler.h
 .\objects\flash_rw.o: .\FreeRTOS-Kernel\include\timers.h
 .\objects\flash_rw.o: .\FreeRTOS-Kernel\include\semphr.h
 .\objects\flash_rw.o: .\FreeRTOS-Kernel\include\queue.h

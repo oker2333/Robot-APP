@@ -34,6 +34,6 @@ struct data_frame_struct_t{
 };
 
 void DataFrame_Handle(void);
-
+void DataFrame_Transmit(void);
 
 #endif

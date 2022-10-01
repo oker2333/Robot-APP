@@ -298,12 +298,10 @@ void DMA0_Channel5_IRQHandler(void)
 void USART1_IRQHandler(void)
 {
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_IDLE)){		//RX
-				BaseType_t pxHigherPriorityTaskWoken;
-				xSemaphoreGiveFromISR(Usart1RxSemaphore,&pxHigherPriorityTaskWoken);
+			  FIFO_Recv(Queue_Usart1_RX);
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_IDLE);
         USART_STAT0(USART1);
 			  USART_DATA(USART1);
-				portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
     }
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_TC)){			//TX
 				BaseType_t pxHigherPriorityTaskWoken;

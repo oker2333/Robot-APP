@@ -48,6 +48,7 @@
 .\objects\usart.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h
 .\objects\usart.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h
 .\objects\usart.o: ..\Robot-APP\app_config.h
+.\objects\usart.o: .\MsgHandler\handler.h
 .\objects\usart.o: .\FreeRTOS-Kernel\include\timers.h
 .\objects\usart.o: .\FreeRTOS-Kernel\include\semphr.h
 .\objects\usart.o: .\FreeRTOS-Kernel\include\queue.h

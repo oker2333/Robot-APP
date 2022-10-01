@@ -25,7 +25,6 @@
 
 /* global variable */
 SemaphoreHandle_t VL6180xSemaphore;
-SemaphoreHandle_t Usart1RxSemaphore;
 SemaphoreHandle_t Usart1TxSemaphore;
 SemaphoreHandle_t Usar0TxSemaphore;
 
@@ -47,27 +46,27 @@ static uint8_t Usart1_TX_Buffer[USART1_TX_BUFFER_SIZE] = {0};
 
 /* Task Configure. */
 #define INIT_TASK_PRIORITY 1
-#define INIT_TASK_STK_SIZE 130
+#define INIT_TASK_STK_SIZE 100
 TaskHandle_t InitTaskHanle;
 static void InitTask( void *pvParameters );
 
 #define LOG_TASK_PRIORITY 2
-#define LOG_TASK_STK_SIZE 130
+#define LOG_TASK_STK_SIZE 100
 TaskHandle_t LogTaskHanle;
 static void LogTask( void *pvParameters );
 
 #define EMERGENCY_TASK_PRIORITY 3
-#define EMERGENCY_TASK_STK_SIZE 130
+#define EMERGENCY_TASK_STK_SIZE 100
 TaskHandle_t EmergencyTaskHanle;
 static void EmergencyTask( void *pvParameters );
 
 #define VL6180x_TASK_PRIORITY 4
-#define VL6180x_TASK_STK_SIZE 130
+#define VL6180x_TASK_STK_SIZE 100
 TaskHandle_t VL6180xTaskHanle;
 static void VL6180xTask( void *pvParameters );
 
 #define COMMUNICATION_TASK_PRIORITY 5
-#define COMMUNICATION_TASK_STK_SIZE 130
+#define COMMUNICATION_TASK_STK_SIZE 1024
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
 
@@ -78,7 +77,6 @@ int main(void)
 		nvic_priority_group_set(NVIC_PRIGROUP_PRE4_SUB0);
 			
 		VL6180xSemaphore = xSemaphoreCreateBinary();
-		Usart1RxSemaphore = xSemaphoreCreateBinary();
 		Usart1TxSemaphore = xSemaphoreCreateBinary();
 	  Usar0TxSemaphore = xSemaphoreCreateBinary();
 
@@ -101,7 +99,7 @@ static void InitTask( void *pvParameters )
 	  FIFO_Callback_Init(Queue_Usart1_TX,usart1_dma_send,NULL);
 		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
-		dma_usart1_init(115200);
+		dma_usart1_init(460800);
 		bsp_usart_init(460800);
 		bsp_iic_init(I2C0);
 	
@@ -135,9 +133,9 @@ static void CommunicationTask( void *pvParameters )
 {
 		while(1)
 		{
-			 xSemaphoreTake(Usart1RxSemaphore, portMAX_DELAY);
-			 FIFO_Recv(Queue_Usart1_RX);
 			 DataFrame_Handle();
+			 DataFrame_Transmit();
+			 vTaskDelay(pdMS_TO_TICKS(20));
 		}
 }
 

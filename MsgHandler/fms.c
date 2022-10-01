@@ -1,26 +1,9 @@
 #include "fms.h"
 #include "fifo.h"
 #include "print.h"
+#include "handler.h"
+#include "crc.h"
 #include "app_config.h"
-
-uint16_t CRC16_Check(uint8_t wChar,uint16_t wCRCin)
-{
-	  uint16_t wCPoly = 0x1021;
-	
-		wCRCin ^= (wChar <<8);
-		for(int i= 0;i < 8;i++)
-		{
-			if(wCRCin & 0x8000)
-			{
-				wCRCin = (wCRCin << 1)^ wCPoly;
-			} 
-			else
-			{
-				wCRCin = wCRCin << 1;
-			}
-		}
-		return wCRCin;
-}
 
 struct data_frame_struct_t frame;
 
@@ -117,7 +100,8 @@ void Receive_FMS(uint8_t data_byte)
 			case FMS_RECEIVE_STATE_TAIL_L:
 				if((data_byte == 0x5A) && (frame.DataCRC == frame.DataCRCActual))		//校验成功，消息回调处理
 				{
-					 print_info("receive ok\n");
+					 uint8_t index = (frame.command & COMAND_MASK) >> 8;
+					 Callback_Handler[index](frame.command,frame.UserData,frame.index);
 				}
 		
 				state = FMS_RECEIVE_STATE_IDLE;
@@ -138,4 +122,7 @@ void DataFrame_Handle(void)
 	 }
 }
 
-
+void DataFrame_Transmit(void)
+{
+	 FIFO_Tansmit(Queue_Usart1_TX);
+}

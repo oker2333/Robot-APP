@@ -38,6 +38,9 @@ extern "C" {
         uint8_t dataValue,
         uint16_t crcValue);
 
+uint16_t CRC16_Check(uint8_t wChar,uint16_t wCRCin);
+uint16_t CRC16_CCITT_FALSE(uint8_t *puchMsg, uint32_t usDataLen);
+
 #ifdef __cplusplus
 }
 #endif /* __cplusplus */

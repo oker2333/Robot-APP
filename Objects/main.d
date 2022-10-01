@@ -65,4 +65,5 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\main.o: .\MsgHandler\fms.h
 .\objects\main.o: app_config.h
+.\objects\main.o: .\MsgHandler\handler.h
 .\objects\main.o: .\Common_API\print.h

@@ -672,6 +672,31 @@
               <FileType>1</FileType>
               <FilePath>.\MsgHandler\fms.c</FilePath>
             </File>
+            <File>
+              <FileName>handler.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MsgHandler\handler.c</FilePath>
+            </File>
+            <File>
+              <FileName>control.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MsgHandler\control.c</FilePath>
+            </File>
+            <File>
+              <FileName>inquire.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MsgHandler\inquire.c</FilePath>
+            </File>
+            <File>
+              <FileName>online.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MsgHandler\online.c</FilePath>
+            </File>
+            <File>
+              <FileName>timing.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MsgHandler\timing.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

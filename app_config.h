@@ -2,6 +2,7 @@
 #define IAP_CONFIG_H_
 
 #include "fifo.h"
+#include "handler.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -30,11 +31,12 @@
 #define APP_ADDR_FLASH_SIZE 	((uint32_t)(INFO_ADDRESS - APP_ADDR_ADDRESS))
 #define INFO_FLASH_SIZE 			((uint32_t)(FLASH_END_ADDR - INFO_ADDRESS + 1))
 
+extern msg_handler_t Callback_Handler[CALLBACK_NUM];
+
 extern FIFO_BUFFER *Queue_Usart1_RX;
 extern FIFO_BUFFER *Queue_Usart1_TX;
 extern FIFO_BUFFER *Queue_log;
 
-extern SemaphoreHandle_t Usart1RxSemaphore;
 extern SemaphoreHandle_t Usart1TxSemaphore;
 extern SemaphoreHandle_t VL6180xSemaphore;
 
