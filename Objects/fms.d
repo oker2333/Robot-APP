@@ -1,7 +1,8 @@
 .\objects\fms.o: MsgHandler\fms.c
 .\objects\fms.o: MsgHandler\fms.h
-.\objects\fms.o: .\Common_API\fifo.h
 .\objects\fms.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\fms.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\fms.o: .\Common_API\fifo.h
 .\objects\fms.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\fms.o: .\FreeRTOS-Kernel\include\FreeRTOS.h
 .\objects\fms.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h

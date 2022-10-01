@@ -46,10 +46,10 @@ FIFO_BUFFER *Queue_Usart1_TX = &usart1_tx_queue;
 static uint8_t Usart1_TX_Buffer[USART1_TX_BUFFER_SIZE] = {0};
 
 /* Task Configure. */
-#define LED_TEST_TASK_PRIORITY 1
-#define LED_TEST_TASK_STK_SIZE 130
-TaskHandle_t LedTestTaskHanle;
-static void ledTestTask( void *pvParameters );
+#define INIT_TASK_PRIORITY 1
+#define INIT_TASK_STK_SIZE 130
+TaskHandle_t InitTaskHanle;
+static void InitTask( void *pvParameters );
 
 #define LOG_TASK_PRIORITY 2
 #define LOG_TASK_STK_SIZE 130
@@ -76,7 +76,22 @@ int main(void)
 	  __enable_irq();
 	  
 		nvic_priority_group_set(NVIC_PRIGROUP_PRE4_SUB0);
+			
+		VL6180xSemaphore = xSemaphoreCreateBinary();
+		Usart1RxSemaphore = xSemaphoreCreateBinary();
+		Usart1TxSemaphore = xSemaphoreCreateBinary();
+	  Usar0TxSemaphore = xSemaphoreCreateBinary();
+
+		xTaskCreate(InitTask, "InitTask", INIT_TASK_STK_SIZE, NULL, INIT_TASK_PRIORITY, &InitTaskHanle);	
 	
+		vTaskStartScheduler();
+
+		/* Should not get here */
+		while(1);
+}
+
+static void InitTask( void *pvParameters )
+{
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,NULL);
 		FIFO_Init(Queue_log,LOG_Buffer,LOG_BUFFER_SIZE);
 
@@ -99,28 +114,14 @@ int main(void)
 		rcu_periph_clock_enable(RCU_GPIOB);
 		gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_8);
 		GPIO_BC(GPIOB) = GPIO_PIN_8;
-	
-		printf("APP Current Address = 0x%x\n",*((volatile uint32_t*)APP_ADDR_ADDRESS));
-		
-		VL6180xSemaphore = xSemaphoreCreateBinary();
-		Usart1RxSemaphore = xSemaphoreCreateBinary();
-		Usart1TxSemaphore = xSemaphoreCreateBinary();
-	  Usar0TxSemaphore = xSemaphoreCreateBinary();
 
-		xTaskCreate(ledTestTask, "ledTestTask", LED_TEST_TASK_STK_SIZE, NULL, LED_TEST_TASK_PRIORITY, &LedTestTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
-	
-		vTaskStartScheduler();
 
-		/* Should not get here */
-		while(1);
-}
+		printf("APP Current Address = 0x%x\n",*((volatile uint32_t*)APP_ADDR_ADDRESS));
 
-static void ledTestTask( void *pvParameters )
-{
 		while(1)
 		{
 				GPIO_BC(GPIOC) = GPIO_PIN_13;
