@@ -5,7 +5,6 @@
 #include "gd32f30x_libopt.h"
 #include "app_config.h"
 
-static SemaphoreHandle_t Usar0txSemaphore;
 
 static void usart_config(uint32_t baudval)
 {
@@ -94,7 +93,6 @@ static void usart_dma_config(void)
 
 void bsp_usart_init(uint32_t baudval) 
 {   
-	  Usar0txSemaphore = xSemaphoreCreateBinary();
     usart_config(baudval);
     usart_dma_config();
 }
@@ -107,7 +105,7 @@ void usart0_dma_send(uint8_t *buffer,uint16_t len)
 	dma_transfer_number_config(DMA0, DMA_CH3, len);
 	
 	dma_channel_enable(DMA0, DMA_CH3);
-	xSemaphoreTake(Usar0txSemaphore, portMAX_DELAY);
+	xSemaphoreTake(Usar0TxSemaphore, portMAX_DELAY);
 }
 
 uint16_t usart0_dma_recv(uint8_t *buffer)
@@ -152,15 +150,13 @@ void USART0_IRQHandler(void)
     }
     if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_TC)){   //TX
 				BaseType_t pxHigherPriorityTaskWoken;
-				xSemaphoreGiveFromISR(Usar0txSemaphore,&pxHigherPriorityTaskWoken);
+				xSemaphoreGiveFromISR(Usar0TxSemaphore,&pxHigherPriorityTaskWoken);
 				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_TC);
 				portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
     }
 }
 
 /************************************IAP USART******************************************************/
-
-static SemaphoreHandle_t Usar1txSemaphore;
 
 static void iap_usart_config(uint32_t baudval)
 {
@@ -259,7 +255,7 @@ void usart1_dma_send(uint8_t *buffer,uint16_t len)
 	dma_transfer_number_config(DMA0, DMA_CH6, len);
 	
 	dma_channel_enable(DMA0, DMA_CH6);
-	xSemaphoreTake(Usar1txSemaphore, portMAX_DELAY);
+	xSemaphoreTake(Usart1TxSemaphore, portMAX_DELAY);
 }
 
 uint16_t usart1_dma_recv(uint8_t *buffer)
@@ -278,7 +274,6 @@ uint16_t usart1_dma_recv(uint8_t *buffer)
 
 void dma_usart1_init(uint32_t baudval)
 {  
-	  Usar1txSemaphore = xSemaphoreCreateBinary();
     iap_usart_config(baudval);
     isp_usart_dma_config();
 }
@@ -304,7 +299,7 @@ void USART1_IRQHandler(void)
 {
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_IDLE)){		//RX
 				BaseType_t pxHigherPriorityTaskWoken;
-				xSemaphoreGiveFromISR(CommunicationSemaphore,&pxHigherPriorityTaskWoken);
+				xSemaphoreGiveFromISR(Usart1RxSemaphore,&pxHigherPriorityTaskWoken);
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_IDLE);
         USART_STAT0(USART1);
 			  USART_DATA(USART1);
@@ -312,7 +307,7 @@ void USART1_IRQHandler(void)
     }
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_TC)){			//TX
 				BaseType_t pxHigherPriorityTaskWoken;
-				xSemaphoreGiveFromISR(Usar1txSemaphore,&pxHigherPriorityTaskWoken);
+				xSemaphoreGiveFromISR(Usart1TxSemaphore,&pxHigherPriorityTaskWoken);
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_TC);
 				portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);			
     }

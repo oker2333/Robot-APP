@@ -23,23 +23,27 @@
 
 #include "print.h"
 
+/* global variable */
 SemaphoreHandle_t VL6180xSemaphore;
-SemaphoreHandle_t CommunicationSemaphore;
+SemaphoreHandle_t Usart1RxSemaphore;
+SemaphoreHandle_t Usart1TxSemaphore;
+SemaphoreHandle_t Usar0TxSemaphore;
 
+/* FIFO Configure */
 #define LOG_BUFFER_SIZE 1024
 FIFO_BUFFER log_queue;
 FIFO_BUFFER *Queue_log = &log_queue;
 static uint8_t LOG_Buffer[LOG_BUFFER_SIZE] = {0};
 
-#define COMMUNICATE_RX_BUFFER_SIZE 1024
+#define USART1_RX_BUFFER_SIZE 1024
 FIFO_BUFFER communicate_rx_queue;
-FIFO_BUFFER *Queue_Communicate_RX = &communicate_rx_queue;
-static uint8_t Communicate_RX_Buffer[COMMUNICATE_RX_BUFFER_SIZE] = {0};
+FIFO_BUFFER *Queue_Usart1_RX = &communicate_rx_queue;
+static uint8_t Usart1_RX_Buffer[USART1_RX_BUFFER_SIZE] = {0};
 
-#define COMMUNICATE_TX_BUFFER_SIZE 1024
-FIFO_BUFFER communicate_tx_queue;
-FIFO_BUFFER *Queue_Communicate_TX = &communicate_tx_queue;
-static uint8_t Communicate_TX_Buffer[COMMUNICATE_TX_BUFFER_SIZE] = {0};
+#define USART1_TX_BUFFER_SIZE 1024
+FIFO_BUFFER usart1_tx_queue;
+FIFO_BUFFER *Queue_Usart1_TX = &usart1_tx_queue;
+static uint8_t Usart1_TX_Buffer[USART1_TX_BUFFER_SIZE] = {0};
 
 /* Task Configure. */
 #define LED_TEST_TASK_PRIORITY 1
@@ -76,11 +80,11 @@ int main(void)
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,NULL);
 		FIFO_Init(Queue_log,LOG_Buffer,LOG_BUFFER_SIZE);
 
-	  FIFO_Callback_Init(Queue_Communicate_RX,NULL,usart1_dma_recv);
-		FIFO_Init(Queue_Communicate_RX,Communicate_RX_Buffer,COMMUNICATE_RX_BUFFER_SIZE);	
+	  FIFO_Callback_Init(Queue_Usart1_RX,NULL,usart1_dma_recv);
+		FIFO_Init(Queue_Usart1_RX,Usart1_RX_Buffer,USART1_RX_BUFFER_SIZE);	
 	
-	  FIFO_Callback_Init(Queue_Communicate_TX,usart1_dma_send,NULL);
-		FIFO_Init(Queue_Communicate_TX,Communicate_TX_Buffer,COMMUNICATE_TX_BUFFER_SIZE);
+	  FIFO_Callback_Init(Queue_Usart1_TX,usart1_dma_send,NULL);
+		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
 		dma_usart1_init(115200);
 		bsp_usart_init(460800);
@@ -99,8 +103,10 @@ int main(void)
 		printf("APP Current Address = 0x%x\n",*((volatile uint32_t*)APP_ADDR_ADDRESS));
 		
 		VL6180xSemaphore = xSemaphoreCreateBinary();
-		CommunicationSemaphore = xSemaphoreCreateBinary();
-	
+		Usart1RxSemaphore = xSemaphoreCreateBinary();
+		Usart1TxSemaphore = xSemaphoreCreateBinary();
+	  Usar0TxSemaphore = xSemaphoreCreateBinary();
+
 		xTaskCreate(ledTestTask, "ledTestTask", LED_TEST_TASK_STK_SIZE, NULL, LED_TEST_TASK_PRIORITY, &LedTestTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
@@ -128,8 +134,8 @@ static void CommunicationTask( void *pvParameters )
 {
 		while(1)
 		{
-			 xSemaphoreTake(CommunicationSemaphore, portMAX_DELAY);
-			 FIFO_Recv(Queue_Communicate_RX);
+			 xSemaphoreTake(Usart1RxSemaphore, portMAX_DELAY);
+			 FIFO_Recv(Queue_Usart1_RX);
 			 DataFrame_Handle();
 		}
 }

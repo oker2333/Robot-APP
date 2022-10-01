@@ -30,10 +30,14 @@
 #define APP_ADDR_FLASH_SIZE 	((uint32_t)(INFO_ADDRESS - APP_ADDR_ADDRESS))
 #define INFO_FLASH_SIZE 			((uint32_t)(FLASH_END_ADDR - INFO_ADDRESS + 1))
 
-extern FIFO_BUFFER *Queue_Communicate_RX;
+extern FIFO_BUFFER *Queue_Usart1_RX;
+extern FIFO_BUFFER *Queue_Usart1_TX;
 extern FIFO_BUFFER *Queue_log;
-extern FIFO_BUFFER *Queue_Communicate_RX;
-extern SemaphoreHandle_t CommunicationSemaphore;
+
+extern SemaphoreHandle_t Usart1RxSemaphore;
+extern SemaphoreHandle_t Usart1TxSemaphore;
 extern SemaphoreHandle_t VL6180xSemaphore;
+
+extern SemaphoreHandle_t Usar0TxSemaphore;
 
 #endif
