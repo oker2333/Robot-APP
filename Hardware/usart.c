@@ -165,7 +165,7 @@ static void iap_usart_config(uint32_t baudval)
     rcu_periph_clock_enable(RCU_USART1);
 	
     gpio_init(GPIOA, GPIO_MODE_AF_PP, GPIO_OSPEED_50MHZ, GPIO_PIN_2);	//PA2--TX
-    gpio_init(GPIOA, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_3);	//PA13--RX
+    gpio_init(GPIOA, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_3);	//PA3--RX
 
     usart_deinit(USART1);
     usart_baudrate_set(USART1, baudval);
