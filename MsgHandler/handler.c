@@ -94,6 +94,8 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 			 OTA_Device = UserData[0];
 		   uint32_t OTA_Offset = (UserData[1] << 24) | (UserData[2] << 16) | (UserData[3] << 8) | (UserData[4] << 0);
 		   uint32_t OTA_Length = (UserData[5] << 8) | (UserData[6] << 0);
+		   printf("OTA_Offset = %d,OTA_Length = %d\r\n",OTA_Offset,OTA_Length);
+
 		   OTA_Rev_Bytes = Download2Flash(OTA_Offset,&UserData[7],OTA_Length);
 		   
 		   ack_cmd = OTA_ACK;
