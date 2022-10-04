@@ -43,7 +43,7 @@ void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t
 	 Data_Frame[index++] = 0x5A;
 	 Data_Frame[index] = 0x5A;
 	 
-	 FIFO_Add(Queue_Usart1_TX, Data_Frame, DataLength+HEADER_BYTES+TAIL_BYTES+2);
+	 FIFO_Add(Queue_Usart1_TX, Data_Frame, DataLength+HEADER_BYTES+TAIL_BYTES+4);
 }
 
 void Online_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
