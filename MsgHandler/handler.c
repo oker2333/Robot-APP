@@ -20,12 +20,11 @@ uint16_t find_free_invoke_id(void)
 	return invoke_id++;
 }
 
-void Create_Date_Frame(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
+void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
 	 uint16_t index = 0;
 	 uint16_t crc16 = 0x00;
    uint8_t Data_Frame[300];
-	 uint16_t sequence = find_free_invoke_id();
 	
 	 Data_Frame[index++] = 0xA5;
 	 Data_Frame[index++] = 0xA5;
@@ -47,32 +46,32 @@ void Create_Date_Frame(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 	 FIFO_Add(Queue_Usart1_TX, Data_Frame, DataLength+HEADER_BYTES+TAIL_BYTES+2);
 }
 
-void Online_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
+void Online_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
 		
 }
 
-void Inquire_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
+void Inquire_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
 
 }
 
-void Control_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
+void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
 
 }
 
-void Timing_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
+void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
 
 }
 
-void Upload_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
+void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
 
 }
 
-void OTA_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
+void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
 	 uint16_t index = 0;
 	 static int8_t OTA_Device = 0;
@@ -88,7 +87,7 @@ void OTA_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 		   ack_data[2] = (cmd >> 8) & 0xff;
 		   ack_data[3] = (cmd >> 0) & 0xff;
 		   ack_length = 0x04;
-		   Create_Date_Frame(ack_cmd,ack_data,ack_length);
+		   Create_Date_Frame(sequence,ack_cmd,ack_data,ack_length);
 		 break;
 		 
 		 case OTA_FRAME:
@@ -103,7 +102,7 @@ void OTA_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 		   ack_data[2] = (cmd >> 8) & 0xff;
 		   ack_data[3] = (cmd >> 0) & 0xff;
 		   ack_length = 0x04;
-		   Create_Date_Frame(ack_cmd,ack_data,ack_length);
+		   Create_Date_Frame(sequence,ack_cmd,ack_data,ack_length);
 		 break;
 		 
 		 case OTA_END:
@@ -117,7 +116,7 @@ void OTA_Handler(uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 		   ack_data[2] = (cmd >> 8) & 0xff;
 		   ack_data[3] = (cmd >> 0) & 0xff;
 		   ack_length = 0x04;
-		   Create_Date_Frame(ack_cmd,ack_data,ack_length);		 
+		   Create_Date_Frame(sequence,ack_cmd,ack_data,ack_length);		 
 		 break;
 		 
 		 case OTA_ACK:

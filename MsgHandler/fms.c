@@ -83,7 +83,14 @@ void Receive_FMS(uint8_t data_byte)
 			
 			case FMS_RECEIVE_STATE_CRC_L:
 				frame.DataCRC += data_byte;
-			  state = FMS_RECEIVE_STATE_TAIL_H;
+			  if(frame.DataCRC != frame.DataCRCActual)
+				{
+					 state = FMS_RECEIVE_STATE_IDLE;
+				}
+				else
+				{
+					 state = FMS_RECEIVE_STATE_TAIL_H;
+				}
 			break;
 			
 			case FMS_RECEIVE_STATE_TAIL_H:
@@ -98,10 +105,10 @@ void Receive_FMS(uint8_t data_byte)
 			break;
 				
 			case FMS_RECEIVE_STATE_TAIL_L:
-				if((data_byte == 0x5A) && (frame.DataCRC == frame.DataCRCActual))		//校验成功，消息回调处理
+				if(data_byte == 0x5A)
 				{
 					 uint8_t index = (frame.command & COMAND_MASK) >> 8;
-					 Callback_Handler[index](frame.command,frame.UserData,frame.index);
+					 Callback_Handler[index](frame.sequence,frame.command,frame.UserData,frame.index);
 				}
 		
 				state = FMS_RECEIVE_STATE_IDLE;

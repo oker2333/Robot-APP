@@ -10,7 +10,7 @@
 #define SUCCEED 0X00
 #define FAIL		0X01
 
-typedef void (*msg_handler_t)(uint16_t cmd,uint8_t *UserData,uint16_t DataLength);
+typedef void (*msg_handler_t)(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength);
 
 typedef enum{
 	
