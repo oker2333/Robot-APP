@@ -52,10 +52,12 @@ static uint8_t Usart1_TX_Buffer[USART1_TX_BUFFER_SIZE] = {0};
 TaskHandle_t InitTaskHanle;
 static void InitTask( void *pvParameters );
 
+#if FIFO_DEBUG
 #define LOG_TASK_PRIORITY 2
 #define LOG_TASK_STK_SIZE 100
 TaskHandle_t LogTaskHanle;
 static void LogTask( void *pvParameters );
+#endif
 
 #define EMERGENCY_TASK_PRIORITY 3
 #define EMERGENCY_TASK_STK_SIZE 100
@@ -92,8 +94,10 @@ int main(void)
 
 static void InitTask( void *pvParameters )
 {
+	  #if FIFO_DEBUG
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,NULL);
 		FIFO_Init(Queue_log,LOG_Buffer,LOG_BUFFER_SIZE);
+	  #endif
 
 	  FIFO_Callback_Init(Queue_Usart1_RX,NULL,usart1_dma_recv);
 		FIFO_Init(Queue_Usart1_RX,Usart1_RX_Buffer,USART1_RX_BUFFER_SIZE);	
@@ -101,8 +105,12 @@ static void InitTask( void *pvParameters )
 	  FIFO_Callback_Init(Queue_Usart1_TX,usart1_dma_send,NULL);
 		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
+	  #if FIFO_DEBUG
+	  dma_usart0_init(460800);
+	  #else
+	  usart0_init(460800);
+	  #endif
 		dma_usart1_init(460800);
-		bsp_usart_init(460800);
 		bsp_iic_init(I2C0);
 	
 		/* led gpio init */
@@ -116,7 +124,9 @@ static void InitTask( void *pvParameters )
 		GPIO_BC(GPIOB) = GPIO_PIN_8;
 
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
+		#if FIFO_DEBUG
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
+		#endif
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
 
@@ -162,7 +172,7 @@ static void VL6180xTask( void *pvParameters )
 				VL6180x_INT_Enable();
 	 }
 }
-
+#if FIFO_DEBUG
 static void LogTask(void *pvParameters)
 {
 	  while(1)
@@ -171,6 +181,7 @@ static void LogTask(void *pvParameters)
 			 vTaskDelay(pdMS_TO_TICKS(10));
 		}
 }
+#endif
 
 static void EmergencyTask(void *pvParameters)
 {

@@ -11,11 +11,13 @@
 #define USART0_DATA_ADDRESS ((uint32_t)&USART_DATA(USART0))
 #define USART1_DATA_ADDRESS ((uint32_t)&USART_DATA(USART1))
 
+void usart0_init(uint32_t baudval);
+
 void dma_usart1_init(uint32_t baudval);
 uint16_t usart1_dma_recv(uint8_t *buffer);
 void usart1_dma_send(uint8_t *buffer,uint16_t len);
 
-void bsp_usart_init(uint32_t baudval);
+void dma_usart0_init(uint32_t baudval);
 void usart0_dma_send(uint8_t *buffer,uint16_t len);
 uint16_t usart0_dma_recv(uint8_t *buffer);
 
