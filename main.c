@@ -106,9 +106,9 @@ static void InitTask( void *pvParameters )
 		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
 	  #if FIFO_DEBUG
-	  dma_usart0_init(460800);
+	  dma_usart0_init(3000000);
 	  #else
-	  usart0_init(460800);
+	  usart0_init(3000000);
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
