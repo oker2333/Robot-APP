@@ -168,7 +168,7 @@ static void LogTask(void *pvParameters)
 	  while(1)
 		{
 			 print_logs();
-			 vTaskDelay(pdMS_TO_TICKS(100));
+			 vTaskDelay(pdMS_TO_TICKS(10));
 		}
 }
 
