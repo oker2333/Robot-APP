@@ -130,7 +130,7 @@ static void InitTask( void *pvParameters )
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
 
-		printf("APP %s is Running,Start Address = 0x%x,Stack Address = 0x%x\r\n",BINARY_VERSION,*((volatile uint32_t*)APP_ADDR_ADDRESS),*((volatile uint32_t*)(*((volatile uint32_t*)APP_ADDR_ADDRESS))));
+		printf("APP %s is Running\r\n",BINARY_VERSION);
 
 		while(1)
 		{

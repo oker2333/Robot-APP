@@ -16,21 +16,19 @@
 
 #define FLASH_TOTAL_SIZE 			((uint32_t)0x40000U)
 
-#define APP_FLASH_SIZE         APP_A_FLASH_SIZE
-
 #define FLASH_BASE_ADDR 			((uint32_t)0x08000000U)
 
 #define IAP_ADDRESS 					((uint32_t)0x08000000U)
-#define APP_A_ADDRESS 				((uint32_t)0x08004000U)
-#define APP_B_ADDRESS 				((uint32_t)0x08021000U)
-#define APP_ADDR_ADDRESS			((uint32_t)0x0803E000U)
+#define APP_ADDRESS 					((uint32_t)0x08004000U)
+#define APP_BACKUP_ADDRESS 		((uint32_t)0x08021000U)
+#define APP_SIZE_ADDRESS			((uint32_t)0x0803E000U)
 #define INFO_ADDRESS 					((uint32_t)0x0803E800U)
 #define FLASH_END_ADDR 				((uint32_t)0x0803FFFFU)
 
-#define IAP_FLASH_SIZE 				((uint32_t)(APP_A_ADDRESS - IAP_ADDRESS))
-#define APP_A_FLASH_SIZE 			((uint32_t)(APP_B_ADDRESS - APP_A_ADDRESS))
-#define APP_B_FLASH_SIZE 			((uint32_t)(APP_ADDR_ADDRESS - APP_B_ADDRESS))
-#define APP_ADDR_FLASH_SIZE 	((uint32_t)(INFO_ADDRESS - APP_ADDR_ADDRESS))
+#define IAP_FLASH_SIZE 				((uint32_t)(APP_ADDRESS - IAP_ADDRESS))
+#define APP_FLASH_SIZE 				((uint32_t)(APP_BACKUP_ADDRESS - APP_ADDRESS))
+#define APP_BACKUP_FLASH_SIZE	((uint32_t)(APP_SIZE_ADDRESS - APP_BACKUP_ADDRESS))
+#define APP_SIZE_FLASH_SIZE 	((uint32_t)(INFO_ADDRESS - APP_SIZE_ADDRESS))
 #define INFO_FLASH_SIZE 			((uint32_t)(FLASH_END_ADDR - INFO_ADDRESS + 1))
 
 extern msg_handler_t Callback_Handler[CALLBACK_NUM];
