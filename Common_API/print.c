@@ -12,9 +12,9 @@ int fputc(int ch, FILE *f)
 		FIFO_Put(Queue_log,ch);
 	  #else
 	  (void)f;
-    usart_data_transmit(USART0, ch);
     while(RESET == usart_flag_get(USART0, USART_FLAG_TBE));
-	  #endif
+		usart_data_transmit(USART0, ch);
+		#endif
 	  return 0;
 }
 
