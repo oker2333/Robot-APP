@@ -19,6 +19,11 @@
 
 #include "fms.h"
 
+#include "timer.h"
+
+
+#include "switch.h"
+
 #include "app_config.h"
 
 #include "print.h"
@@ -112,6 +117,9 @@ static void InitTask( void *pvParameters )
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
+	
+		switch_init();
+	  switch_timer_init();
 	
 		/* led gpio init */
 		rcu_periph_clock_enable(RCU_GPIOC);

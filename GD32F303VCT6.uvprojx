@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F30X_HD,__TARGET_FPU_VFP</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\MsgHandler</IncludePath>
+              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\MsgHandler;.\Appliance</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -627,6 +627,11 @@
               <FileType>1</FileType>
               <FilePath>.\Hardware\flash_rw.c</FilePath>
             </File>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\timer.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -721,6 +726,16 @@
               <FileName>crc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Common_API\crc.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Appliance</GroupName>
+          <Files>
+            <File>
+              <FileName>switch.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Appliance\switch.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -3,9 +3,10 @@
 
 #include "gd32f30x_libopt.h"
 
-#define  VL6180x_INT_Enable() nvic_irq_enable(EXTI1_IRQn, 10U, 0U)
-#define  VL6180x_INT_Disable() nvic_irq_disable(EXTI1_IRQn)
+#define  VL6180x_INT_Enable() exti_interrupt_enable(EXTI_1)
+#define  VL6180x_INT_Disable() exti_interrupt_disable(EXTI_1)
 
 void bsp_gpio_exti_init(void);
+void switch_exti_init(void);
 
 #endif
