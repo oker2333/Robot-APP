@@ -119,7 +119,6 @@ static void InitTask( void *pvParameters )
 		bsp_iic_init(I2C0);
 	
 		switch_init();
-	  switch_timer_init();
 	
 		/* led gpio init */
 		rcu_periph_clock_enable(RCU_GPIOC);

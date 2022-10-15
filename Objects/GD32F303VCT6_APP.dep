@@ -1,6 +1,6 @@
 Dependencies for Project 'GD32F303VCT6', Target 'APP': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\main.c)(0x63498864)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x634A7284)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (gd32f30x_libopt.h)(0x6316A268)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h)(0x6316A267)
 I (.\CMSIS\GD32F30x\Include\gd32f30x.h)(0x6316A267)
@@ -49,7 +49,7 @@ I (.\FreeRTOS-Kernel\include\semphr.h)(0x6326FFD5)
 I (.\FreeRTOS-Kernel\include\queue.h)(0x6316A267)
 I (.\Hardware\bsp.h)(0x6316A267)
 I (.\Hardware\usart.h)(0x633E61EF)
-I (.\Hardware\exti.h)(0x63498BE3)
+I (.\Hardware\exti.h)(0x634A4D92)
 I (.\Hardware\pwm.h)(0x6316A267)
 I (.\Hardware\iic.h)(0x6316A267)
 I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
@@ -66,7 +66,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\limits.h)(0x5D9AD212)
 I (.\Common_API\fifo.h)(0x6320ABD7)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (.\MsgHandler\fms.h)(0x633BD35F)
-I (.\Hardware\timer.h)(0x6349845E)
+I (.\Hardware\timer.h)(0x634A5523)
 I (.\Appliance\switch.h)(0x6349885B)
 I (app_config.h)(0x63496058)
 I (.\MsgHandler\handler.h)(0x633BE487)
@@ -1115,8 +1115,8 @@ I (.\MsgHandler\handler.h)(0x633BE487)
 I (.\FreeRTOS-Kernel\include\timers.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\semphr.h)(0x6326FFD5)
 I (.\FreeRTOS-Kernel\include\queue.h)(0x6316A267)
-F (.\Hardware\exti.c)(0x63498C31)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\exti.o --omf_browse .\objects\exti.crf --depend .\objects\exti.d)
-I (Hardware\exti.h)(0x63498BE3)
+F (.\Hardware\exti.c)(0x634A4D86)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\exti.o --omf_browse .\objects\exti.crf --depend .\objects\exti.d)
+I (Hardware\exti.h)(0x634A4D92)
 I (..\Robot-APP\gd32f30x_libopt.h)(0x6316A268)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h)(0x6316A267)
 I (.\CMSIS\GD32F30x\Include\gd32f30x.h)(0x6316A267)
@@ -1295,8 +1295,8 @@ I (.\MsgHandler\handler.h)(0x633BE487)
 I (.\FreeRTOS-Kernel\include\timers.h)(0x6316A267)
 I (.\FreeRTOS-Kernel\include\semphr.h)(0x6326FFD5)
 I (.\FreeRTOS-Kernel\include\queue.h)(0x6316A267)
-F (.\Hardware\timer.c)(0x634993C5)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\timer.o --omf_browse .\objects\timer.crf --depend .\objects\timer.d)
-I (Hardware\timer.h)(0x6349845E)
+F (.\Hardware\timer.c)(0x634A5517)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\timer.o --omf_browse .\objects\timer.crf --depend .\objects\timer.d)
+I (Hardware\timer.h)(0x634A5523)
 I (.\CMSIS\GD32F30x\Include\gd32f30x.h)(0x6316A267)
 I (.\CMSIS\core_cm4.h)(0x6316A267)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
@@ -1329,7 +1329,6 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x6316A267)
-I (.\Common_API\print.h)(0x632F0C55)
 F (.\vl6180x\vl6180x_api.c)(0x63306948)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\vl6180x_api.o --omf_browse .\objects\vl6180x_api.crf --depend .\objects\vl6180x_api.d)
 I (vl6180x\vl6180x_api.h)(0x6316A268)
 I (.\CodeSamples\inc\vl6180x_platform.h)(0x6316A267)
@@ -1697,11 +1696,9 @@ I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (Common_API\crc.h)(0x633BD35F)
-F (.\Appliance\switch.c)(0x634971FB)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\switch.o --omf_browse .\objects\switch.crf --depend .\objects\switch.d)
+F (.\Appliance\switch.c)(0x634A8F57)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\switch.o --omf_browse .\objects\switch.crf --depend .\objects\switch.d)
 I (Appliance\switch.h)(0x6349885B)
-I (.\Hardware\exti.h)(0x63498BE3)
-I (..\Robot-APP\gd32f30x_libopt.h)(0x6316A268)
-I (.\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h)(0x6316A267)
+I (.\Common_API\print.h)(0x632F0C55)
 I (.\CMSIS\GD32F30x\Include\gd32f30x.h)(0x6316A267)
 I (.\CMSIS\core_cm4.h)(0x6316A267)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
@@ -1709,6 +1706,8 @@ I (.\CMSIS\core_cmInstr.h)(0x6316A267)
 I (.\CMSIS\core_cmFunc.h)(0x6316A267)
 I (.\CMSIS\core_cm4_simd.h)(0x6316A267)
 I (.\CMSIS\GD32F30x\Include\system_gd32f30x.h)(0x6316A267)
+I (..\Robot-APP\gd32f30x_libopt.h)(0x6316A268)
+I (.\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_adc.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_can.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_crc.h)(0x6316A267)
@@ -1732,3 +1731,16 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x6316A267)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x6316A267)
+I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x632C4C47)
+I (.\FreeRTOS-Kernel\include\projdefs.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\portable.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F\portmacro.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\mpu_wrappers.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\task.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\list.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\timers.h)(0x6316A267)
+I (.\FreeRTOS-Kernel\include\semphr.h)(0x6326FFD5)
+I (.\FreeRTOS-Kernel\include\queue.h)(0x6316A267)

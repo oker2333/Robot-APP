@@ -1,13 +1,6 @@
 #include "timer.h"
 #include "gd32f30x.h"
-#include "print.h"
 
-/**
-    \brief      configure the TIMER peripheral
-    \param[in]  none
-    \param[out] none
-    \retval     none
-  */
 void switch_timer_init(void)
 {
     /* TIMER0CLK = SystemCoreClock / 120 = 1MHz */
@@ -31,7 +24,7 @@ void switch_timer_init(void)
 		nvic_irq_enable(TIMER1_IRQn, 10U, 0U);
 		timer_interrupt_enable(TIMER1, TIMER_INT_CH0);
 
-    timer_enable(TIMER1);
+    timer_disable(TIMER1);
 }
 
 void TIMER1_IRQHandler(void)
@@ -40,5 +33,3 @@ void TIMER1_IRQHandler(void)
 			 timer_interrupt_flag_clear(TIMER1,TIMER_INT_FLAG_CH0);
     }
 }
-
-

@@ -37,32 +37,3 @@ void EXTI1_IRQHandler(void)
 			portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
     }
 }
-
-void switch_exti_init(void)
-{
-		/* enable the key clock */
-		rcu_periph_clock_enable(RCU_GPIOB);
-		rcu_periph_clock_enable(RCU_AF);
-		
-		/* configure button pin as input */
-		gpio_init(GPIOB, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ, GPIO_PIN_9);
-		
-		/* enable and set key EXTI interrupt to the lowest priority */
-		nvic_irq_enable(EXTI5_9_IRQn, 10U, 0U);
-
-		/* connect key EXTI line to key GPIO pin */
-		gpio_exti_source_select(GPIO_PORT_SOURCE_GPIOB, GPIO_PIN_SOURCE_9);
-
-		/* configure key EXTI line */
-		exti_init(EXTI_9, EXTI_INTERRUPT, EXTI_TRIG_FALLING);
-		exti_interrupt_flag_clear(EXTI_9);
-		exti_interrupt_enable(EXTI_9);
-}
-
-void EXTI5_9_IRQHandler(void)
-{
-    if (RESET != exti_interrupt_flag_get(EXTI_9)) {
-			
-			exti_interrupt_flag_clear(EXTI_9);
-    }
-}

@@ -7,6 +7,5 @@
 #define  VL6180x_INT_Disable() exti_interrupt_disable(EXTI_1)
 
 void bsp_gpio_exti_init(void);
-void switch_exti_init(void);
 
 #endif

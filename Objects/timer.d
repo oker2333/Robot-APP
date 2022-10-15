@@ -33,4 +33,3 @@
 .\objects\timer.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h
 .\objects\timer.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h
 .\objects\timer.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h
-.\objects\timer.o: .\Common_API\print.h
