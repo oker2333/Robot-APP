@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "switch.h"
 #include "print.h"
 #include "gd32f30x.h"
@@ -21,26 +23,42 @@ uint8_t key_type = 0;
 typedef enum{
 	DOWN,
 	PRESS,
-	LOW,
-	UP,
+	LOW_UP,
 	HIGH
 }key_state;
 
 TimerHandle_t	Key_Timer_Handle;
 
 static key_state state = DOWN;
+static uint32_t press_time = 0;
 
-void key_state_update(void)
-{
-	if(state == LOW)
-	{
-		 state = UP;
-	}
+void Key_CallBack_FMS(void)
+{ 
+	 switch(state)
+	 {
+		 case PRESS:
+			 state = LOW_UP;
+			 KEY_EXTI_ON();
+		 break;
+		 
+		 case LOW_UP:
+			 press_time++;
+		 break;
+		 
+		 case HIGH:
+			 state = DOWN;
+		   xTimerStop(Key_Timer_Handle,0);
+		   KEY_EXTI_ON();
+		 break;
+		 
+		 default:
+			 printf("[Key_CallBack_FMS]error state\r\n");
+		 break;
+	 }
 }
 
-void Key_FMS(void)		//不可重入函数
+void Key_Interrupt_FMS(void)
 {
-	 static uint32_t press_time = 0;
 	 BaseType_t pxHigherPriorityTaskWoken;
 	 
 	 switch(state)
@@ -50,31 +68,10 @@ void Key_FMS(void)		//不可重入函数
 			 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
 			 KEY_EXTI_OFF();
 			 state = PRESS;
-//		   printf("DOWN\n");
 		 break;
 		 
-		 case PRESS:
-			 KEY_EXTI_ON();
-			 state = LOW;
-//			 printf("PRESS\n");
-		 break;
-		 
-		 case LOW:
-			 press_time++;
-//		   printf("LOW %d\n",press_time);
-		 break;
-		 
-		 case UP:
+		 case LOW_UP:
 			 KEY_EXTI_OFF();
-			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
-		   portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
-			 state = HIGH;
-//			 printf("UP\n");
-		 break;
-		 
-		 case HIGH:
-			 KEY_EXTI_ON();
-		   xTimerStop(Key_Timer_Handle,0);
 		   if(press_time >= LONG_PRESS_TIME)
 			 {
 				  printf("long press %d\r\n",press_time);
@@ -84,11 +81,72 @@ void Key_FMS(void)		//不可重入函数
 				  printf("short press %d\r\n",press_time);
 			 }
 			 press_time = 0;
+			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
+		   portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+			 state = HIGH;
+		 break;
+
+		 default:
+			 printf("[Key_Interrupt_FMS]error state\r\n");
+		 break;			 
+
+	 }
+}
+
+#if 0
+void Key_FMS(void)		//不可重入函数
+{
+	 static uint32_t press_time = 0;
+	 BaseType_t pxHigherPriorityTaskWoken;
+	 
+	 switch(state)
+	 {
+		 case DOWN:			//中断服务函数
+			 xTimerStartFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
+			 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+			 KEY_EXTI_OFF();
+			 state = PRESS;
+//		   printf("DOWN\n");
+		 break;
+		 
+		 case PRESS:		//定时器回调函数
+			 KEY_EXTI_ON();
+			 state = LOW;
+//			 printf("PRESS\n");
+		 break;
+		 
+		 case LOW:			//定时器回调函数
+			 press_time++;
+//		   printf("LOW %d\n",press_time);
+		 break;
+		 
+		 case UP:				//中断服务函数
+			 KEY_EXTI_OFF();
+		   if(press_time >= LONG_PRESS_TIME)
+			 {
+				  printf("long press %d\r\n",press_time);
+			 }
+			 else
+			 {
+				  printf("short press %d\r\n",press_time);
+			 }
+			 press_time = 0;
+			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
+		   portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+			 state = HIGH;
+//			 printf("UP\n");
+		 break;
+		 
+		 case HIGH:			//定时器回调函数
+			 KEY_EXTI_ON();
+		   xTimerStop(Key_Timer_Handle,0);
 			 state = DOWN;
 //			 printf("HIGH\n\n");
 		 break;
 	 }
 }
+#endif
+
 
 void switch_exti_init(void)
 {
@@ -114,17 +172,14 @@ void switch_exti_init(void)
 void EXTI5_9_IRQHandler(void)
 {
     if (RESET != exti_interrupt_flag_get(EXTI_9)) {
-			key_state_update();
-			Key_FMS();
+			Key_Interrupt_FMS();
 			exti_interrupt_flag_clear(EXTI_9);
     }
 }
 
 void KeyCallback(TimerHandle_t xTimer)
 {
-	 keyENTER_CRITICAL_FROM_ISR();
-	 Key_FMS();
-	 keyEXIT_CRITICAL_FROM_ISR();
+	 Key_CallBack_FMS();
 }
 
 void switch_init(void)
