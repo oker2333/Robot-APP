@@ -42,7 +42,17 @@ void Key_CallBack_FMS(void)
 		 break;
 		 
 		 case LOW_UP:
-			 press_time++;
+			 if(gpio_input_bit_get(GPIOB,GPIO_PIN_9) == RESET){			//SET锟竭碉拷平锟斤拷RESET锟酵碉拷平
+				  KEY_EXTI_OFF();
+					press_time++;
+				  KEY_EXTI_ON();
+			 }
+			 else{
+				 xTimerStop(Key_Timer_Handle,0);
+				 KEY_EXTI_ON();
+				 state = DOWN;
+			 }
+				 
 		 break;
 		 
 		 case HIGH:
@@ -92,61 +102,6 @@ void Key_Interrupt_FMS(void)
 
 	 }
 }
-
-#if 0
-void Key_FMS(void)		//不可重入函数
-{
-	 static uint32_t press_time = 0;
-	 BaseType_t pxHigherPriorityTaskWoken;
-	 
-	 switch(state)
-	 {
-		 case DOWN:			//中断服务函数
-			 xTimerStartFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
-			 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
-			 KEY_EXTI_OFF();
-			 state = PRESS;
-//		   printf("DOWN\n");
-		 break;
-		 
-		 case PRESS:		//定时器回调函数
-			 KEY_EXTI_ON();
-			 state = LOW;
-//			 printf("PRESS\n");
-		 break;
-		 
-		 case LOW:			//定时器回调函数
-			 press_time++;
-//		   printf("LOW %d\n",press_time);
-		 break;
-		 
-		 case UP:				//中断服务函数
-			 KEY_EXTI_OFF();
-		   if(press_time >= LONG_PRESS_TIME)
-			 {
-				  printf("long press %d\r\n",press_time);
-			 }
-			 else
-			 {
-				  printf("short press %d\r\n",press_time);
-			 }
-			 press_time = 0;
-			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
-		   portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
-			 state = HIGH;
-//			 printf("UP\n");
-		 break;
-		 
-		 case HIGH:			//定时器回调函数
-			 KEY_EXTI_ON();
-		   xTimerStop(Key_Timer_Handle,0);
-			 state = DOWN;
-//			 printf("HIGH\n\n");
-		 break;
-	 }
-}
-#endif
-
 
 void switch_exti_init(void)
 {
