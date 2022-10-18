@@ -84,11 +84,11 @@ void Key_Interrupt_FMS(void)
 			 KEY_EXTI_OFF();
 		   if(press_time >= LONG_PRESS_TIME)
 			 {
-				  printf("long press %d\r\n",press_time);
+				  printf("long press %d ms\r\n",press_time*10);
 			 }
 			 else
 			 {
-				  printf("short press %d\r\n",press_time);
+				  printf("short press %d ms\r\n",press_time*10);
 			 }
 			 press_time = 0;
 			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
