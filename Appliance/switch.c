@@ -45,13 +45,12 @@ void Key_CallBack_FMS(void)
 			 if(gpio_input_bit_get(GPIOB,GPIO_PIN_9) == RESET){
 				  KEY_EXTI_OFF();
 					press_time++;
-				  KEY_EXTI_ON();
 			 }
 			 else{
 				 xTimerStop(Key_Timer_Handle,0);
-				 KEY_EXTI_ON();
 				 state = DOWN;
 			 }
+			 KEY_EXTI_ON();
 				 
 		 break;
 		 
