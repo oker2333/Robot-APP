@@ -42,7 +42,7 @@ void Key_CallBack_FMS(void)
 		 break;
 		 
 		 case LOW_UP:
-			 if(gpio_input_bit_get(GPIOB,GPIO_PIN_9) == RESET){			//SET�ߵ�ƽ��RESET�͵�ƽ
+			 if(gpio_input_bit_get(GPIOB,GPIO_PIN_9) == RESET){
 				  KEY_EXTI_OFF();
 					press_time++;
 				  KEY_EXTI_ON();
@@ -62,7 +62,7 @@ void Key_CallBack_FMS(void)
 		 break;
 		 
 		 default:
-			 printf("[Key_CallBack_FMS]error state\r\n");
+			 printf("[Key_CallBack_FMS]error state = %d\r\n",state);
 		 break;
 	 }
 }
@@ -81,7 +81,6 @@ void Key_Interrupt_FMS(void)
 		 break;
 		 
 		 case LOW_UP:
-			 KEY_EXTI_OFF();
 		   if(press_time >= LONG_PRESS_TIME)
 			 {
 				  printf("long press %d ms\r\n",press_time*10);
@@ -93,11 +92,12 @@ void Key_Interrupt_FMS(void)
 			 press_time = 0;
 			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
 		   portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+		   KEY_EXTI_OFF();
 			 state = HIGH;
 		 break;
 
 		 default:
-			 printf("[Key_Interrupt_FMS]error state\r\n");
+			 printf("[Key_Interrupt_FMS]error state = %d\r\n",state);
 		 break;			 
 
 	 }
