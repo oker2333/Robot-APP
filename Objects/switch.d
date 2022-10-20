@@ -1,10 +1,10 @@
 .\objects\switch.o: Appliance\switch.c
 .\objects\switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\switch.o: Appliance\switch.h
+.\objects\switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\switch.o: .\Common_API\print.h
 .\objects\switch.o: .\CMSIS\GD32F30x\Include\gd32f30x.h
 .\objects\switch.o: .\CMSIS\core_cm4.h
-.\objects\switch.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\switch.o: .\CMSIS\core_cmInstr.h
 .\objects\switch.o: .\CMSIS\core_cmFunc.h
 .\objects\switch.o: .\CMSIS\core_cm4_simd.h

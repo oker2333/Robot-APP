@@ -13,6 +13,9 @@
 typedef void (*msg_handler_t)(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength);
 
 typedef enum{
+	/* UPLOAD */
+	UPLOAD_KEY_TYPE = 0x0407,
+	UPLOAD_ACK = 0x8400,
 	
 	/* OTA */
 	OTA_START = 0x0500,

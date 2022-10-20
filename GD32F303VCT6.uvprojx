@@ -702,6 +702,11 @@
               <FileType>1</FileType>
               <FilePath>.\MsgHandler\timing.c</FilePath>
             </File>
+            <File>
+              <FileName>upload.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MsgHandler\upload.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -726,6 +731,11 @@
               <FileName>crc.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Common_API\crc.c</FilePath>
+            </File>
+            <File>
+              <FileName>synchronous.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Common_API\synchronous.c</FilePath>
             </File>
           </Files>
         </Group>

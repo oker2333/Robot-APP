@@ -68,6 +68,16 @@ void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 
 void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
+	switch(cmd)
+	{
+		 case UPLOAD_KEY_TYPE:
+			
+		 break;
+		
+		 case UPLOAD_ACK:
+			
+		 break;
+	}
 
 }
 

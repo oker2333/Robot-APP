@@ -79,6 +79,11 @@ static void VL6180xTask( void *pvParameters );
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
 
+#define SENSOR_UPLOAD_TASK_PRIORITY 6
+#define SENSOR_UPLOAD_TASK_STK_SIZE 1024
+TaskHandle_t SensorUploadTaskHanle;
+static void SensorUploadionTask( void *pvParameters );
+
 int main(void)
 {
 	  __enable_irq();
@@ -130,12 +135,17 @@ static void InitTask( void *pvParameters )
 		gpio_init(GPIOB, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_8);
 		GPIO_BC(GPIOB) = GPIO_PIN_8;
 
+		taskENTER_CRITICAL();
+		
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		#if FIFO_DEBUG
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 		#endif
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
+		xTaskCreate(SensorUploadionTask, "SensorUploadionTask", SENSOR_UPLOAD_TASK_STK_SIZE, NULL, SENSOR_UPLOAD_TASK_PRIORITY, &SensorUploadTaskHanle);
+		
+		taskEXIT_CRITICAL();
 
 		printf("APP %s is Running\r\n",BINARY_VERSION);
 
@@ -179,6 +189,7 @@ static void VL6180xTask( void *pvParameters )
 				VL6180x_INT_Enable();
 	 }
 }
+
 #if FIFO_DEBUG
 static void LogTask(void *pvParameters)
 {
@@ -198,4 +209,13 @@ static void EmergencyTask(void *pvParameters)
 			 
 			 vTaskDelay(pdMS_TO_TICKS(1000));
 		}
+}
+
+static void SensorUploadionTask(void *pvParameters)
+{
+	 while(1)
+	 {
+		  
+		  vTaskDelay(pdMS_TO_TICKS(20));
+	 }
 }
