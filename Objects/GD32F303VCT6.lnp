@@ -58,6 +58,7 @@
 ".\objects\lib_mem_a.o"
 ".\objects\crc.o"
 ".\objects\switch.o"
+".\objects\motor.o"
 --library_type=microlib --strict --scatter ".\Objects\GD32F303VCT6.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
