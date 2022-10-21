@@ -2,6 +2,9 @@
 #define HANDLER_H_
 
 #include <stdint.h>
+#include <stdbool.h>
+
+#include "synchronous.h"
 
 #define CALLBACK_NUM 6
 
@@ -24,6 +27,7 @@ typedef enum{
 	OTA_FRAME = 0x0503
 }msg_cmd_t;
 
+bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len);
 
 
 #endif

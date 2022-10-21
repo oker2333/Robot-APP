@@ -1,8 +1,10 @@
 .\objects\handler.o: MsgHandler\handler.c
-.\objects\handler.o: MsgHandler\handler.h
 .\objects\handler.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
-.\objects\handler.o: .\Common_API\fifo.h
+.\objects\handler.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\objects\handler.o: MsgHandler\handler.h
 .\objects\handler.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
+.\objects\handler.o: .\Common_API\synchronous.h
+.\objects\handler.o: .\Common_API\fifo.h
 .\objects\handler.o: .\FreeRTOS-Kernel\include\FreeRTOS.h
 .\objects\handler.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\handler.o: .\FreeRTOS-Kernel\FreeRTOSConfig.h
@@ -15,7 +17,6 @@
 .\objects\handler.o: .\FreeRTOS-Kernel\include\list.h
 .\objects\handler.o: MsgHandler\ota.h
 .\objects\handler.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
-.\objects\handler.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\handler.o: .\Hardware\flash_rw.h
 .\objects\handler.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_fmc.h
 .\objects\handler.o: .\CMSIS\GD32F30x\Include\gd32f30x.h

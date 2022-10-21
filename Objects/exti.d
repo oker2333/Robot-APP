@@ -58,4 +58,5 @@
 .\objects\exti.o: .\Common_API\fifo.h
 .\objects\exti.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\exti.o: .\MsgHandler\handler.h
+.\objects\exti.o: .\Common_API\synchronous.h
 .\objects\exti.o: .\FreeRTOS-Kernel\include\timers.h

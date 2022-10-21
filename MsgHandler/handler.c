@@ -1,11 +1,12 @@
+#include <stdint.h>
+#include <stdio.h>
+
 #include "handler.h"
 #include "fifo.h"
 #include "ota.h"
 #include "crc.h"
 #include "fms.h"
 #include "app_config.h"
-
-#include <stdint.h>
 
 #define ACK_DATA_SIZE 128
 
@@ -44,6 +45,26 @@ void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t
 	 Data_Frame[index] = 0x5A;
 	 
 	 FIFO_Add(Queue_Usart1_TX, Data_Frame, DataLength+HEADER_BYTES+TAIL_BYTES+4);
+}
+
+bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len)
+{
+	printf("[datalink_frame_send]cmd = 0x%x",cmd);
+	uint16_t invoke_id = 0;
+	bool ret = false;
+	for(int i = 1;i <= RYTEIES;i++)
+	{
+		invoke_id = find_free_invoke_id();
+		Create_Date_Frame(invoke_id,cmd,buffer,len);
+
+		if(semaphore_timed_wait(id)){
+			ret = true;
+			break;
+		}else{
+			printf("[datalink_frame_send]wait ack failed %d times",i);
+		}
+	}
+	return ret;
 }
 
 void Online_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)

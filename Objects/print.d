@@ -16,6 +16,7 @@
 .\objects\print.o: .\FreeRTOS-Kernel\include\list.h
 .\objects\print.o: ..\Robot-APP\app_config.h
 .\objects\print.o: .\MsgHandler\handler.h
+.\objects\print.o: .\Common_API\synchronous.h
 .\objects\print.o: .\FreeRTOS-Kernel\include\timers.h
 .\objects\print.o: .\FreeRTOS-Kernel\include\semphr.h
 .\objects\print.o: .\FreeRTOS-Kernel\include\queue.h

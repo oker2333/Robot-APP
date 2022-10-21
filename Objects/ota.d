@@ -51,6 +51,7 @@
 .\objects\ota.o: .\FreeRTOS-Kernel\include\task.h
 .\objects\ota.o: .\FreeRTOS-Kernel\include\list.h
 .\objects\ota.o: .\MsgHandler\handler.h
+.\objects\ota.o: .\Common_API\synchronous.h
 .\objects\ota.o: .\FreeRTOS-Kernel\include\timers.h
 .\objects\ota.o: .\FreeRTOS-Kernel\include\semphr.h
 .\objects\ota.o: .\FreeRTOS-Kernel\include\queue.h

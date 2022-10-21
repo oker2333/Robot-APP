@@ -68,4 +68,5 @@
 .\objects\main.o: .\Appliance\switch.h
 .\objects\main.o: app_config.h
 .\objects\main.o: .\MsgHandler\handler.h
+.\objects\main.o: .\Common_API\synchronous.h
 .\objects\main.o: .\Common_API\print.h

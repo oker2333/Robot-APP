@@ -16,6 +16,7 @@
 .\objects\fms.o: .\FreeRTOS-Kernel\include\list.h
 .\objects\fms.o: .\Common_API\print.h
 .\objects\fms.o: MsgHandler\handler.h
+.\objects\fms.o: .\Common_API\synchronous.h
 .\objects\fms.o: .\Common_API\crc.h
 .\objects\fms.o: ..\Robot-APP\app_config.h
 .\objects\fms.o: .\FreeRTOS-Kernel\include\timers.h
