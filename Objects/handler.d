@@ -57,3 +57,4 @@
 .\objects\handler.o: .\FreeRTOS-Kernel\include\queue.h
 .\objects\handler.o: .\Common_API\crc.h
 .\objects\handler.o: MsgHandler\fms.h
+.\objects\handler.o: .\Common_API\print.h

@@ -6,6 +6,7 @@
 #include "ota.h"
 #include "crc.h"
 #include "fms.h"
+#include "print.h"
 #include "app_config.h"
 
 #define ACK_DATA_SIZE 128
@@ -49,9 +50,10 @@ void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t
 
 bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len)
 {
-	printf("[datalink_frame_send]cmd = 0x%x",cmd);
+	printf("[datalink_frame_send]cmd = 0x%x\r\n",cmd);
 	uint16_t invoke_id = 0;
 	bool ret = false;
+	uint8_t fail_count = 0;
 	for(int i = 1;i <= RYTEIES;i++)
 	{
 		invoke_id = find_free_invoke_id();
@@ -61,8 +63,12 @@ bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t l
 			ret = true;
 			break;
 		}else{
-			printf("[datalink_frame_send]wait ack failed %d times",i);
+		  fail_count++;
 		}
+	}
+	if(fail_count != 0)
+	{
+		 printf("[datalink_frame_send]wait ack failed %d times\r\n",fail_count);
 	}
 	return ret;
 }
@@ -89,6 +95,8 @@ void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 
 void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
+	uint16_t ack_cmd = 0x00;
+	
 	switch(cmd)
 	{
 		 case UPLOAD_KEY_TYPE:
@@ -96,10 +104,12 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 		 break;
 		
 		 case UPLOAD_ACK:
-			
+			 ack_cmd = invoke_id = (UserData[2] << 8) | UserData[3];
+		   if(ack_cmd == UPLOAD_KEY_TYPE)
+			   semaphore_post(KEY_ID);
 		 break;
 	}
-
+	printf("[Upload_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
@@ -156,6 +166,7 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 			 
 		 break;
 	 }	 
+	 printf("[Upload_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 msg_handler_t Callback_Handler[CALLBACK_NUM] = {Online_Handler,Inquire_Handler,Control_Handler,Timing_Handler,Upload_Handler,OTA_Handler};

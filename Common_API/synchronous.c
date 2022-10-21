@@ -10,8 +10,8 @@
 
 #include "synchronous.h"
 
-#define semaphore_lock() (void*)0
-#define semaphore_unlock() (void*)0
+#define semaphore_lock() 		uint32_t ulReturn = taskENTER_CRITICAL_FROM_ISR()
+#define semaphore_unlock() 	taskEXIT_CRITICAL_FROM_ISR(ulReturn)
 
 typedef struct{
 	bool occupied;
@@ -50,6 +50,7 @@ static void free_semaphore(Sensor_Id_t id)
 {
 	semaphore_lock();
 	sem_pool[id].occupied = false;
+	vSemaphoreDelete(sem_pool[id].semaphore);
 	semaphore_unlock();
 }
 
@@ -60,21 +61,18 @@ bool semaphore_timed_wait(Sensor_Id_t id)
 	
 	sem_ptr = get_semaphore(id);
 	if(!sem_ptr){
-		printf("get_semaphore failed\n");
+		printf("get_semaphore failed\r\n");
 		return false;
 	}
 	
-	err = xSemaphoreTake(sem_ptr, portMAX_DELAY);
+	err = xSemaphoreTake(sem_ptr, pdMS_TO_TICKS(TIMEOUT_MS));
 	if(err == pdFALSE){
-		vSemaphoreDelete(sem_ptr);
 		free_semaphore(id);
-		printf("sem_timedwait error\r\n");
+		printf("xSemaphoreTake error\r\n");
 		return false;
 	}
 
-	vSemaphoreDelete(sem_ptr);
 	free_semaphore(id);
-
 	return true;
 }
 
