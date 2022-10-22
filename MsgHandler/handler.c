@@ -75,7 +75,20 @@ bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t l
 
 void Online_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
-		
+	  int index = 0;
+	  uint8_t buffer[10] = {0};
+		switch(cmd)
+		{
+			case ONLINE_HEARTBEAT:
+				buffer[index++] = 0x00;
+			  Create_Date_Frame(sequence,ONLINE_HEARTBEAT_ACK,buffer,index);
+				print_info("Heart Beart From Host\r\n");
+			break;
+			
+			case ONLINE_HEARTBEAT_ACK:
+
+			break;
+		}
 }
 
 void Inquire_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)

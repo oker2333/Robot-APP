@@ -64,7 +64,13 @@ void Receive_FMS(uint8_t data_byte)
 				frame.command += data_byte;
 			  frame.index = 0x00;
 			  frame.DataCRCActual = CRC16_Check(data_byte,frame.DataCRCActual);
-			  state = FMS_RECEIVE_STATE_DATA;
+				if(frame.index == (frame.DataLength - HEADER_BYTES - TAIL_BYTES))
+				{
+					 state = FMS_RECEIVE_STATE_CRC_H;
+				}else
+				{
+					 state = FMS_RECEIVE_STATE_DATA;
+				}
 			break;
 			
 			case FMS_RECEIVE_STATE_DATA:

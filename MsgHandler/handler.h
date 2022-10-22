@@ -16,6 +16,10 @@
 typedef void (*msg_handler_t)(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength);
 
 typedef enum{
+	/* ONLINE */
+	ONLINE_HEARTBEAT = 0x0002,
+	ONLINE_HEARTBEAT_ACK = 0x8002,
+	
 	/* UPLOAD */
 	UPLOAD_KEY_TYPE = 0x0407,
 	UPLOAD_ACK = 0x8400,
