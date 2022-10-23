@@ -5,10 +5,9 @@ void gpio_config(void)
     rcu_periph_clock_enable(RCU_GPIOA);
     rcu_periph_clock_enable(RCU_AF);
 
-    /*Configure PA0 PA1 PA2(TIMER1 CH0 CH1 CH2) as alternate function*/
-    gpio_init(GPIOA,GPIO_MODE_AF_PP,GPIO_OSPEED_50MHZ,GPIO_PIN_0);
-    gpio_init(GPIOA,GPIO_MODE_AF_PP,GPIO_OSPEED_50MHZ,GPIO_PIN_1);
-    gpio_init(GPIOA,GPIO_MODE_AF_PP,GPIO_OSPEED_50MHZ,GPIO_PIN_2);
+    /*Configure PA6 PA7 (TIMER2 CH0 CH1) as alternate function*/
+    gpio_init(GPIOA,GPIO_MODE_AF_PP,GPIO_OSPEED_50MHZ,GPIO_PIN_6);
+    gpio_init(GPIOA,GPIO_MODE_AF_PP,GPIO_OSPEED_50MHZ,GPIO_PIN_7);
 }
 
 void timer_config(void)
@@ -17,25 +16,24 @@ void timer_config(void)
     TIMER1 configuration: generate 3 PWM signals with 3 different duty cycles:
     TIMER1CLK = SystemCoreClock / 120 = 1MHz
 
-    TIMER1 channel0 duty cycle = (4000/ 16000)* 100  = 25%
-    TIMER1 channel1 duty cycle = (8000/ 16000)* 100  = 50%
-    TIMER1 channel2 duty cycle = (12000/ 16000)* 100 = 75%
+    TIMER1 channel0 duty cycle = (250/ 1000)* 100  = 25%
+    TIMER1 channel1 duty cycle = (500/ 1000)* 100  = 50%
     ----------------------------------------------------------------------- */
     timer_oc_parameter_struct timer_ocintpara;
     timer_parameter_struct timer_initpara;
 
-    rcu_periph_clock_enable(RCU_TIMER1);
+    rcu_periph_clock_enable(RCU_TIMER2);
 
-    timer_deinit(TIMER1);
+    timer_deinit(TIMER2);
 
     /* TIMER1 configuration */
     timer_initpara.prescaler         = 119;
     timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
-    timer_initpara.period            = 15999;
+    timer_initpara.period            = 999;
     timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
     timer_initpara.repetitioncounter = 0;
-    timer_init(TIMER1,&timer_initpara);
+    timer_init(TIMER2,&timer_initpara);
 
     /* CH0,CH1 and CH2 configuration in PWM mode */
     timer_ocintpara.outputstate  = TIMER_CCX_ENABLE;
@@ -45,29 +43,23 @@ void timer_config(void)
     timer_ocintpara.ocidlestate  = TIMER_OC_IDLE_STATE_LOW;
     timer_ocintpara.ocnidlestate = TIMER_OCN_IDLE_STATE_LOW;
 
-    timer_channel_output_config(TIMER1,TIMER_CH_0,&timer_ocintpara);
-    timer_channel_output_config(TIMER1,TIMER_CH_1,&timer_ocintpara);
-    timer_channel_output_config(TIMER1,TIMER_CH_2,&timer_ocintpara);
+    timer_channel_output_config(TIMER2,TIMER_CH_0,&timer_ocintpara);
+    timer_channel_output_config(TIMER2,TIMER_CH_1,&timer_ocintpara);
 
     /* CH0 configuration in PWM mode0,duty cycle 25% */
-    timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_0,3999);
-    timer_channel_output_mode_config(TIMER1,TIMER_CH_0,TIMER_OC_MODE_PWM0);
-    timer_channel_output_shadow_config(TIMER1,TIMER_CH_0,TIMER_OC_SHADOW_DISABLE);
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,249);
+    timer_channel_output_mode_config(TIMER2,TIMER_CH_0,TIMER_OC_MODE_PWM0);
+    timer_channel_output_shadow_config(TIMER2,TIMER_CH_0,TIMER_OC_SHADOW_DISABLE);
 
     /* CH1 configuration in PWM mode0,duty cycle 50% */
-    timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_1,7999);
-    timer_channel_output_mode_config(TIMER1,TIMER_CH_1,TIMER_OC_MODE_PWM0);
-    timer_channel_output_shadow_config(TIMER1,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);
-
-    /* CH2 configuration in PWM mode0,duty cycle 75% */
-    timer_channel_output_pulse_value_config(TIMER1,TIMER_CH_2,11999);
-    timer_channel_output_mode_config(TIMER1,TIMER_CH_2,TIMER_OC_MODE_PWM0);
-    timer_channel_output_shadow_config(TIMER1,TIMER_CH_2,TIMER_OC_SHADOW_DISABLE);
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,499);
+    timer_channel_output_mode_config(TIMER2,TIMER_CH_1,TIMER_OC_MODE_PWM0);
+    timer_channel_output_shadow_config(TIMER2,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);
 
     /* auto-reload preload enable */
-    timer_auto_reload_shadow_enable(TIMER1);
+    timer_auto_reload_shadow_enable(TIMER2);
     /* auto-reload preload enable */
-    timer_enable(TIMER1);
+    timer_enable(TIMER2);
 }
 
 void bsp_pwm_out_init(void)

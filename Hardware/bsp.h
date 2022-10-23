@@ -5,5 +5,6 @@
 #include "exti.h"
 #include "pwm.h"
 #include "iic.h"
+#include "motor.h"
 
 #endif
