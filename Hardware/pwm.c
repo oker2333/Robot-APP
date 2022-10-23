@@ -47,12 +47,12 @@ void timer_config(void)
     timer_channel_output_config(TIMER2,TIMER_CH_1,&timer_ocintpara);
 
     /* CH0 configuration in PWM mode0,duty cycle 25% */
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,249);
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,99);
     timer_channel_output_mode_config(TIMER2,TIMER_CH_0,TIMER_OC_MODE_PWM0);
     timer_channel_output_shadow_config(TIMER2,TIMER_CH_0,TIMER_OC_SHADOW_DISABLE);
 
     /* CH1 configuration in PWM mode0,duty cycle 50% */
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,499);
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,99);
     timer_channel_output_mode_config(TIMER2,TIMER_CH_1,TIMER_OC_MODE_PWM0);
     timer_channel_output_shadow_config(TIMER2,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);
 

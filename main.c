@@ -101,7 +101,7 @@ int main(void)
 		vTaskStartScheduler();
 
 		/* Should not get here */
-		while(1);
+		while(pdTRUE);
 }
 
 static void InitTask( void *pvParameters )
@@ -153,7 +153,7 @@ static void InitTask( void *pvParameters )
 
 		printf("APP %s is Running\r\n",BINARY_VERSION);
 
-		while(1)
+		while(pdTRUE)
 		{
 				GPIO_BC(GPIOC) = GPIO_PIN_13;
 				vTaskDelay(pdMS_TO_TICKS(1000));
@@ -164,7 +164,7 @@ static void InitTask( void *pvParameters )
 
 static void CommunicationTask( void *pvParameters )
 {
-		while(1)
+		while(pdTRUE)
 		{
 			 DataFrame_Handle();
 			 DataFrame_Transmit();
@@ -178,7 +178,7 @@ static void VL6180xTask( void *pvParameters )
 	 Sample_Interrupt();
 	 bsp_gpio_exti_init();
 	 
-	 while(1)
+	 while(pdTRUE)
 	 {
 		    xSemaphoreTake(VL6180xSemaphore, portMAX_DELAY);
         VL6180x_RangeGetMeasurement(theVL6180xDev, &RangeData);
@@ -197,7 +197,7 @@ static void VL6180xTask( void *pvParameters )
 #if FIFO_DEBUG
 static void LogTask(void *pvParameters)
 {
-	  while(1)
+	  while(pdTRUE)
 		{
 			 print_logs();
 			 vTaskDelay(pdMS_TO_TICKS(100));
@@ -207,19 +207,16 @@ static void LogTask(void *pvParameters)
 
 static void EmergencyTask(void *pvParameters)
 {
-	  while(1)
+	  while(pdTRUE)
 		{
-			 //Reset the Breakdown Sensors
-			 
 			 vTaskDelay(pdMS_TO_TICKS(1000));
 		}
 }
 
 static void SensorUploadionTask(void *pvParameters)
 {
-	 while(1)
+	 while(pdTRUE)
 	 {
-		  
 		  vTaskDelay(pdMS_TO_TICKS(10));
 	 }
 }
