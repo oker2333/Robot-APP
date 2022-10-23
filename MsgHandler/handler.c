@@ -9,12 +9,6 @@
 #include "print.h"
 #include "app_config.h"
 
-#define ACK_DATA_SIZE 128
-
-uint8_t ack_data[ACK_DATA_SIZE];
-uint16_t ack_length = 0;
-uint16_t ack_cmd = 0;
-
 static uint16_t invoke_id = 0;
 
 uint16_t find_free_invoke_id(void)
@@ -98,7 +92,22 @@ void Inquire_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 
 void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
-
+	  int index = 0;
+	  uint8_t buffer[10] = {0};
+	  switch(cmd)
+		{
+			case CONTROL_SPEED:
+				buffer[index++] = 0x00;
+				buffer[index++] = CONTROL_SPEED >> 8;
+				buffer[index++] = CONTROL_SPEED & 0xFF;
+			  Create_Date_Frame(sequence,CONTROL_ACK,buffer,index);
+				print_info("Speed From Host\r\n");
+			break;
+			
+			case CONTROL_ACK:
+				
+			break;
+		}
 }
 
 void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
@@ -127,7 +136,9 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 
 void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
-	 uint16_t index = 0;
+	 int index = 0;
+	 uint8_t buffer[10] = {0};
+
 	 static int8_t OTA_Device = 0;
 	 static uint32_t OTA_Rev_Bytes = 0;
 	 
@@ -135,13 +146,11 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 	 {
 		 case OTA_START:
 			 OTA_Device = UserData[0];
-		   ack_cmd = OTA_ACK;
-		   ack_data[0] = OTA_Device;
-		   ack_data[1] = SUCCEED;
-		   ack_data[2] = (cmd >> 8) & 0xff;
-		   ack_data[3] = (cmd >> 0) & 0xff;
-		   ack_length = 0x04;
-		   Create_Date_Frame(sequence,ack_cmd,ack_data,ack_length);
+		   buffer[index++] = OTA_Device;
+		   buffer[index++] = SUCCEED;
+		   buffer[index++] = (cmd >> 8) & 0xff;
+		   buffer[index++] = (cmd >> 0) & 0xff;
+		   Create_Date_Frame(sequence,OTA_ACK,buffer,index);
 		 break;
 		 
 		 case OTA_FRAME:
@@ -152,13 +161,11 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 
 		   OTA_Rev_Bytes = Download2Flash(OTA_Offset,&UserData[7],OTA_Length);
 		   
-		   ack_cmd = OTA_ACK;
-		   ack_data[0] = OTA_Device;
-		   ack_data[1] = SUCCEED;
-		   ack_data[2] = (cmd >> 8) & 0xff;
-		   ack_data[3] = (cmd >> 0) & 0xff;
-		   ack_length = 0x04;
-		   Create_Date_Frame(sequence,ack_cmd,ack_data,ack_length);
+		   buffer[index++] = OTA_Device;
+		   buffer[index++] = SUCCEED;
+		   buffer[index++] = (cmd >> 8) & 0xff;
+		   buffer[index++] = (cmd >> 0) & 0xff;
+		   Create_Date_Frame(sequence,OTA_ACK,buffer,index);
 		 break;
 		 
 		 case OTA_END:
@@ -166,13 +173,11 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 		   uint16_t CRC16 = (UserData[1] << 8) | (UserData[2] << 0);
 		   uint8_t OTA_Result = FlashBinaryCheck(CRC16,OTA_Rev_Bytes);
 
-		   ack_cmd = OTA_ACK;
-		   ack_data[0] = OTA_Device;
-		   ack_data[1] = OTA_Result;
-		   ack_data[2] = (cmd >> 8) & 0xff;
-		   ack_data[3] = (cmd >> 0) & 0xff;
-		   ack_length = 0x04;
-		   Create_Date_Frame(sequence,ack_cmd,ack_data,ack_length);		 
+		   buffer[index++] = OTA_Device;
+		   buffer[index++] = OTA_Result;
+		   buffer[index++] = (cmd >> 8) & 0xff;
+		   buffer[index++] = (cmd >> 0) & 0xff;
+		   Create_Date_Frame(sequence,OTA_ACK,buffer,index);		 
 		 break;
 		 
 		 case OTA_ACK:

@@ -4,8 +4,6 @@
 #include "app_config.h"
 #include "gd32f30x_libopt.h"
 
-extern FIFO_BUFFER *Queue_log;
-
 int fputc(int ch, FILE *f)
 {
 	  #if FIFO_DEBUG
@@ -18,7 +16,11 @@ int fputc(int ch, FILE *f)
 	  return 0;
 }
 
+#if FIFO_DEBUG
+extern FIFO_BUFFER *Queue_log;
+
 void print_logs(void)
 {
 	  FIFO_Tansmit(Queue_log);
 }
+#endif

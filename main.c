@@ -36,10 +36,12 @@ SemaphoreHandle_t Usart1TxSemaphore;
 SemaphoreHandle_t Usar0TxSemaphore;
 
 /* FIFO Configure */
+#if FIFO_DEBUG
 #define LOG_BUFFER_SIZE 1024
 FIFO_BUFFER log_queue;
 FIFO_BUFFER *Queue_log = &log_queue;
 static uint8_t LOG_Buffer[LOG_BUFFER_SIZE] = {0};
+#endif
 
 #define USART1_RX_BUFFER_SIZE 1024
 FIFO_BUFFER communicate_rx_queue;
@@ -74,15 +76,15 @@ static void EmergencyTask( void *pvParameters );
 TaskHandle_t VL6180xTaskHanle;
 static void VL6180xTask( void *pvParameters );
 
-#define COMMUNICATION_TASK_PRIORITY 5
-#define COMMUNICATION_TASK_STK_SIZE 1024
-TaskHandle_t CommunicationTaskHanle;
-static void CommunicationTask( void *pvParameters );
-
-#define SENSOR_UPLOAD_TASK_PRIORITY 6
+#define SENSOR_UPLOAD_TASK_PRIORITY 5
 #define SENSOR_UPLOAD_TASK_STK_SIZE 1024
 TaskHandle_t SensorUploadTaskHanle;
 static void SensorUploadionTask( void *pvParameters );
+
+#define COMMUNICATION_TASK_PRIORITY 6
+#define COMMUNICATION_TASK_STK_SIZE 1024
+TaskHandle_t CommunicationTaskHanle;
+static void CommunicationTask( void *pvParameters );
 
 int main(void)
 {
@@ -164,7 +166,7 @@ static void CommunicationTask( void *pvParameters )
 		{
 			 DataFrame_Handle();
 			 DataFrame_Transmit();
-			 vTaskDelay(pdMS_TO_TICKS(20));
+			 vTaskDelay(pdMS_TO_TICKS(10));
 		}
 }
 
@@ -196,7 +198,7 @@ static void LogTask(void *pvParameters)
 	  while(1)
 		{
 			 print_logs();
-			 vTaskDelay(pdMS_TO_TICKS(10));
+			 vTaskDelay(pdMS_TO_TICKS(100));
 		}
 }
 #endif
@@ -216,6 +218,6 @@ static void SensorUploadionTask(void *pvParameters)
 	 while(1)
 	 {
 		  
-		  vTaskDelay(pdMS_TO_TICKS(20));
+		  vTaskDelay(pdMS_TO_TICKS(10));
 	 }
 }
