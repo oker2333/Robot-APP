@@ -68,10 +68,3 @@ void bsp_pwm_out_init(void)
 		timer_config();
 }
 
-
-
-
-
-
-
-

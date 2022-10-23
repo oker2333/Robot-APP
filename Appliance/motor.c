@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 #include "motor.h"
 #include "pwm.h"
 
@@ -15,6 +17,13 @@ Right:E0 E1
 			1  0	forward
 
 */
+
+/*
+	duty cycle = (x / 1000)* 100%  = 50%
+*/
+
+#define set_left_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,x);
+#define set_right_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,x);
 
 static void STBY_Init(void)
 {
@@ -81,16 +90,43 @@ void motor_init(void)
 {
 	 bsp_pwm_out_init();
 	 Direction_Init();
-	 left_stop();
-	 right_stop();
 }
+
+static int32_t left_velocity = 0;
+static int32_t right_velocity = 0;
 
 void motor_control(int32_t left,int32_t right)
 {
+	 if(left != left_velocity)
+	 {
+		  left_stop();
+		  if(left >= 0){
+				 set_left_velocity(left);
+				 left_forward();
+			}else{
+				 set_left_velocity(-left);
+				 left_backward();
+			}
+			left_velocity = left;
+	 }
 	 
+	 if(right != right_velocity)
+	 {
+		  right_stop();
+		  if(right >= 0){
+				 set_right_velocity(right);
+				 right_forward();
+			}else{
+				 set_right_velocity(-right);
+				 right_backward();
+			}
+			right_velocity = right;
+	 }
+	 printf("[motor_control]left_velocity = %d,right_velocity = %d\r\n",left_velocity,right_velocity);
 }
 
 void motor_info(int32_t* left,int32_t* right)
 {
-	 
+	 *left = left_velocity;
+	 *right = right_velocity;
 }
