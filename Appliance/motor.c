@@ -6,6 +6,18 @@
 /*Configure PA6 PA7 as TIMER2 CH0(left) CH1(right),Configure PA5 as STBY */
 
 /*
+  rated revolution:293rpm
+	w = 293*2*pi/60   <----------->   duty cycle
+	v = 2*pi*r/T
+	v = w*r --------   pwm = f(w)	======	pwm = f(v/r)   === x = f(v/r) * 1000
+*/
+
+/* 
+  Wheel Diameter:65mm
+	Distance Between Wheels:123mm
+*/
+
+/*
 Left:E0 E1
 		 0  0  stop
 		 0  1	 backward
@@ -129,4 +141,9 @@ void motor_info(int32_t* left,int32_t* right)
 {
 	 *left = left_velocity;
 	 *right = right_velocity;
+}
+
+void PID_Adjust(int32_t left,int32_t right)
+{
+	 
 }

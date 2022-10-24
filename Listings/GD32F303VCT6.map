@@ -2161,6 +2161,7 @@ Removing Unused input sections from the image.
     Removing switch.o(i.set_key_type), (12 bytes).
     Removing motor.o(.rev16_text), (4 bytes).
     Removing motor.o(.revsh_text), (4 bytes).
+    Removing motor.o(i.PID_Adjust), (2 bytes).
     Removing motor.o(i.STBY_Init), (36 bytes).
     Removing motor.o(i.left_backward), (24 bytes).
     Removing motor.o(i.left_forward), (24 bytes).
@@ -2178,7 +2179,7 @@ Removing Unused input sections from the image.
     Removing cdrcmple.o(.text), (48 bytes).
     Removing depilogue.o(.text), (186 bytes).
 
-776 unused section(s) (total 36174 bytes) removed from the image.
+777 unused section(s) (total 36176 bytes) removed from the image.
 
 ==============================================================================
 
@@ -3219,27 +3220,27 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08004000   0x08004000   0x00000150   Data   RO         4268    RESET               startup_gd32f30x_cl.o
-    0x08004150   0x08004150   0x00000000   Code   RO         6942  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08004150   0x08004150   0x00000004   Code   RO         7214    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x08004154   0x08004154   0x00000004   Code   RO         7217    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08004158   0x08004158   0x00000000   Code   RO         7219    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08004158   0x08004158   0x00000000   Code   RO         7221    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08004158   0x08004158   0x00000008   Code   RO         7222    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08004160   0x08004160   0x00000000   Code   RO         7224    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08004160   0x08004160   0x00000000   Code   RO         7226    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08004160   0x08004160   0x00000004   Code   RO         7215    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08004150   0x08004150   0x00000000   Code   RO         6948  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08004150   0x08004150   0x00000004   Code   RO         7220    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x08004154   0x08004154   0x00000004   Code   RO         7223    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08004158   0x08004158   0x00000000   Code   RO         7225    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08004158   0x08004158   0x00000000   Code   RO         7227    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08004158   0x08004158   0x00000008   Code   RO         7228    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08004160   0x08004160   0x00000000   Code   RO         7230    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08004160   0x08004160   0x00000000   Code   RO         7232    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08004160   0x08004160   0x00000004   Code   RO         7221    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08004164   0x08004164   0x000000be   Code   RO         5377    .emb_text           port.o
     0x08004222   0x08004222   0x00000002   PAD
     0x08004224   0x08004224   0x00000024   Code   RO         4269    .text               startup_gd32f30x_cl.o
     0x08004248   0x08004248   0x00000220   Code   RO         6702    .text               lib_mem_a.o
-    0x08004468   0x08004468   0x00000024   Code   RO         6945    .text               mc_w.l(memcpya.o)
-    0x0800448c   0x0800448c   0x00000024   Code   RO         6949    .text               mc_w.l(memseta.o)
-    0x080044b0   0x080044b0   0x00000062   Code   RO         7231    .text               mc_w.l(uldiv.o)
+    0x08004468   0x08004468   0x00000024   Code   RO         6951    .text               mc_w.l(memcpya.o)
+    0x0800448c   0x0800448c   0x00000024   Code   RO         6955    .text               mc_w.l(memseta.o)
+    0x080044b0   0x080044b0   0x00000062   Code   RO         7237    .text               mc_w.l(uldiv.o)
     0x08004512   0x08004512   0x00000002   PAD
-    0x08004514   0x08004514   0x00000024   Code   RO         7244    .text               mc_w.l(init.o)
-    0x08004538   0x08004538   0x0000001e   Code   RO         7246    .text               mc_w.l(llshl.o)
-    0x08004556   0x08004556   0x00000020   Code   RO         7248    .text               mc_w.l(llushr.o)
-    0x08004576   0x08004576   0x00000056   Code   RO         7262    .text               mc_w.l(__dczerorl2.o)
+    0x08004514   0x08004514   0x00000024   Code   RO         7250    .text               mc_w.l(init.o)
+    0x08004538   0x08004538   0x0000001e   Code   RO         7252    .text               mc_w.l(llshl.o)
+    0x08004556   0x08004556   0x00000020   Code   RO         7254    .text               mc_w.l(llushr.o)
+    0x08004576   0x08004576   0x00000056   Code   RO         7268    .text               mc_w.l(__dczerorl2.o)
     0x080045cc   0x080045cc   0x00000004   Code   RO          279    i.BusFault_Handler  gd32f30x_it.o
     0x080045d0   0x080045d0   0x00000042   Code   RO         6705    i.CRC16_CCITT_FALSE  crc.o
     0x08004612   0x08004612   0x00000030   Code   RO         6706    i.CRC16_Check       crc.o
@@ -3346,20 +3347,20 @@ Memory Map of the image
     0x080068d4   0x080068d4   0x00000070   Code   RO         5872    i._GetAveTotalTime  vl6180x_api.o
     0x08006944   0x08006944   0x000000b0   Code   RO         5873    i._GetRateResult    vl6180x_api.o
     0x080069f4   0x080069f4   0x00000020   Code   RO         5875    i._UpscaleInitPatch0  vl6180x_api.o
-    0x08006a14   0x08006a14   0x00000020   Code   RO         7160    i.__0printf$8       mc_w.l(printf8.o)
-    0x08006a34   0x08006a34   0x00000028   Code   RO         7162    i.__0sprintf$8      mc_w.l(printf8.o)
-    0x08006a5c   0x08006a5c   0x0000000e   Code   RO         7256    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x08006a6a   0x08006a6a   0x00000002   Code   RO         7257    i.__scatterload_null  mc_w.l(handlers.o)
-    0x08006a6c   0x08006a6c   0x0000000e   Code   RO         7258    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08006a14   0x08006a14   0x00000020   Code   RO         7166    i.__0printf$8       mc_w.l(printf8.o)
+    0x08006a34   0x08006a34   0x00000028   Code   RO         7168    i.__0sprintf$8      mc_w.l(printf8.o)
+    0x08006a5c   0x08006a5c   0x0000000e   Code   RO         7262    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x08006a6a   0x08006a6a   0x00000002   Code   RO         7263    i.__scatterload_null  mc_w.l(handlers.o)
+    0x08006a6c   0x08006a6c   0x0000000e   Code   RO         7264    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x08006a7a   0x08006a7a   0x00000002   PAD
     0x08006a7c   0x08006a7c   0x0000006c   Code   RO         5876    i._filter_GetResult  vl6180x_api.o
     0x08006ae8   0x08006ae8   0x00000048   Code   RO         5877    i._filter_Init      vl6180x_api.o
     0x08006b30   0x08006b30   0x00000690   Code   RO         5878    i._filter_Start     vl6180x_api.o
     0x080071c0   0x080071c0   0x00000050   Code   RO         5879    i._filter_StdDevDamper  vl6180x_api.o
-    0x08007210   0x08007210   0x00000410   Code   RO         7167    i._printf_core      mc_w.l(printf8.o)
-    0x08007620   0x08007620   0x00000024   Code   RO         7168    i._printf_post_padding  mc_w.l(printf8.o)
-    0x08007644   0x08007644   0x0000002e   Code   RO         7169    i._printf_pre_padding  mc_w.l(printf8.o)
-    0x08007672   0x08007672   0x0000000a   Code   RO         7171    i._sputc            mc_w.l(printf8.o)
+    0x08007210   0x08007210   0x00000410   Code   RO         7173    i._printf_core      mc_w.l(printf8.o)
+    0x08007620   0x08007620   0x00000024   Code   RO         7174    i._printf_post_padding  mc_w.l(printf8.o)
+    0x08007644   0x08007644   0x0000002e   Code   RO         7175    i._printf_pre_padding  mc_w.l(printf8.o)
+    0x08007672   0x08007672   0x0000000a   Code   RO         7177    i._sputc            mc_w.l(printf8.o)
     0x0800767c   0x0800767c   0x0000004c   Code   RO         5606    i.bsp_gpio_exti_init  exti.o
     0x080076c8   0x080076c8   0x00000050   Code   RO         5677    i.bsp_iic_init      iic.o
     0x08007718   0x08007718   0x0000000c   Code   RO         5638    i.bsp_pwm_out_init  pwm.o
@@ -3419,7 +3420,7 @@ Memory Map of the image
     0x080084c0   0x080084c0   0x000000a8   Code   RO         5481    i.iap_usart_config  usart.o
     0x08008568   0x08008568   0x0000010c   Code   RO         5482    i.isp_usart_dma_config  usart.o
     0x08008674   0x08008674   0x00000074   Code   RO            9    i.main              main.o
-    0x080086e8   0x080086e8   0x0000000c   Code   RO         6870    i.motor_init        motor.o
+    0x080086e8   0x080086e8   0x0000000c   Code   RO         6871    i.motor_init        motor.o
     0x080086f4   0x080086f4   0x000000c4   Code   RO         2384    i.nvic_irq_enable   gd32f30x_misc.o
     0x080087b8   0x080087b8   0x00000014   Code   RO         2385    i.nvic_priority_group_set  gd32f30x_misc.o
     0x080087cc   0x080087cc   0x00000010   Code   RO         6662    i.print_logs        print.o
@@ -3550,7 +3551,7 @@ Memory Map of the image
     0x0800b7d8   0x0800b7d8   0x0000000c   Data   RO         5880    .constdata          vl6180x_api.o
     0x0800b7e4   0x0800b7e4   0x00000163   Data   RO         5881    .conststring        vl6180x_api.o
     0x0800b947   0x0800b947   0x00000001   PAD
-    0x0800b948   0x0800b948   0x00000020   Data   RO         7254    Region$$Table       anon$$obj.o
+    0x0800b948   0x0800b948   0x00000020   Data   RO         7260    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800b968, Size: 0x00004d58, Max: 0x0000c000, ABSOLUTE, COMPRESSED[0x00000080])
@@ -3574,7 +3575,7 @@ Memory Map of the image
     0x200001f4   COMPRESSED   0x00000024   Data   RW         6444    .data               handler.o
     0x20000218   COMPRESSED   0x00000008   Data   RW         6743    .data               synchronous.o
     0x20000220   COMPRESSED   0x00000010   Data   RW         6793    .data               switch.o
-    0x20000230   COMPRESSED   0x00000004   Data   RW         7228    .data               mc_w.l(stdout.o)
+    0x20000230   COMPRESSED   0x00000004   Data   RW         7234    .data               mc_w.l(stdout.o)
     0x20000234        -       0x00000c48   Zero   RW           10    .bss                main.o
     0x20000e7c        -       0x00000040   Zero   RW         4458    .bss                queue.o
     0x20000ebc        -       0x00000104   Zero   RW         4859    .bss                tasks.o
