@@ -752,6 +752,11 @@
               <FileType>1</FileType>
               <FilePath>.\Appliance\motor.c</FilePath>
             </File>
+            <File>
+              <FileName>encoder.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Appliance\encoder.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
