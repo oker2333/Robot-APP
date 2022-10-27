@@ -52,6 +52,7 @@
 .\objects\main.o: .\Hardware\iic.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
 .\objects\main.o: .\Appliance\motor.h
+.\objects\main.o: .\Appliance\encoder.h
 .\objects\main.o: .\CodeSamples\inc\vl6180x_sample_plat.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h

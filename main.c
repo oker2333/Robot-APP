@@ -126,6 +126,8 @@ static void InitTask( void *pvParameters )
 		bsp_iic_init(I2C0);
 	
 		switch_init();
+	
+		encoder_init();
 	  
 		motor_init();
 	

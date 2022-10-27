@@ -6,5 +6,6 @@
 #include "pwm.h"
 #include "iic.h"
 #include "motor.h"
+#include "encoder.h"
 
 #endif
