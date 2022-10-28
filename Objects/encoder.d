@@ -33,3 +33,4 @@
 .\objects\encoder.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h
 .\objects\encoder.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h
 .\objects\encoder.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h
+.\objects\encoder.o: .\Common_API\print.h
