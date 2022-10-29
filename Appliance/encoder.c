@@ -8,7 +8,7 @@
 #define ENCODER_TIM_PERIOD  (13*4*30-1)
 #define ENCODER_TIM_PSC 0
 
-static void encoderGPIOConfiguration(void)
+static void rightEncoderGPIOConfiguration(void)
 {
     rcu_periph_clock_enable(RCU_TIMER3);
     rcu_periph_clock_enable(RCU_GPIOD);
@@ -17,7 +17,16 @@ static void encoderGPIOConfiguration(void)
 		gpio_init(GPIOD, GPIO_MODE_IPU, GPIO_OSPEED_50MHZ, GPIO_PIN_12 | GPIO_PIN_13);
 }
 
-static void encoderTimerConfiguration(void)
+static void leftEncoderGPIOConfiguration(void)
+{
+    rcu_periph_clock_enable(RCU_TIMER0);
+    rcu_periph_clock_enable(RCU_GPIOE);
+		rcu_periph_clock_enable(RCU_AF);
+
+		gpio_init(GPIOE, GPIO_MODE_IPU, GPIO_OSPEED_50MHZ, GPIO_PIN_9 | GPIO_PIN_11);
+}
+
+static void rightEncoderTimerConfiguration(void)
 {
 	  timer_parameter_struct timer_initpara;
     timer_ic_parameter_struct timer_icinitpara;
@@ -55,21 +64,75 @@ static void encoderTimerConfiguration(void)
     timer_enable(TIMER3);
 }
 
-void encoder_init(void)
+
+static void leftEncoderTimerConfiguration(void)
 {
-		encoderGPIOConfiguration();
-		encoderTimerConfiguration();
+	  timer_parameter_struct timer_initpara;
+    timer_ic_parameter_struct timer_icinitpara;
+	
+    timer_deinit(TIMER0);
+		
+		gpio_pin_remap_config(GPIO_TIMER0_FULL_REMAP, ENABLE);
+	
+    timer_initpara.period = ENCODER_TIM_PERIOD;
+    timer_initpara.prescaler = ENCODER_TIM_PSC;
+    timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
+    timer_initpara.counterdirection  = TIMER_COUNTER_UP;
+    timer_initpara.clockdivision = TIMER_CKDIV_DIV1;
+    timer_initpara.repetitioncounter = 0;
+    timer_init(TIMER0, &timer_initpara);
+		
+		timer_channel_input_struct_para_init(&timer_icinitpara);
+		/* TIMER1 CH0 input capture configuration */
+    timer_icinitpara.icfilter    = 0x05;
+    timer_icinitpara.icpolarity  = TIMER_IC_POLARITY_RISING;
+    timer_icinitpara.icselection = TIMER_IC_SELECTION_DIRECTTI;
+    timer_icinitpara.icprescaler = TIMER_IC_PSC_DIV1;
+
+		/*Configure PE9 PE11 (TIMER0 CH0 CH1) as alternate function*/
+    timer_input_capture_config(TIMER0, TIMER_CH_0, &timer_icinitpara);
+    timer_input_capture_config(TIMER0, TIMER_CH_1, &timer_icinitpara);
+
+    timer_quadrature_decoder_mode_config(TIMER0, TIMER_ENCODER_MODE2, TIMER_IC_POLARITY_RISING, TIMER_IC_POLARITY_RISING);
+
+		timer_interrupt_flag_clear(TIMER0, TIMER_INT_FLAG_UP);
+    timer_interrupt_enable(TIMER0, TIMER_INT_UP);
+		
+    nvic_irq_enable(TIMER0_UP_IRQn, 10, 0);
+
+    timer_enable(TIMER0);
 }
 
-static uint32_t Timer_Update = 0;
+void encoder_init(void)
+{
+		rightEncoderGPIOConfiguration();
+		leftEncoderGPIOConfiguration();
+	
+	  rightEncoderTimerConfiguration();
+		leftEncoderTimerConfiguration();
+}
+
+static uint32_t Timer3_Update = 0;
 
 void TIMER3_IRQHandler(void)
 {
     if(SET == timer_interrupt_flag_get(TIMER3, TIMER_INT_FLAG_UP))
     {
-				Timer_Update++;
-			  print_info("now it adds up to %d circles\n",Timer_Update);
+				Timer3_Update++;
+			  print_info("right wheel adds up to %d circles\n",Timer3_Update);
         timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
+    }
+}
+
+static uint32_t Timer0_Update = 0;
+
+void TIMER0_UP_TIMER9_IRQHandler(void)
+{
+    if(SET == timer_interrupt_flag_get(TIMER0, TIMER_INT_FLAG_UP))
+    {
+				Timer0_Update++;
+			  print_info("left wheel adds up to %d circles\n",Timer0_Update);
+        timer_interrupt_flag_clear(TIMER0, TIMER_INT_FLAG_UP);
     }
 }
 
@@ -126,7 +189,6 @@ bool right_velocity_measurement(uint32_t time_interval)
 			}
 			
 			right_velocity = Current_Right_Direction * PI * WHEEL_DIAMETER * Pulse_Difference / CIRCLE_PULSE / time_interval;
-		  print_info("Current_Right_Pulse = %d,Record_Right_Pulse = %d,right_velocity = %f\n",Current_Right_Pulse,Record_Right_Pulse,right_velocity);
 	 }
 
 		Record_Right_Pulse = Current_Right_Pulse;
@@ -137,7 +199,53 @@ bool right_velocity_measurement(uint32_t time_interval)
 
 bool left_velocity_measurement(uint32_t time_interval)
 {
+	 bool ret = true;
+	 static uint32_t Record_Left_Pulse = 0;
+	 static int8_t Record_Left_Direction = 0;
+	 
+	 static uint32_t Current_Left_Pulse = 0;
+	 static int8_t Current_Left_Direction = 0;	
+	
+	 Current_Left_Pulse = TIMER_CNT(TIMER0);
+	 Current_Left_Direction = ((TIMER_CTL0(TIMER0)&TIMER_CTL0_DIR) == TIMER_CTL0_DIR)?-1:1;
+	 
+	 if(Record_Left_Direction != Current_Left_Direction)
+	 {
+		  ret = false;
+	 }
+	 else
+	 {
+		  uint32_t Pulse_Difference = 0;
+		  if(Current_Left_Direction == 1)
+			{
+			   if(Current_Left_Pulse < Record_Left_Pulse)
+				 {
+					  Pulse_Difference = Current_Left_Pulse + CIRCLE_PULSE - Record_Left_Pulse;
+				 }
+				 else
+				 {
+						Pulse_Difference = Current_Left_Pulse - Record_Left_Pulse;
+				 }
+			}
+			else if(Current_Left_Direction == -1)
+			{
+			   if(Current_Left_Pulse > Record_Left_Pulse)
+				 {
+					  Pulse_Difference = Record_Left_Pulse + CIRCLE_PULSE - Current_Left_Pulse;
+				 }
+				 else
+				 {
+						Pulse_Difference = Record_Left_Pulse - Current_Left_Pulse;
+				 }
+			}
+			
+			left_velocity = Current_Left_Direction * PI * WHEEL_DIAMETER * Pulse_Difference / CIRCLE_PULSE / time_interval;
+	 }
 
+		Record_Left_Pulse = Current_Left_Pulse;
+		Record_Left_Direction = Current_Left_Direction;
+	 
+	 return ret;
 }
 
 float get_left_velocity(void)

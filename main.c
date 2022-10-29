@@ -227,6 +227,7 @@ static void VelocityMeasurementTask(void *pvParameters)
 {
 	  while(pdTRUE)
 		{
+			 left_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 		}

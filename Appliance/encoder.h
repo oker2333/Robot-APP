@@ -7,5 +7,6 @@
 void encoder_init(void);
 
 bool right_velocity_measurement(uint32_t time_interval);
+bool left_velocity_measurement(uint32_t time_interval);
 
 #endif
