@@ -59,6 +59,7 @@
 ".\objects\lib_mem_a.o"
 ".\objects\crc.o"
 ".\objects\synchronous.o"
+".\objects\cjson.o"
 ".\objects\switch.o"
 ".\objects\motor.o"
 ".\objects\encoder.o"
