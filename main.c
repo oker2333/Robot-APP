@@ -71,17 +71,22 @@ static void LogTask( void *pvParameters );
 TaskHandle_t EmergencyTaskHanle;
 static void EmergencyTask( void *pvParameters );
 
-#define VL6180x_TASK_PRIORITY 4
+#define SPEED_TASK_PRIORITY 4
+#define SPEED_TASK_STK_SIZE 100
+TaskHandle_t SpeedTaskHanle;
+static void VelocityMeasurementTask( void *pvParameters );
+
+#define VL6180x_TASK_PRIORITY 5
 #define VL6180x_TASK_STK_SIZE 100
 TaskHandle_t VL6180xTaskHanle;
 static void VL6180xTask( void *pvParameters );
 
-#define SENSOR_UPLOAD_TASK_PRIORITY 5
+#define SENSOR_UPLOAD_TASK_PRIORITY 6
 #define SENSOR_UPLOAD_TASK_STK_SIZE 1024
 TaskHandle_t SensorUploadTaskHanle;
 static void SensorUploadionTask( void *pvParameters );
 
-#define COMMUNICATION_TASK_PRIORITY 6
+#define COMMUNICATION_TASK_PRIORITY 7
 #define COMMUNICATION_TASK_STK_SIZE 1024
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
@@ -143,6 +148,7 @@ static void InitTask( void *pvParameters )
 
 		taskENTER_CRITICAL();
 		
+		xTaskCreate(VelocityMeasurementTask, "VelocityMeasurementTask", SPEED_TASK_STK_SIZE, NULL, SPEED_TASK_PRIORITY, &SpeedTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
 		#if FIFO_DEBUG
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
@@ -212,6 +218,17 @@ static void EmergencyTask(void *pvParameters)
 	  while(pdTRUE)
 		{
 			 vTaskDelay(pdMS_TO_TICKS(1000));
+		}
+}
+
+#define VELOCITY_MEASUREMENT_INTERVAL 100
+
+static void VelocityMeasurementTask(void *pvParameters)
+{
+	  while(pdTRUE)
+		{
+			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
+			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 		}
 }
 

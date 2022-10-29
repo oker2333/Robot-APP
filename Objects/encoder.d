@@ -1,10 +1,12 @@
 .\objects\encoder.o: Appliance\encoder.c
+.\objects\encoder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
 .\objects\encoder.o: Appliance\encoder.h
+.\objects\encoder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\encoder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\encoder.o: ..\Robot-APP\gd32f30x_libopt.h
 .\objects\encoder.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h
 .\objects\encoder.o: .\CMSIS\GD32F30x\Include\gd32f30x.h
 .\objects\encoder.o: .\CMSIS\core_cm4.h
-.\objects\encoder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
 .\objects\encoder.o: .\CMSIS\core_cmInstr.h
 .\objects\encoder.o: .\CMSIS\core_cmFunc.h
 .\objects\encoder.o: .\CMSIS\core_cm4_simd.h
@@ -37,7 +39,6 @@
 .\objects\encoder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\encoder.o: ..\Robot-APP\app_config.h
 .\objects\encoder.o: .\Common_API\fifo.h
-.\objects\encoder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\encoder.o: .\FreeRTOS-Kernel\include\FreeRTOS.h
 .\objects\encoder.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
 .\objects\encoder.o: .\FreeRTOS-Kernel\FreeRTOSConfig.h

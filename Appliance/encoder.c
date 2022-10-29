@@ -1,3 +1,4 @@
+#include <limits.h>
 #include "encoder.h"
 #include "gd32f30x_libopt.h"
 #include "print.h"
@@ -36,7 +37,7 @@ static void encoderTimerConfiguration(void)
 		timer_channel_input_struct_para_init(&timer_icinitpara);
 		/* TIMER1 CH0 input capture configuration */
     timer_icinitpara.icfilter    = 0x05;
-    timer_icinitpara.icpolarity  = TIMER_IC_POLARITY_RISING | TIMER_IC_POLARITY_FALLING;
+    timer_icinitpara.icpolarity  = TIMER_IC_POLARITY_RISING;
     timer_icinitpara.icselection = TIMER_IC_SELECTION_DIRECTTI;
     timer_icinitpara.icprescaler = TIMER_IC_PSC_DIV1;
 
@@ -44,7 +45,7 @@ static void encoderTimerConfiguration(void)
     timer_input_capture_config(TIMER3, TIMER_CH_0, &timer_icinitpara);
     timer_input_capture_config(TIMER3, TIMER_CH_1, &timer_icinitpara);
 
-    timer_quadrature_decoder_mode_config(TIMER3, TIMER_ENCODER_MODE2, TIMER_IC_POLARITY_RISING | TIMER_IC_POLARITY_FALLING, TIMER_IC_POLARITY_FALLING | TIMER_IC_POLARITY_FALLING);
+    timer_quadrature_decoder_mode_config(TIMER3, TIMER_ENCODER_MODE2, TIMER_IC_POLARITY_RISING, TIMER_IC_POLARITY_RISING);
 
 		timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
     timer_interrupt_enable(TIMER3, TIMER_INT_UP);
@@ -67,9 +68,85 @@ void TIMER3_IRQHandler(void)
     if(SET == timer_interrupt_flag_get(TIMER3, TIMER_INT_FLAG_UP))
     {
 				Timer_Update++;
+			  printf("now it adds up to %d circles\n",Timer_Update);
         timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
-				print_info("TIMER_CTL0_DIR = %d,TIMER_CNT = %d\n",(TIMER_CTL0(TIMER3)&TIMER_CTL0_DIR) == TIMER_CTL0_DIR,TIMER_CNT(TIMER3));
     }
 }
 
+#define CIRCLE_PULSE 		(13*4*30)
+#define WHEEL_DISTANCE 	(168)
+#define WHEEL_DIAMETER	(65)
+
+#define PI (3.141592)
+
+/*unit:m/s*/
+float left_velocity = 0;
+float right_velocity = 0;
+
+bool right_velocity_measurement(uint32_t time_interval)
+{
+	 bool ret = true;
+	 static uint32_t Record_Right_Pulse = 0;
+	 static int8_t Record_Right_Direction = 0;
+	 
+	 static uint32_t Current_Right_Pulse = 0;
+	 static int8_t Current_Right_Direction = 0;	
+	
+	 Current_Right_Pulse = TIMER_CNT(TIMER3);
+	 Current_Right_Direction = ((TIMER_CTL0(TIMER3)&TIMER_CTL0_DIR) == TIMER_CTL0_DIR)?-1:1;
+	 
+	 if(Record_Right_Direction != Current_Right_Direction)
+	 {
+		  ret = false;
+	 }
+	 else
+	 {
+		  uint32_t Pulse_Difference = 0;
+		  if(Current_Right_Direction == 1)
+			{
+			   if(Current_Right_Pulse < Record_Right_Pulse)
+				 {
+					  Pulse_Difference = Current_Right_Pulse + CIRCLE_PULSE - Record_Right_Pulse;
+				 }
+				 else
+				 {
+						Pulse_Difference = Current_Right_Pulse - Record_Right_Pulse;
+				 }
+			}
+			else if(Current_Right_Direction == -1)
+			{
+			   if(Current_Right_Pulse > Record_Right_Pulse)
+				 {
+					  Pulse_Difference = Record_Right_Pulse + CIRCLE_PULSE - Current_Right_Pulse;
+				 }
+				 else
+				 {
+						Pulse_Difference = Record_Right_Pulse - Current_Right_Pulse;
+				 }
+			}
+			
+			right_velocity = Current_Right_Direction * PI * WHEEL_DIAMETER * Pulse_Difference / CIRCLE_PULSE / time_interval;
+		  print_info("Current_Right_Pulse = %d,Record_Right_Pulse = %d,right_velocity = %f\n",Current_Right_Pulse,Record_Right_Pulse,right_velocity);
+	 }
+
+		Record_Right_Pulse = Current_Right_Pulse;
+		Record_Right_Direction = Current_Right_Direction;
+	 
+	 return ret;
+}
+
+bool left_velocity_measurement(uint32_t time_interval)
+{
+
+}
+
+float get_left_velocity(void)
+{
+	 return left_velocity;
+}
+
+float get_right_velocity(void)
+{
+	 return right_velocity;
+}
 
