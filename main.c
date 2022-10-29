@@ -72,7 +72,7 @@ TaskHandle_t EmergencyTaskHanle;
 static void EmergencyTask( void *pvParameters );
 
 #define SPEED_TASK_PRIORITY 4
-#define SPEED_TASK_STK_SIZE 100
+#define SPEED_TASK_STK_SIZE 1024
 TaskHandle_t SpeedTaskHanle;
 static void VelocityMeasurementTask( void *pvParameters );
 
