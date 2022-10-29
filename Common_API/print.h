@@ -1,7 +1,8 @@
 #ifndef PRINT_H_
 #define PRINT_H_
 
-extern char* PowerOn_Time(void);
+#include <stdio.h>
+#include "app_config.h"
 
 #define print_info(format,...) printf("%s"format,PowerOn_Time(),##__VA_ARGS__)
 

@@ -47,12 +47,7 @@ static void encoderTimerConfiguration(void)
     timer_quadrature_decoder_mode_config(TIMER3, TIMER_ENCODER_MODE2, TIMER_IC_POLARITY_RISING | TIMER_IC_POLARITY_FALLING, TIMER_IC_POLARITY_FALLING | TIMER_IC_POLARITY_FALLING);
 
 		timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
-		timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_CH0);
-		timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_CH1);
-
     timer_interrupt_enable(TIMER3, TIMER_INT_UP);
-		timer_interrupt_enable(TIMER3, TIMER_INT_CH0);
-		timer_interrupt_enable(TIMER3, TIMER_INT_CH1);
 		
     nvic_irq_enable(TIMER3_IRQn, 10, 0);
 
@@ -65,27 +60,15 @@ void encoder_init(void)
 		encoderTimerConfiguration();
 }
 
-uint32_t Timer_Update = 0;
-uint32_t CH0_Counter = 0;
-uint32_t CH1_Counter = 0;
+static uint32_t Timer_Update = 0;
 
 void TIMER3_IRQHandler(void)
 {
     if(SET == timer_interrupt_flag_get(TIMER3, TIMER_INT_FLAG_UP))
     {
 				Timer_Update++;
-			  print_info("Timer_Update = %d,CH0_Counter = %d,CH1_Counter = %d\n",Timer_Update,CH0_Counter,CH1_Counter);
         timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
-    }
-		else if(SET == timer_interrupt_flag_get(TIMER3, TIMER_INT_FLAG_CH0))
-    {
-				CH0_Counter++;
-        timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_CH0);
-    }
-		else if(SET == timer_interrupt_flag_get(TIMER3, TIMER_INT_FLAG_CH1))
-    {
-				CH1_Counter++;
-        timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_CH1);
+				print_info("TIMER_CTL0_DIR = %d,TIMER_CNT = %d\n",(TIMER_CTL0(TIMER3)&TIMER_CTL0_DIR) == TIMER_CTL0_DIR,TIMER_CNT(TIMER3));
     }
 }
 

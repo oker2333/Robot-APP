@@ -9,7 +9,7 @@
 #include "timers.h"
 #include "semphr.h"
 
-#define FIFO_DEBUG 1
+#define FIFO_DEBUG 0
 
 #define FMC_PAGE_NUM					((uint16_t)0x80U)
 #define FMC_PAGE_SIZE					((uint32_t)0x00000800U)
@@ -30,6 +30,8 @@
 #define APP_BACKUP_FLASH_SIZE	((uint32_t)(APP_SIZE_ADDRESS - APP_BACKUP_ADDRESS))
 #define APP_SIZE_FLASH_SIZE 	((uint32_t)(INFO_ADDRESS - APP_SIZE_ADDRESS))
 #define INFO_FLASH_SIZE 			((uint32_t)(FLASH_END_ADDR - INFO_ADDRESS + 1))
+
+extern char* PowerOn_Time(void);
 
 extern msg_handler_t Callback_Handler[CALLBACK_NUM];
 
