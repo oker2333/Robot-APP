@@ -68,7 +68,7 @@ void TIMER3_IRQHandler(void)
     if(SET == timer_interrupt_flag_get(TIMER3, TIMER_INT_FLAG_UP))
     {
 				Timer_Update++;
-			  printf("now it adds up to %d circles\n",Timer_Update);
+			  print_info("now it adds up to %d circles\n",Timer_Update);
         timer_interrupt_flag_clear(TIMER3, TIMER_INT_FLAG_UP);
     }
 }

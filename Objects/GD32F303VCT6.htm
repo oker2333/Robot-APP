@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\GD32F303VCT6.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\GD32F303VCT6.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Oct 29 15:57:59 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sat Oct 29 16:04:04 2022
 <BR><P>
 <H3>Maximum Stack Usage =       1120 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -802,6 +802,7 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;right_velocity_measurement
 <LI><a href="#[58]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;VL6180xTask
+<LI><a href="#[2e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIMER3_IRQHandler
 <LI><a href="#[0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Online_Handler
 <LI><a href="#[2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Control_Handler
 </UL>
@@ -857,10 +858,11 @@ Global Symbols
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_gd32f30x_cl.o(RESET)
 </UL>
-<P><STRONG><a name="[2e]"></a>TIMER3_IRQHandler</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, encoder.o(i.TIMER3_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TIMER3_IRQHandler &rArr; __2printf
+<P><STRONG><a name="[2e]"></a>TIMER3_IRQHandler</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, encoder.o(i.TIMER3_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = TIMER3_IRQHandler &rArr; PowerOn_Time &rArr; __2sprintf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_interrupt_flag_get
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;PowerOn_Time
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_interrupt_flag_get
 <LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;timer_interrupt_flag_clear
 <LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__2printf
 </UL>
