@@ -28,7 +28,7 @@
 
 #include "print.h"
 
-#ifdef JSON
+#if JSON
 #include "cJSON.h"
 #endif
 
@@ -115,7 +115,9 @@ int main(void)
 
 static void InitTask( void *pvParameters )
 {
+		#if JSON
 	  cJSON_InitHooks(NULL);
+	  #endif
 	  
 	  #if FIFO_DEBUG
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,NULL);
@@ -238,7 +240,7 @@ static void VelocityMeasurementTask(void *pvParameters)
 			 
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 
-#ifdef JSON
+       #if JSON
 			 char* cJSON_Str = NULL;
 			 cJSON *cJSON_Velocity = cJSON_CreateObject();
 			 cJSON_AddNumberToObject(cJSON_Velocity, "left_velocity", get_left_velocity());
@@ -249,7 +251,7 @@ static void VelocityMeasurementTask(void *pvParameters)
 			
 			 cJSON_Delete(cJSON_Velocity);
 			 free(cJSON_Str);
-#endif
+		   #endif
 		}
 }
 
