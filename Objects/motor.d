@@ -2,6 +2,8 @@
 .\objects\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
 .\objects\motor.o: Appliance\motor.h
 .\objects\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\motor.o: Appliance\encoder.h
+.\objects\motor.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
 .\objects\motor.o: .\Hardware\pwm.h
 .\objects\motor.o: ..\Robot-APP\gd32f30x_libopt.h
 .\objects\motor.o: .\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h

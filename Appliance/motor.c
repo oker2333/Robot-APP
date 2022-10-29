@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "motor.h"
+#include "encoder.h"
 #include "pwm.h"
 
 /*Configure PA6 PA7 as TIMER2 CH0(left) CH1(right),Configure PA5 as STBY */
