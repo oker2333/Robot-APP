@@ -189,7 +189,6 @@ bool right_velocity_measurement(uint32_t time_interval)
 			}
 			
 			right_velocity = Current_Right_Direction * PI * WHEEL_DIAMETER * Pulse_Difference / CIRCLE_PULSE / time_interval;
-			printf("right_velocity = %f,Pulse_Difference = %d\n",right_velocity,Pulse_Difference);
 	 }
 
 		Record_Right_Pulse = Current_Right_Pulse;
@@ -241,7 +240,6 @@ bool left_velocity_measurement(uint32_t time_interval)
 			}
 			
 			left_velocity = Current_Left_Direction * PI * WHEEL_DIAMETER * Pulse_Difference / CIRCLE_PULSE / time_interval;
-			printf("left_velocity = %f,Pulse_Difference = %d\n",left_velocity,Pulse_Difference);
 	 }
 
 		Record_Left_Pulse = Current_Left_Pulse;

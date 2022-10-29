@@ -28,6 +28,10 @@
 
 #include "print.h"
 
+#ifdef JSON
+#include "cJSON.h"
+#endif
+
 #define BINARY_VERSION "V0.0.1"
 
 /* global variable */
@@ -111,6 +115,8 @@ int main(void)
 
 static void InitTask( void *pvParameters )
 {
+	  cJSON_InitHooks(NULL);
+	  
 	  #if FIFO_DEBUG
 	  FIFO_Callback_Init(Queue_log,usart0_dma_send,NULL);
 		FIFO_Init(Queue_log,LOG_Buffer,LOG_BUFFER_SIZE);
@@ -123,9 +129,9 @@ static void InitTask( void *pvParameters )
 		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
 	  #if FIFO_DEBUG
-	  dma_usart0_init(3000000);
+	  dma_usart0_init(115200);
 	  #else
-	  usart0_init(3000000);
+	  usart0_init(115200);
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
@@ -229,7 +235,21 @@ static void VelocityMeasurementTask(void *pvParameters)
 		{
 			 left_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
+			 
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
+
+#ifdef JSON
+			 char* cJSON_Str = NULL;
+			 cJSON *cJSON_Velocity = cJSON_CreateObject();
+			 cJSON_AddNumberToObject(cJSON_Velocity, "left_velocity", get_left_velocity());
+			 cJSON_AddNumberToObject(cJSON_Velocity, "right_velocity", get_right_velocity());
+			
+			 cJSON_Str = cJSON_Print(cJSON_Velocity);
+			 printf("%s\r\n",cJSON_Str);
+			
+			 cJSON_Delete(cJSON_Velocity);
+			 free(cJSON_Str);
+#endif
 		}
 }
 
