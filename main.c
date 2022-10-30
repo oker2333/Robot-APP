@@ -95,6 +95,11 @@ static void SensorUploadionTask( void *pvParameters );
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
 
+// printf("/*value:%f*/\r\n",value);
+/*
+	Serial Studio json conf
+*/
+
 int main(void)
 {
 	  __enable_irq();
@@ -131,9 +136,9 @@ static void InitTask( void *pvParameters )
 		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
 	  #if FIFO_DEBUG
-	  dma_usart0_init(115200);
+	  dma_usart0_init(3000000);
 	  #else
-	  usart0_init(115200);
+	  usart0_init(3000000);
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
@@ -229,7 +234,7 @@ static void EmergencyTask(void *pvParameters)
 		}
 }
 
-#define VELOCITY_MEASUREMENT_INTERVAL 100
+#define VELOCITY_MEASUREMENT_INTERVAL 50
 
 static void VelocityMeasurementTask(void *pvParameters)
 {
