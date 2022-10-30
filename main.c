@@ -95,7 +95,7 @@ static void SensorUploadionTask( void *pvParameters );
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
 
-// printf("/*value:%f*/\r\n",value);
+// printf("/*value:%f:%f*/\r\n",value1,value2);
 /*
 	Serial Studio json conf
 */
@@ -242,6 +242,8 @@ static void VelocityMeasurementTask(void *pvParameters)
 		{
 			 left_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
+			
+			 printf("/*value:%f:%f*/\r\n",get_left_velocity(),get_right_velocity());
 				
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 
