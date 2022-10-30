@@ -35,8 +35,19 @@ Right:E0 E1
 	duty cycle = (x / 1000)* 100%  = 50%
 */
 
-#define set_left_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,x);
-#define set_right_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,x);
+/* 
+	rated speed:366 +- 26	rpm
+	load speed:293 +- 21 rpm
+*/
+
+#define MAX_LOAD_VELOCITY 1021.0f			/*unit:mm/s*/
+#define MAX_RATED_VELOCITY 1246.0f			/*unit:mm/s*/
+
+#define MAX_VELOCITY MAX_RATED_VELOCITY
+
+#define set_left_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,(1000.0f*x/MAX_VELOCITY));
+#define set_right_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,(1000.0f*x/MAX_VELOCITY));
+
 
 static void STBY_Init(void)
 {
