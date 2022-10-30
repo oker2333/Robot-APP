@@ -136,9 +136,9 @@ static void InitTask( void *pvParameters )
 		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
 	  #if FIFO_DEBUG
-	  dma_usart0_init(3000000);
+	  dma_usart0_init(2000000);
 	  #else
-	  usart0_init(3000000);
+	  usart0_init(2000000);
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
@@ -234,7 +234,7 @@ static void EmergencyTask(void *pvParameters)
 		}
 }
 
-#define VELOCITY_MEASUREMENT_INTERVAL 50
+#define VELOCITY_MEASUREMENT_INTERVAL 100
 
 static void VelocityMeasurementTask(void *pvParameters)
 {
@@ -242,7 +242,7 @@ static void VelocityMeasurementTask(void *pvParameters)
 		{
 			 left_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
-			 
+				
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 
        #if JSON
