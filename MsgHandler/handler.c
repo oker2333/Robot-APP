@@ -9,6 +9,8 @@
 #include "print.h"
 #include "app_config.h"
 
+#include "motor.h"
+
 static uint16_t invoke_id = 0;
 
 uint16_t find_free_invoke_id(void)
@@ -94,9 +96,16 @@ void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 {
 	  int index = 0;
 	  uint8_t buffer[10] = {0};
+		uint16_t left_velocity = 0;
+		uint16_t right_velocity = 0;
+		
 	  switch(cmd)
 		{
 			case CONTROL_SPEED:
+			  left_velocity = (UserData[2] << 8) | UserData[1];
+			  right_velocity = (UserData[4] << 8) | UserData[3];
+				motor_control(left_velocity,right_velocity);
+			 
 				buffer[index++] = 0x00;
 				buffer[index++] = CONTROL_SPEED >> 8;
 				buffer[index++] = CONTROL_SPEED & 0xFF;

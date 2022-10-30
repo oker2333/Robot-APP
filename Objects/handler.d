@@ -58,3 +58,4 @@
 .\objects\handler.o: .\Common_API\crc.h
 .\objects\handler.o: MsgHandler\fms.h
 .\objects\handler.o: .\Common_API\print.h
+.\objects\handler.o: .\Appliance\motor.h
