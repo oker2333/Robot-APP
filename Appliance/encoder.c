@@ -5,8 +5,8 @@
 
 /* https://blog.csdn.net/qq_48453068/article/details/126624658 */
 
-#define ENCODER_TIM_PERIOD  (13*4*30-1)
-#define ENCODER_TIM_PSC 0
+#define ENCODER_TIM_PERIOD  (13*4*30)
+#define ENCODER_TIM_PSC 1
 
 static void rightEncoderGPIOConfiguration(void)
 {
@@ -35,8 +35,8 @@ static void rightEncoderTimerConfiguration(void)
 		
 		gpio_pin_remap_config(GPIO_TIMER3_REMAP, ENABLE);
 	
-    timer_initpara.period = ENCODER_TIM_PERIOD;
-    timer_initpara.prescaler = ENCODER_TIM_PSC;
+    timer_initpara.period = ENCODER_TIM_PERIOD - 1;
+    timer_initpara.prescaler = ENCODER_TIM_PSC - 1;
     timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
     timer_initpara.clockdivision = TIMER_CKDIV_DIV1;
@@ -74,8 +74,8 @@ static void leftEncoderTimerConfiguration(void)
 		
 		gpio_pin_remap_config(GPIO_TIMER0_FULL_REMAP, ENABLE);
 	
-    timer_initpara.period = ENCODER_TIM_PERIOD;
-    timer_initpara.prescaler = ENCODER_TIM_PSC;
+    timer_initpara.period = ENCODER_TIM_PERIOD - 1;
+    timer_initpara.prescaler = ENCODER_TIM_PSC - 1;
     timer_initpara.alignedmode = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
     timer_initpara.clockdivision = TIMER_CKDIV_DIV1;

@@ -45,8 +45,8 @@ Right:E0 E1
 
 #define MAX_VELOCITY MAX_RATED_VELOCITY
 
-#define set_left_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,(1000.0f*x/MAX_VELOCITY));
-#define set_right_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,(1000.0f*x/MAX_VELOCITY));
+#define set_left_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,(PWM_TIM_PERIOD * x / MAX_VELOCITY));
+#define set_right_velocity(x) timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,(PWM_TIM_PERIOD * x / MAX_VELOCITY));
 
 
 static void STBY_Init(void)

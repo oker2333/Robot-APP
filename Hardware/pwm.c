@@ -13,11 +13,11 @@ void gpio_config(void)
 void timer_config(void)
 {
     /* -----------------------------------------------------------------------
-    TIMER1 configuration: generate 3 PWM signals with 3 different duty cycles:
+    TIMER1 configuration: generate 2 PWM signals with 2 different duty cycles:
     TIMER1CLK = SystemCoreClock / 120 = 1MHz
 
-    TIMER1 channel0 duty cycle = (250/ 1000)* 100  = 25%
-    TIMER1 channel1 duty cycle = (500/ 1000)* 100  = 50%
+    TIMER1 channel0 duty cycle = (25/ 100)* 100%  = 25%
+    TIMER1 channel1 duty cycle = (50/ 100)* 100%  = 50%
     ----------------------------------------------------------------------- */
     timer_oc_parameter_struct timer_ocintpara;
     timer_parameter_struct timer_initpara;
@@ -27,10 +27,10 @@ void timer_config(void)
     timer_deinit(TIMER2);
 
     /* TIMER1 configuration */
-    timer_initpara.prescaler         = 119;
+    timer_initpara.prescaler         = PWM_TIM_PSC - 1;
     timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
-    timer_initpara.period            = 999;
+    timer_initpara.period            = PWM_TIM_PERIOD - 1;
     timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
     timer_initpara.repetitioncounter = 0;
     timer_init(TIMER2,&timer_initpara);
@@ -47,12 +47,12 @@ void timer_config(void)
     timer_channel_output_config(TIMER2,TIMER_CH_1,&timer_ocintpara);
 
     /* CH0 configuration in PWM mode0,duty cycle 25% */
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,99);
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,0);
     timer_channel_output_mode_config(TIMER2,TIMER_CH_0,TIMER_OC_MODE_PWM0);
     timer_channel_output_shadow_config(TIMER2,TIMER_CH_0,TIMER_OC_SHADOW_DISABLE);
 
     /* CH1 configuration in PWM mode0,duty cycle 50% */
-    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,99);
+    timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,0);
     timer_channel_output_mode_config(TIMER2,TIMER_CH_1,TIMER_OC_MODE_PWM0);
     timer_channel_output_shadow_config(TIMER2,TIMER_CH_1,TIMER_OC_SHADOW_DISABLE);
 
