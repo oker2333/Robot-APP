@@ -234,8 +234,6 @@ static void EmergencyTask(void *pvParameters)
 		}
 }
 
-#define VELOCITY_MEASUREMENT_INTERVAL 100
-
 static void VelocityMeasurementTask(void *pvParameters)
 {
 	  while(pdTRUE)
