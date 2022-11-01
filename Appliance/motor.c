@@ -3,6 +3,7 @@
 #include "motor.h"
 #include "encoder.h"
 #include "pwm.h"
+#include "app_config.h"
 
 /*Configure PA6 PA7 as TIMER2 CH0(left) CH1(right),Configure PA5 as STBY */
 
@@ -40,8 +41,8 @@ Right:E0 E1
 	load speed:293 +- 21 rpm
 */
 
-#define MAX_LOAD_VELOCITY 1021.0f			/*unit:mm/s*/
-#define MAX_RATED_VELOCITY 1246.0f			/*unit:mm/s*/
+#define MAX_LOAD_VELOCITY (PI*65.0f*300.0f/60.0f)			/*unit:mm/s*/
+#define MAX_RATED_VELOCITY (PI*65.0f*360.0f/60.0f)			/*unit:mm/s*/
 
 #define MAX_VELOCITY MAX_RATED_VELOCITY
 

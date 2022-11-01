@@ -12,7 +12,9 @@
 #define FIFO_DEBUG 0
 #define JSON	0
 
-#define VELOCITY_MEASUREMENT_INTERVAL 100
+#define PI (3.141592f)
+
+#define VELOCITY_MEASUREMENT_INTERVAL 50
 
 #define FMC_PAGE_NUM					((uint16_t)0x80U)
 #define FMC_PAGE_SIZE					((uint32_t)0x00000800U)

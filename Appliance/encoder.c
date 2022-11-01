@@ -140,7 +140,6 @@ void TIMER0_UP_TIMER9_IRQHandler(void)
 #define WHEEL_DISTANCE 	(168)
 #define WHEEL_DIAMETER	(65)
 
-#define PI (3.14f)
 
 /*unit:m/s*/
 float left_velocity = 0;
