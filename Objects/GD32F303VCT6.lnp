@@ -60,6 +60,7 @@
 ".\objects\crc.o"
 ".\objects\synchronous.o"
 ".\objects\cjson.o"
+".\objects\pid.o"
 ".\objects\switch.o"
 ".\objects\motor.o"
 ".\objects\encoder.o"

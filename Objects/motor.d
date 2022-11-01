@@ -54,3 +54,4 @@
 .\objects\motor.o: .\FreeRTOS-Kernel\include\timers.h
 .\objects\motor.o: .\FreeRTOS-Kernel\include\semphr.h
 .\objects\motor.o: .\FreeRTOS-Kernel\include\queue.h
+.\objects\motor.o: .\Common_API\pid.h

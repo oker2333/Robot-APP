@@ -21,6 +21,7 @@
 
 #include "timer.h"
 
+#include "pid.h"
 
 #include "switch.h"
 
@@ -144,7 +145,9 @@ static void InitTask( void *pvParameters )
 		bsp_iic_init(I2C0);
 	
 		switch_init();
-	
+	  
+		IncPIDInit();
+	 
 		encoder_init();
 	  
 		motor_init();
@@ -243,6 +246,9 @@ static void VelocityMeasurementTask(void *pvParameters)
 			
 			 printf("/*value:%f:%f*/\r\n",get_left_velocity(),get_right_velocity());
 				
+			 Left_PID_Controller(get_left_velocity()*1000);
+
+			
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 
        #if JSON

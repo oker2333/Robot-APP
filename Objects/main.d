@@ -67,6 +67,7 @@
 .\objects\main.o: .\Common_API\fifo.h
 .\objects\main.o: .\MsgHandler\fms.h
 .\objects\main.o: .\Hardware\timer.h
+.\objects\main.o: .\Common_API\pid.h
 .\objects\main.o: .\Appliance\switch.h
 .\objects\main.o: app_config.h
 .\objects\main.o: .\MsgHandler\handler.h

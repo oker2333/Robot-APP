@@ -45,7 +45,7 @@ static void rightEncoderTimerConfiguration(void)
 		
 		timer_channel_input_struct_para_init(&timer_icinitpara);
 		/* TIMER1 CH0 input capture configuration */
-    timer_icinitpara.icfilter    = 0x05;
+    timer_icinitpara.icfilter    = 0x0A;
     timer_icinitpara.icpolarity  = TIMER_IC_POLARITY_RISING;
     timer_icinitpara.icselection = TIMER_IC_SELECTION_DIRECTTI;
     timer_icinitpara.icprescaler = TIMER_IC_PSC_DIV1;

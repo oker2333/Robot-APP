@@ -4,6 +4,7 @@
 #include "encoder.h"
 #include "pwm.h"
 #include "app_config.h"
+#include "pid.h"
 
 /*Configure PA6 PA7 as TIMER2 CH0(left) CH1(right),Configure PA5 as STBY */
 
@@ -156,7 +157,9 @@ void motor_info(int32_t* left,int32_t* right)
 	 *right = right_velocity;
 }
 
-void PID_Adjust(int32_t left,int32_t right)
+void Left_PID_Controller(int left_measure)
 {
-	 
+	int ret = IncPIDCalc(left_velocity,left_measure);
+
+	 set_left_velocity(ret);
 }
