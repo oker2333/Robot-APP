@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <limits.h>
 
 #include "motor.h"
 #include "encoder.h"
@@ -159,7 +160,9 @@ void motor_info(int32_t* left,int32_t* right)
 
 void Left_PID_Controller(int left_measure)
 {
-	int ret = IncPIDCalc(left_velocity,left_measure);
-
-	 set_left_velocity(ret);
+	 int ret = IncPIDCalc(left_velocity,left_measure);
+   if(ret != INT_MAX)
+	 {
+		  set_left_velocity(ret);
+	 }
 }

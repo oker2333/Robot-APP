@@ -1,5 +1,7 @@
 #include "pid.h"
+#include <stdio.h>
 #include <math.h>
+#include <limits.h>
 
 #define MAXOUT 1000                 //输出最大值
 #define MINOUT -1000                 //输出最小值
@@ -16,8 +18,8 @@ void IncPIDInit(void)
     sptr->LastError     = 0u;       //前2次误差值
     sptr->PrevError     = 0u;       //前1次误差值
 
-    sptr->Proportion    = 3.0f;     //比例
-    sptr->Integral      = 0.0f;     //积分
+    sptr->Proportion    = 0.3f;     //比例
+    sptr->Integral      = 0.12f;     //积分
     sptr->Derivative    = 0.0f;     //微分
 
     sptr->iError        = 0;        //当前误差
@@ -32,6 +34,11 @@ int IncPIDCalc(int SetPoint,int measurement)
 	  
     //当前误差
     sptr->iError = sptr->SetPoint - measurement;
+	  if((sptr->iError <= 5) && (sptr->iError >= -5))
+		{
+			 return INT_MAX;
+		}
+	  printf("Eroor = %d\n",sptr->iError);
     //增量误差
     sptr->iIncpid = sptr->Proportion * sptr->iError - sptr->Integral * sptr->LastError
                     + sptr->Derivative * sptr->PrevError;
@@ -52,7 +59,7 @@ int IncPIDCalc(int SetPoint,int measurement)
     }
     else 
 		{
-				sptr->Uk = sptr->Uk>>sptr->BitMove;
+				sptr->Uk = sptr->Uk >> sptr->BitMove;
 		}
 
     return sptr->Uk;

@@ -120,7 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name> w皻? w皻?</Name>
+          <Name> w ǘ" w ǘ"</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -980,7 +980,7 @@
 
   <Group>
     <GroupName>utilize</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
@@ -1072,7 +1072,7 @@
 
   <Group>
     <GroupName>Appliance</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>
