@@ -245,9 +245,6 @@ static void VelocityMeasurementTask(void *pvParameters)
 			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			
 			 printf("/*value:%f:%f*/\r\n",get_left_velocity(),get_right_velocity());
-				
-			 Left_PID_Controller(get_left_velocity()*1000);
-			 Right_PID_Controller(get_right_velocity()*1000);
 
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 
