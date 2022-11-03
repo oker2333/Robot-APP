@@ -103,7 +103,7 @@ void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 		{
 			case CONTROL_SPEED:
 			  left_velocity = (UserData[1] << 8) | UserData[0];
-			  right_velocity = (UserData[4] << 3) | UserData[2];
+			  right_velocity = (UserData[3] << 3) | UserData[2];
 				motor_control(left_velocity,right_velocity);
 			 
 				buffer[index++] = 0x00;

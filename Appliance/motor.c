@@ -152,17 +152,20 @@ void motor_control(int32_t left,int32_t right)
 	 printf("[motor_control]left_velocity = %d,right_velocity = %d\r\n",left_velocity,right_velocity);
 }
 
-void motor_info(int32_t* left,int32_t* right)
-{
-	 *left = left_velocity;
-	 *right = right_velocity;
-}
-
 void Left_PID_Controller(int left_measure)
 {
 	 int ret = IncPIDCalc(left_velocity,left_measure);
    if(ret != INT_MAX)
 	 {
 		  set_left_velocity(ret);
+	 }
+}
+
+void Right_PID_Controller(int right_measure)
+{
+	 int ret = IncPIDCalc(right_velocity,right_measure);
+   if(ret != INT_MAX)
+	 {
+		  set_right_velocity(ret);
 	 }
 }
