@@ -18,8 +18,8 @@ void IncPIDInit(void)
     sptr->LastError     = 0u;       //前2次误差值
     sptr->PrevError     = 0u;       //前1次误差值
 
-    sptr->Proportion    = 0.3f;     //比例
-    sptr->Integral      = 0.12f;     //积分
+    sptr->Proportion    = 0.32f;     //比例
+    sptr->Integral      = 0.102f;     //积分
     sptr->Derivative    = 0.0f;     //微分
 
     sptr->iError        = 0;        //当前误差
