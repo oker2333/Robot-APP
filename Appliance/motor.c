@@ -157,7 +157,13 @@ static void Left_PID_Controller(int left_measure,int left_target)
 	 int ret = IncPIDCalc(left_target,left_measure);
    if(ret != INT_MAX)
 	 {
-		  set_left_velocity(ret);
+			if(ret >= 0){
+				 set_left_velocity(ret);
+				 left_forward();
+			}else{
+				 set_left_velocity(-ret);
+				 left_backward();
+			}
 	 }
 }
 
@@ -166,12 +172,28 @@ static void Right_PID_Controller(int right_measure,int right_target)
 	 int ret = IncPIDCalc(right_target,right_measure);
    if(ret != INT_MAX)
 	 {
-		  set_right_velocity(ret);
+			if(ret >= 0){
+				 set_right_velocity(ret);
+				 right_forward();
+			}else{
+				 set_right_velocity(-ret);
+				 right_backward();
+			}
 	 }
 }
 
-void PID_Controller(int left_target,int right_target)
+static int left_wheel_target,right_wheel_target;
+
+void pid_motor_control(int left_target,int right_target)
 {
-	 Left_PID_Controller(get_left_velocity()*1000,left_target);
-	 Right_PID_Controller(get_right_velocity()*1000,right_target);
+	 left_wheel_target = left_target;
+	 right_wheel_target = right_target;
+	 Left_PID_Controller(get_left_velocity()*1000,left_wheel_target);
+	 Right_PID_Controller(get_right_velocity()*1000,right_wheel_target);
+}
+
+void PID_Controller(void)
+{
+	 Left_PID_Controller(get_left_velocity()*1000,left_wheel_target);
+	 Right_PID_Controller(get_right_velocity()*1000,right_wheel_target);
 }

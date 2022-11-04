@@ -243,6 +243,8 @@ static void VelocityMeasurementTask(void *pvParameters)
 		{
 			 left_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
+			 
+			 PID_Controller();
 			
 			 printf("/*value:%f:%f*/\r\n",get_left_velocity(),get_right_velocity());
 
