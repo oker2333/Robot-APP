@@ -154,6 +154,11 @@ void motor_control(int32_t left,int32_t right)
 
 static void Left_PID_Controller(int left_measure,int left_target)
 {
+	 if(left_target == 0)
+	 {
+		  set_left_velocity(0);
+		  return;
+	 }
 	 int ret = IncPIDCalc(left_target,left_measure);
    if(ret != INT_MAX)
 	 {
@@ -169,6 +174,12 @@ static void Left_PID_Controller(int left_measure,int left_target)
 
 static void Right_PID_Controller(int right_measure,int right_target)
 {
+	 if(right_target == 0)
+	 {
+		  set_right_velocity(0);
+		  return;
+	 }
+	 
 	 int ret = IncPIDCalc(right_target,right_measure);
    if(ret != INT_MAX)
 	 {
