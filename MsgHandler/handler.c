@@ -96,8 +96,8 @@ void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 {
 	  int index = 0;
 	  uint8_t buffer[10] = {0};
-		uint16_t left_velocity = 0;
-		uint16_t right_velocity = 0;
+		int16_t left_velocity = 0;
+		int16_t right_velocity = 0;
 		
 	  switch(cmd)
 		{
