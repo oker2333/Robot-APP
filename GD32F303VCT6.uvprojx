@@ -627,11 +627,6 @@
               <FileType>1</FileType>
               <FilePath>.\Hardware\flash_rw.c</FilePath>
             </File>
-            <File>
-              <FileName>timer.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\timer.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -766,6 +761,11 @@
               <FileName>encoder.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Appliance\encoder.c</FilePath>
+            </File>
+            <File>
+              <FileName>IRremote.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Appliance\IRremote.c</FilePath>
             </File>
           </Files>
         </Group>

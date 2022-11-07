@@ -50,7 +50,7 @@ static void rightEncoderTimerConfiguration(void)
     timer_icinitpara.icselection = TIMER_IC_SELECTION_DIRECTTI;
     timer_icinitpara.icprescaler = TIMER_IC_PSC_DIV1;
 
-		/*Configure PD12 PD13 (TIMER2 CH0 CH1) as alternate function*/
+		/*Configure PD12 PD13 (TIMER3 CH0 CH1) as alternate function*/
     timer_input_capture_config(TIMER3, TIMER_CH_0, &timer_icinitpara);
     timer_input_capture_config(TIMER3, TIMER_CH_1, &timer_icinitpara);
 

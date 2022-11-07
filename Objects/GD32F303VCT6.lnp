@@ -41,7 +41,6 @@
 ".\objects\pwm.o"
 ".\objects\iic.o"
 ".\objects\flash_rw.o"
-".\objects\timer.o"
 ".\objects\vl6180x_api.o"
 ".\objects\vl6180x_i2c.o"
 ".\objects\vl6180x_simple_ranging.o"
@@ -64,6 +63,7 @@
 ".\objects\switch.o"
 ".\objects\motor.o"
 ".\objects\encoder.o"
+".\objects\irremote.o"
 --library_type=microlib --strict --scatter ".\Objects\GD32F303VCT6.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
