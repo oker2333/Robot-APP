@@ -38,7 +38,7 @@ void ir_rx_init(void)
     timer_initpara.prescaler         = 119;
     timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
     timer_initpara.counterdirection  = TIMER_COUNTER_UP;
-    timer_initpara.period            = 10;
+    timer_initpara.period            = 10000;
     timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
     timer_initpara.repetitioncounter = 0;
     timer_init(TIMER1,&timer_initpara);
@@ -53,8 +53,8 @@ void ir_rx_init(void)
     /* auto-reload preload enable */
     timer_auto_reload_shadow_enable(TIMER1);
     /* clear channel 3 interrupt bit */
-    timer_interrupt_flag_clear(TIMER1,TIMER_INT_FLAG_CH0|TIMER_INT_FLAG_UP);
-    timer_interrupt_enable(TIMER1,TIMER_INT_CH0|TIMER_INT_UP);
+    timer_interrupt_flag_clear(TIMER1,TIMER_INT_FLAG_CH0 | TIMER_INT_FLAG_UP);
+    timer_interrupt_enable(TIMER1,TIMER_INT_CH0 | TIMER_INT_UP);
     /* channel 3 interrupt enable */
     nvic_irq_enable(TIMER1_IRQn, 10, 0);
 

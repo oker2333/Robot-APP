@@ -25,6 +25,8 @@
 
 #include "switch.h"
 
+#include "IRremote.h"
+
 #include "app_config.h"
 
 #include "print.h"
@@ -151,6 +153,8 @@ static void InitTask( void *pvParameters )
 		encoder_init();
 	  
 		motor_init();
+		
+		ir_rx_init();
 	
 		/* led gpio init */
 		rcu_periph_clock_enable(RCU_GPIOC);
