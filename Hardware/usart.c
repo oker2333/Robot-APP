@@ -176,8 +176,19 @@ void usart0_init(uint32_t baudval)
     usart_hardware_flow_cts_config(USART0, USART_CTS_DISABLE);
     usart_receive_config(USART0, USART_RECEIVE_ENABLE);
     usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);
+		nvic_irq_enable(USART0_IRQn, 9, 0);
+		usart_interrupt_enable(USART0, USART_INT_RBNE);
     usart_enable(USART0);
 }
+
+void USART0_IRQHandler(void)
+{
+    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_RBNE)){			//TX
+			  uint8_t data = usart_data_receive(USART0);
+				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_RBNE);
+    }
+}
+
 #endif
 
 /************************************IAP USART******************************************************/
