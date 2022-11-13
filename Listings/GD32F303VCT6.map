@@ -802,6 +802,262 @@ Section Cross References
     flash_rw.o(i.flash_write_word) refers to gd32f30x_fmc.o(i.fmc_word_program) for fmc_word_program
     flash_rw.o(i.flash_write_word) refers to gd32f30x_fmc.o(i.fmc_flag_clear) for fmc_flag_clear
     flash_rw.o(i.flash_write_word) refers to gd32f30x_fmc.o(i.fmc_lock) for fmc_lock
+    driver_mpu6050.o(i.a_mpu6050_accel_self_test) refers to driver_mpu6050.o(i.a_mpu6050_get_accel_prod_shift) for a_mpu6050_get_accel_prod_shift
+    driver_mpu6050.o(i.a_mpu6050_accel_self_test) refers to f2d.o(.text) for __aeabi_f2d
+    driver_mpu6050.o(i.a_mpu6050_accel_self_test) refers to fabs.o(i.__hardfp_fabs) for __hardfp_fabs
+    driver_mpu6050.o(i.a_mpu6050_accel_self_test) refers to cdrcmple.o(.text) for __aeabi_cdrcmple
+    driver_mpu6050.o(i.a_mpu6050_get_accel_prod_shift) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.a_mpu6050_get_st_biases) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.a_mpu6050_get_st_biases) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.a_mpu6050_get_st_biases) refers to ldiv.o(.text) for __aeabi_ldivmod
+    driver_mpu6050.o(i.a_mpu6050_gyro_self_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.a_mpu6050_gyro_self_test) refers to f2d.o(.text) for __aeabi_f2d
+    driver_mpu6050.o(i.a_mpu6050_gyro_self_test) refers to fabs.o(i.__hardfp_fabs) for __hardfp_fabs
+    driver_mpu6050.o(i.a_mpu6050_gyro_self_test) refers to cdrcmple.o(.text) for __aeabi_cdrcmple
+    driver_mpu6050.o(i.a_mpu6050_inv_orientation_matrix_to_scalar) refers to driver_mpu6050.o(i.a_mpu6050_inv_row_2_scale) for a_mpu6050_inv_row_2_scale
+    driver_mpu6050.o(i.a_mpu6050_reset_fifo) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.a_mpu6050_reset_fifo) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_deinit) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_device_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_device_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_dmp_get_fifo_rate) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_min_tap_count) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_pedometer_step_count) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_pedometer_walk_time) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_shake_reject_thresh) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_shake_reject_time) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_shake_reject_timeout) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_tap_axes) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_tap_thresh) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_tap_thresh) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_dmp_get_tap_time) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_get_tap_time_multi) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_gyro_accel_raw_offset_convert) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_dmp_load_firmware) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_load_firmware) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_load_firmware) refers to memcmp.o(.text) for memcmp
+    driver_mpu6050.o(i.mpu6050_dmp_load_firmware) refers to driver_mpu6050.o(.data) for gs_mpu6050_dmp_code
+    driver_mpu6050.o(i.mpu6050_dmp_read) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_dmp_read) refers to driver_mpu6050.o(i.a_mpu6050_reset_fifo) for a_mpu6050_reset_fifo
+    driver_mpu6050.o(i.mpu6050_dmp_read) refers to asinf.o(i.__hardfp_asinf) for __hardfp_asinf
+    driver_mpu6050.o(i.mpu6050_dmp_read) refers to atan2f.o(i.__hardfp_atan2f) for __hardfp_atan2f
+    driver_mpu6050.o(i.mpu6050_dmp_read) refers to driver_mpu6050.o(i.a_mpu6050_dmp_decode_gesture) for a_mpu6050_dmp_decode_gesture
+    driver_mpu6050.o(i.mpu6050_dmp_set_3x_quaternion) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_3x_quaternion) refers to driver_mpu6050.o(i.a_mpu6050_reset_fifo) for a_mpu6050_reset_fifo
+    driver_mpu6050.o(i.mpu6050_dmp_set_6x_quaternion) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_6x_quaternion) refers to driver_mpu6050.o(i.a_mpu6050_reset_fifo) for a_mpu6050_reset_fifo
+    driver_mpu6050.o(i.mpu6050_dmp_set_accel_bias) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_dmp_set_accel_bias) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_dmp_set_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_dmp_set_feature) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_feature) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_dmp_set_feature) refers to driver_mpu6050.o(i.a_mpu6050_reset_fifo) for a_mpu6050_reset_fifo
+    driver_mpu6050.o(i.mpu6050_dmp_set_fifo_rate) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_gyro_bias) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_gyro_calibrate) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_interrupt_mode) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_min_tap_count) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_orientation) refers to driver_mpu6050.o(i.a_mpu6050_inv_orientation_matrix_to_scalar) for a_mpu6050_inv_orientation_matrix_to_scalar
+    driver_mpu6050.o(i.mpu6050_dmp_set_orientation) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_pedometer_step_count) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_pedometer_walk_time) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_shake_reject_thresh) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_shake_reject_time) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_shake_reject_timeout) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_tap_axes) refers to driver_mpu6050.o(i.a_mpu6050_read_mem) for a_mpu6050_read_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_tap_axes) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_tap_thresh) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_dmp_set_tap_thresh) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_tap_time) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_dmp_set_tap_time_multi) refers to driver_mpu6050.o(i.a_mpu6050_write_mem) for a_mpu6050_write_mem
+    driver_mpu6050.o(i.mpu6050_fifo_get) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_fifo_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_fifo_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_fifo_set) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_get_accelerometer_range) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_accelerometer_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_accelerometer_x_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_accelerometer_y_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_accelerometer_z_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_clock_source) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_cycle_wake_up) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_device_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_extern_sync) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_fifo) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_fifo_count) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_fifo_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_fifo_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_fsync_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_fsync_interrupt_level) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_gyroscope_range) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_gyroscope_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_gyroscope_x_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_gyroscope_y_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_gyroscope_z_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic4_data_in) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic4_data_out) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic4_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic4_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic4_transaction_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_address) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_bypass) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_byte_swap) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_clock) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_data_out) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_delay) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_delay_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_fifo_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_group_order) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_master) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_master_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_multi_master) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_read_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_register) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_status) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_transaction_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_transferred_len) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_iic_wait_for_external_sensor) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_interrupt_latch) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_interrupt_level) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_interrupt_pin_type) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_interrupt_read_clear) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_interrupt_status) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_low_pass_filter) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_motion_duration) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_motion_threshold) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_reg) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_sample_rate_divider) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_sensor_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_sleep) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_standby_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_temperature_sensor) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_get_wake_up_frequency) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_iic_master_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_iic_master_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_info) refers to memseta.o(.text) for __aeabi_memclr4
+    driver_mpu6050.o(i.mpu6050_info) refers to strncpy.o(.text) for strncpy
+    driver_mpu6050.o(i.mpu6050_init) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_init) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_irq_handler) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_irq_handler) refers to driver_mpu6050.o(i.a_mpu6050_reset_fifo) for a_mpu6050_reset_fifo
+    driver_mpu6050.o(i.mpu6050_read) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_read_extern_sensor_data) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_read_temperature) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_self_test) refers to driver_mpu6050.o(i.a_mpu6050_get_st_biases) for a_mpu6050_get_st_biases
+    driver_mpu6050.o(i.mpu6050_self_test) refers to driver_mpu6050.o(i.a_mpu6050_accel_self_test) for a_mpu6050_accel_self_test
+    driver_mpu6050.o(i.mpu6050_self_test) refers to driver_mpu6050.o(i.a_mpu6050_gyro_self_test) for a_mpu6050_gyro_self_test
+    driver_mpu6050.o(i.mpu6050_self_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_self_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_sensor_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_sensor_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_range) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_range) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_x_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_x_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_y_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_y_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_z_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_accelerometer_z_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_clock_source) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_clock_source) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_cycle_wake_up) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_cycle_wake_up) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_extern_sync) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_extern_sync) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_fifo) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_fifo) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_fifo_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_fifo_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_force_accel_sample) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_force_accel_sample) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_fsync_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_fsync_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_fsync_interrupt_level) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_fsync_interrupt_level) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_range) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_range) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_x_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_x_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_y_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_y_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_z_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_gyroscope_z_test) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic4_data_in) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic4_data_out) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic4_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic4_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic4_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic4_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic4_transaction_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic4_transaction_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_address) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_address) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_bypass) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_bypass) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_byte_swap) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_byte_swap) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_clock) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_clock) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_data_out) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_delay) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_delay) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_delay_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_delay_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_fifo_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_fifo_enable) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_group_order) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_group_order) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_master) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_master) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_multi_master) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_multi_master) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_read_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_read_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_register) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_transaction_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_transaction_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_transferred_len) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_transferred_len) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_iic_wait_for_external_sensor) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_iic_wait_for_external_sensor) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_interrupt) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_interrupt_latch) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_interrupt_latch) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_interrupt_level) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_interrupt_level) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_interrupt_pin_type) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_interrupt_pin_type) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_interrupt_read_clear) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_interrupt_read_clear) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_low_pass_filter) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_low_pass_filter) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_motion_duration) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_motion_threshold) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_reg) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_sample_rate_divider) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_signal_path_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_signal_path_reset) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_sleep) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_sleep) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_standby_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_standby_mode) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_temperature_sensor) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_temperature_sensor) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
+    driver_mpu6050.o(i.mpu6050_set_wake_up_frequency) refers to driver_mpu6050.o(i.a_mpu6050_iic_read) for a_mpu6050_iic_read
+    driver_mpu6050.o(i.mpu6050_set_wake_up_frequency) refers to driver_mpu6050.o(i.a_mpu6050_iic_write) for a_mpu6050_iic_write
     vl6180x_api.o(i.VL6180x_ClearInterrupt) refers to vl6180x_i2c.o(i.VL6180x_WrByte) for VL6180x_WrByte
     vl6180x_api.o(i.VL6180x_DMaxGetState) refers to vl6180x_api.o(.data) for SingleVL6180xDevData
     vl6180x_api.o(i.VL6180x_DMaxSetState) refers to vl6180x_api.o(i._DMax_InitData) for _DMax_InitData
@@ -1449,6 +1705,40 @@ Section Cross References
     irremote.o(i.ir_rx_init) refers to gd32f30x_timer.o(i.timer_interrupt_enable) for timer_interrupt_enable
     irremote.o(i.ir_rx_init) refers to gd32f30x_misc.o(i.nvic_irq_enable) for nvic_irq_enable
     irremote.o(i.ir_rx_init) refers to gd32f30x_timer.o(i.timer_enable) for timer_enable
+    asinf.o(i.__hardfp_asinf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    asinf.o(i.__hardfp_asinf) refers to sqrtf.o(i.sqrtf) for sqrtf
+    asinf.o(i.__hardfp_asinf) refers to fpclassifyf.o(i.__ARM_fpclassifyf) for __ARM_fpclassifyf
+    asinf.o(i.__hardfp_asinf) refers to funder.o(i.__mathlib_flt_underflow) for __mathlib_flt_underflow
+    asinf.o(i.__hardfp_asinf) refers to funder.o(i.__mathlib_flt_infnan) for __mathlib_flt_infnan
+    asinf.o(i.__hardfp_asinf) refers to errno.o(i.__set_errno) for __set_errno
+    asinf.o(i.__hardfp_asinf) refers to funder.o(i.__mathlib_flt_invalid) for __mathlib_flt_invalid
+    asinf.o(i.__softfp_asinf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    asinf.o(i.__softfp_asinf) refers to asinf.o(i.__hardfp_asinf) for __hardfp_asinf
+    asinf.o(i.asinf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    asinf.o(i.asinf) refers to asinf.o(i.__hardfp_asinf) for __hardfp_asinf
+    asinf_x.o(i.____hardfp_asinf$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    asinf_x.o(i.____hardfp_asinf$lsc) refers to sqrtf.o(i.sqrtf) for sqrtf
+    asinf_x.o(i.____hardfp_asinf$lsc) refers to funder.o(i.__mathlib_flt_infnan) for __mathlib_flt_infnan
+    asinf_x.o(i.____hardfp_asinf$lsc) refers to errno.o(i.__set_errno) for __set_errno
+    asinf_x.o(i.____softfp_asinf$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    asinf_x.o(i.____softfp_asinf$lsc) refers to asinf_x.o(i.____hardfp_asinf$lsc) for ____hardfp_asinf$lsc
+    asinf_x.o(i.__asinf$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    asinf_x.o(i.__asinf$lsc) refers to asinf_x.o(i.____hardfp_asinf$lsc) for ____hardfp_asinf$lsc
+    atan2f.o(i.__hardfp_atan2f) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2f.o(i.__hardfp_atan2f) refers to fpclassifyf.o(i.__ARM_fpclassifyf) for __ARM_fpclassifyf
+    atan2f.o(i.__hardfp_atan2f) refers to funder.o(i.__mathlib_flt_underflow) for __mathlib_flt_underflow
+    atan2f.o(i.__hardfp_atan2f) refers to funder.o(i.__mathlib_flt_infnan2) for __mathlib_flt_infnan2
+    atan2f.o(i.__softfp_atan2f) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2f.o(i.__softfp_atan2f) refers to atan2f.o(i.__hardfp_atan2f) for __hardfp_atan2f
+    atan2f.o(i.atan2f) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2f.o(i.atan2f) refers to atan2f.o(i.__hardfp_atan2f) for __hardfp_atan2f
+    atan2f_x.o(i.____hardfp_atan2f$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2f_x.o(i.____hardfp_atan2f$lsc) refers to funder.o(i.__mathlib_flt_infnan2) for __mathlib_flt_infnan2
+    atan2f_x.o(i.____hardfp_atan2f$lsc) refers to errno.o(i.__set_errno) for __set_errno
+    atan2f_x.o(i.____softfp_atan2f$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2f_x.o(i.____softfp_atan2f$lsc) refers to atan2f_x.o(i.____hardfp_atan2f$lsc) for ____hardfp_atan2f$lsc
+    atan2f_x.o(i.__atan2f$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2f_x.o(i.__atan2f$lsc) refers to atan2f_x.o(i.____hardfp_atan2f$lsc) for ____hardfp_atan2f$lsc
     fabs.o(i.__hardfp_fabs) refers (Special) to iusefp.o(.text) for __I$use$fp
     fabs.o(i.__softfp_fabs) refers (Special) to iusefp.o(.text) for __I$use$fp
     fabs.o(i.fabs) refers (Special) to iusefp.o(.text) for __I$use$fp
@@ -1465,6 +1755,7 @@ Section Cross References
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
     entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    ldiv.o(.text) refers to uldiv.o(.text) for __aeabi_uldivmod
     printfb.o(i.__0fprintf$bare) refers to printfb.o(i._printf_core) for _printf_core
     printfb.o(i.__0fprintf$bare) refers to print.o(i.fputc) for fputc
     printfb.o(i.__0printf$bare) refers to printfb.o(i._printf_core) for _printf_core
@@ -1752,6 +2043,19 @@ Section Cross References
     f2d.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     cdcmple.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
     cdrcmple.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fpclassifyf.o(i.__ARM_fpclassifyf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    sqrtf.o(i.__hardfp_sqrtf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    sqrtf.o(i.__hardfp_sqrtf) refers to errno.o(i.__set_errno) for __set_errno
+    sqrtf.o(i.__softfp_sqrtf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    sqrtf.o(i.__softfp_sqrtf) refers to errno.o(i.__set_errno) for __set_errno
+    sqrtf.o(i.sqrtf) refers (Special) to iusefp.o(.text) for __I$use$fp
+    sqrtf.o(i.sqrtf) refers to errno.o(i.__set_errno) for __set_errno
+    sqrtf_x.o(i.____hardfp_sqrtf$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    sqrtf_x.o(i.____hardfp_sqrtf$lsc) refers to errno.o(i.__set_errno) for __set_errno
+    sqrtf_x.o(i.____softfp_sqrtf$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    sqrtf_x.o(i.____softfp_sqrtf$lsc) refers to errno.o(i.__set_errno) for __set_errno
+    sqrtf_x.o(i.__sqrtf$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    sqrtf_x.o(i.__sqrtf$lsc) refers to errno.o(i.__set_errno) for __set_errno
     entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
     entry2.o(.ARM.Collect$$$$00002712) refers to startup_gd32f30x_cl.o(STACK) for __initial_sp
     entry2.o(__vectab_stack_and_reset_area) refers to startup_gd32f30x_cl.o(STACK) for __initial_sp
@@ -1761,6 +2065,9 @@ Section Cross References
     entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(i.main) for main
     uldiv.o(.text) refers to llushr.o(.text) for __aeabi_llsr
     uldiv.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    errno.o(i.__aeabi_errno_addr) refers to errno.o(.data) for .data
+    errno.o(i.__read_errno) refers to errno.o(.data) for .data
+    errno.o(i.__set_errno) refers to errno.o(.data) for .data
     _scanf_longlong.o(.text) refers to _chval.o(.text) for _chval
     _scanf_int.o(.text) refers to _chval.o(.text) for _chval
     scanf_fp.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
@@ -2479,6 +2786,192 @@ Removing Unused input sections from the image.
     Removing flash_rw.o(i.flash_write_dword), (52 bytes).
     Removing flash_rw.o(i.flash_write_pages), (36 bytes).
     Removing flash_rw.o(i.flash_write_word), (52 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_accel_self_test), (276 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_dmp_decode_gesture), (88 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_get_accel_prod_shift), (208 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_get_st_biases), (954 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_gyro_self_test), (312 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_iic_read), (38 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_iic_write), (38 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_inv_orientation_matrix_to_scalar), (40 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_inv_row_2_scale), (78 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_read_mem), (82 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_reset_fifo), (608 bytes).
+    Removing driver_mpu6050.o(i.a_mpu6050_write_mem), (82 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_deinit), (152 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_device_reset), (188 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_fifo_rate), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_min_tap_count), (144 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_pedometer_step_count), (164 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_pedometer_walk_time), (172 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_shake_reject_thresh), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_shake_reject_time), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_shake_reject_timeout), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_tap_axes), (176 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_tap_thresh), (476 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_tap_time), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_get_tap_time_multi), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_gyro_accel_raw_offset_convert), (916 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_load_firmware), (368 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_read), (3064 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_3x_quaternion), (280 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_6x_quaternion), (280 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_accel_bias), (536 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_enable), (224 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_feature), (1840 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_fifo_rate), (248 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_gyro_bias), (428 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_gyro_calibrate), (232 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_interrupt_mode), (208 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_min_tap_count), (200 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_orient_callback), (80 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_orientation), (444 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_pedometer_step_count), (160 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_pedometer_walk_time), (164 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_shake_reject_thresh), (168 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_shake_reject_time), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_shake_reject_timeout), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_tap_axes), (236 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_tap_callback), (80 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_tap_thresh), (720 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_tap_time), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_dmp_set_tap_time_multi), (156 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_fifo_get), (88 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_fifo_reset), (172 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_fifo_set), (92 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_accelerometer_range), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_accelerometer_test), (112 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_accelerometer_x_test), (172 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_accelerometer_y_test), (172 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_accelerometer_z_test), (168 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_addr_pin), (16 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_clock_source), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_cycle_wake_up), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_device_reset), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_extern_sync), (96 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_fifo), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_fifo_count), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_fifo_enable), (112 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_fifo_reset), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_fsync_interrupt), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_fsync_interrupt_level), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_gyroscope_range), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_gyroscope_test), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_gyroscope_x_test), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_gyroscope_y_test), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_gyroscope_z_test), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic4_data_in), (92 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic4_data_out), (92 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic4_enable), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic4_interrupt), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic4_transaction_mode), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_address), (476 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_bypass), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_byte_swap), (396 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_clock), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_data_out), (340 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_delay), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_delay_enable), (112 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_enable), (388 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_fifo_enable), (232 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_group_order), (396 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_master), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_master_reset), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_mode), (468 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_multi_master), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_read_mode), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_register), (408 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_status), (96 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_transaction_mode), (396 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_transferred_len), (396 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_iic_wait_for_external_sensor), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_interrupt), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_interrupt_latch), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_interrupt_level), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_interrupt_pin_type), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_interrupt_read_clear), (104 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_interrupt_status), (96 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_low_pass_filter), (96 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_motion_duration), (96 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_motion_threshold), (96 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_reg), (46 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_sample_rate_divider), (92 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_sensor_reset), (100 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_sleep), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_standby_mode), (112 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_temperature_sensor), (112 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_get_wake_up_frequency), (108 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_iic_master_reset), (172 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_info), (140 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_init), (656 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_irq_handler), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_motion_duration_convert_to_data), (26 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_motion_duration_convert_to_register), (26 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_motion_threshold_convert_to_data), (48 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_motion_threshold_convert_to_register), (48 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_read), (2800 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_read_extern_sensor_data), (136 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_read_temperature), (136 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_self_test), (460 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_sensor_reset), (172 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_accelerometer_range), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_accelerometer_test), (200 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_accelerometer_x_test), (372 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_accelerometer_y_test), (372 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_accelerometer_z_test), (368 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_addr_pin), (14 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_clock_source), (188 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_cycle_wake_up), (192 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_extern_sync), (168 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_fifo), (176 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_fifo_enable), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_force_accel_sample), (188 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_fsync_interrupt), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_fsync_interrupt_level), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_gyroscope_range), (188 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_gyroscope_test), (192 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_gyroscope_x_test), (216 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_gyroscope_y_test), (216 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_gyroscope_z_test), (216 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic4_data_in), (88 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic4_data_out), (88 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic4_enable), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic4_interrupt), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic4_transaction_mode), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_address), (868 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_bypass), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_byte_swap), (708 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_clock), (176 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_data_out), (336 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_delay), (216 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_delay_enable), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_enable), (708 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_fifo_enable), (384 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_group_order), (708 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_master), (176 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_mode), (868 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_multi_master), (180 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_read_mode), (180 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_register), (424 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_transaction_mode), (708 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_transferred_len), (732 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_iic_wait_for_external_sensor), (180 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_interrupt), (188 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_interrupt_latch), (188 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_interrupt_level), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_interrupt_pin_type), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_interrupt_read_clear), (184 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_low_pass_filter), (164 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_motion_duration), (92 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_motion_threshold), (96 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_reg), (46 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_sample_rate_divider), (88 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_signal_path_reset), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_sleep), (192 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_standby_mode), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_temperature_sensor), (196 bytes).
+    Removing driver_mpu6050.o(i.mpu6050_set_wake_up_frequency), (192 bytes).
+    Removing driver_mpu6050.o(.data), (3062 bytes).
     Removing vl6180x_api.o(i.VL6180x_DMaxGetState), (16 bytes).
     Removing vl6180x_api.o(i.VL6180x_DMaxSetState), (36 bytes).
     Removing vl6180x_api.o(i.VL6180x_DisableGPIOxOut), (22 bytes).
@@ -2671,7 +3164,7 @@ Removing Unused input sections from the image.
     Removing d2f.o(.text), (56 bytes).
     Removing fepilogue.o(.text), (110 bytes).
 
-875 unused section(s) (total 43995 bytes) removed from the image.
+1061 unused section(s) (total 93551 bytes) removed from the image.
 
 ==============================================================================
 
@@ -2686,45 +3179,48 @@ Image Symbol Table
     ../clib/microlib/ctype/ctype.c           0x00000000   Number         0  isspace_c.o ABSOLUTE
     ../clib/microlib/ctype/tolower.c         0x00000000   Number         0  tolower.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uldiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  ldiv.o ABSOLUTE
     ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/errno.c                 0x00000000   Number         0  errno.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
-    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
     ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
-    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
     ../clib/microlib/longlong.c              0x00000000   Number         0  llsshr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llushr.o ABSOLUTE
+    ../clib/microlib/longlong.c              0x00000000   Number         0  llshl.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloc.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocr.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  malloca.o ABSOLUTE
     ../clib/microlib/malloc/malloc.c         0x00000000   Number         0  mallocra.o ABSOLUTE
     ../clib/microlib/malloc/mvars.c          0x00000000   Number         0  mvars.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfb.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf6.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf8.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf7.o ABSOLUTE
-    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf2.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf4.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf0.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf1.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printfa.o ABSOLUTE
     ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf5.o ABSOLUTE
+    ../clib/microlib/printf/printf.c         0x00000000   Number         0  printf3.o ABSOLUTE
     ../clib/microlib/printf/stubs.s          0x00000000   Number         0  stubs.o ABSOLUTE
     ../clib/microlib/stdio/streams.c         0x00000000   Number         0  stdout.o ABSOLUTE
+    ../clib/microlib/string/memcmp.c         0x00000000   Number         0  memcmp.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpya.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpy.o ABSOLUTE
-    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyc.o ABSOLUTE
     ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyb.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpyc.o ABSOLUTE
+    ../clib/microlib/string/memcpy.c         0x00000000   Number         0  memcpy.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
     ../clib/microlib/string/memset.c         0x00000000   Number         0  memset.o ABSOLUTE
     ../clib/microlib/string/strcmp.c         0x00000000   Number         0  strcmp.o ABSOLUTE
@@ -2733,28 +3229,36 @@ Image Symbol Table
     ../clib/microlib/string/strncmp.c        0x00000000   Number         0  strncmp.o ABSOLUTE
     ../clib/microlib/string/strncpy.c        0x00000000   Number         0  strncpy.o ABSOLUTE
     ../clib/microlib/stubs.s                 0x00000000   Number         0  iusefp.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  _sgetc.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  scanf_char.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  _scanf_str.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  _scanf_int.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  _scanf_longlong.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  scanf_fp.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  _chval.o ABSOLUTE
-    ../clib/scanf.c                          0x00000000   Number         0  sscanf.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  _scanf.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  scanf_char.o ABSOLUTE
     ../clib/scanf.c                          0x00000000   Number         0  strtod.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  _sgetc.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  _scanf_int.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  scanf_fp.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  _scanf_str.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  sscanf.o ABSOLUTE
+    ../clib/scanf.c                          0x00000000   Number         0  _scanf_longlong.o ABSOLUTE
     ../fplib/microlib/d2f.c                  0x00000000   Number         0  d2f.o ABSOLUTE
     ../fplib/microlib/f2d.c                  0x00000000   Number         0  f2d.o ABSOLUTE
     ../fplib/microlib/fpadd.c                0x00000000   Number         0  dadd.o ABSOLUTE
     ../fplib/microlib/fpdiv.c                0x00000000   Number         0  ddiv.o ABSOLUTE
-    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
     ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  depilogue.o ABSOLUTE
+    ../fplib/microlib/fpepilogue.c           0x00000000   Number         0  fepilogue.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixi.o ABSOLUTE
     ../fplib/microlib/fpfix.c                0x00000000   Number         0  dfixul.o ABSOLUTE
-    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltul.o ABSOLUTE
     ../fplib/microlib/fpflt.c                0x00000000   Number         0  dflti.o ABSOLUTE
+    ../fplib/microlib/fpflt.c                0x00000000   Number         0  dfltul.o ABSOLUTE
     ../fplib/microlib/fpmul.c                0x00000000   Number         0  dmul.o ABSOLUTE
+    ../mathlib/asinf.c                       0x00000000   Number         0  asinf.o ABSOLUTE
+    ../mathlib/asinf.c                       0x00000000   Number         0  asinf_x.o ABSOLUTE
+    ../mathlib/atan2f.c                      0x00000000   Number         0  atan2f.o ABSOLUTE
+    ../mathlib/atan2f.c                      0x00000000   Number         0  atan2f_x.o ABSOLUTE
     ../mathlib/fabs.c                        0x00000000   Number         0  fabs.o ABSOLUTE
+    ../mathlib/fpclassifyf.c                 0x00000000   Number         0  fpclassifyf.o ABSOLUTE
+    ../mathlib/funder.c                      0x00000000   Number         0  funder.o ABSOLUTE
+    ../mathlib/sqrtf.c                       0x00000000   Number         0  sqrtf_x.o ABSOLUTE
+    ../mathlib/sqrtf.c                       0x00000000   Number         0  sqrtf.o ABSOLUTE
     ../mathlib/strtod.c                      0x00000000   Number         0  strtod.o ABSOLUTE
     Appliance\IRremote.c                     0x00000000   Number         0  irremote.o ABSOLUTE
     Appliance\\IRremote.c                    0x00000000   Number         0  irremote.o ABSOLUTE
@@ -2844,6 +3348,7 @@ Image Symbol Table
     Hardware\\iic.c                          0x00000000   Number         0  iic.o ABSOLUTE
     Hardware\\pwm.c                          0x00000000   Number         0  pwm.o ABSOLUTE
     Hardware\\usart.c                        0x00000000   Number         0  usart.o ABSOLUTE
+    Hardware\driver_mpu6050.c                0x00000000   Number         0  driver_mpu6050.o ABSOLUTE
     Hardware\exti.c                          0x00000000   Number         0  exti.o ABSOLUTE
     Hardware\flash_rw.c                      0x00000000   Number         0  flash_rw.o ABSOLUTE
     Hardware\iic.c                           0x00000000   Number         0  iic.o ABSOLUTE
@@ -3422,7 +3927,7 @@ Image Symbol Table
 
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
-    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$VFPi3$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$ROPI$IEEEJ$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$VFPi3$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$ROPI$IEEEX$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
     __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
     _printf_a                                0x00000000   Number         0  stubs.o ABSOLUTE
     _printf_c                                0x00000000   Number         0  stubs.o ABSOLUTE
@@ -3896,171 +4401,171 @@ Memory Map of the image
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
     0x08004000   0x08004000   0x00000150   Data   RO         4289    RESET               startup_gd32f30x_cl.o
-    0x08004150   0x08004150   0x00000000   Code   RO         7820  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
-    0x08004150   0x08004150   0x00000004   Code   RO         8152    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
-    0x08004154   0x08004154   0x00000004   Code   RO         8155    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
-    0x08004158   0x08004158   0x00000000   Code   RO         8157    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
-    0x08004158   0x08004158   0x00000000   Code   RO         8159    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
-    0x08004158   0x08004158   0x00000008   Code   RO         8160    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
-    0x08004160   0x08004160   0x00000000   Code   RO         8162    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
-    0x08004160   0x08004160   0x00000000   Code   RO         8164    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
-    0x08004160   0x08004160   0x00000004   Code   RO         8153    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
+    0x08004150   0x08004150   0x00000000   Code   RO         8967  * .ARM.Collect$$$$00000000  mc_w.l(entry.o)
+    0x08004150   0x08004150   0x00000004   Code   RO         9331    .ARM.Collect$$$$00000001  mc_w.l(entry2.o)
+    0x08004154   0x08004154   0x00000004   Code   RO         9334    .ARM.Collect$$$$00000004  mc_w.l(entry5.o)
+    0x08004158   0x08004158   0x00000000   Code   RO         9336    .ARM.Collect$$$$00000008  mc_w.l(entry7b.o)
+    0x08004158   0x08004158   0x00000000   Code   RO         9338    .ARM.Collect$$$$0000000A  mc_w.l(entry8b.o)
+    0x08004158   0x08004158   0x00000008   Code   RO         9339    .ARM.Collect$$$$0000000B  mc_w.l(entry9a.o)
+    0x08004160   0x08004160   0x00000000   Code   RO         9341    .ARM.Collect$$$$0000000D  mc_w.l(entry10a.o)
+    0x08004160   0x08004160   0x00000000   Code   RO         9343    .ARM.Collect$$$$0000000F  mc_w.l(entry11a.o)
+    0x08004160   0x08004160   0x00000004   Code   RO         9332    .ARM.Collect$$$$00002712  mc_w.l(entry2.o)
     0x08004164   0x08004164   0x000000be   Code   RO         5398    .emb_text           port.o
     0x08004222   0x08004222   0x00000002   PAD
     0x08004224   0x08004224   0x00000024   Code   RO         4290    .text               startup_gd32f30x_cl.o
-    0x08004248   0x08004248   0x00000220   Code   RO         6651    .text               lib_mem_a.o
-    0x08004468   0x08004468   0x00000028   Code   RO         7825    .text               mc_w.l(memcpy.o)
-    0x08004490   0x08004490   0x00000024   Code   RO         7831    .text               mc_w.l(memseta.o)
-    0x080044b4   0x080044b4   0x00000018   Code   RO         7833    .text               mc_w.l(strncpy.o)
-    0x080044cc   0x080044cc   0x0000001c   Code   RO         7837    .text               mc_w.l(strcmp.o)
-    0x080044e8   0x080044e8   0x0000014e   Code   RO         8138    .text               mf_w.l(dadd.o)
-    0x08004636   0x08004636   0x000000e4   Code   RO         8140    .text               mf_w.l(dmul.o)
+    0x08004248   0x08004248   0x00000220   Code   RO         7774    .text               lib_mem_a.o
+    0x08004468   0x08004468   0x00000028   Code   RO         8974    .text               mc_w.l(memcpy.o)
+    0x08004490   0x08004490   0x00000024   Code   RO         8980    .text               mc_w.l(memseta.o)
+    0x080044b4   0x080044b4   0x00000018   Code   RO         8982    .text               mc_w.l(strncpy.o)
+    0x080044cc   0x080044cc   0x0000001c   Code   RO         8986    .text               mc_w.l(strcmp.o)
+    0x080044e8   0x080044e8   0x0000014e   Code   RO         9289    .text               mf_w.l(dadd.o)
+    0x08004636   0x08004636   0x000000e4   Code   RO         9291    .text               mf_w.l(dmul.o)
     0x0800471a   0x0800471a   0x00000002   PAD
-    0x0800471c   0x0800471c   0x00000030   Code   RO         8150    .text               mf_w.l(cdrcmple.o)
-    0x0800474c   0x0800474c   0x0000002c   Code   RO         8167    .text               mc_w.l(uidiv.o)
-    0x08004778   0x08004778   0x00000062   Code   RO         8169    .text               mc_w.l(uldiv.o)
-    0x080047da   0x080047da   0x0000001e   Code   RO         8171    .text               mc_w.l(llshl.o)
-    0x080047f8   0x080047f8   0x00000020   Code   RO         8173    .text               mc_w.l(llushr.o)
-    0x08004818   0x08004818   0x00000024   Code   RO         8175    .text               mc_w.l(llsshr.o)
-    0x0800483c   0x0800483c   0x00000000   Code   RO         8195    .text               mc_w.l(iusefp.o)
-    0x0800483c   0x0800483c   0x000000ba   Code   RO         8196    .text               mf_w.l(depilogue.o)
-    0x080048f6   0x080048f6   0x000000de   Code   RO         8198    .text               mf_w.l(ddiv.o)
-    0x080049d4   0x080049d4   0x00000030   Code   RO         8200    .text               mf_w.l(dfixul.o)
-    0x08004a04   0x08004a04   0x00000024   Code   RO         8202    .text               mc_w.l(init.o)
-    0x08004a28   0x08004a28   0x00000056   Code   RO         8227    .text               mc_w.l(__dczerorl2.o)
+    0x0800471c   0x0800471c   0x00000030   Code   RO         9301    .text               mf_w.l(cdrcmple.o)
+    0x0800474c   0x0800474c   0x0000002c   Code   RO         9346    .text               mc_w.l(uidiv.o)
+    0x08004778   0x08004778   0x00000062   Code   RO         9348    .text               mc_w.l(uldiv.o)
+    0x080047da   0x080047da   0x0000001e   Code   RO         9350    .text               mc_w.l(llshl.o)
+    0x080047f8   0x080047f8   0x00000020   Code   RO         9352    .text               mc_w.l(llushr.o)
+    0x08004818   0x08004818   0x00000024   Code   RO         9354    .text               mc_w.l(llsshr.o)
+    0x0800483c   0x0800483c   0x00000000   Code   RO         9381    .text               mc_w.l(iusefp.o)
+    0x0800483c   0x0800483c   0x000000ba   Code   RO         9382    .text               mf_w.l(depilogue.o)
+    0x080048f6   0x080048f6   0x000000de   Code   RO         9384    .text               mf_w.l(ddiv.o)
+    0x080049d4   0x080049d4   0x00000030   Code   RO         9386    .text               mf_w.l(dfixul.o)
+    0x08004a04   0x08004a04   0x00000024   Code   RO         9388    .text               mc_w.l(init.o)
+    0x08004a28   0x08004a28   0x00000056   Code   RO         9413    .text               mc_w.l(__dczerorl2.o)
     0x08004a7e   0x08004a7e   0x00000004   Code   RO          300    i.BusFault_Handler  gd32f30x_it.o
-    0x08004a82   0x08004a82   0x00000042   Code   RO         6654    i.CRC16_CCITT_FALSE  crc.o
-    0x08004ac4   0x08004ac4   0x00000030   Code   RO         6655    i.CRC16_Check       crc.o
+    0x08004a82   0x08004a82   0x00000042   Code   RO         7777    i.CRC16_CCITT_FALSE  crc.o
+    0x08004ac4   0x08004ac4   0x00000030   Code   RO         7778    i.CRC16_Check       crc.o
     0x08004af4   0x08004af4   0x00000012   Code   RO            3    i.CommunicationTask  main.o
     0x08004b06   0x08004b06   0x00000002   PAD
     0x08004b08   0x08004b08   0x0000004c   Code   RO            4    i.ConsoleTask       main.o
-    0x08004b54   0x08004b54   0x000000a4   Code   RO         6391    i.Control_Handler   handler.o
-    0x08004bf8   0x08004bf8   0x000000c8   Code   RO         6392    i.Create_Date_Frame  handler.o
+    0x08004b54   0x08004b54   0x000000a4   Code   RO         7514    i.Control_Handler   handler.o
+    0x08004bf8   0x08004bf8   0x000000c8   Code   RO         7515    i.Create_Date_Frame  handler.o
     0x08004cc0   0x08004cc0   0x00000020   Code   RO         5494    i.DMA0_Channel5_IRQHandler  usart.o
     0x08004ce0   0x08004ce0   0x00000020   Code   RO         5495    i.DMA0_Channel6_IRQHandler  usart.o
-    0x08004d00   0x08004d00   0x00000024   Code   RO         6348    i.DataFrame_Handle  fms.o
-    0x08004d24   0x08004d24   0x00000010   Code   RO         6349    i.DataFrame_Transmit  fms.o
+    0x08004d00   0x08004d00   0x00000024   Code   RO         7471    i.DataFrame_Handle  fms.o
+    0x08004d24   0x08004d24   0x00000010   Code   RO         7472    i.DataFrame_Transmit  fms.o
     0x08004d34   0x08004d34   0x00000002   Code   RO          301    i.DebugMon_Handler  gd32f30x_it.o
     0x08004d36   0x08004d36   0x00000002   PAD
-    0x08004d38   0x08004d38   0x00000060   Code   RO         7582    i.Direction_Init    motor.o
-    0x08004d98   0x08004d98   0x000000f0   Code   RO         6303    i.Download2Flash    ota.o
+    0x08004d38   0x08004d38   0x00000060   Code   RO         8705    i.Direction_Init    motor.o
+    0x08004d98   0x08004d98   0x000000f0   Code   RO         7426    i.Download2Flash    ota.o
     0x08004e88   0x08004e88   0x00000040   Code   RO         5593    i.EXTI1_IRQHandler  exti.o
-    0x08004ec8   0x08004ec8   0x0000001a   Code   RO         7504    i.EXTI5_9_IRQHandler  switch.o
+    0x08004ec8   0x08004ec8   0x0000001a   Code   RO         8627    i.EXTI5_9_IRQHandler  switch.o
     0x08004ee2   0x08004ee2   0x0000000c   Code   RO            5    i.EmergencyTask     main.o
-    0x08004eee   0x08004eee   0x00000068   Code   RO         6513    i.FIFO_Add          fifo.o
-    0x08004f56   0x08004f56   0x00000046   Code   RO         6514    i.FIFO_Available    fifo.o
-    0x08004f9c   0x08004f9c   0x00000006   Code   RO         6515    i.FIFO_Callback_Init  fifo.o
-    0x08004fa2   0x08004fa2   0x00000032   Code   RO         6516    i.FIFO_Count        fifo.o
-    0x08004fd4   0x08004fd4   0x0000003e   Code   RO         6517    i.FIFO_Empty        fifo.o
-    0x08005012   0x08005012   0x0000004a   Code   RO         6520    i.FIFO_Get          fifo.o
-    0x0800505c   0x0800505c   0x00000036   Code   RO         6521    i.FIFO_Init         fifo.o
-    0x08005092   0x08005092   0x0000005e   Code   RO         6525    i.FIFO_Recv         fifo.o
-    0x080050f0   0x080050f0   0x0000008c   Code   RO         6526    i.FIFO_Tansmit      fifo.o
-    0x0800517c   0x0800517c   0x00000070   Code   RO         6304    i.FlashBinaryCheck  ota.o
+    0x08004eee   0x08004eee   0x00000068   Code   RO         7636    i.FIFO_Add          fifo.o
+    0x08004f56   0x08004f56   0x00000046   Code   RO         7637    i.FIFO_Available    fifo.o
+    0x08004f9c   0x08004f9c   0x00000006   Code   RO         7638    i.FIFO_Callback_Init  fifo.o
+    0x08004fa2   0x08004fa2   0x00000032   Code   RO         7639    i.FIFO_Count        fifo.o
+    0x08004fd4   0x08004fd4   0x0000003e   Code   RO         7640    i.FIFO_Empty        fifo.o
+    0x08005012   0x08005012   0x0000004a   Code   RO         7643    i.FIFO_Get          fifo.o
+    0x0800505c   0x0800505c   0x00000036   Code   RO         7644    i.FIFO_Init         fifo.o
+    0x08005092   0x08005092   0x0000005e   Code   RO         7648    i.FIFO_Recv         fifo.o
+    0x080050f0   0x080050f0   0x0000008c   Code   RO         7649    i.FIFO_Tansmit      fifo.o
+    0x0800517c   0x0800517c   0x00000070   Code   RO         7427    i.FlashBinaryCheck  ota.o
     0x080051ec   0x080051ec   0x00000004   Code   RO          302    i.HardFault_Handler  gd32f30x_it.o
-    0x080051f0   0x080051f0   0x00000130   Code   RO         7402    i.IncPIDCalc        pid.o
-    0x08005320   0x08005320   0x0000006c   Code   RO         7403    i.IncPIDInit        pid.o
+    0x080051f0   0x080051f0   0x00000130   Code   RO         8525    i.IncPIDCalc        pid.o
+    0x08005320   0x08005320   0x0000006c   Code   RO         8526    i.IncPIDInit        pid.o
     0x0800538c   0x0800538c   0x0000025c   Code   RO            6    i.InitTask          main.o
-    0x080055e8   0x080055e8   0x00000002   Code   RO         6393    i.Inquire_Handler   handler.o
-    0x080055ea   0x080055ea   0x0000000a   Code   RO         7505    i.KeyCallback       switch.o
-    0x080055f4   0x080055f4   0x000000cc   Code   RO         7506    i.Key_CallBack_FMS  switch.o
-    0x080056c0   0x080056c0   0x00000128   Code   RO         7507    i.Key_Interrupt_FMS  switch.o
-    0x080057e8   0x080057e8   0x00000094   Code   RO         7583    i.Left_PID_Controller  motor.o
+    0x080055e8   0x080055e8   0x00000002   Code   RO         7516    i.Inquire_Handler   handler.o
+    0x080055ea   0x080055ea   0x0000000a   Code   RO         8628    i.KeyCallback       switch.o
+    0x080055f4   0x080055f4   0x000000cc   Code   RO         8629    i.Key_CallBack_FMS  switch.o
+    0x080056c0   0x080056c0   0x00000128   Code   RO         8630    i.Key_Interrupt_FMS  switch.o
+    0x080057e8   0x080057e8   0x00000094   Code   RO         8706    i.Left_PID_Controller  motor.o
     0x0800587c   0x0800587c   0x00000004   Code   RO          303    i.MemManage_Handler  gd32f30x_it.o
     0x08005880   0x08005880   0x00000002   Code   RO          304    i.NMI_Handler       gd32f30x_it.o
     0x08005882   0x08005882   0x00000002   PAD
-    0x08005884   0x08005884   0x000001a0   Code   RO         6394    i.OTA_Handler       handler.o
-    0x08005a24   0x08005a24   0x00000070   Code   RO         6395    i.Online_Handler    handler.o
-    0x08005a94   0x08005a94   0x0000004c   Code   RO         7584    i.PID_Controller    motor.o
+    0x08005884   0x08005884   0x000001a0   Code   RO         7517    i.OTA_Handler       handler.o
+    0x08005a24   0x08005a24   0x00000070   Code   RO         7518    i.Online_Handler    handler.o
+    0x08005a94   0x08005a94   0x0000004c   Code   RO         8707    i.PID_Controller    motor.o
     0x08005ae0   0x08005ae0   0x000000dc   Code   RO         5399    i.PowerOn_Time      port.o
     0x08005bbc   0x08005bbc   0x00000064   Code   RO         5400    i.PowerOn_Time_statistics  port.o
-    0x08005c20   0x08005c20   0x000001d4   Code   RO         6350    i.Receive_FMS       fms.o
-    0x08005df4   0x08005df4   0x00000094   Code   RO         7585    i.Right_PID_Controller  motor.o
-    0x08005e88   0x08005e88   0x0000009c   Code   RO         6277    i.Sample_Interrupt  vl6180x_range_interrupt.o
+    0x08005c20   0x08005c20   0x000001d4   Code   RO         7473    i.Receive_FMS       fms.o
+    0x08005df4   0x08005df4   0x00000094   Code   RO         8708    i.Right_PID_Controller  motor.o
+    0x08005e88   0x08005e88   0x0000009c   Code   RO         7400    i.Sample_Interrupt  vl6180x_range_interrupt.o
     0x08005f24   0x08005f24   0x0000000a   Code   RO            7    i.SensorUploadionTask  main.o
     0x08005f2e   0x08005f2e   0x00000002   PAD
     0x08005f30   0x08005f30   0x00000038   Code   RO         5401    i.SysTick_Handler   port.o
     0x08005f68   0x08005f68   0x00000070   Code   RO          357    i.SystemInit        system_gd32f30x.o
-    0x08005fd8   0x08005fd8   0x00000060   Code   RO         7688    i.TIMER0_UP_TIMER9_IRQHandler  encoder.o
-    0x08006038   0x08006038   0x00000228   Code   RO         7777    i.TIMER1_IRQHandler  irremote.o
-    0x08006260   0x08006260   0x00000064   Code   RO         7689    i.TIMER3_IRQHandler  encoder.o
-    0x080062c4   0x080062c4   0x00000002   Code   RO         6396    i.Timing_Handler    handler.o
+    0x08005fd8   0x08005fd8   0x00000060   Code   RO         8811    i.TIMER0_UP_TIMER9_IRQHandler  encoder.o
+    0x08006038   0x08006038   0x00000228   Code   RO         8900    i.TIMER1_IRQHandler  irremote.o
+    0x08006260   0x08006260   0x00000064   Code   RO         8812    i.TIMER3_IRQHandler  encoder.o
+    0x080062c4   0x080062c4   0x00000002   Code   RO         7519    i.Timing_Handler    handler.o
     0x080062c6   0x080062c6   0x00000002   PAD
     0x080062c8   0x080062c8   0x00000060   Code   RO         5496    i.USART0_IRQHandler  usart.o
     0x08006328   0x08006328   0x00000074   Code   RO         5497    i.USART1_IRQHandler  usart.o
-    0x0800639c   0x0800639c   0x00000068   Code   RO         6397    i.Upload_Handler    handler.o
+    0x0800639c   0x0800639c   0x00000068   Code   RO         7520    i.Upload_Handler    handler.o
     0x08006404   0x08006404   0x00000004   Code   RO          305    i.UsageFault_Handler  gd32f30x_it.o
     0x08006408   0x08006408   0x00000160   Code   RO         5665    i.VL6180_Read_Multiple_Register  iic.o
     0x08006568   0x08006568   0x00000108   Code   RO         5667    i.VL6180_Write_Multiple_Register  iic.o
     0x08006670   0x08006670   0x000000c0   Code   RO            8    i.VL6180xTask       main.o
-    0x08006730   0x08006730   0x00000020   Code   RO         5777    i.VL6180x_ClearInterrupt  vl6180x_api.o
-    0x08006750   0x08006750   0x00000010   Code   RO         5782    i.VL6180x_FilterSetState  vl6180x_api.o
-    0x08006760   0x08006760   0x00000040   Code   RO         5783    i.VL6180x_GetCachedByte  vl6180x_api.o
-    0x080067a0   0x080067a0   0x00000058   Code   RO         5784    i.VL6180x_GetCachedDWord  vl6180x_api.o
-    0x080067f8   0x080067f8   0x00000048   Code   RO         5785    i.VL6180x_GetCachedWord  vl6180x_api.o
-    0x08006840   0x08006840   0x0000001c   Code   RO         6175    i.VL6180x_I2CRead   vl6180x_i2c.o
-    0x0800685c   0x0800685c   0x0000001c   Code   RO         6176    i.VL6180x_I2CWrite  vl6180x_i2c.o
-    0x08006878   0x08006878   0x000000c4   Code   RO         5789    i.VL6180x_InitData  vl6180x_api.o
-    0x0800693c   0x0800693c   0x0000004a   Code   RO         5790    i.VL6180x_Prepare   vl6180x_api.o
-    0x08006986   0x08006986   0x00000022   Code   RO         5791    i.VL6180x_RangeConfigInterrupt  vl6180x_api.o
-    0x080069a8   0x080069a8   0x000000a0   Code   RO         5794    i.VL6180x_RangeGetMeasurement  vl6180x_api.o
-    0x08006a48   0x08006a48   0x0000002c   Code   RO         5796    i.VL6180x_RangeGetResult  vl6180x_api.o
-    0x08006a74   0x08006a74   0x00000094   Code   RO         5802    i.VL6180x_RangeSetEarlyConvergenceEestimateThreshold  vl6180x_api.o
-    0x08006b08   0x08006b08   0x00000024   Code   RO         5804    i.VL6180x_RangeSetEceState  vl6180x_api.o
-    0x08006b2c   0x08006b2c   0x0000004c   Code   RO         5805    i.VL6180x_RangeSetInterMeasPeriod  vl6180x_api.o
-    0x08006b78   0x08006b78   0x00000036   Code   RO         5806    i.VL6180x_RangeSetMaxConvergenceTime  vl6180x_api.o
-    0x08006bae   0x08006bae   0x0000002a   Code   RO         5807    i.VL6180x_RangeSetRawThresholds  vl6180x_api.o
-    0x08006bd8   0x08006bd8   0x00000022   Code   RO         5808    i.VL6180x_RangeSetSystemMode  vl6180x_api.o
-    0x08006bfa   0x08006bfa   0x00000012   Code   RO         5810    i.VL6180x_RangeStartContinuousMode  vl6180x_api.o
-    0x08006c0c   0x08006c0c   0x00000038   Code   RO         6177    i.VL6180x_RdByte    vl6180x_i2c.o
-    0x08006c44   0x08006c44   0x0000004a   Code   RO         6178    i.VL6180x_RdDWord   vl6180x_i2c.o
-    0x08006c8e   0x08006c8e   0x00000038   Code   RO         6179    i.VL6180x_RdMulti   vl6180x_i2c.o
-    0x08006cc6   0x08006cc6   0x0000003e   Code   RO         6180    i.VL6180x_RdWord    vl6180x_i2c.o
-    0x08006d04   0x08006d04   0x00000022   Code   RO         5816    i.VL6180x_SetGroupParamHold  vl6180x_api.o
-    0x08006d26   0x08006d26   0x0000002c   Code   RO         5822    i.VL6180x_SqrtUint32  vl6180x_api.o
+    0x08006730   0x08006730   0x00000020   Code   RO         6900    i.VL6180x_ClearInterrupt  vl6180x_api.o
+    0x08006750   0x08006750   0x00000010   Code   RO         6905    i.VL6180x_FilterSetState  vl6180x_api.o
+    0x08006760   0x08006760   0x00000040   Code   RO         6906    i.VL6180x_GetCachedByte  vl6180x_api.o
+    0x080067a0   0x080067a0   0x00000058   Code   RO         6907    i.VL6180x_GetCachedDWord  vl6180x_api.o
+    0x080067f8   0x080067f8   0x00000048   Code   RO         6908    i.VL6180x_GetCachedWord  vl6180x_api.o
+    0x08006840   0x08006840   0x0000001c   Code   RO         7298    i.VL6180x_I2CRead   vl6180x_i2c.o
+    0x0800685c   0x0800685c   0x0000001c   Code   RO         7299    i.VL6180x_I2CWrite  vl6180x_i2c.o
+    0x08006878   0x08006878   0x000000c4   Code   RO         6912    i.VL6180x_InitData  vl6180x_api.o
+    0x0800693c   0x0800693c   0x0000004a   Code   RO         6913    i.VL6180x_Prepare   vl6180x_api.o
+    0x08006986   0x08006986   0x00000022   Code   RO         6914    i.VL6180x_RangeConfigInterrupt  vl6180x_api.o
+    0x080069a8   0x080069a8   0x000000a0   Code   RO         6917    i.VL6180x_RangeGetMeasurement  vl6180x_api.o
+    0x08006a48   0x08006a48   0x0000002c   Code   RO         6919    i.VL6180x_RangeGetResult  vl6180x_api.o
+    0x08006a74   0x08006a74   0x00000094   Code   RO         6925    i.VL6180x_RangeSetEarlyConvergenceEestimateThreshold  vl6180x_api.o
+    0x08006b08   0x08006b08   0x00000024   Code   RO         6927    i.VL6180x_RangeSetEceState  vl6180x_api.o
+    0x08006b2c   0x08006b2c   0x0000004c   Code   RO         6928    i.VL6180x_RangeSetInterMeasPeriod  vl6180x_api.o
+    0x08006b78   0x08006b78   0x00000036   Code   RO         6929    i.VL6180x_RangeSetMaxConvergenceTime  vl6180x_api.o
+    0x08006bae   0x08006bae   0x0000002a   Code   RO         6930    i.VL6180x_RangeSetRawThresholds  vl6180x_api.o
+    0x08006bd8   0x08006bd8   0x00000022   Code   RO         6931    i.VL6180x_RangeSetSystemMode  vl6180x_api.o
+    0x08006bfa   0x08006bfa   0x00000012   Code   RO         6933    i.VL6180x_RangeStartContinuousMode  vl6180x_api.o
+    0x08006c0c   0x08006c0c   0x00000038   Code   RO         7300    i.VL6180x_RdByte    vl6180x_i2c.o
+    0x08006c44   0x08006c44   0x0000004a   Code   RO         7301    i.VL6180x_RdDWord   vl6180x_i2c.o
+    0x08006c8e   0x08006c8e   0x00000038   Code   RO         7302    i.VL6180x_RdMulti   vl6180x_i2c.o
+    0x08006cc6   0x08006cc6   0x0000003e   Code   RO         7303    i.VL6180x_RdWord    vl6180x_i2c.o
+    0x08006d04   0x08006d04   0x00000022   Code   RO         6939    i.VL6180x_SetGroupParamHold  vl6180x_api.o
+    0x08006d26   0x08006d26   0x0000002c   Code   RO         6945    i.VL6180x_SqrtUint32  vl6180x_api.o
     0x08006d52   0x08006d52   0x00000002   PAD
-    0x08006d54   0x08006d54   0x0000003c   Code   RO         5823    i.VL6180x_StaticInit  vl6180x_api.o
-    0x08006d90   0x08006d90   0x0000004c   Code   RO         6181    i.VL6180x_UpdateByte  vl6180x_i2c.o
-    0x08006ddc   0x08006ddc   0x0000019e   Code   RO         5825    i.VL6180x_UpscaleRegInit  vl6180x_api.o
+    0x08006d54   0x08006d54   0x0000003c   Code   RO         6946    i.VL6180x_StaticInit  vl6180x_api.o
+    0x08006d90   0x08006d90   0x0000004c   Code   RO         7304    i.VL6180x_UpdateByte  vl6180x_i2c.o
+    0x08006ddc   0x08006ddc   0x0000019e   Code   RO         6948    i.VL6180x_UpscaleRegInit  vl6180x_api.o
     0x08006f7a   0x08006f7a   0x00000002   PAD
-    0x08006f7c   0x08006f7c   0x000000b4   Code   RO         5826    i.VL6180x_UpscaleSetScaling  vl6180x_api.o
-    0x08007030   0x08007030   0x00000038   Code   RO         5827    i.VL6180x_UpscaleStaticInit  vl6180x_api.o
-    0x08007068   0x08007068   0x00000026   Code   RO         6182    i.VL6180x_WrByte    vl6180x_i2c.o
-    0x0800708e   0x0800708e   0x00000032   Code   RO         6183    i.VL6180x_WrDWord   vl6180x_i2c.o
-    0x080070c0   0x080070c0   0x0000002a   Code   RO         6184    i.VL6180x_WrWord    vl6180x_i2c.o
+    0x08006f7c   0x08006f7c   0x000000b4   Code   RO         6949    i.VL6180x_UpscaleSetScaling  vl6180x_api.o
+    0x08007030   0x08007030   0x00000038   Code   RO         6950    i.VL6180x_UpscaleStaticInit  vl6180x_api.o
+    0x08007068   0x08007068   0x00000026   Code   RO         7305    i.VL6180x_WrByte    vl6180x_i2c.o
+    0x0800708e   0x0800708e   0x00000032   Code   RO         7306    i.VL6180x_WrDWord   vl6180x_i2c.o
+    0x080070c0   0x080070c0   0x0000002a   Code   RO         7307    i.VL6180x_WrWord    vl6180x_i2c.o
     0x080070ea   0x080070ea   0x0000001a   Code   RO            9    i.VelocityMeasurementTask  main.o
-    0x08007104   0x08007104   0x00000014   Code   RO         6305    i.Write_APP_Size    ota.o
-    0x08007118   0x08007118   0x00000034   Code   RO         5829    i._CachedRegs_Fetch  vl6180x_api.o
-    0x0800714c   0x0800714c   0x00000010   Code   RO         5830    i._CachedRegs_Flush  vl6180x_api.o
-    0x0800715c   0x0800715c   0x0000005c   Code   RO         5831    i._DMax_Compute     vl6180x_api.o
-    0x080071b8   0x080071b8   0x00000114   Code   RO         5832    i._DMax_InitData    vl6180x_api.o
-    0x080072cc   0x080072cc   0x00000010   Code   RO         5833    i._DMax_OneTimeInit  vl6180x_api.o
-    0x080072dc   0x080072dc   0x00000068   Code   RO         5834    i._DMax_RawValueAtRateKCps  vl6180x_api.o
-    0x08007344   0x08007344   0x00000070   Code   RO         5835    i._GetAveTotalTime  vl6180x_api.o
-    0x080073b4   0x080073b4   0x000000b0   Code   RO         5836    i._GetRateResult    vl6180x_api.o
-    0x08007464   0x08007464   0x00000020   Code   RO         5838    i._UpscaleInitPatch0  vl6180x_api.o
-    0x08007484   0x08007484   0x00000020   Code   RO         8080    i.__0printf         mc_w.l(printfa.o)
-    0x080074a4   0x080074a4   0x00000028   Code   RO         8082    i.__0sprintf        mc_w.l(printfa.o)
-    0x080074cc   0x080074cc   0x0000000e   Code   RO         8221    i.__scatterload_copy  mc_w.l(handlers.o)
-    0x080074da   0x080074da   0x00000002   Code   RO         8222    i.__scatterload_null  mc_w.l(handlers.o)
-    0x080074dc   0x080074dc   0x0000000e   Code   RO         8223    i.__scatterload_zeroinit  mc_w.l(handlers.o)
+    0x08007104   0x08007104   0x00000014   Code   RO         7428    i.Write_APP_Size    ota.o
+    0x08007118   0x08007118   0x00000034   Code   RO         6952    i._CachedRegs_Fetch  vl6180x_api.o
+    0x0800714c   0x0800714c   0x00000010   Code   RO         6953    i._CachedRegs_Flush  vl6180x_api.o
+    0x0800715c   0x0800715c   0x0000005c   Code   RO         6954    i._DMax_Compute     vl6180x_api.o
+    0x080071b8   0x080071b8   0x00000114   Code   RO         6955    i._DMax_InitData    vl6180x_api.o
+    0x080072cc   0x080072cc   0x00000010   Code   RO         6956    i._DMax_OneTimeInit  vl6180x_api.o
+    0x080072dc   0x080072dc   0x00000068   Code   RO         6957    i._DMax_RawValueAtRateKCps  vl6180x_api.o
+    0x08007344   0x08007344   0x00000070   Code   RO         6958    i._GetAveTotalTime  vl6180x_api.o
+    0x080073b4   0x080073b4   0x000000b0   Code   RO         6959    i._GetRateResult    vl6180x_api.o
+    0x08007464   0x08007464   0x00000020   Code   RO         6961    i._UpscaleInitPatch0  vl6180x_api.o
+    0x08007484   0x08007484   0x00000020   Code   RO         9231    i.__0printf         mc_w.l(printfa.o)
+    0x080074a4   0x080074a4   0x00000028   Code   RO         9233    i.__0sprintf        mc_w.l(printfa.o)
+    0x080074cc   0x080074cc   0x0000000e   Code   RO         9407    i.__scatterload_copy  mc_w.l(handlers.o)
+    0x080074da   0x080074da   0x00000002   Code   RO         9408    i.__scatterload_null  mc_w.l(handlers.o)
+    0x080074dc   0x080074dc   0x0000000e   Code   RO         9409    i.__scatterload_zeroinit  mc_w.l(handlers.o)
     0x080074ea   0x080074ea   0x00000002   PAD
-    0x080074ec   0x080074ec   0x0000006c   Code   RO         5839    i._filter_GetResult  vl6180x_api.o
-    0x08007558   0x08007558   0x00000048   Code   RO         5840    i._filter_Init      vl6180x_api.o
-    0x080075a0   0x080075a0   0x00000690   Code   RO         5841    i._filter_Start     vl6180x_api.o
-    0x08007c30   0x08007c30   0x00000050   Code   RO         5842    i._filter_StdDevDamper  vl6180x_api.o
-    0x08007c80   0x08007c80   0x00000184   Code   RO         8087    i._fp_digits        mc_w.l(printfa.o)
-    0x08007e04   0x08007e04   0x000006dc   Code   RO         8088    i._printf_core      mc_w.l(printfa.o)
-    0x080084e0   0x080084e0   0x00000024   Code   RO         8089    i._printf_post_padding  mc_w.l(printfa.o)
-    0x08008504   0x08008504   0x0000002e   Code   RO         8090    i._printf_pre_padding  mc_w.l(printfa.o)
-    0x08008532   0x08008532   0x0000002a   Code   RO         7435    i._shell_find       shell.o
-    0x0800855c   0x0800855c   0x00000078   Code   RO         7436    i._shell_pretreatment  shell.o
-    0x080085d4   0x080085d4   0x0000004a   Code   RO         7437    i._shell_run        shell.o
-    0x0800861e   0x0800861e   0x0000000a   Code   RO         8092    i._sputc            mc_w.l(printfa.o)
+    0x080074ec   0x080074ec   0x0000006c   Code   RO         6962    i._filter_GetResult  vl6180x_api.o
+    0x08007558   0x08007558   0x00000048   Code   RO         6963    i._filter_Init      vl6180x_api.o
+    0x080075a0   0x080075a0   0x00000690   Code   RO         6964    i._filter_Start     vl6180x_api.o
+    0x08007c30   0x08007c30   0x00000050   Code   RO         6965    i._filter_StdDevDamper  vl6180x_api.o
+    0x08007c80   0x08007c80   0x00000184   Code   RO         9238    i._fp_digits        mc_w.l(printfa.o)
+    0x08007e04   0x08007e04   0x000006dc   Code   RO         9239    i._printf_core      mc_w.l(printfa.o)
+    0x080084e0   0x080084e0   0x00000024   Code   RO         9240    i._printf_post_padding  mc_w.l(printfa.o)
+    0x08008504   0x08008504   0x0000002e   Code   RO         9241    i._printf_pre_padding  mc_w.l(printfa.o)
+    0x08008532   0x08008532   0x0000002a   Code   RO         8558    i._shell_find       shell.o
+    0x0800855c   0x0800855c   0x00000078   Code   RO         8559    i._shell_pretreatment  shell.o
+    0x080085d4   0x080085d4   0x0000004a   Code   RO         8560    i._shell_run        shell.o
+    0x0800861e   0x0800861e   0x0000000a   Code   RO         9243    i._sputc            mc_w.l(printfa.o)
     0x08008628   0x08008628   0x0000004c   Code   RO         5594    i.bsp_gpio_exti_init  exti.o
     0x08008674   0x08008674   0x00000050   Code   RO         5669    i.bsp_iic_init      iic.o
     0x080086c4   0x080086c4   0x0000000c   Code   RO         5630    i.bsp_pwm_out_init  pwm.o
-    0x080086d0   0x080086d0   0x00000044   Code   RO         7483    i.console           console.o
+    0x080086d0   0x080086d0   0x00000044   Code   RO         8606    i.console           console.o
     0x08008714   0x08008714   0x00000032   Code   RO         1363    i.dma_channel_disable  gd32f30x_dma.o
     0x08008746   0x08008746   0x00000032   Code   RO         1364    i.dma_channel_enable  gd32f30x_dma.o
     0x08008778   0x08008778   0x00000032   Code   RO         1365    i.dma_circulation_disable  gd32f30x_dma.o
@@ -4077,7 +4582,7 @@ Memory Map of the image
     0x08008a98   0x08008a98   0x00000026   Code   RO         1389    i.dma_transfer_number_config  gd32f30x_dma.o
     0x08008abe   0x08008abe   0x00000022   Code   RO         1390    i.dma_transfer_number_get  gd32f30x_dma.o
     0x08008ae0   0x08008ae0   0x00000010   Code   RO         5498    i.dma_usart1_init   usart.o
-    0x08008af0   0x08008af0   0x00000014   Code   RO         7690    i.encoder_init      encoder.o
+    0x08008af0   0x08008af0   0x00000014   Code   RO         8813    i.encoder_init      encoder.o
     0x08008b04   0x08008b04   0x000000b8   Code   RO         1721    i.exti_init         gd32f30x_exti.o
     0x08008bbc   0x08008bbc   0x00000010   Code   RO         1722    i.exti_interrupt_disable  gd32f30x_exti.o
     0x08008bcc   0x08008bcc   0x00000010   Code   RO         1723    i.exti_interrupt_enable  gd32f30x_exti.o
@@ -4096,9 +4601,9 @@ Memory Map of the image
     0x08008f18   0x08008f18   0x000000ec   Code   RO         1821    i.fmc_page_erase    gd32f30x_fmc.o
     0x08009004   0x08009004   0x00000044   Code   RO         1822    i.fmc_unlock        gd32f30x_fmc.o
     0x08009048   0x08009048   0x000000c0   Code   RO         1823    i.fmc_word_program  gd32f30x_fmc.o
-    0x08009108   0x08009108   0x00000024   Code   RO         6620    i.fputc             print.o
-    0x0800912c   0x0800912c   0x0000000c   Code   RO         7691    i.get_left_velocity  encoder.o
-    0x08009138   0x08009138   0x0000000c   Code   RO         7692    i.get_right_velocity  encoder.o
+    0x08009108   0x08009108   0x00000024   Code   RO         7743    i.fputc             print.o
+    0x0800912c   0x0800912c   0x0000000c   Code   RO         8814    i.get_left_velocity  encoder.o
+    0x08009138   0x08009138   0x0000000c   Code   RO         8815    i.get_right_velocity  encoder.o
     0x08009144   0x08009144   0x00000004   Code   RO         2077    i.gpio_bit_reset    gd32f30x_gpio.o
     0x08009148   0x08009148   0x00000004   Code   RO         2078    i.gpio_bit_set      gd32f30x_gpio.o
     0x0800914c   0x0800914c   0x00000030   Code   RO         5631    i.gpio_config       pwm.o
@@ -4119,18 +4624,18 @@ Memory Map of the image
     0x08009560   0x08009560   0x0000000a   Code   RO         2233    i.i2c_stop_on_bus   gd32f30x_i2c.o
     0x0800956a   0x0800956a   0x00000002   PAD
     0x0800956c   0x0800956c   0x000000a8   Code   RO         5499    i.iap_usart_config  usart.o
-    0x08009614   0x08009614   0x000000c0   Code   RO         7778    i.ir_rx_init        irremote.o
+    0x08009614   0x08009614   0x000000c0   Code   RO         8901    i.ir_rx_init        irremote.o
     0x080096d4   0x080096d4   0x0000010c   Code   RO         5500    i.isp_usart_dma_config  usart.o
-    0x080097e0   0x080097e0   0x00000030   Code   RO         7693    i.leftEncoderGPIOConfiguration  encoder.o
-    0x08009810   0x08009810   0x000000a0   Code   RO         7694    i.leftEncoderTimerConfiguration  encoder.o
-    0x080098b0   0x080098b0   0x00000018   Code   RO         7587    i.left_backward     motor.o
-    0x080098c8   0x080098c8   0x00000018   Code   RO         7588    i.left_forward      motor.o
-    0x080098e0   0x080098e0   0x00000128   Code   RO         7695    i.left_velocity_measurement  encoder.o
+    0x080097e0   0x080097e0   0x00000030   Code   RO         8816    i.leftEncoderGPIOConfiguration  encoder.o
+    0x08009810   0x08009810   0x000000a0   Code   RO         8817    i.leftEncoderTimerConfiguration  encoder.o
+    0x080098b0   0x080098b0   0x00000018   Code   RO         8710    i.left_backward     motor.o
+    0x080098c8   0x080098c8   0x00000018   Code   RO         8711    i.left_forward      motor.o
+    0x080098e0   0x080098e0   0x00000128   Code   RO         8818    i.left_velocity_measurement  encoder.o
     0x08009a08   0x08009a08   0x00000074   Code   RO           10    i.main              main.o
-    0x08009a7c   0x08009a7c   0x0000000c   Code   RO         7591    i.motor_init        motor.o
+    0x08009a7c   0x08009a7c   0x0000000c   Code   RO         8714    i.motor_init        motor.o
     0x08009a88   0x08009a88   0x000000c4   Code   RO         2405    i.nvic_irq_enable   gd32f30x_misc.o
     0x08009b4c   0x08009b4c   0x00000014   Code   RO         2406    i.nvic_priority_group_set  gd32f30x_misc.o
-    0x08009b60   0x08009b60   0x00000058   Code   RO         7592    i.pid_motor_control  motor.o
+    0x08009b60   0x08009b60   0x00000058   Code   RO         8715    i.pid_motor_control  motor.o
     0x08009bb8   0x08009bb8   0x00000098   Code   RO         4822    i.prvAddCurrentTaskToDelayedList  tasks.o
     0x08009c50   0x08009c50   0x000000b8   Code   RO         4823    i.prvAddNewTaskToReadyList  tasks.o
     0x08009d08   0x08009d08   0x00000064   Code   RO         5186    i.prvCheckForValidListAndQueue  timers.o
@@ -4168,18 +4673,18 @@ Memory Map of the image
     0x0800a8fc   0x0800a8fc   0x00000020   Code   RO         2622    i.rcu_periph_clock_enable  gd32f30x_rcu.o
     0x0800a91c   0x0800a91c   0x00000020   Code   RO         2625    i.rcu_periph_reset_disable  gd32f30x_rcu.o
     0x0800a93c   0x0800a93c   0x00000020   Code   RO         2626    i.rcu_periph_reset_enable  gd32f30x_rcu.o
-    0x0800a95c   0x0800a95c   0x00000030   Code   RO         7696    i.rightEncoderGPIOConfiguration  encoder.o
-    0x0800a98c   0x0800a98c   0x0000009c   Code   RO         7697    i.rightEncoderTimerConfiguration  encoder.o
-    0x0800aa28   0x0800aa28   0x00000018   Code   RO         7593    i.right_backward    motor.o
-    0x0800aa40   0x0800aa40   0x00000018   Code   RO         7594    i.right_forward     motor.o
-    0x0800aa58   0x0800aa58   0x00000128   Code   RO         7698    i.right_velocity_measurement  encoder.o
-    0x0800ab80   0x0800ab80   0x00000040   Code   RO         6689    i.search_semaphore  synchronous.o
-    0x0800abc0   0x0800abc0   0x00000078   Code   RO         6690    i.semaphore_post    synchronous.o
-    0x0800ac38   0x0800ac38   0x00000014   Code   RO         7438    i.shell_init        shell.o
-    0x0800ac4c   0x0800ac4c   0x00000060   Code   RO         7439    i.shell_parse       shell.o
-    0x0800acac   0x0800acac   0x00000054   Code   RO         7440    i.shell_register    shell.o
-    0x0800ad00   0x0800ad00   0x00000054   Code   RO         7510    i.switch_exti_init  switch.o
-    0x0800ad54   0x0800ad54   0x00000030   Code   RO         7511    i.switch_init       switch.o
+    0x0800a95c   0x0800a95c   0x00000030   Code   RO         8819    i.rightEncoderGPIOConfiguration  encoder.o
+    0x0800a98c   0x0800a98c   0x0000009c   Code   RO         8820    i.rightEncoderTimerConfiguration  encoder.o
+    0x0800aa28   0x0800aa28   0x00000018   Code   RO         8716    i.right_backward    motor.o
+    0x0800aa40   0x0800aa40   0x00000018   Code   RO         8717    i.right_forward     motor.o
+    0x0800aa58   0x0800aa58   0x00000128   Code   RO         8821    i.right_velocity_measurement  encoder.o
+    0x0800ab80   0x0800ab80   0x00000040   Code   RO         7812    i.search_semaphore  synchronous.o
+    0x0800abc0   0x0800abc0   0x00000078   Code   RO         7813    i.semaphore_post    synchronous.o
+    0x0800ac38   0x0800ac38   0x00000014   Code   RO         8561    i.shell_init        shell.o
+    0x0800ac4c   0x0800ac4c   0x00000060   Code   RO         8562    i.shell_parse       shell.o
+    0x0800acac   0x0800acac   0x00000054   Code   RO         8563    i.shell_register    shell.o
+    0x0800ad00   0x0800ad00   0x00000054   Code   RO         8633    i.switch_exti_init  switch.o
+    0x0800ad54   0x0800ad54   0x00000030   Code   RO         8634    i.switch_init       switch.o
     0x0800ad84   0x0800ad84   0x00000114   Code   RO          358    i.system_clock_120m_hxtal  system_gd32f30x.o
     0x0800ae98   0x0800ae98   0x00000008   Code   RO          359    i.system_clock_config  system_gd32f30x.o
     0x0800aea0   0x0800aea0   0x0000000a   Code   RO         3480    i.timer_auto_reload_shadow_enable  gd32f30x_timer.o
@@ -4269,10 +4774,10 @@ Memory Map of the image
     0x0800ce9a   0x0800ce9a   0x00000002   PAD
     0x0800ce9c   0x0800ce9c   0x00000058   Code   RO         5203    i.xTimerCreateTimerTask  timers.o
     0x0800cef4   0x0800cef4   0x00000084   Code   RO         5204    i.xTimerGenericCommand  timers.o
-    0x0800cf78   0x0800cf78   0x0000000c   Data   RO         5843    .constdata          vl6180x_api.o
-    0x0800cf84   0x0800cf84   0x00000163   Data   RO         5844    .conststring        vl6180x_api.o
+    0x0800cf78   0x0800cf78   0x0000000c   Data   RO         6966    .constdata          vl6180x_api.o
+    0x0800cf84   0x0800cf84   0x00000163   Data   RO         6967    .conststring        vl6180x_api.o
     0x0800d0e7   0x0800d0e7   0x00000001   PAD
-    0x0800d0e8   0x0800d0e8   0x00000020   Data   RO         8219    Region$$Table       anon$$obj.o
+    0x0800d0e8   0x0800d0e8   0x00000020   Data   RO         9405    Region$$Table       anon$$obj.o
 
 
     Execution Region RW_IRAM1 (Exec base: 0x20000000, Load base: 0x0800d108, Size: 0x00009d20, Max: 0x0000c000, ABSOLUTE, COMPRESSED[0x0000007c])
@@ -4287,22 +4792,22 @@ Memory Map of the image
     0x200000bc   COMPRESSED   0x00000012   Data   RW         5411    .data               port.o
     0x200000ce   COMPRESSED   0x00000002   Data   RW         5505    .data               usart.o
     0x200000d0   COMPRESSED   0x00000004   Data   RW         5670    .data               iic.o
-    0x200000d4   COMPRESSED   0x00000114   Data   RW         5845    .data               vl6180x_api.o
-    0x200001e8   COMPRESSED   0x00000001   Data   RW         6278    .data               vl6180x_range_interrupt.o
+    0x200000d4   COMPRESSED   0x00000114   Data   RW         6968    .data               vl6180x_api.o
+    0x200001e8   COMPRESSED   0x00000001   Data   RW         7401    .data               vl6180x_range_interrupt.o
     0x200001e9   COMPRESSED   0x00000003   PAD
-    0x200001ec   COMPRESSED   0x00000006   Data   RW         6307    .data               ota.o
-    0x200001f2   COMPRESSED   0x00000001   Data   RW         6352    .data               fms.o
+    0x200001ec   COMPRESSED   0x00000006   Data   RW         7430    .data               ota.o
+    0x200001f2   COMPRESSED   0x00000001   Data   RW         7475    .data               fms.o
     0x200001f3   COMPRESSED   0x00000001   PAD
-    0x200001f4   COMPRESSED   0x00000024   Data   RW         6400    .data               handler.o
-    0x20000218   COMPRESSED   0x00000008   Data   RW         6692    .data               synchronous.o
-    0x20000220   COMPRESSED   0x00000004   Data   RW         7405    .data               pid.o
-    0x20000224   COMPRESSED   0x00000010   Data   RW         7512    .data               switch.o
-    0x20000234   COMPRESSED   0x00000010   Data   RW         7596    .data               motor.o
-    0x20000244   COMPRESSED   0x0000002d   Data   RW         7699    .data               encoder.o
+    0x200001f4   COMPRESSED   0x00000024   Data   RW         7523    .data               handler.o
+    0x20000218   COMPRESSED   0x00000008   Data   RW         7815    .data               synchronous.o
+    0x20000220   COMPRESSED   0x00000004   Data   RW         8528    .data               pid.o
+    0x20000224   COMPRESSED   0x00000010   Data   RW         8635    .data               switch.o
+    0x20000234   COMPRESSED   0x00000010   Data   RW         8719    .data               motor.o
+    0x20000244   COMPRESSED   0x0000002d   Data   RW         8822    .data               encoder.o
     0x20000271   COMPRESSED   0x00000003   PAD
-    0x20000274   COMPRESSED   0x00000021   Data   RW         7780    .data               irremote.o
+    0x20000274   COMPRESSED   0x00000021   Data   RW         8903    .data               irremote.o
     0x20000295   COMPRESSED   0x00000003   PAD
-    0x20000298   COMPRESSED   0x00000004   Data   RW         8166    .data               mc_w.l(stdout.o)
+    0x20000298   COMPRESSED   0x00000004   Data   RW         9345    .data               mc_w.l(stdout.o)
     0x2000029c        -       0x00000830   Zero   RW           11    .bss                main.o
     0x20000acc        -       0x00000040   Zero   RW         4479    .bss                queue.o
     0x20000b0c        -       0x0000012c   Zero   RW         4880    .bss                tasks.o
@@ -4310,11 +4815,11 @@ Memory Map of the image
     0x20000c60        -       0x00007800   Zero   RW         5351    .bss                heap_4.o
     0x20008460        -       0x00000064   Zero   RW         5410    .bss                port.o
     0x200084c4        -       0x00000500   Zero   RW         5504    .bss                usart.o
-    0x200089c4        -       0x00000800   Zero   RW         6306    .bss                ota.o
-    0x200091c4        -       0x0000010c   Zero   RW         6351    .bss                fms.o
-    0x200092d0        -       0x00000028   Zero   RW         7404    .bss                pid.o
-    0x200092f8        -       0x00000604   Zero   RW         7441    .bss                shell.o
-    0x200098fc        -       0x00000024   Zero   RW         7779    .bss                irremote.o
+    0x200089c4        -       0x00000800   Zero   RW         7429    .bss                ota.o
+    0x200091c4        -       0x0000010c   Zero   RW         7474    .bss                fms.o
+    0x200092d0        -       0x00000028   Zero   RW         8527    .bss                pid.o
+    0x200092f8        -       0x00000604   Zero   RW         8564    .bss                shell.o
+    0x200098fc        -       0x00000024   Zero   RW         8902    .bss                irremote.o
     0x20009920        -       0x00000400   Zero   RW         4287    STACK               startup_gd32f30x_cl.o
 
 

@@ -627,6 +627,11 @@
               <FileType>1</FileType>
               <FilePath>.\Hardware\flash_rw.c</FilePath>
             </File>
+            <File>
+              <FileName>driver_mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Hardware\driver_mpu6050.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
