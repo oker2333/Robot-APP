@@ -1,6 +1,6 @@
 Dependencies for Project 'GD32F303VCT6', Target 'APP': (DO NOT MODIFY !)
 CompilerVersion: 5060750::V5.06 update 6 (build 750)::ARMCC
-F (.\main.c)(0x636D0885)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\main.c)(0x6370EEE7)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (gd32f30x_libopt.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_rcu.h)(0x635D5F57)
 I (.\CMSIS\GD32F30x\Include\gd32f30x.h)(0x635D5F56)
@@ -36,7 +36,7 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -67,12 +67,14 @@ I (.\CodeSamples\inc\vl6180x_types.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\limits.h)(0x5D9AD212)
 I (.\Common_API\fifo.h)(0x635D5F56)
+I (.\Common_API\shell.h)(0x62E2AC39)
+I (.\Common_API\console.h)(0x6370EEE0)
 I (.\MsgHandler\fms.h)(0x635D5F57)
 I (.\Hardware\timer.h)(0x635D5F6A)
 I (.\Common_API\pid.h)(0x636145BB)
 I (.\Appliance\switch.h)(0x635D5F6A)
 I (.\Appliance\IRremote.h)(0x63691E18)
-I (app_config.h)(0x6367DAF2)
+I (app_config.h)(0x6370EB46)
 I (.\MsgHandler\handler.h)(0x635D5F6A)
 I (.\Common_API\synchronous.h)(0x635D5F6A)
 I (.\Common_API\print.h)(0x635D5F6A)
@@ -110,7 +112,7 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
-F (.\app_config.h)(0x6367DAF2)()
+F (.\app_config.h)(0x6370EB46)()
 F (.\CMSIS\GD32F30x\Source\system_gd32f30x.c)(0x635D5F56)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\system_gd32f30x.o --omf_browse .\objects\system_gd32f30x.crf --depend .\objects\system_gd32f30x.d)
 I (.\CMSIS\GD32F30x\Include\gd32f30x.h)(0x635D5F56)
 I (.\CMSIS\core_cm4.h)(0x635D5F56)
@@ -944,7 +946,7 @@ F (.\FreeRTOS-Kernel\croutine.c)(0x635D5F56)(--c99 --gnu -c --cpu Cortex-M4.fp.s
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -958,7 +960,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -973,7 +975,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -986,7 +988,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1000,7 +1002,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1015,7 +1017,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1030,7 +1032,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1045,7 +1047,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1057,7 +1059,7 @@ F (.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F\port.c)(0x635D5F57)(--c99 --gnu -c -
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1066,8 +1068,8 @@ I (.\FreeRTOS-Kernel\include\mpu_wrappers.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\task.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\list.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
-F (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)()
-F (.\Hardware\usart.c)(0x6370DB33)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
+F (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)()
+F (.\Hardware\usart.c)(0x6370EC0E)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\usart.o --omf_browse .\objects\usart.crf --depend .\objects\usart.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
 I (Hardware\usart.h)(0x635D5F57)
@@ -1076,7 +1078,7 @@ I (.\Common_API\fifo.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1115,7 +1117,7 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\MsgHandler\handler.h)(0x635D5F6A)
 I (.\Common_API\synchronous.h)(0x635D5F6A)
 I (.\FreeRTOS-Kernel\include\timers.h)(0x635D5F56)
@@ -1157,7 +1159,7 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1176,7 +1178,7 @@ I (.\CodeSamples\inc\vl6180x_sample_plat.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5D9AD21A)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (.\MsgHandler\handler.h)(0x635D5F6A)
@@ -1286,11 +1288,11 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1396,7 +1398,7 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1448,7 +1450,7 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1494,11 +1496,11 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1520,7 +1522,7 @@ I (.\Common_API\fifo.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1529,7 +1531,7 @@ I (.\FreeRTOS-Kernel\include\mpu_wrappers.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\task.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\list.h)(0x635D5F56)
 I (.\Common_API\print.h)(0x635D5F6A)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\MsgHandler\handler.h)(0x635D5F6A)
 I (.\Common_API\synchronous.h)(0x635D5F6A)
 I (.\FreeRTOS-Kernel\include\timers.h)(0x635D5F56)
@@ -1545,7 +1547,7 @@ I (.\Common_API\synchronous.h)(0x635D5F6A)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1587,7 +1589,7 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\FreeRTOS-Kernel\include\timers.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\semphr.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\queue.h)(0x635D5F56)
@@ -1611,7 +1613,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (Common_API\fifo.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1622,13 +1624,13 @@ I (.\FreeRTOS-Kernel\include\list.h)(0x635D5F56)
 F (.\Common_API\print.c)(0x635D5F6A)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\print.o --omf_browse .\objects\print.crf --depend .\objects\print.d)
 I (Common_API\print.h)(0x635D5F6A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1685,7 +1687,7 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdlib.h)(0x5D9AD21A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1717,17 +1719,22 @@ I (Common_API\shell.h)(0x62E2AC39)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
+F (.\Common_API\console.c)(0x6370EEDC)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\console.o --omf_browse .\objects\console.crf --depend .\objects\console.d)
+I (C:\Keil_v5\ARM\ARMCC\include\string.h)(0x5D9AD218)
+I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
+I (Common_API\console.h)(0x6370EEE0)
+I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 F (.\Appliance\switch.c)(0x63611813)(--c99 --gnu -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -W -O0 --apcs=interwork --split_sections -I ..\Robot-APP -I .\CMSIS -I .\CMSIS\GD32F30x\Include -I .\GD32F30x_standard_peripheral\Include -I .\FreeRTOS-Kernel\include -I .\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F -I .\FreeRTOS-Kernel -I .\Hardware -I .\vl6180x -I .\CodeSamples\inc -I .\Common_API -I .\MsgHandler -I .\Appliance-I.\RTE\_APP-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\Include-IC:\Keil_v5\ARM\CMSIS\Include-D__UVISION_VERSION="529" -DGD32F30X_HD -DUSE_STDPERIPH_DRIVER -DGD32F30X_HD -D__TARGET_FPU_VFP-o .\objects\switch.o --omf_browse .\objects\switch.crf --depend .\objects\switch.d)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
 I (Appliance\switch.h)(0x635D5F6A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x5D9AD218)
 I (.\Common_API\print.h)(0x635D5F6A)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5D9AD218)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1810,11 +1817,11 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_wwdgt.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_misc.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)
@@ -1866,11 +1873,11 @@ I (.\GD32F30x_standard_peripheral\Include\gd32f30x_enet.h)(0x635D5F57)
 I (.\GD32F30x_standard_peripheral\Include\gd32f30x_exmc.h)(0x635D5F57)
 I (.\Common_API\print.h)(0x635D5F6A)
 I (C:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5D9AD21A)
-I (..\Robot-APP\app_config.h)(0x6367DAF2)
+I (..\Robot-APP\app_config.h)(0x6370EB46)
 I (.\Common_API\fifo.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\FreeRTOS.h)(0x635D5F56)
 I (C:\Keil_v5\ARM\ARMCC\include\stddef.h)(0x5D9AD218)
-I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x635E1CC0)
+I (.\FreeRTOS-Kernel\FreeRTOSConfig.h)(0x6370EDF9)
 I (.\FreeRTOS-Kernel\include\projdefs.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\portable.h)(0x635D5F56)
 I (.\FreeRTOS-Kernel\include\deprecated_definitions.h)(0x635D5F56)

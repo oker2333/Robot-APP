@@ -747,6 +747,11 @@
               <FileType>1</FileType>
               <FilePath>.\Common_API\shell.c</FilePath>
             </File>
+            <File>
+              <FileName>console.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Common_API\console.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

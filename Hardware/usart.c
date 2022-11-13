@@ -181,10 +181,18 @@ void usart0_init(uint32_t baudval)
     usart_enable(USART0);
 }
 
+uint8_t console_buffer[CONSOLE_BUFFER_LEN] = {0};
+uint8_t console_header = 0;
+uint8_t console_tail = 0;
+
 void USART0_IRQHandler(void)
 {
-    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_RBNE)){			//TX
-			  uint8_t data = usart_data_receive(USART0);
+    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_RBNE)){			//RX
+			  if(CONSOLE_BUFFER_LEN > (console_header - console_tail))
+				{
+				   console_buffer[console_header%CONSOLE_BUFFER_LEN] = usart_data_receive(USART0);
+					 console_header++;
+				}
 				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_RBNE);
     }
 }

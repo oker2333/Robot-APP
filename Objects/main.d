@@ -65,6 +65,8 @@
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
 .\objects\main.o: .\Common_API\fifo.h
+.\objects\main.o: .\Common_API\shell.h
+.\objects\main.o: .\Common_API\console.h
 .\objects\main.o: .\MsgHandler\fms.h
 .\objects\main.o: .\Hardware\timer.h
 .\objects\main.o: .\Common_API\pid.h

@@ -61,6 +61,7 @@
 ".\objects\cjson.o"
 ".\objects\pid.o"
 ".\objects\shell.o"
+".\objects\console.o"
 ".\objects\switch.o"
 ".\objects\motor.o"
 ".\objects\encoder.o"

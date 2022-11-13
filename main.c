@@ -17,6 +17,10 @@
 
 #include "fifo.h"
 
+#include "shell.h"
+
+#include "console.h"
+
 #include "fms.h"
 
 #include "timer.h"
@@ -34,8 +38,6 @@
 #if JSON
 #include "cJSON.h"
 #endif
-
-#define BINARY_VERSION "V0.0.1"
 
 /* global variable */
 SemaphoreHandle_t VL6180xSemaphore;
@@ -98,6 +100,11 @@ static void SensorUploadionTask( void *pvParameters );
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
 
+#define CONSOLE_TASK_PRIORITY 8
+#define CONSOLE_TASK_STK_SIZE 512
+TaskHandle_t ConsoleTaskHanle;
+static void ConsoleTask( void *pvParameters );
+
 // printf("/*value:%f:%f*/\r\n",value1,value2);
 /*
 	Serial Studio json conf
@@ -139,9 +146,9 @@ static void InitTask( void *pvParameters )
 		FIFO_Init(Queue_Usart1_TX,Usart1_TX_Buffer,USART1_TX_BUFFER_SIZE);
 		
 	  #if FIFO_DEBUG
-	  dma_usart0_init(2000000);
+	  dma_usart0_init(3000000);
 	  #else
-	  usart0_init(460800);
+	  usart0_init(3000000);
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
@@ -155,6 +162,10 @@ static void InitTask( void *pvParameters )
 		motor_init();
 		
 		ir_rx_init();
+	
+		/* shell init && register handler fuction */
+    shell_init();
+    shell_register("robot", console);
 	
 		/* led gpio init */
 		rcu_periph_clock_enable(RCU_GPIOC);
@@ -176,10 +187,11 @@ static void InitTask( void *pvParameters )
 		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
 		xTaskCreate(SensorUploadionTask, "SensorUploadionTask", SENSOR_UPLOAD_TASK_STK_SIZE, NULL, SENSOR_UPLOAD_TASK_PRIORITY, &SensorUploadTaskHanle);
+		xTaskCreate(ConsoleTask, "ConsoleTask", CONSOLE_TASK_STK_SIZE, NULL, CONSOLE_TASK_PRIORITY, &ConsoleTaskHanle);
 		
 		taskEXIT_CRITICAL();
 
-		printf("APP %s is Running\r\n",BINARY_VERSION);
+		printf("APP %s is running,welcome to robot console.\n",BINARY_VERSION);
 
 		while(pdTRUE)
 		{
@@ -272,5 +284,19 @@ static void SensorUploadionTask(void *pvParameters)
 	 while(pdTRUE)
 	 {
 		  vTaskDelay(pdMS_TO_TICKS(10));
+	 }
+}
+
+static void ConsoleTask( void *pvParameters )
+{
+	 while(pdTRUE)
+	 {
+		  uint8_t len = console_header - console_tail;
+		  if(len)
+			{
+				 shell_parse((char *)&console_buffer[console_tail%CONSOLE_BUFFER_LEN],len);
+				 console_tail += len;
+			}
+		  vTaskDelay(pdMS_TO_TICKS(300));
 	 }
 }

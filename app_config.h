@@ -12,6 +12,8 @@
 #define FIFO_DEBUG 0
 #define JSON	0
 
+#define BINARY_VERSION "V0.0.1"
+
 #define PI (3.141592f)
 
 #define VELOCITY_MEASUREMENT_INTERVAL 50
@@ -35,6 +37,12 @@
 #define APP_BACKUP_FLASH_SIZE	((uint32_t)(APP_SIZE_ADDRESS - APP_BACKUP_ADDRESS))
 #define APP_SIZE_FLASH_SIZE 	((uint32_t)(INFO_ADDRESS - APP_SIZE_ADDRESS))
 #define INFO_FLASH_SIZE 			((uint32_t)(FLASH_END_ADDR - INFO_ADDRESS + 1))
+
+#define CONSOLE_BUFFER_LEN 256
+
+extern uint8_t console_header;
+extern uint8_t console_tail;
+extern uint8_t console_buffer[CONSOLE_BUFFER_LEN];
 
 extern char* PowerOn_Time(void);
 
