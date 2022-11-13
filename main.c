@@ -141,7 +141,7 @@ static void InitTask( void *pvParameters )
 	  #if FIFO_DEBUG
 	  dma_usart0_init(2000000);
 	  #else
-	  usart0_init(2000000);
+	  usart0_init(460800);
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
@@ -212,7 +212,7 @@ static void VL6180xTask( void *pvParameters )
         VL6180x_RangeGetMeasurement(theVL6180xDev, &RangeData);
         if( RangeData.errorStatus == 0){
             MyDev_ShowRange(theVL6180xDev, RangeData.range_mm, 0);
-					  print_info("RangeData.range_mm = %d\r\n",RangeData.range_mm);
+					  printf("RangeData.range_mm = $%d;\n",RangeData.range_mm);
         }
         else{
             MyDev_ShowErr(theVL6180xDev, RangeData.errorStatus);
@@ -249,8 +249,6 @@ static void VelocityMeasurementTask(void *pvParameters)
 			 right_velocity_measurement(VELOCITY_MEASUREMENT_INTERVAL);
 			 
 			 PID_Controller();
-			
-			 printf("/*value:%f:%f*/\r\n",get_left_velocity(),get_right_velocity());
 
 			 vTaskDelay(pdMS_TO_TICKS(VELOCITY_MEASUREMENT_INTERVAL));
 
