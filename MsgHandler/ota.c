@@ -1,11 +1,28 @@
+#include <stdio.h>
 #include "ota.h"
 #include "crc.h"
 
 typedef void (*Jump_To_ADDR_t)(void);
 
-void Write_APP_Size(uint32_t File_Bytes)
+void Write_Jump_Addr(uint32_t Jump_Addr)
 {
-	 flash_write_buffer(APP_SIZE_ADDRESS, (uint8_t*)&File_Bytes,sizeof(uint32_t));
+	 flash_write_buffer(JUMP_ADDR_ADDRESS, (uint8_t*)&Jump_Addr,sizeof(uint32_t));
+}
+
+static uint32_t download_address = 0x00;
+
+void download_address_update(void)
+{
+	  uint32_t jump_address = 0x00;
+		flash_read_buffer(JUMP_ADDR_ADDRESS,(uint8_t*)&jump_address,sizeof(uint32_t));
+	  if(jump_address == APP_ADDRESS_A)
+		{
+			 download_address = APP_ADDRESS_B;
+		}else if(jump_address == APP_ADDRESS_B)
+		{
+			 download_address = APP_ADDRESS_A;
+		}
+		printf("ota download address = %d\n",download_address);
 }
 
 uint32_t Download2Flash(uint32_t OTA_Offset,uint8_t *OTA_Data,uint32_t OTA_Length)
@@ -19,7 +36,7 @@ uint32_t Download2Flash(uint32_t OTA_Offset,uint8_t *OTA_Data,uint32_t OTA_Lengt
 	
 	 if((OTA_Count % FMC_PAGE_SIZE) == 0)
 	 {
-		  uint32_t Cur_Download_Addr = Frame_ID * FMC_PAGE_SIZE + APP_BACKUP_ADDRESS;
+		  uint32_t Cur_Download_Addr = Frame_ID * FMC_PAGE_SIZE + download_address;
 		  
 		  flash_write_buffer(Cur_Download_Addr, OTA_Page_Buffer,OTA_Count);
 		  printf("[frame id %d]Current Download Address 0x%x,OTA_Count = %d\r\n",Frame_ID,Cur_Download_Addr,OTA_Count);
@@ -29,7 +46,7 @@ uint32_t Download2Flash(uint32_t OTA_Offset,uint8_t *OTA_Data,uint32_t OTA_Lengt
 	 }
 	 else if(OTA_Length < 128)
 	 {
-		  uint32_t Cur_Download_Addr = Frame_ID * FMC_PAGE_SIZE + APP_BACKUP_ADDRESS;
+		  uint32_t Cur_Download_Addr = Frame_ID * FMC_PAGE_SIZE + download_address;
 		  
 		  flash_write_buffer(Cur_Download_Addr, OTA_Page_Buffer,OTA_Count);
 		  printf("[frame id %d]Current Download Address 0x%x,OTA_Count = %d\r\n",Frame_ID,Cur_Download_Addr,OTA_Count);
@@ -41,12 +58,12 @@ uint32_t Download2Flash(uint32_t OTA_Offset,uint8_t *OTA_Data,uint32_t OTA_Lengt
 
 uint8_t FlashBinaryCheck(uint16_t CRC16,uint32_t OTA_Rev_Bytes)
 {
-	 uint16_t FileCRCActual = CRC16_CCITT_FALSE(((uint8_t*)APP_BACKUP_ADDRESS), OTA_Rev_Bytes);
+	 uint16_t FileCRCActual = CRC16_CCITT_FALSE(((uint8_t*)download_address), OTA_Rev_Bytes);
 	 printf("FileSize = %d Bytes,FileCRC = 0x%x,FileCRCActual = 0x%x\r\n",OTA_Rev_Bytes,CRC16,FileCRCActual);
 	 
 	 if(CRC16 == FileCRCActual)
 	 {
-		  Write_APP_Size(OTA_Rev_Bytes);
+		  Write_Jump_Addr(download_address);
 		  return 0;
 	 }
 	 return 1;

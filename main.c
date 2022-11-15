@@ -23,6 +23,8 @@
 
 #include "fms.h"
 
+#include "ota.h"
+
 #include "timer.h"
 
 #include "pid.h"
@@ -152,6 +154,8 @@ static void InitTask( void *pvParameters )
 	  #endif
 		dma_usart1_init(460800);
 		bsp_iic_init(I2C0);
+		
+		download_address_update();
 	
 		switch_init();
 	  
