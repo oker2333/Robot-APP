@@ -22,7 +22,7 @@ void download_address_update(void)
 		{
 			 download_address = APP_ADDRESS_A;
 		}
-		printf("ota download address = %d\n",download_address);
+		printf("download address = 0x%x\n",download_address);
 }
 
 uint32_t Download2Flash(uint32_t OTA_Offset,uint8_t *OTA_Data,uint32_t OTA_Length)

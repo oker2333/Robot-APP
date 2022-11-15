@@ -153,6 +153,9 @@ static void InitTask( void *pvParameters )
 	  usart0_init(3000000);
 	  #endif
 		dma_usart1_init(460800);
+		
+		printf("APP %s is running,welcome to robot console.\n",BINARY_VERSION);
+		
 		bsp_iic_init(I2C0);
 		
 		download_address_update();
@@ -194,8 +197,6 @@ static void InitTask( void *pvParameters )
 		xTaskCreate(ConsoleTask, "ConsoleTask", CONSOLE_TASK_STK_SIZE, NULL, CONSOLE_TASK_PRIORITY, &ConsoleTaskHanle);
 		
 		taskEXIT_CRITICAL();
-
-		printf("APP %s is running,welcome to robot console.\n",BINARY_VERSION);
 
 		while(pdTRUE)
 		{
