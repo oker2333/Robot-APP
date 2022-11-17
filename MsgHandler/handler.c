@@ -117,6 +117,7 @@ void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 				
 			break;
 		}
+		printf("[Control_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
@@ -148,13 +149,15 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 	 int index = 0;
 	 uint8_t buffer[10] = {0};
 
-	 static int8_t OTA_Device = 0;
+	 static int8_t OTA_Device = -1;
+	 static uint16_t Binary_Version = 0x00;
 	 static uint32_t OTA_Rev_Bytes = 0;
 	 
 	 switch(cmd)
 	 {
 		 case OTA_START:
 			 OTA_Device = UserData[0];
+		   Binary_Version = (UserData[1] << 8) | UserData[2];
 		   buffer[index++] = OTA_Device;
 		   buffer[index++] = SUCCEED;
 		   buffer[index++] = (cmd >> 8) & 0xff;
@@ -168,7 +171,7 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 		   uint32_t OTA_Length = (UserData[5] << 8) | (UserData[6] << 0);
 		   printf("OTA_Offset = %d,OTA_Length = %d\r\n",OTA_Offset,OTA_Length);
 
-		   OTA_Rev_Bytes = Download2Flash(OTA_Offset,&UserData[7],OTA_Length);
+		   OTA_Rev_Bytes = Download2Flash(OTA_Device,OTA_Offset,&UserData[7],OTA_Length);
 		   
 		   buffer[index++] = OTA_Device;
 		   buffer[index++] = SUCCEED;
@@ -180,7 +183,7 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 		 case OTA_END:
 			 OTA_Device = UserData[0];
 		   uint16_t CRC16 = (UserData[1] << 8) | (UserData[2] << 0);
-		   uint8_t OTA_Result = FlashBinaryCheck(CRC16,OTA_Rev_Bytes);
+		   uint8_t OTA_Result = FlashBinaryCheck(OTA_Device,Binary_Version,CRC16,OTA_Rev_Bytes);
 
 		   buffer[index++] = OTA_Device;
 		   buffer[index++] = OTA_Result;
@@ -193,7 +196,7 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 			 
 		 break;
 	 }	 
-	 printf("[Upload_Handler]cmd = 0x%x\r\n",cmd);
+	 printf("[OTA_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 msg_handler_t Callback_Handler[CALLBACK_NUM] = {Online_Handler,Inquire_Handler,Control_Handler,Timing_Handler,Upload_Handler,OTA_Handler};

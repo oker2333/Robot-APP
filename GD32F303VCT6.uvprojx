@@ -274,7 +274,7 @@
               </OCR_RVCT3>
               <OCR_RVCT4>
                 <Type>1</Type>
-                <StartAddress>0x8004000</StartAddress>
+                <StartAddress>0x8021000</StartAddress>
                 <Size>0x1d000</Size>
               </OCR_RVCT4>
               <OCR_RVCT5>
@@ -783,6 +783,9 @@
               <FilePath>.\Appliance\IRremote.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>EasyLogger</GroupName>
         </Group>
       </Groups>
     </Target>
