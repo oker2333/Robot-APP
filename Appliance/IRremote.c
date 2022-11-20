@@ -6,8 +6,6 @@
 
 #define TIMER_PERIOD 10000
 
-static uint32_t timer_update_count = 0;
-
 void ir_rx_init(void)
 {
     timer_ic_parameter_struct timer_icinitpara;
@@ -58,6 +56,7 @@ void ir_rx_init(void)
   * @retval None
   */
 void infrared_receiver_state_machine (void);
+void timer_update(void);
 
 void TIMER1_IRQHandler(void)
 {
@@ -70,7 +69,7 @@ void TIMER1_IRQHandler(void)
 		
     if(SET == timer_interrupt_flag_get(TIMER1,TIMER_INT_FLAG_UP))
     {
-			  timer_update_count++;
+			  timer_update();
         timer_interrupt_flag_clear(TIMER1,TIMER_INT_FLAG_UP);
     }
 }
@@ -84,6 +83,7 @@ typedef enum{
 	 ADDRESS_REVERSE,
 	 COMMAND_ORIGINAL,
 	 COMMAND_REVERSE,
+	 REPEAT_CODE_PRE,
 	 REPEAT_CODE
 }IR_State_t;
 
@@ -98,14 +98,33 @@ typedef struct{
 
 #define SYSTICK_COUNT_MAX TIMER_PERIOD
 
-#define ALLOWED_OFFSET 400u
+#define ALLOWED_OFFSET 450u
 
 #define LEADER_CODE_TIMEOUT 13500u
 #define BIT_SET_TIMEOUT 2250u
 #define BIT_RESET_TIMEOUT 1125u
 
+#define REPEAT_CODE_TIMEOUT_MIN 11000u
+#define REPEAT_CODE_TIMEOUT_MAX 13000u
+
+#define REPEAT_CODE_PRE_MAX 115000u
+#define REPEAT_CODE_PRE_MIN  35000u
+
 static uint32_t current_count = 0x00;
-static uint32_t last_count = 0x00;
+
+static IR_Data_t ir_data = {0};
+static IR_State_t ir_state = IDLE;
+
+static uint32_t timer_update_count = 0;
+void timer_update(void)
+{
+	timer_update_count++;
+	if(timer_update_count >= 13)
+	{
+		 timer_update_count = 0;
+		 ir_state = IDLE;
+	}	
+}
 
 static void Timer_Reset(void)
 {
@@ -121,21 +140,17 @@ static uint32_t Timer_Interval(void)
 
 void infrared_receiver_state_machine (void)
 {
-	 static IR_Data_t ir_data = {0};
-	 static IR_State_t ir_state = IDLE;
 	 uint32_t timeout = 0x00;
 	 
 	 switch(ir_state)
 	 {
 		  case IDLE:
-				 printf("IDLE\n");
 			   Timer_Reset();
-			   memset(&ir_data,0,sizeof(IR_Data_t));
 			   ir_state = LEADER_CODE;
 		  break;
 			
 		  case LEADER_CODE:
-				printf("LEADER_CODE\n");
+			   memset(&ir_data,0,sizeof(IR_Data_t));
 			   timeout = Timer_Interval();
 			   Timer_Reset();
 			   if((timeout >= (LEADER_CODE_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (LEADER_CODE_TIMEOUT + ALLOWED_OFFSET)))
@@ -149,7 +164,6 @@ void infrared_receiver_state_machine (void)
 		  break;
 			
 		  case ADDRESS_ORIGINAL:
-				printf("ADDRESS_ORIGINAL\n");
 			   timeout = Timer_Interval();
 			   Timer_Reset();
 			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
@@ -176,7 +190,6 @@ void infrared_receiver_state_machine (void)
 		  break;
 
 		  case ADDRESS_REVERSE:
-				printf("ADDRESS_REVERSE\n");
 			   timeout = Timer_Interval();
 			   Timer_Reset();
 			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
@@ -203,7 +216,6 @@ void infrared_receiver_state_machine (void)
 		  break;
 
 		  case COMMAND_ORIGINAL:
-				printf("COMMAND_ORIGINAL\n");
 			   timeout = Timer_Interval();
 			   Timer_Reset();
 			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
@@ -223,14 +235,13 @@ void infrared_receiver_state_machine (void)
 				 
 				 if(ir_data.index == 8)
 				 {
-					   ir_state = COMMAND_ORIGINAL;
+					   ir_state = COMMAND_REVERSE;
 					   ir_data.index = 0;
 					   printf("command_original = 0x%x\n",ir_data.command_original);
 				 }
 		  break;
 
 		  case COMMAND_REVERSE:
-				printf("COMMAND_REVERSE\n");
 			   timeout = Timer_Interval();
 			   Timer_Reset();
 			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
@@ -250,14 +261,39 @@ void infrared_receiver_state_machine (void)
 				 
 				 if(ir_data.index == 8)
 				 {
-					   ir_state = REPEAT_CODE;
+					   ir_state = REPEAT_CODE_PRE;
 					   ir_data.index = 0;
 					   printf("command_reverse = 0x%x\n",ir_data.command_reverse);
 				 }
 		  break;
 
+			case REPEAT_CODE_PRE:
+			   timeout = Timer_Interval();
+			   Timer_Reset();
+			   if((timeout >= REPEAT_CODE_PRE_MIN) && (timeout <= REPEAT_CODE_PRE_MAX))
+				 {
+					  ir_state = REPEAT_CODE;
+				 }
+				 else
+				 {
+						ir_state = LEADER_CODE;
+				 }
+			break;
+				 
 		  case REPEAT_CODE:
-			   printf("REPEAT_CODE\n");
+			   timeout = Timer_Interval();
+			   Timer_Reset();
+			   if((timeout >= REPEAT_CODE_TIMEOUT_MIN) && (timeout <= REPEAT_CODE_TIMEOUT_MAX))
+				 {
+					  ir_data.repeat_conter++;
+					  ir_state = REPEAT_CODE_PRE;
+					  printf("repeat_conter = %d\n",ir_data.repeat_conter);
+				 }
+				 else
+				 {
+					  ir_state = LEADER_CODE;
+				 }
+			
 		  break;
 			
 		  default:
