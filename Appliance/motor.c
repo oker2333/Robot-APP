@@ -46,7 +46,7 @@ Right:E0 E1
 #define MAX_LOAD_VELOCITY (PI*65.0f*300.0f/60.0f)			/*unit:mm/s*/
 #define MAX_RATED_VELOCITY (PI*65.0f*360.0f/60.0f)			/*unit:mm/s*/
 
-#define MAX_VELOCITY MAX_RATED_VELOCITY
+#define MAX_VELOCITY MAX_LOAD_VELOCITY
 
 #define set_left_velocity(x)  timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_0,(PWM_TIM_PERIOD * x / MAX_VELOCITY));
 #define set_right_velocity(x) timer_channel_output_pulse_value_config(TIMER2,TIMER_CH_1,(PWM_TIM_PERIOD * x / MAX_VELOCITY));
