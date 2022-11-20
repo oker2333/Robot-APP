@@ -159,7 +159,7 @@ static void Left_PID_Controller(int left_measure,int left_target)
 		  set_left_velocity(0);
 		  return;
 	 }
-	 int ret = IncPIDCalc(left_target,left_measure);
+	 int ret = IncPIDCalc_l(left_target,left_measure);
    if(ret != INT_MAX)
 	 {
 			if(ret >= 0){
@@ -180,7 +180,7 @@ static void Right_PID_Controller(int right_measure,int right_target)
 		  return;
 	 }
 	 
-	 int ret = IncPIDCalc(right_target,right_measure);
+	 int ret = IncPIDCalc_r(right_target,right_measure);
    if(ret != INT_MAX)
 	 {
 			if(ret >= 0){

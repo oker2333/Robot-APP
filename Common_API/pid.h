@@ -20,9 +20,8 @@ typedef struct PID
     int Uk;
 } PID, *pPID;
 
-extern PID sPID;
-
 void IncPIDInit(void);
-int IncPIDCalc(int SetPoint,int measurement);
+int IncPIDCalc_l(int SetPoint,int measurement);
+int IncPIDCalc_r(int SetPoint,int measurement);
 
 #endif
