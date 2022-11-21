@@ -55,14 +55,14 @@ void ir_rx_init(void)
   * @param  None
   * @retval None
   */
-void infrared_receiver_state_machine (void);
+void ir_state_machine (void);
 void timer_update(void);
 
 void TIMER1_IRQHandler(void)
 {
     if(SET == timer_interrupt_flag_get(TIMER1,TIMER_INT_FLAG_CH0))
     {
-        infrared_receiver_state_machine();
+        ir_state_machine();
 
         timer_interrupt_flag_clear(TIMER1,TIMER_INT_FLAG_CH0);
     }
@@ -74,7 +74,7 @@ void TIMER1_IRQHandler(void)
     }
 }
 
-/**************************************红外接收器状态机**********************************************/
+/**************************************绾㈠鎺ユ敹鍣ㄧ姸鎬佹満**********************************************/
 
 typedef enum{
    IDLE,
@@ -98,19 +98,28 @@ typedef struct{
 
 #define SYSTICK_COUNT_MAX TIMER_PERIOD
 
-#define ALLOWED_OFFSET 450u
+#define MAX_RATIO 1.1f
+#define MIN_RATIO 0.9f
 
 #define LEADER_CODE_TIMEOUT 13500u
 #define BIT_SET_TIMEOUT 2250u
 #define BIT_RESET_TIMEOUT 1125u
+#define REPEAT_CODE_TIMEOUT 11250u
 
-#define REPEAT_CODE_TIMEOUT_MIN 11000u
-#define REPEAT_CODE_TIMEOUT_MAX 13000u
+#define LEADER_CODE_TIMEOUT_MAX (LEADER_CODE_TIMEOUT * MAX_RATIO)
+#define LEADER_CODE_TIMEOUT_MIN (LEADER_CODE_TIMEOUT * MIN_RATIO)
+
+#define BIT_SET_TIMEOUT_MAX (BIT_SET_TIMEOUT * MAX_RATIO)
+#define BIT_SET_TIMEOUT_MIN (BIT_SET_TIMEOUT * MIN_RATIO)
+
+#define BIT_RESET_TIMEOUT_MAX (BIT_RESET_TIMEOUT * MAX_RATIO)
+#define BIT_RESET_TIMEOUT_MIN (BIT_RESET_TIMEOUT * MIN_RATIO)
+
+#define REPEAT_CODE_TIMEOUT_MAX (REPEAT_CODE_TIMEOUT * MAX_RATIO)
+#define REPEAT_CODE_TIMEOUT_MIN (REPEAT_CODE_TIMEOUT * MIN_RATIO)
 
 #define REPEAT_CODE_PRE_MAX 115000u
-#define REPEAT_CODE_PRE_MIN  35000u
-
-static uint32_t current_count = 0x00;
+#define REPEAT_CODE_PRE_MIN 35000u
 
 static IR_Data_t ir_data = {0};
 static IR_State_t ir_state = IDLE;
@@ -134,11 +143,10 @@ static void Timer_Reset(void)
 
 static uint32_t Timer_Interval(void)
 {
-	 uint32_t timeout = timer_update_count*TIMER_PERIOD + TIMER_CNT(TIMER1);
-	 return timeout;
+	 return timer_update_count * TIMER_PERIOD + TIMER_CNT(TIMER1);
 }
 
-void infrared_receiver_state_machine (void)
+void ir_state_machine (void)
 {
 	 uint32_t timeout = 0x00;
 	 
@@ -150,11 +158,11 @@ void infrared_receiver_state_machine (void)
 		  break;
 			
 		  case LEADER_CODE:
-			   memset(&ir_data,0,sizeof(IR_Data_t));
 			   timeout = Timer_Interval();
 			   Timer_Reset();
-			   if((timeout >= (LEADER_CODE_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (LEADER_CODE_TIMEOUT + ALLOWED_OFFSET)))
+			   if((timeout >= LEADER_CODE_TIMEOUT_MIN) && (timeout <= LEADER_CODE_TIMEOUT_MAX))
 				 {
+					  memset(&ir_data,0,sizeof(IR_Data_t));
 					  ir_state = ADDRESS_ORIGINAL;
 				 }
 				 else
@@ -166,12 +174,12 @@ void infrared_receiver_state_machine (void)
 		  case ADDRESS_ORIGINAL:
 			   timeout = Timer_Interval();
 			   Timer_Reset();
-			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
+			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
 					  ir_data.address_original |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
-				 else if((timeout >= (BIT_RESET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_RESET_TIMEOUT + ALLOWED_OFFSET)))
+				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
 					  ir_data.address_original &= ~(1 << ir_data.index);
 					  ir_data.index++;
@@ -192,12 +200,12 @@ void infrared_receiver_state_machine (void)
 		  case ADDRESS_REVERSE:
 			   timeout = Timer_Interval();
 			   Timer_Reset();
-			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
+			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
 					  ir_data.address_reverse |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
-				 else if((timeout >= (BIT_RESET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_RESET_TIMEOUT + ALLOWED_OFFSET)))
+				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
 					  ir_data.address_reverse &= ~(1 << ir_data.index);
 					  ir_data.index++;
@@ -218,12 +226,12 @@ void infrared_receiver_state_machine (void)
 		  case COMMAND_ORIGINAL:
 			   timeout = Timer_Interval();
 			   Timer_Reset();
-			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
+			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
 					  ir_data.command_original |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
-				 else if((timeout >= (BIT_RESET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_RESET_TIMEOUT + ALLOWED_OFFSET)))
+				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
 					  ir_data.command_original &= ~(1 << ir_data.index);
 					  ir_data.index++;
@@ -244,12 +252,12 @@ void infrared_receiver_state_machine (void)
 		  case COMMAND_REVERSE:
 			   timeout = Timer_Interval();
 			   Timer_Reset();
-			   if((timeout >= (BIT_SET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_SET_TIMEOUT + ALLOWED_OFFSET)))
+			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
 					  ir_data.command_reverse |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
-				 else if((timeout >= (BIT_RESET_TIMEOUT - ALLOWED_OFFSET)) && (timeout <= (BIT_RESET_TIMEOUT + ALLOWED_OFFSET)))
+				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
 					  ir_data.command_reverse &= ~(1 << ir_data.index);
 					  ir_data.index++;

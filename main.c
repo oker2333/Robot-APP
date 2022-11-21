@@ -77,10 +77,10 @@ TaskHandle_t LogTaskHanle;
 static void LogTask( void *pvParameters );
 #endif
 
-#define EMERGENCY_TASK_PRIORITY 3
-#define EMERGENCY_TASK_STK_SIZE 100
-TaskHandle_t EmergencyTaskHanle;
-static void EmergencyTask( void *pvParameters );
+#define REMOTE_CONTROL_TASK_PRIORITY 3
+#define REMOTE_CONTROL_TASK_STK_SIZE 100
+TaskHandle_t RemoteControlTaskHanle;
+static void RemoteControlTask( void *pvParameters );
 
 #define SPEED_TASK_PRIORITY 4
 #define SPEED_TASK_STK_SIZE 1024
@@ -191,7 +191,7 @@ static void InitTask( void *pvParameters )
 		#if FIFO_DEBUG
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 		#endif
-		xTaskCreate(EmergencyTask, "EmergencyTask", EMERGENCY_TASK_STK_SIZE, NULL, EMERGENCY_TASK_PRIORITY, &EmergencyTaskHanle);
+		xTaskCreate(RemoteControlTask, "RemoteControlTask", REMOTE_CONTROL_TASK_STK_SIZE, NULL, REMOTE_CONTROL_TASK_PRIORITY, &RemoteControlTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
 		xTaskCreate(SensorUploadionTask, "SensorUploadionTask", SENSOR_UPLOAD_TASK_STK_SIZE, NULL, SENSOR_UPLOAD_TASK_PRIORITY, &SensorUploadTaskHanle);
 		xTaskCreate(ConsoleTask, "ConsoleTask", CONSOLE_TASK_STK_SIZE, NULL, CONSOLE_TASK_PRIORITY, &ConsoleTaskHanle);
@@ -201,9 +201,9 @@ static void InitTask( void *pvParameters )
 		while(pdTRUE)
 		{
 				GPIO_BC(GPIOC) = GPIO_PIN_13;
-				vTaskDelay(pdMS_TO_TICKS(1000));
+				vTaskDelay(pdMS_TO_TICKS(500));
 				GPIO_BOP(GPIOC) = GPIO_PIN_13;
-				vTaskDelay(pdMS_TO_TICKS(1000));
+				vTaskDelay(pdMS_TO_TICKS(500));
 		}
 }
 
@@ -250,7 +250,7 @@ static void LogTask(void *pvParameters)
 }
 #endif
 
-static void EmergencyTask(void *pvParameters)
+static void RemoteControlTask(void *pvParameters)
 {
 	  while(pdTRUE)
 		{
