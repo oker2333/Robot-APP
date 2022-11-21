@@ -98,12 +98,16 @@ typedef struct{
 
 #define SYSTICK_COUNT_MAX TIMER_PERIOD
 
+#define TIMER_STATE_TIMEOUT 12
+
 #define MAX_RATIO 1.1f
 #define MIN_RATIO 0.9f
 
 #define LEADER_CODE_TIMEOUT 13500u
 #define BIT_SET_TIMEOUT 2250u
 #define BIT_RESET_TIMEOUT 1125u
+#define REPEAT_CODE_PRE_V1_TIMEOUT 108000u
+#define REPEAT_CODE_PRE_V2_TIMEOUT 96750u
 #define REPEAT_CODE_TIMEOUT 11250u
 
 #define LEADER_CODE_TIMEOUT_MAX (LEADER_CODE_TIMEOUT * MAX_RATIO)
@@ -115,20 +119,24 @@ typedef struct{
 #define BIT_RESET_TIMEOUT_MAX (BIT_RESET_TIMEOUT * MAX_RATIO)
 #define BIT_RESET_TIMEOUT_MIN (BIT_RESET_TIMEOUT * MIN_RATIO)
 
+#define REPEAT_CODE_PRE_V1_MAX (REPEAT_CODE_PRE_V1_TIMEOUT * MAX_RATIO)
+#define REPEAT_CODE_PRE_V1_MIN (REPEAT_CODE_PRE_V1_TIMEOUT * MIN_RATIO)
+
+#define REPEAT_CODE_PRE_V2_MAX (REPEAT_CODE_PRE_V2_TIMEOUT * MAX_RATIO)
+#define REPEAT_CODE_PRE_V2_MIN (REPEAT_CODE_PRE_V2_TIMEOUT * MIN_RATIO)
+
 #define REPEAT_CODE_TIMEOUT_MAX (REPEAT_CODE_TIMEOUT * MAX_RATIO)
 #define REPEAT_CODE_TIMEOUT_MIN (REPEAT_CODE_TIMEOUT * MIN_RATIO)
-
-#define REPEAT_CODE_PRE_MAX 115000u
-#define REPEAT_CODE_PRE_MIN 35000u
 
 static IR_Data_t ir_data = {0};
 static IR_State_t ir_state = IDLE;
 
 static uint32_t timer_update_count = 0;
+
 void timer_update(void)
 {
 	timer_update_count++;
-	if(timer_update_count >= 13)
+	if(timer_update_count >= TIMER_STATE_TIMEOUT)
 	{
 		 timer_update_count = 0;
 		 ir_state = IDLE;
@@ -148,6 +156,7 @@ static uint32_t Timer_Interval(void)
 
 void ir_state_machine (void)
 {
+	 static uint32_t time_accumulation = 0x00;
 	 uint32_t timeout = 0x00;
 	 
 	 switch(ir_state)
@@ -162,6 +171,7 @@ void ir_state_machine (void)
 			   Timer_Reset();
 			   if((timeout >= LEADER_CODE_TIMEOUT_MIN) && (timeout <= LEADER_CODE_TIMEOUT_MAX))
 				 {
+					  time_accumulation = timeout;
 					  memset(&ir_data,0,sizeof(IR_Data_t));
 					  ir_state = ADDRESS_ORIGINAL;
 				 }
@@ -176,11 +186,13 @@ void ir_state_machine (void)
 			   Timer_Reset();
 			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.address_original |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
 				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.address_original &= ~(1 << ir_data.index);
 					  ir_data.index++;
 				 }
@@ -202,11 +214,13 @@ void ir_state_machine (void)
 			   Timer_Reset();
 			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.address_reverse |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
 				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.address_reverse &= ~(1 << ir_data.index);
 					  ir_data.index++;
 				 }
@@ -228,11 +242,13 @@ void ir_state_machine (void)
 			   Timer_Reset();
 			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.command_original |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
 				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.command_original &= ~(1 << ir_data.index);
 					  ir_data.index++;
 				 }
@@ -254,11 +270,13 @@ void ir_state_machine (void)
 			   Timer_Reset();
 			   if((timeout >= BIT_SET_TIMEOUT_MIN) && (timeout <= BIT_SET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.command_reverse |= (1 << ir_data.index);
 					  ir_data.index++;
 				 }
 				 else if((timeout >= BIT_RESET_TIMEOUT_MIN) && (timeout <= BIT_RESET_TIMEOUT_MAX))
 				 {
+					  time_accumulation += timeout;
 					  ir_data.command_reverse &= ~(1 << ir_data.index);
 					  ir_data.index++;
 				 }
@@ -276,10 +294,13 @@ void ir_state_machine (void)
 		  break;
 
 			case REPEAT_CODE_PRE:
-			   timeout = Timer_Interval();
+				 timeout = Timer_Interval();
 			   Timer_Reset();
-			   if((timeout >= REPEAT_CODE_PRE_MIN) && (timeout <= REPEAT_CODE_PRE_MAX))
+			   time_accumulation += timeout;
+			   if(((time_accumulation >= REPEAT_CODE_PRE_V1_MIN) && (time_accumulation <= REPEAT_CODE_PRE_V1_MAX)) || 
+					  ((timeout >= REPEAT_CODE_PRE_V2_MIN) && (timeout <= REPEAT_CODE_PRE_V2_MAX)))
 				 {
+					  time_accumulation = 0x00;
 					  ir_state = REPEAT_CODE;
 				 }
 				 else
