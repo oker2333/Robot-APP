@@ -252,9 +252,48 @@ static void LogTask(void *pvParameters)
 
 static void RemoteControlTask(void *pvParameters)
 {
+	 int32_t VELOCITY = 80;
+
 	  while(pdTRUE)
 		{
-			 printf("IR_Key= %d\n",IR_Key_Obtain());
+			 IR_Key_t ir_key = IR_Key_Obtain();
+			 
+			 switch(ir_key)
+			 {
+				 case LEFT:
+					 pid_motor_control(-VELOCITY,VELOCITY);
+				 break;
+				 
+				 case RIGHT:
+					 pid_motor_control(VELOCITY,-VELOCITY);
+				 break;
+				 
+				 case UP:
+					 pid_motor_control(VELOCITY,VELOCITY);
+				 break;
+
+				 case DOWN:
+					 pid_motor_control(-VELOCITY,-VELOCITY);
+				 break;
+				 
+				 case PAUSE:
+					 pid_motor_control(0,0);
+				 break;
+				 
+				 case ZERO:
+					 VELOCITY -= 20;
+				   printf("Remote Control Set Velocity %d mm/s\n",VELOCITY);
+				 break;
+				 
+				 case C:
+					 VELOCITY += 20;
+				   printf("Remote Control Set Velocity %d mm/s\n",VELOCITY);
+				 break;
+				 
+				 default:
+					 printf("unsupported ir key type\n");
+				 break;
+			 }			 
 		}
 }
 

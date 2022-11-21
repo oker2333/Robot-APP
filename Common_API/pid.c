@@ -58,7 +58,7 @@ int IncPIDCalc_l(int SetPoint,int measurement)
 		{
 			 return INT_MAX;
 		}
-	  printf("velocity_l error = %d\n",sptr_l->iError);
+
     //增量误差
     sptr_l->iIncpid = sptr_l->Proportion * sptr_l->iError - sptr_l->Integral * sptr_l->LastError
                     + sptr_l->Derivative * sptr_l->PrevError;
