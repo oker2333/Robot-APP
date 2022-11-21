@@ -4,6 +4,13 @@
 #include "IRremote.h"
 #include "gd32f30x.h"
 
+#include "FreeRTOS.h"
+#include "task.h"
+#include "semphr.h"
+
+SemaphoreHandle_t IRSemaphore;
+
+/*************************************定时器&中断初始化*********************************************/
 #define TIMER_PERIOD 10000
 
 void ir_rx_init(void)
@@ -48,6 +55,8 @@ void ir_rx_init(void)
 
     /* TIMER1 counter enable */
     timer_enable(TIMER1);
+		
+		IRSemaphore = xSemaphoreCreateBinary();
 }
 
 /**
@@ -156,9 +165,10 @@ static uint32_t Timer_Interval(void)
 
 void ir_state_machine (void)
 {
+	 BaseType_t pxHigherPriorityTaskWoken;
 	 static uint32_t time_accumulation = 0x00;
 	 uint32_t timeout = 0x00;
-	 
+	 			
 	 switch(ir_state)
 	 {
 		  case IDLE:
@@ -289,6 +299,7 @@ void ir_state_machine (void)
 				 {
 					   ir_state = REPEAT_CODE_PRE;
 					   ir_data.index = 0;
+					   xSemaphoreGiveFromISR(IRSemaphore,&pxHigherPriorityTaskWoken);
 					   printf("command_reverse = 0x%x\n",ir_data.command_reverse);
 				 }
 		  break;
@@ -316,6 +327,7 @@ void ir_state_machine (void)
 				 {
 					  ir_data.repeat_conter++;
 					  ir_state = REPEAT_CODE_PRE;
+					  xSemaphoreGiveFromISR(IRSemaphore,&pxHigherPriorityTaskWoken);
 					  printf("repeat_conter = %d\n",ir_data.repeat_conter);
 				 }
 				 else
@@ -329,4 +341,58 @@ void ir_state_machine (void)
 			   printf("IR State Error\n");
 		  break;
 	 }
+	 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+}
+
+/**************************************红外接收器键值**********************************************/
+
+#define KEY_NUM 20
+
+typedef struct{
+    IR_Key_t key;
+	  uint8_t value;
+}IR_Key_Value_t;
+
+const IR_Key_Value_t key_value_array[KEY_NUM] = 
+{
+	{START,0x45},
+	{MENU,0x47},
+	{LEFT,0x07},
+	{RIGHT,0x09},
+	{UP,0x40},
+	{DOWN,0x19},
+	{TEST,0x44},
+	{CANCEL,0x43},
+	{PAUSE,0x15},
+	{C,0x0D},
+	{ZERO,0x16},
+	{ONE,0x0C},
+	{TWO,0x18},
+	{THREE,0x5E},
+	{FOUR,0x08},
+	{FIVE,0x1C},
+	{SIX,0x5A},
+	{SEVEN,0x42},
+	{EIGHT,0x52},
+	{NINE,0x4A}
+};
+
+IR_Key_t IR_Key_Obtain(void)
+{
+	 xSemaphoreTake(IRSemaphore, portMAX_DELAY);
+	 
+	 if(((ir_data.address_original + ir_data.address_reverse) != 0xFF) || ((ir_data.command_original + ir_data.command_reverse) != 0xFF))
+	 {
+		  return NONE;
+	 }
+	 
+	 for(uint8_t i = 0;i < KEY_NUM;i++)
+	 {
+		  if(key_value_array[i].value == ir_data.command_original)
+			{
+				 return key_value_array[i].key;
+			}
+	 }
+	 
+	 return NONE;
 }

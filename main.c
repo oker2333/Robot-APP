@@ -254,7 +254,7 @@ static void RemoteControlTask(void *pvParameters)
 {
 	  while(pdTRUE)
 		{
-			 vTaskDelay(pdMS_TO_TICKS(1000));
+			 printf("IR_Key= %d\n",IR_Key_Obtain());
 		}
 }
 
