@@ -314,11 +314,17 @@ void delay_ms(uint32_t ms)
 /**
  * @brief iic gpio operate definition
  */
-
-#define SCL_IN()          {MEM_ADDR(GPIOE+0x00) &= ~(3 << (7 * 4)); MEM_ADDR(GPIOE+0x00) |= 0 << 7 * 4;}
-#define SCL_OUT()         {MEM_ADDR(GPIOE+0x00) &= ~(3 << (7 * 4)); MEM_ADDR(GPIOE+0x00) |= 1 << 7 * 4;}
-#define SDA_IN()          {MEM_ADDR(GPIOE+0x04) &= ~(3 << (0 * 4)); MEM_ADDR(GPIOE+0x04) |= 0 << 0 * 4;}
-#define SDA_OUT()         {MEM_ADDR(GPIOE+0x04) &= ~(3 << (0 * 4)); MEM_ADDR(GPIOE+0x04) |= 1 << 0 * 4;}
+#if 0
+#define SCL_IN()          gpio_init(GPIOE, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ,GPIO_PIN_7)
+#define SCL_OUT()         gpio_init(GPIOE, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_7)
+#define SDA_IN()          gpio_init(GPIOE, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ,GPIO_PIN_8)
+#define SDA_OUT()         gpio_init(GPIOE, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_8)
+#else
+#define SCL_IN()          {MEM_ADDR(GPIOE+0x00) &= ~(0x0F << (7 * 4)); MEM_ADDR(GPIOE+0x00) |= 0 << 7 * 4;}
+#define SCL_OUT()         {MEM_ADDR(GPIOE+0x00) &= ~(0x0F << (7 * 4)); MEM_ADDR(GPIOE+0x00) |= 1 << 7 * 4;}
+#define SDA_IN()          {MEM_ADDR(GPIOE+0x04) &= ~(0x0F << (0 * 4)); MEM_ADDR(GPIOE+0x04) |= 0 << 0 * 4;}
+#define SDA_OUT()         {MEM_ADDR(GPIOE+0x04) &= ~(0x0F << (0 * 4)); MEM_ADDR(GPIOE+0x04) |= 1 << 0 * 4;}
+#endif
 #define IIC_SCL           BIT_ADDR(GPIOE+0x0C, 7)
 #define IIC_SDA           BIT_ADDR(GPIOE+0x0C, 8)
 #define READ_SCL          BIT_ADDR(GPIOE+0x08, 7)
