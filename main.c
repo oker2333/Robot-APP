@@ -41,6 +41,16 @@
 #include "cJSON.h"
 #endif
 
+#include "driver_mpu6050_register_test.h"
+#include "driver_mpu6050_read_test.h"
+#include "driver_mpu6050_fifo_test.h"
+#include "driver_mpu6050_dmp_read_test.h"
+#include "driver_mpu6050_dmp_tap_orient_motion_test.h"
+#include "driver_mpu6050_dmp_pedometer_test.h"
+#include "driver_mpu6050_basic.h"
+#include "driver_mpu6050_fifo.h"
+#include "driver_mpu6050_dmp.h"
+
 /* global variable */
 SemaphoreHandle_t VL6180xSemaphore;
 SemaphoreHandle_t Usart1TxSemaphore;
@@ -76,6 +86,11 @@ static void InitTask( void *pvParameters );
 TaskHandle_t LogTaskHanle;
 static void LogTask( void *pvParameters );
 #endif
+
+#define MPU6050_TASK_PRIORITY 2
+#define MPU6050_TASK_STK_SIZE 1024
+TaskHandle_t MPU6050TaskHanle;
+static void MPU6050Task( void *pvParameters );
 
 #define REMOTE_CONTROL_TASK_PRIORITY 3
 #define REMOTE_CONTROL_TASK_STK_SIZE 100
@@ -188,6 +203,7 @@ static void InitTask( void *pvParameters )
 		
 		xTaskCreate(VelocityMeasurementTask, "VelocityMeasurementTask", SPEED_TASK_STK_SIZE, NULL, SPEED_TASK_PRIORITY, &SpeedTaskHanle);
 		xTaskCreate(VL6180xTask, "VL6180xTask", VL6180x_TASK_STK_SIZE, NULL, VL6180x_TASK_PRIORITY, &VL6180xTaskHanle);
+		xTaskCreate(MPU6050Task, "MPU6050Task", MPU6050_TASK_STK_SIZE, NULL, MPU6050_TASK_PRIORITY, &MPU6050TaskHanle);
 		#if FIFO_DEBUG
 		xTaskCreate(LogTask, "LogTask", LOG_TASK_STK_SIZE, NULL, LOG_TASK_PRIORITY, &LogTaskHanle);
 		#endif
@@ -204,6 +220,52 @@ static void InitTask( void *pvParameters )
 				vTaskDelay(pdMS_TO_TICKS(500));
 				GPIO_BOP(GPIOC) = GPIO_PIN_13;
 				vTaskDelay(pdMS_TO_TICKS(500));
+		}
+}
+
+static void MPU6050Task( void *pvParameters )
+{
+		uint8_t res;
+		uint16_t len;
+		static int16_t gs_accel_raw[2][3];
+		static float gs_accel_g[2][3];
+		static int16_t gs_gyro_raw[2][3];
+		static float gs_gyro_dps[2][3];
+		static int32_t gs_quat[2][4];
+		static float gs_pitch[2];
+		static float gs_roll[2];
+		static float gs_yaw[2];
+
+		mpu6050_address_t addr = MPU6050_ADDRESS_AD0_LOW;
+	
+		if (mpu6050_dmp_init(addr, a_receive_callback, 
+												 a_dmp_tap_callback, a_dmp_orient_callback) != 0)
+		{
+				return;
+		}
+		
+		while(pdTRUE)
+		{
+				len = 2;
+
+				mpu6050_dmp_read_all(gs_accel_raw, gs_accel_g,
+														 gs_gyro_raw, gs_gyro_dps, 
+														 gs_quat,
+														 gs_pitch, gs_roll, gs_yaw,
+														 &len);
+
+				printf("mpu6050: fifo %d.\n", len);
+				printf("mpu6050: pitch[0] is %0.2fdps. \n", gs_pitch[len-1]);
+				printf("mpu6050: roll[0] is %0.2fdps. \n", gs_roll[len-1]);
+				printf("mpu6050: yaw[0] is %0.2fdps. \n", gs_yaw[len-1]);
+				printf("mpu6050: acc x[0] is %0.2fg. \n", gs_accel_g[len-1][0]);
+				printf("mpu6050: acc y[0] is %0.2fg. \n", gs_accel_g[len-1][1]);
+				printf("mpu6050: acc z[0] is %0.2fg. \n", gs_accel_g[len-1][2]);
+				printf("mpu6050: gyro x[0] is %0.2fdps. \n", gs_gyro_dps[len-1][0]);
+				printf("mpu6050: gyro y[0] is %0.2fdps. \n", gs_gyro_dps[len-1][1]);
+				printf("mpu6050: gyro z[0] is %0.2fdps. \n\033[m", gs_gyro_dps[len-1][2]);
+
+				vTaskDelay(pdMS_TO_TICKS(10));
 		}
 }
 

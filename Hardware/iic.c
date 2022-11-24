@@ -277,9 +277,32 @@ uint8_t VL6180_Read_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, ui
  *         - 0 success
  * @note   none
  */
+
+#define DELAY_TIM_PERIOD  5000
+#define DELAY_TIM_PSC 120
+
 uint8_t delay_init(void)
 {
-	 
+    timer_oc_parameter_struct timer_ocintpara;
+    timer_parameter_struct timer_initpara;
+
+    rcu_periph_clock_enable(RCU_TIMER4);
+
+    timer_deinit(TIMER4);
+
+    /* TIMER4 configuration */
+    timer_initpara.prescaler         = DELAY_TIM_PSC - 1;
+    timer_initpara.alignedmode       = TIMER_COUNTER_EDGE;
+    timer_initpara.counterdirection  = TIMER_COUNTER_UP;
+    timer_initpara.period            = DELAY_TIM_PERIOD - 1;
+    timer_initpara.clockdivision     = TIMER_CKDIV_DIV1;
+    timer_initpara.repetitioncounter = 0;
+    timer_init(TIMER4,&timer_initpara);
+
+    /* auto-reload preload enable */
+    timer_auto_reload_shadow_enable(TIMER4);
+    /* auto-reload preload enable */
+    timer_enable(TIMER4);
 }
 
 /**
@@ -289,7 +312,8 @@ uint8_t delay_init(void)
  */
 void delay_us(uint32_t us)
 {
-	 
+	 TIMER_CNT(TIMER4) = 0;
+	 while(TIMER_CNT(TIMER4) <= us){}
 }
 
 /**
@@ -299,7 +323,10 @@ void delay_us(uint32_t us)
  */
 void delay_ms(uint32_t ms)
 {
-	 
+	 for(int i = 0;i < ms;i++)
+	 {
+		  delay_us(1000);
+	 }
 }
 
 /*************************************************Software IIC*************************************************/
@@ -337,8 +364,10 @@ void delay_ms(uint32_t ms)
  *         - 0 success
  * @note   SCL is PE7 and SDA is PE8
  */
-uint8_t software_iic_init(void)
+uint8_t iic_init(void)
 {
+	  delay_init();
+	  
 		rcu_periph_clock_enable(RCU_GPIOE);
 	  rcu_periph_clock_enable(RCU_AF);
 	  
@@ -356,7 +385,7 @@ uint8_t software_iic_init(void)
  *         - 0 success
  * @note   SCL is PE7 and SDA is PE8
  */
-uint8_t software_iic_deinit(void)
+uint8_t iic_deinit(void)
 {
     
     IIC_SDA = 1;

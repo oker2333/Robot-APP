@@ -11,9 +11,13 @@
 typedef uint32_t I2C_TypeDef;
 
 void bsp_iic_init(I2C_TypeDef I2Cx);
+
 uint8_t VL6180_Read_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint16_t Reg_Address);
+
 void VL6180_Write_Single_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint16_t Reg_Address,uint8_t WriteValue);
+
 uint8_t VL6180_Write_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint8_t *pBuffer,uint8_t NumByteToWrite);
+
 uint8_t VL6180_Read_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, uint8_t *pBuffer,uint8_t NumByteToRead);
 
 /*************************************************Software IIC*************************************************/
@@ -31,7 +35,7 @@ uint8_t VL6180_Read_Multiple_Register(I2C_TypeDef I2Cx, uint8_t SlaveAddress, ui
  *         - 0 success
  * @note   SCL is PE7 and SDA is PE8
  */
-uint8_t software_iic_init(void);
+uint8_t iic_init(void);
 
 /**
  * @brief  iic bus deinit
@@ -39,7 +43,7 @@ uint8_t software_iic_init(void);
  *         - 0 success
  * @note   SCL is PE7 and SDA is PE8
  */
-uint8_t software_iic_deinit(void);
+uint8_t iic_deinit(void);
 
 /**
  * @brief     iic bus write command
@@ -134,11 +138,8 @@ uint8_t iic_read_address16_with_scl(uint8_t addr, uint16_t reg, uint8_t *buf, ui
  * @}
  */
 
-
-
-
-
-
-
+uint8_t delay_init(void);
+void delay_us(uint32_t us);
+void delay_ms(uint32_t ms);
 
 #endif

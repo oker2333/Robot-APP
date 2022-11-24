@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F30X_HD,__TARGET_FPU_VFP</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\MsgHandler;.\Appliance</IncludePath>
+              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\MsgHandler;.\Appliance;.\MPU6050</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -627,11 +627,6 @@
               <FileType>1</FileType>
               <FilePath>.\Hardware\flash_rw.c</FilePath>
             </File>
-            <File>
-              <FileName>driver_mpu6050.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Hardware\driver_mpu6050.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
@@ -786,6 +781,66 @@
         </Group>
         <Group>
           <GroupName>EasyLogger</GroupName>
+        </Group>
+        <Group>
+          <GroupName>MPU6050</GroupName>
+          <Files>
+            <File>
+              <FileName>driver_mpu6050.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_basic.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_basic.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_dmp.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_dmp.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_dmp_pedometer_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_dmp_pedometer_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_dmp_read_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_dmp_read_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_dmp_tap_orient_motion_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_dmp_tap_orient_motion_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_fifo.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_fifo.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_fifo_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_fifo_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_read_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_read_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>driver_mpu6050_register_test.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\driver_mpu6050_register_test.c</FilePath>
+            </File>
+            <File>
+              <FileName>gd32F303_driver_mpu6050_interface.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MPU6050\gd32F303_driver_mpu6050_interface.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
