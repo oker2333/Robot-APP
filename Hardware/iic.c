@@ -314,12 +314,12 @@ void delay_ms(uint32_t ms)
 /**
  * @brief iic gpio operate definition
  */
-#if 0
+#if 1
 #define SCL_IN()          gpio_init(GPIOE, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ,GPIO_PIN_7)
 #define SCL_OUT()         gpio_init(GPIOE, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_7)
 #define SDA_IN()          gpio_init(GPIOE, GPIO_MODE_IN_FLOATING, GPIO_OSPEED_50MHZ,GPIO_PIN_8)
 #define SDA_OUT()         gpio_init(GPIOE, GPIO_MODE_OUT_PP, GPIO_OSPEED_50MHZ,GPIO_PIN_8)
-#else
+#else		//error
 #define SCL_IN()          {MEM_ADDR(GPIOE+0x00) &= ~(0x0F << (7 * 4)); MEM_ADDR(GPIOE+0x00) |= 0 << 7 * 4;}
 #define SCL_OUT()         {MEM_ADDR(GPIOE+0x00) &= ~(0x0F << (7 * 4)); MEM_ADDR(GPIOE+0x00) |= 1 << 7 * 4;}
 #define SDA_IN()          {MEM_ADDR(GPIOE+0x04) &= ~(0x0F << (0 * 4)); MEM_ADDR(GPIOE+0x04) |= 0 << 0 * 4;}
