@@ -230,9 +230,9 @@ static float gs_accel_g[MPU6050_BUFFER_SIZE][3];
 static int16_t gs_gyro_raw[MPU6050_BUFFER_SIZE][3];
 static float gs_gyro_dps[MPU6050_BUFFER_SIZE][3];
 static int32_t gs_quat[MPU6050_BUFFER_SIZE][4];
-static float gs_pitch[2];
-static float gs_roll[2];
-static float gs_yaw[2];
+static float gs_pitch[MPU6050_BUFFER_SIZE];
+static float gs_roll[MPU6050_BUFFER_SIZE];
+static float gs_yaw[MPU6050_BUFFER_SIZE];
 
 static void MPU6050Task( void *pvParameters )
 {
