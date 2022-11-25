@@ -223,19 +223,22 @@ static void InitTask( void *pvParameters )
 		}
 }
 
+#define MPU6050_BUFFER_SIZE 5
+
+static int16_t gs_accel_raw[MPU6050_BUFFER_SIZE][3];
+static float gs_accel_g[MPU6050_BUFFER_SIZE][3];
+static int16_t gs_gyro_raw[MPU6050_BUFFER_SIZE][3];
+static float gs_gyro_dps[MPU6050_BUFFER_SIZE][3];
+static int32_t gs_quat[MPU6050_BUFFER_SIZE][4];
+static float gs_pitch[2];
+static float gs_roll[2];
+static float gs_yaw[2];
+
 static void MPU6050Task( void *pvParameters )
 {
+
 		uint8_t res;
 		uint16_t len;
-		static int16_t gs_accel_raw[2][3];
-		static float gs_accel_g[2][3];
-		static int16_t gs_gyro_raw[2][3];
-		static float gs_gyro_dps[2][3];
-		static int32_t gs_quat[2][4];
-		static float gs_pitch[2];
-		static float gs_roll[2];
-		static float gs_yaw[2];
-
 		mpu6050_address_t addr = MPU6050_ADDRESS_AD0_LOW;
 	
 		if (mpu6050_dmp_init(addr, a_receive_callback, 
@@ -246,15 +249,18 @@ static void MPU6050Task( void *pvParameters )
 		
 		while(pdTRUE)
 		{
-				len = 2;
+				len = MPU6050_BUFFER_SIZE;
 
-				mpu6050_dmp_read_all(gs_accel_raw, gs_accel_g,
+				if(mpu6050_dmp_read_all(gs_accel_raw, gs_accel_g,
 														 gs_gyro_raw, gs_gyro_dps, 
 														 gs_quat,
 														 gs_pitch, gs_roll, gs_yaw,
-														 &len);
+														 &len) != 0)
+				{
+					 continue;
+				}
 
-				printf("mpu6050: fifo %d.\n", len);
+				printf("\033[1;1Hmpu6050: fifo %d.\n", len);
 				printf("mpu6050: pitch[0] is %0.2fdps. \n", gs_pitch[len-1]);
 				printf("mpu6050: roll[0] is %0.2fdps. \n", gs_roll[len-1]);
 				printf("mpu6050: yaw[0] is %0.2fdps. \n", gs_yaw[len-1]);
