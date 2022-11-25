@@ -223,7 +223,7 @@ static void InitTask( void *pvParameters )
 		}
 }
 
-#define MPU6050_BUFFER_SIZE 5
+#define MPU6050_BUFFER_SIZE 3
 
 static int16_t gs_accel_raw[MPU6050_BUFFER_SIZE][3];
 static float gs_accel_g[MPU6050_BUFFER_SIZE][3];
@@ -261,15 +261,15 @@ static void MPU6050Task( void *pvParameters )
 				}
 
 				printf("\033[1;1Hmpu6050: fifo %d.\n", len);
-				printf("mpu6050: pitch[0] is %0.2fdps. \n", gs_pitch[len-1]);
-				printf("mpu6050: roll[0] is %0.2fdps. \n", gs_roll[len-1]);
-				printf("mpu6050: yaw[0] is %0.2fdps. \n", gs_yaw[len-1]);
-				printf("mpu6050: acc x[0] is %0.2fg. \n", gs_accel_g[len-1][0]);
-				printf("mpu6050: acc y[0] is %0.2fg. \n", gs_accel_g[len-1][1]);
-				printf("mpu6050: acc z[0] is %0.2fg. \n", gs_accel_g[len-1][2]);
-				printf("mpu6050: gyro x[0] is %0.2fdps. \n", gs_gyro_dps[len-1][0]);
-				printf("mpu6050: gyro y[0] is %0.2fdps. \n", gs_gyro_dps[len-1][1]);
-				printf("mpu6050: gyro z[0] is %0.2fdps. \n\033[m", gs_gyro_dps[len-1][2]);
+				printf("mpu6050: pitch[%d] is %0.2fdps. \n", len-1, gs_pitch[len-1]);
+				printf("mpu6050: roll[%d] is %0.2fdps. \n", len-1, gs_roll[len-1]);
+				printf("mpu6050: yaw[%d] is %0.2fdps. \n", len-1, gs_yaw[len-1]);
+				printf("mpu6050: acc x[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][0]);
+				printf("mpu6050: acc y[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][1]);
+				printf("mpu6050: acc z[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][2]);
+				printf("mpu6050: gyro x[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][0]);
+				printf("mpu6050: gyro y[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][1]);
+				printf("mpu6050: gyro z[%d] is %0.2fdps. \n\033[m", len-1, gs_gyro_dps[len-1][2]);
 
 				vTaskDelay(pdMS_TO_TICKS(10));
 		}
