@@ -29,6 +29,8 @@
 
 #include "timer.h"
 
+#include "upload.h"
+
 #include "pid.h"
 
 #include "switch.h"
@@ -247,8 +249,7 @@ static void MPU6050Task( void *pvParameters )
 		uint16_t len;
 		mpu6050_address_t addr = MPU6050_ADDRESS_AD0_LOW;
 	
-		if (mpu6050_dmp_init(addr, a_receive_callback, 
-												 a_dmp_tap_callback, a_dmp_orient_callback) != 0)
+		if (mpu6050_dmp_init(addr, a_receive_callback, NULL, NULL) != 0)
 		{
 				return;
 		}
@@ -266,6 +267,7 @@ static void MPU6050Task( void *pvParameters )
 					 continue;
 				}
 
+				#if true
 				printf("\033[1;1Hmpu6050: fifo %d.\n", len);
 				printf("mpu6050: pitch[%d] is %0.2fdps. \n", len-1, gs_pitch[len-1]);
 				printf("mpu6050: roll[%d] is %0.2fdps. \n", len-1, gs_roll[len-1]);
@@ -276,6 +278,7 @@ static void MPU6050Task( void *pvParameters )
 				printf("mpu6050: gyro x[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][0]);
 				printf("mpu6050: gyro y[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][1]);
 				printf("mpu6050: gyro z[%d] is %0.2fdps. \n\033[m", len-1, gs_gyro_dps[len-1][2]);
+				#endif
 
 				vTaskDelay(pdMS_TO_TICKS(10));
 		}
@@ -285,6 +288,9 @@ static void CommunicationTask( void *pvParameters )
 {
 		while(pdTRUE)
 		{
+			 timing_uploader();
+			 active_uploader();
+			 
 			 DataFrame_Handle();
 			 DataFrame_Transmit();
 			 vTaskDelay(pdMS_TO_TICKS(10));
@@ -404,7 +410,6 @@ static void TimingUploadTask(void *pvParameters)
 {
 	 while(pdTRUE)
 	 {
-		  timing_uploader();
 		  vTaskDelay(pdMS_TO_TICKS(10));
 	 }
 }
@@ -413,7 +418,6 @@ static void ActiveUploadTask(void *pvParameters)
 {
 	 while(pdTRUE)
 	 {
-		  
 		  vTaskDelay(pdMS_TO_TICKS(10));
 	 }
 }

@@ -52,7 +52,7 @@ extern "C"{
  * @brief mpu6050 dmp example default definition
  */
 #define MPU6050_DMP_DEFAULT_CLOCK_SOURCE                   MPU6050_CLOCK_SOURCE_PLL_X_GYRO           /**< gyro pll x */
-#define MPU6050_DMP_DEFAULT_RATE                           200                                       /**< 500Hz */
+#define MPU6050_DMP_DEFAULT_RATE                           250                                       /**< 500Hz */
 #define MPU6050_DMP_DEFAULT_ACCELEROMETER_RANGE            MPU6050_ACCELEROMETER_RANGE_2G            /**< 2g */
 #define MPU6050_DMP_DEFAULT_GYROSCOPE_RANGE                MPU6050_GYROSCOPE_RANGE_2000DPS           /**< 2000dps */
 #define MPU6050_DMP_DEFAULT_LOW_PASS_FILTER                MPU6050_LOW_PASS_FILTER_3                 /**< low pass filter 3 */
@@ -60,7 +60,7 @@ extern "C"{
 #define MPU6050_DMP_DEFAULT_WAKE_UP_FREQUENCY              MPU6050_WAKE_UP_FREQUENCY_1P25_HZ         /**< 1.25Hz */
 #define MPU6050_DMP_DEFAULT_INTERRUPT_PIN_LEVEL            MPU6050_PIN_LEVEL_LOW                     /**< low level */
 #define MPU6050_DMP_DEFAULT_INTERRUPT_PIN_TYPE             MPU6050_PIN_TYPE_PUSH_PULL                /**< push pull */
-#define MPU6050_DMP_DEFAULT_INTERRUPT_MOTION               MPU6050_BOOL_TRUE                         /**< enable motion */
+#define MPU6050_DMP_DEFAULT_INTERRUPT_MOTION               MPU6050_BOOL_FALSE                         /**< enable motion */
 #define MPU6050_DMP_DEFAULT_INTERRUPT_FIFO_OVERFLOW        MPU6050_BOOL_TRUE                         /**< enable fifo overflow */
 #define MPU6050_DMP_DEFAULT_INTERRUPT_DMP                  MPU6050_BOOL_FALSE                        /**< disable dmp */
 #define MPU6050_DMP_DEFAULT_INTERRUPT_I2C_MAST             MPU6050_BOOL_FALSE                        /**< disable i2c master */

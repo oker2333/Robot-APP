@@ -14,7 +14,7 @@
 
 #define BINARY_VERSION "V0.0.1"
 
-#define MPU6050_BUFFER_SIZE 8
+#define MPU6050_BUFFER_SIZE 10
 
 #define PI (3.141592f)
 
