@@ -217,7 +217,7 @@ void ir_state_machine (void)
 				 {
 					   ir_state = ADDRESS_REVERSE;
 					   ir_data.index = 0;
-					   printf("address_original = 0x%x\n",ir_data.address_original);
+					   robot_print("address_original = 0x%x\n",ir_data.address_original);
 				 }
 		  break;
 
@@ -245,7 +245,7 @@ void ir_state_machine (void)
 				 {
 					   ir_state = COMMAND_ORIGINAL;
 					   ir_data.index = 0;
-					   printf("address_reverse = 0x%x\n",ir_data.address_reverse);
+					   robot_print("address_reverse = 0x%x\n",ir_data.address_reverse);
 				 }
 		  break;
 
@@ -273,7 +273,7 @@ void ir_state_machine (void)
 				 {
 					   ir_state = COMMAND_REVERSE;
 					   ir_data.index = 0;
-					   printf("command_original = 0x%x\n",ir_data.command_original);
+					   robot_print("command_original = 0x%x\n",ir_data.command_original);
 				 }
 		  break;
 
@@ -302,7 +302,7 @@ void ir_state_machine (void)
 					   ir_state = REPEAT_CODE_PRE;
 					   ir_data.index = 0;
 					   xSemaphoreGiveFromISR(IRSemaphore,&pxHigherPriorityTaskWoken);
-					   printf("command_reverse = 0x%x\n",ir_data.command_reverse);
+					   robot_print("command_reverse = 0x%x\n",ir_data.command_reverse);
 				 }
 		  break;
 
@@ -330,7 +330,7 @@ void ir_state_machine (void)
 					  ir_data.repeat_conter++;
 					  ir_state = REPEAT_CODE_PRE;
 					  xSemaphoreGiveFromISR(IRSemaphore,&pxHigherPriorityTaskWoken);
-					  printf("repeat_conter = %d\n",ir_data.repeat_conter);
+					  robot_print("repeat_conter = %d\n",ir_data.repeat_conter);
 				 }
 				 else
 				 {
@@ -340,7 +340,7 @@ void ir_state_machine (void)
 		  break;
 			
 		  default:
-			   printf("IR State Error\n");
+			   robot_print("IR State Error\n");
 		  break;
 	 }
 	 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);

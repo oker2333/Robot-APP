@@ -29,7 +29,7 @@ void download_address_update(void)
 		{
 			 app_download_address = APP_ADDRESS_A;
 		}
-		printf("app download address = 0x%x\n",app_download_address);
+		robot_print("app download address = 0x%x\n",app_download_address);
 }
 
 
@@ -58,7 +58,7 @@ uint32_t Download2Flash(int8_t OTA_Device,uint32_t OTA_Offset,uint8_t *OTA_Data,
 		  uint32_t Cur_Download_Addr = Frame_ID * FMC_PAGE_SIZE + download_address;
 		  
 		  flash_write_buffer(Cur_Download_Addr, OTA_Page_Buffer,OTA_Count);
-		  printf("[frame id %d]Current Download Address 0x%x,OTA_Count = %d\r\n",Frame_ID,Cur_Download_Addr,OTA_Count);
+		  robot_print("[frame id %d]Current Download Address 0x%x,OTA_Count = %d\r\n",Frame_ID,Cur_Download_Addr,OTA_Count);
 		  
 		  Frame_ID++;
 		  OTA_Count = 0x00;
@@ -68,7 +68,7 @@ uint32_t Download2Flash(int8_t OTA_Device,uint32_t OTA_Offset,uint8_t *OTA_Data,
 		  uint32_t Cur_Download_Addr = Frame_ID * FMC_PAGE_SIZE + download_address;
 		  
 		  flash_write_buffer(Cur_Download_Addr, OTA_Page_Buffer,OTA_Count);
-		  printf("[frame id %d]Current Download Address 0x%x,OTA_Count = %d\r\n",Frame_ID,Cur_Download_Addr,OTA_Count);
+		  robot_print("[frame id %d]Current Download Address 0x%x,OTA_Count = %d\r\n",Frame_ID,Cur_Download_Addr,OTA_Count);
 		  OTA_Count = 0x00;
 		  Frame_ID = 0x00;
 	 }
@@ -78,7 +78,7 @@ uint32_t Download2Flash(int8_t OTA_Device,uint32_t OTA_Offset,uint8_t *OTA_Data,
 uint8_t FlashBinaryCheck(int8_t OTA_Device,uint16_t Binary_Version,uint16_t CRC16,uint32_t OTA_Rev_Bytes)
 {
 	 uint16_t FileCRCActual = CRC16_CCITT_FALSE(((uint8_t*)download_address), OTA_Rev_Bytes);
-	 printf("FileSize = %d Bytes,FileCRC = 0x%x,FileCRCActual = 0x%x\r\n",OTA_Rev_Bytes,CRC16,FileCRCActual);
+	 robot_print("FileSize = %d Bytes,FileCRC = 0x%x,FileCRCActual = 0x%x\r\n",OTA_Rev_Bytes,CRC16,FileCRCActual);
 	 
 	 if(CRC16 == FileCRCActual)
 	 {

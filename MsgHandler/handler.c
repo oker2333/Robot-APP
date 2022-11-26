@@ -67,7 +67,7 @@ void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t
 
 bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len)
 {
-	printf("[datalink_frame_send]cmd = 0x%x\r\n",cmd);
+	robot_print("[datalink_frame_send]cmd = 0x%x\r\n",cmd);
 	uint16_t invoke_id = 0;
 	bool ret = false;
 	uint8_t fail_count = 0;
@@ -85,7 +85,7 @@ bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t l
 	}
 	if(fail_count != 0)
 	{
-		 printf("[datalink_frame_send]wait ack failed %d times\r\n",fail_count);
+		 robot_print("[datalink_frame_send]wait ack failed %d times\r\n",fail_count);
 	}
 	return ret;
 }
@@ -138,7 +138,7 @@ void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 				
 			break;
 		}
-		printf("[Control_Handler]cmd = 0x%x\r\n",cmd);
+		robot_print("[Control_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
@@ -162,7 +162,7 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 			   semaphore_post(KEY_ID);
 		 break;
 	}
-	printf("[Upload_Handler]cmd = 0x%x\r\n",cmd);
+	robot_print("[Upload_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
@@ -190,7 +190,7 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 			 OTA_Device = UserData[0];
 		   uint32_t OTA_Offset = (UserData[1] << 24) | (UserData[2] << 16) | (UserData[3] << 8) | (UserData[4] << 0);
 		   uint32_t OTA_Length = (UserData[5] << 8) | (UserData[6] << 0);
-		   printf("OTA_Offset = %d,OTA_Length = %d\r\n",OTA_Offset,OTA_Length);
+		   robot_print("OTA_Offset = %d,OTA_Length = %d\r\n",OTA_Offset,OTA_Length);
 
 		   OTA_Rev_Bytes = Download2Flash(OTA_Device,OTA_Offset,&UserData[7],OTA_Length);
 		   
@@ -217,7 +217,7 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 			 
 		 break;
 	 }	 
-	 printf("[OTA_Handler]cmd = 0x%x\r\n",cmd);
+	 robot_print("[OTA_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 msg_handler_t Callback_Handler[CALLBACK_NUM] = {Online_Handler,Inquire_Handler,Control_Handler,Timing_Handler,Upload_Handler,OTA_Handler};

@@ -71,7 +71,7 @@ void Key_CallBack_FMS(void)
 		 break;
 		 
 		 default:
-			 printf("[Key_CallBack_FMS]error state = %d\r\n",state);
+			 robot_print("[Key_CallBack_FMS]error state = %d\r\n",state);
 		 break;
 	 }
 }
@@ -92,11 +92,11 @@ void Key_Interrupt_FMS(void)
 		 case LOW_UP:
 		   if(press_time >= LONG_PRESS_TIME)
 			 {
-				  printf("long press %d ms\r\n",press_time*10);
+				  robot_print("long press %d ms\r\n",press_time*10);
 			 }
 			 else
 			 {
-				  printf("short press %d ms\r\n",press_time*10);
+				  robot_print("short press %d ms\r\n",press_time*10);
 			 }
 			 press_time = 0;
 			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
@@ -106,7 +106,7 @@ void Key_Interrupt_FMS(void)
 		 break;
 
 		 default:
-			 printf("[Key_Interrupt_FMS]error state = %d\r\n",state);
+			 robot_print("[Key_Interrupt_FMS]error state = %d\r\n",state);
 		 break;			 
 
 	 }

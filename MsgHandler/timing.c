@@ -32,7 +32,7 @@ static uint16_t BitMask = 0x00FF;
 void BitMask_Set(uint16_t DataByte)
 {
 	 BitMask = DataByte;
-	 printf("BitMask = 0x%x\n",BitMask);
+	 robot_print("BitMask = 0x%x\n",BitMask);
 }
 
 uint8_t timing_upload_frame(SensorBit_t Bit,uint8_t* buffer,uint8_t index)
@@ -68,7 +68,7 @@ uint8_t timing_upload_frame(SensorBit_t Bit,uint8_t* buffer,uint8_t index)
 			break;
 
 			default:
-				printf("Unsupport Sensor Bit\n");
+				robot_print("Unsupport Sensor Bit\n");
 			break;
 	 }
 	 return index;

@@ -274,20 +274,20 @@ void testCRC8CreateTable(
     int i;
 
     (void) pTest;
-    printf("static const uint8_t HeaderCRC[256] =\n");
-    printf("{\n");
-    printf("    ");
+    robot_print("static const uint8_t HeaderCRC[256] =\n");
+    robot_print("{\n");
+    robot_print("    ");
     for (i = 0; i < 256; i++) {
         crc = CRC_Calc_Header(i, 0);
-        printf("0x%02x, ", crc);
+        robot_print("0x%02x, ", crc);
         if (!((i + 1) % 8)) {
-            printf("\n");
+            robot_print("\n");
             if (i != 255) {
-                printf("    ");
+                robot_print("    ");
             }
         }
     }
-    printf("};\n");
+    robot_print("};\n");
 }
 
 void testCRC16CreateTable(
@@ -297,20 +297,20 @@ void testCRC16CreateTable(
     int i;
 
     (void) pTest;
-    printf("static const uint16_t DataCRC[256] =\n");
-    printf("{\n");
-    printf("    ");
+    robot_print("static const uint16_t DataCRC[256] =\n");
+    robot_print("{\n");
+    robot_print("    ");
     for (i = 0; i < 256; i++) {
         crc = CRC_Calc_Data(i, 0);
-        printf("0x%04x, ", crc);
+        robot_print("0x%04x, ", crc);
         if (!((i + 1) % 8)) {
-            printf("\n");
+            robot_print("\n");
             if (i != 255) {
-                printf("    ");
+                robot_print("    ");
             }
         }
     }
-    printf("};\n");
+    robot_print("};\n");
 }
 
 #endif

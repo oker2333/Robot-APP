@@ -149,7 +149,7 @@ void motor_control(int32_t left,int32_t right)
 			}
 			right_velocity = right;
 	 }
-	 printf("[motor_control]left_velocity = %d,right_velocity = %d\r\n",left_velocity,right_velocity);
+	 robot_print("[motor_control]left_velocity = %d,right_velocity = %d\r\n",left_velocity,right_velocity);
 }
 
 static void Left_PID_Controller(int left_measure,int left_target)

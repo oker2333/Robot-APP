@@ -131,7 +131,7 @@ static void ActiveUploadTask( void *pvParameters );
 TaskHandle_t ConsoleTaskHanle;
 static void ConsoleTask( void *pvParameters );
 
-// printf("/*value:%f:%f*/\r\n",value1,value2);
+// robot_print("/*value:%f:%f*/\r\n",value1,value2);
 /*
 	Serial Studio json conf
 */
@@ -178,7 +178,7 @@ static void InitTask( void *pvParameters )
 	  #endif
 		dma_usart1_init(460800);
 		
-		printf("APP %s is running,welcome to robot console.\n",BINARY_VERSION);
+		robot_print("APP %s is running,welcome to robot console.\n",BINARY_VERSION);
 		
 		bsp_iic_init(I2C0);
 		
@@ -268,16 +268,16 @@ static void MPU6050Task( void *pvParameters )
 				}
 
 				#if true
-				printf("\033[1;1Hmpu6050: fifo %d.\n", len);
-				printf("mpu6050: pitch[%d] is %0.2fdps. \n", len-1, gs_pitch[len-1]);
-				printf("mpu6050: roll[%d] is %0.2fdps. \n", len-1, gs_roll[len-1]);
-				printf("mpu6050: yaw[%d] is %0.2fdps. \n", len-1, gs_yaw[len-1]);
-				printf("mpu6050: acc x[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][0]);
-				printf("mpu6050: acc y[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][1]);
-				printf("mpu6050: acc z[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][2]);
-				printf("mpu6050: gyro x[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][0]);
-				printf("mpu6050: gyro y[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][1]);
-				printf("mpu6050: gyro z[%d] is %0.2fdps. \n\033[m", len-1, gs_gyro_dps[len-1][2]);
+				robot_print("\033[1;1Hmpu6050: fifo %d.\n", len);
+				robot_print("mpu6050: pitch[%d] is %0.2fdps. \n", len-1, gs_pitch[len-1]);
+				robot_print("mpu6050: roll[%d] is %0.2fdps. \n", len-1, gs_roll[len-1]);
+				robot_print("mpu6050: yaw[%d] is %0.2fdps. \n", len-1, gs_yaw[len-1]);
+				robot_print("mpu6050: acc x[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][0]);
+				robot_print("mpu6050: acc y[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][1]);
+				robot_print("mpu6050: acc z[%d] is %0.2fg. \n", len-1, gs_accel_g[len-1][2]);
+				robot_print("mpu6050: gyro x[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][0]);
+				robot_print("mpu6050: gyro y[%d] is %0.2fdps. \n", len-1, gs_gyro_dps[len-1][1]);
+				robot_print("mpu6050: gyro z[%d] is %0.2fdps. \n\033[m", len-1, gs_gyro_dps[len-1][2]);
 				#endif
 
 				vTaskDelay(pdMS_TO_TICKS(10));
@@ -365,16 +365,16 @@ static void RemoteControlTask(void *pvParameters)
 				 
 				 case ZERO:
 					 VELOCITY -= 20;
-				   printf("Remote Control Set Velocity %d mm/s\n",VELOCITY);
+				   robot_print("Remote Control Set Velocity %d mm/s\n",VELOCITY);
 				 break;
 				 
 				 case C:
 					 VELOCITY += 20;
-				   printf("Remote Control Set Velocity %d mm/s\n",VELOCITY);
+				   robot_print("Remote Control Set Velocity %d mm/s\n",VELOCITY);
 				 break;
 				 
 				 default:
-					 printf("unsupported ir key type\n");
+					 robot_print("unsupported ir key type\n");
 				 break;
 			 }			 
 		}
@@ -398,7 +398,7 @@ static void VelocityMeasurementTask(void *pvParameters)
 			 cJSON_AddNumberToObject(cJSON_Velocity, "right_velocity", get_right_velocity());
 			
 			 cJSON_Str = cJSON_Print(cJSON_Velocity);
-			 printf("%s\r\n",cJSON_Str);
+			 robot_print("%s\r\n",cJSON_Str);
 			
 			 cJSON_Delete(cJSON_Velocity);
 			 free(cJSON_Str);

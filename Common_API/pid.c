@@ -95,7 +95,7 @@ int IncPIDCalc_r(int SetPoint,int measurement)
 		{
 			 return INT_MAX;
 		}
-	  printf("velocity_r error = %d\n",sptr_r->iError);
+	  robot_print("velocity_r error = %d\n",sptr_r->iError);
     //增量误差
     sptr_r->iIncpid = sptr_r->Proportion * sptr_r->iError - sptr_r->Integral * sptr_r->LastError
                     + sptr_r->Derivative * sptr_r->PrevError;

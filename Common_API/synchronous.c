@@ -61,14 +61,14 @@ bool semaphore_timed_wait(Sensor_Id_t id)
 	
 	sem_ptr = get_semaphore(id);
 	if(!sem_ptr){
-		printf("get_semaphore failed\r\n");
+		robot_print("get_semaphore failed\r\n");
 		return false;
 	}
 	
 	err = xSemaphoreTake(sem_ptr, pdMS_TO_TICKS(TIMEOUT_MS));
 	if(err == pdFALSE){
 		free_semaphore(id);
-		printf("xSemaphoreTake error\r\n");
+		robot_print("xSemaphoreTake error\r\n");
 		return false;
 	}
 
@@ -80,7 +80,7 @@ bool semaphore_post(Sensor_Id_t id)
 {
 	SemaphoreHandle_t sem_ptr = search_semaphore(id);
 	if(sem_ptr == NULL){
-		printf("semaphore posted doesn't exist\r\n");
+		robot_print("semaphore posted doesn't exist\r\n");
 		return false;
 	}
 	
@@ -88,7 +88,7 @@ bool semaphore_post(Sensor_Id_t id)
 	err = xSemaphoreGive(sem_ptr);
 	if(err == pdFALSE)
 	{
-		 printf("semaphore posted failed\r\n");
+		 robot_print("semaphore posted failed\r\n");
 		 return false;
 	}
 	
