@@ -120,6 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
+          <Name></Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -994,8 +995,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\MPU6050\gd32F303_driver_mpu6050_interface.c</PathWithFileName>
-      <FilenameWithoutPath>gd32F303_driver_mpu6050_interface.c</FilenameWithoutPath>
+      <PathWithFileName>.\MPU6050\gd32f303_driver_mpu6050_interface.c</PathWithFileName>
+      <FilenameWithoutPath>gd32f303_driver_mpu6050_interface.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

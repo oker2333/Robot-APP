@@ -32,10 +32,16 @@ typedef enum{
 	OTA_START = 0x0500,
 	OTA_ACK = 0x8500,
 	OTA_END = 0x0502,
-	OTA_FRAME = 0x0503
+	OTA_FRAME = 0x0503,
+	
+	/* TIMING */
+	TIMING_UPLOAD = 0x0301
 }msg_cmd_t;
 
+uint16_t find_free_invoke_id(void);
+
 bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len);
+void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength);
 
 
 #endif

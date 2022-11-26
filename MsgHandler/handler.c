@@ -11,10 +11,31 @@
 
 #include "motor.h"
 
-static uint16_t invoke_id = 0;
+union U8_TO_FLOAT
+{
+	float f;
+	unsigned char u8[4];
+};
+
+float u8_to_float(uint8_t* buffer)
+{
+	union U8_TO_FLOAT temp;
+	for(int i = 0;i < 4;i ++)
+	{
+		temp.u8[i] = buffer[i];
+	}
+	return temp.f;
+}
+
+void float_to_u8(uint8_t* buffer,float value)
+{
+	union U8_TO_FLOAT temp;
+	temp.f = value;
+}
 
 uint16_t find_free_invoke_id(void)
 {
+  static uint16_t invoke_id = 0;
 	return invoke_id++;
 }
 

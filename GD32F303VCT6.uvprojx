@@ -713,9 +713,9 @@
               <FilePath>.\MPU6050\driver_mpu6050_register_test.c</FilePath>
             </File>
             <File>
-              <FileName>gd32F303_driver_mpu6050_interface.c</FileName>
+              <FileName>gd32f303_driver_mpu6050_interface.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\MPU6050\gd32F303_driver_mpu6050_interface.c</FilePath>
+              <FilePath>.\MPU6050\gd32f303_driver_mpu6050_interface.c</FilePath>
             </File>
           </Files>
         </Group>

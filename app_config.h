@@ -14,6 +14,8 @@
 
 #define BINARY_VERSION "V0.0.1"
 
+#define MPU6050_BUFFER_SIZE 3
+
 #define PI (3.141592f)
 
 #define VELOCITY_MEASUREMENT_INTERVAL 50
@@ -53,5 +55,17 @@ extern SemaphoreHandle_t Usart1TxSemaphore;
 extern SemaphoreHandle_t VL6180xSemaphore;
 
 extern SemaphoreHandle_t Usar0TxSemaphore;
+
+extern uint16_t tof_mm;
+extern uint8_t ir_value;
+
+extern int16_t gs_accel_raw[MPU6050_BUFFER_SIZE][3];
+extern float gs_accel_g[MPU6050_BUFFER_SIZE][3];
+extern int16_t gs_gyro_raw[MPU6050_BUFFER_SIZE][3];
+extern float gs_gyro_dps[MPU6050_BUFFER_SIZE][3];
+extern int32_t gs_quat[MPU6050_BUFFER_SIZE][4];
+extern float gs_pitch[MPU6050_BUFFER_SIZE];
+extern float gs_roll[MPU6050_BUFFER_SIZE];
+extern float gs_yaw[MPU6050_BUFFER_SIZE];
 
 #endif

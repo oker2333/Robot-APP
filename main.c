@@ -25,6 +25,8 @@
 
 #include "ota.h"
 
+#include "timing.h"
+
 #include "timer.h"
 
 #include "pid.h"
@@ -223,16 +225,14 @@ static void InitTask( void *pvParameters )
 		}
 }
 
-#define MPU6050_BUFFER_SIZE 3
-
-static int16_t gs_accel_raw[MPU6050_BUFFER_SIZE][3];
-static float gs_accel_g[MPU6050_BUFFER_SIZE][3];
-static int16_t gs_gyro_raw[MPU6050_BUFFER_SIZE][3];
-static float gs_gyro_dps[MPU6050_BUFFER_SIZE][3];
-static int32_t gs_quat[MPU6050_BUFFER_SIZE][4];
-static float gs_pitch[MPU6050_BUFFER_SIZE];
-static float gs_roll[MPU6050_BUFFER_SIZE];
-static float gs_yaw[MPU6050_BUFFER_SIZE];
+int16_t gs_accel_raw[MPU6050_BUFFER_SIZE][3];
+float gs_accel_g[MPU6050_BUFFER_SIZE][3];
+int16_t gs_gyro_raw[MPU6050_BUFFER_SIZE][3];
+float gs_gyro_dps[MPU6050_BUFFER_SIZE][3];
+int32_t gs_quat[MPU6050_BUFFER_SIZE][4];
+float gs_pitch[MPU6050_BUFFER_SIZE];
+float gs_roll[MPU6050_BUFFER_SIZE];
+float gs_yaw[MPU6050_BUFFER_SIZE];
 
 static void MPU6050Task( void *pvParameters )
 {
@@ -285,6 +285,8 @@ static void CommunicationTask( void *pvParameters )
 		}
 }
 
+uint16_t tof_mm = 0;
+
 static void VL6180xTask( void *pvParameters )
 {
 	 VL6180x_RangeData_t RangeData;
@@ -296,11 +298,10 @@ static void VL6180xTask( void *pvParameters )
 		    xSemaphoreTake(VL6180xSemaphore, portMAX_DELAY);
         VL6180x_RangeGetMeasurement(theVL6180xDev, &RangeData);
         if( RangeData.errorStatus == 0){
-            MyDev_ShowRange(theVL6180xDev, RangeData.range_mm, 0);
-					  printf("RangeData.range_mm = $%d;\n",RangeData.range_mm);
+					  tof_mm = RangeData.range_mm;
         }
         else{
-            MyDev_ShowErr(theVL6180xDev, RangeData.errorStatus);
+            tof_mm = -1;
         }
 				VL6180x_RangeClearInterrupt(theVL6180xDev);
 				VL6180x_INT_Enable();
@@ -318,15 +319,17 @@ static void LogTask(void *pvParameters)
 }
 #endif
 
+uint8_t ir_value = NONE;
+
 static void RemoteControlTask(void *pvParameters)
 {
 	 int32_t VELOCITY = 80;
 
 	  while(pdTRUE)
 		{
-			 IR_Key_t ir_key = IR_Key_Obtain();
+			 ir_value = IR_Key_Obtain();
 			 
-			 switch(ir_key)
+			 switch(ir_value)
 			 {
 				 case LEFT:
 					 pid_motor_control(-VELOCITY,VELOCITY);
@@ -395,6 +398,7 @@ static void SensorUploadionTask(void *pvParameters)
 {
 	 while(pdTRUE)
 	 {
+		  timing_uploader();
 		  vTaskDelay(pdMS_TO_TICKS(10));
 	 }
 }
