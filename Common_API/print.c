@@ -41,7 +41,7 @@ int robot_print(const char *const fmt, ...)
 	  for(int i = 0;i <= len;i++)
 	  {
 			#if FIFO_DEBUG
-			FIFO_Put(Queue_log,ch);
+			FIFO_Put(Queue_log,log_str[i]);
 			#else
 			while(RESET == usart_flag_get(USART0, USART_FLAG_TBE));
 			usart_data_transmit(USART0, log_str[i]);
