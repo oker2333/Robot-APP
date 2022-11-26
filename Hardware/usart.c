@@ -5,6 +5,10 @@
 #include "gd32f30x_libopt.h"
 #include "app_config.h"
 
+uint8_t console_buffer[CONSOLE_BUFFER_LEN] = {0};
+uint8_t console_header = 0;
+uint8_t console_tail = 0;
+
 #if FIFO_DEBUG
 static void usart_config(uint32_t baudval)
 {
@@ -180,10 +184,6 @@ void usart0_init(uint32_t baudval)
 		usart_interrupt_enable(USART0, USART_INT_RBNE);
     usart_enable(USART0);
 }
-
-uint8_t console_buffer[CONSOLE_BUFFER_LEN] = {0};
-uint8_t console_header = 0;
-uint8_t console_tail = 0;
 
 void USART0_IRQHandler(void)
 {

@@ -24,7 +24,7 @@ int fputc(int ch, FILE *f)
 	  return 0;
 }
 
-#define LOG_MAX_LEN 256
+#define LOG_MAX_LEN 64
 
 int robot_print(const char *const fmt, ...)
 {
