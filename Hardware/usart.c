@@ -29,8 +29,8 @@ static void usart_config(uint32_t baudval)
     usart_receive_config(USART0, USART_RECEIVE_ENABLE);
     usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);
 		nvic_irq_enable(USART0_IRQn, 10, 0);
-    usart_interrupt_enable(USART0, USART_INT_IDLE);
 		usart_interrupt_enable(USART0, USART_INT_TC);
+	  usart_interrupt_enable(USART0, USART_INT_RBNE);
     usart_enable(USART0);
 }
 
@@ -56,35 +56,14 @@ static void usart_dma_config(void)
     dma_init_struct.periph_width = DMA_PERIPHERAL_WIDTH_8BIT;
     dma_init_struct.priority = DMA_PRIORITY_ULTRA_HIGH;
     dma_init(DMA0, DMA_CH3, &dma_init_struct);
-    
-    /* deinitialize DMA channel4 (USART0 rx) */
-    dma_deinit(DMA0, DMA_CH4);
-    dma_struct_para_init(&dma_init_struct);
-
-    dma_init_struct.direction = DMA_PERIPHERAL_TO_MEMORY;
-    dma_init_struct.memory_addr = (uint32_t)rxbuffer;
-    dma_init_struct.memory_inc = DMA_MEMORY_INCREASE_ENABLE;
-    dma_init_struct.memory_width = DMA_MEMORY_WIDTH_8BIT;
-    dma_init_struct.number = ARRAYNUM(rxbuffer);
-    dma_init_struct.periph_addr = USART0_DATA_ADDRESS;
-    dma_init_struct.periph_inc = DMA_PERIPH_INCREASE_DISABLE;
-    dma_init_struct.memory_width = DMA_PERIPHERAL_WIDTH_8BIT;
-    dma_init_struct.priority = DMA_PRIORITY_ULTRA_HIGH;
-    dma_init(DMA0, DMA_CH4, &dma_init_struct);
   
     /* configure DMA mode */
     dma_circulation_disable(DMA0, DMA_CH3);
     dma_memory_to_memory_disable(DMA0, DMA_CH3);
-    dma_circulation_disable(DMA0, DMA_CH4);
-    dma_memory_to_memory_disable(DMA0, DMA_CH4);
     
     /* USART DMA0 enable for reception */
     usart_dma_receive_config(USART0, USART_DENR_ENABLE);
 		nvic_irq_enable(DMA0_Channel4_IRQn, 0, 0);
-    /* enable DMA0 channel4 transfer complete interrupt */
-    dma_interrupt_enable(DMA0, DMA_CH4, DMA_INT_FTF);
-    /* enable DMA0 channel4 */
-    dma_channel_enable(DMA0, DMA_CH4);
 		
     /* USART DMA0 enable for transmission */
     usart_dma_transmit_config(USART0, USART_DENT_ENABLE);
@@ -112,20 +91,6 @@ void usart0_dma_send(uint8_t *buffer,uint16_t len)
 	xSemaphoreTake(Usar0TxSemaphore, portMAX_DELAY);
 }
 
-uint16_t usart0_dma_recv(uint8_t *buffer)
-{
-	dma_channel_disable(DMA0, DMA_CH4);
-	
-	uint16_t rx_len = ARRAYNUM(rxbuffer) - dma_transfer_number_get(DMA0, DMA_CH4);
-	Mem_Copy(buffer,rxbuffer,rx_len);
-	
-	dma_memory_address_config(DMA0, DMA_CH4,(uint32_t)rxbuffer);
-	dma_transfer_number_config(DMA0, DMA_CH4, ARRAYNUM(rxbuffer));	
-	
-	dma_channel_enable(DMA0, DMA_CH4);
-	return rx_len;
-}
-
 /*DMA TX*/
 void DMA0_Channel3_IRQHandler(void)
 {
@@ -134,24 +99,18 @@ void DMA0_Channel3_IRQHandler(void)
     }
 }
 
-/*DMA RX*/
-void DMA0_Channel4_IRQHandler(void)
-{
-    if(dma_interrupt_flag_get(DMA0, DMA_CH4, DMA_INT_FLAG_FTF)){     
-			 FIFO_Recv(Queue_log);
-			 dma_interrupt_flag_clear(DMA0, DMA_CH4, DMA_INT_FLAG_G);
-    }
-}
-
 /* USART  */
 void USART0_IRQHandler(void)
 {
-    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_IDLE)){   //RX
-			  FIFO_Recv(Queue_log);
-				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_IDLE);
-        USART_STAT0(USART0);
-			  USART_DATA(USART0);
+    if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_RBNE)){			//RX
+			  if(CONSOLE_BUFFER_LEN > (console_header - console_tail))
+				{
+				   console_buffer[console_header%CONSOLE_BUFFER_LEN] = usart_data_receive(USART0);
+					 console_header++;
+				}
+				usart_interrupt_flag_clear(USART0,USART_INT_FLAG_RBNE);
     }
+		
     if(RESET != usart_interrupt_flag_get(USART0, USART_INT_FLAG_TC)){   //TX
 				BaseType_t pxHigherPriorityTaskWoken;
 				xSemaphoreGiveFromISR(Usar0TxSemaphore,&pxHigherPriorityTaskWoken);

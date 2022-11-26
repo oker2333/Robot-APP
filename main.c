@@ -267,7 +267,7 @@ static void MPU6050Task( void *pvParameters )
 					 continue;
 				}
 
-				#if false
+				#if true
 				robot_print("\033[1;1Hmpu6050: fifo %d.\n", len);
 				robot_print("mpu6050: pitch[%d] is %0.2fdps. \n", len-1, gs_pitch[len-1]);
 				robot_print("mpu6050: roll[%d] is %0.2fdps. \n", len-1, gs_roll[len-1]);
