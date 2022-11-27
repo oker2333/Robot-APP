@@ -111,7 +111,7 @@ void monitor_update(uint8_t time_interval)
 				 monitor[i].retries++;
 				 monitor[i].id = sequence;
 				 
-				 robot_print("active upload wait %s times for host cmd 0x%x ack\n",monitor[i].retries,monitor[i].cmd);
+				 robot_print("active upload wait %d times for host cmd 0x%x ack\n",monitor[i].retries,monitor[i].cmd);
 			}
 			else if((monitor[i].status == true) && (monitor[i].ack == true))
 		  {
