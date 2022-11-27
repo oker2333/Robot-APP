@@ -29,6 +29,8 @@ static void usart_config(uint32_t baudval)
     usart_receive_config(USART0, USART_RECEIVE_ENABLE);
     usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);
 		nvic_irq_enable(USART0_IRQn, 10, 0);
+		usart_interrupt_flag_clear(USART0,USART_INT_FLAG_TC);
+		usart_interrupt_flag_clear(USART0,USART_INT_FLAG_RBNE);
 		usart_interrupt_enable(USART0, USART_INT_TC);
 	  usart_interrupt_enable(USART0, USART_INT_RBNE);
     usart_enable(USART0);
@@ -65,6 +67,8 @@ static void usart_dma_config(void)
     usart_dma_receive_config(USART0, USART_DENR_ENABLE);
 		nvic_irq_enable(DMA0_Channel4_IRQn, 0, 0);
 		
+		dma_interrupt_flag_clear(DMA0, DMA_CH3, DMA_INT_FLAG_FTF);
+		
     /* USART DMA0 enable for transmission */
     usart_dma_transmit_config(USART0, USART_DENT_ENABLE);
 		nvic_irq_enable(DMA0_Channel3_IRQn, 0, 0);
@@ -94,7 +98,8 @@ void usart0_dma_send(uint8_t *buffer,uint16_t len)
 /*DMA TX*/
 void DMA0_Channel3_IRQHandler(void)
 {
-    if(dma_interrupt_flag_get(DMA0, DMA_CH3, DMA_INT_FLAG_FTF)){     
+    if(dma_interrupt_flag_get(DMA0, DMA_CH3, DMA_INT_FLAG_FTF)){
+        dma_interrupt_flag_clear(DMA0, DMA_CH3, DMA_INT_FLAG_FTF);		
         dma_interrupt_flag_clear(DMA0, DMA_CH3, DMA_INT_FLAG_G);
     }
 }
@@ -140,7 +145,9 @@ void usart0_init(uint32_t baudval)
     usart_receive_config(USART0, USART_RECEIVE_ENABLE);
     usart_transmit_config(USART0, USART_TRANSMIT_ENABLE);
 		nvic_irq_enable(USART0_IRQn, 9, 0);
+	  usart_interrupt_flag_clear(USART0, USART_INT_FLAG_RBNE);
 		usart_interrupt_enable(USART0, USART_INT_RBNE);
+
     usart_enable(USART0);
 }
 
@@ -179,7 +186,11 @@ static void iap_usart_config(uint32_t baudval)
     usart_receive_config(USART1, USART_RECEIVE_ENABLE);
     usart_transmit_config(USART1, USART_TRANSMIT_ENABLE);
 		nvic_irq_enable(USART1_IRQn, 9, 0);
+	
+	  usart_interrupt_flag_clear(USART1, USART_INT_FLAG_IDLE);
+	  usart_interrupt_flag_clear(USART1, USART_INT_FLAG_TC);
     usart_interrupt_enable(USART1, USART_INT_IDLE);
+		
 		usart_interrupt_enable(USART1, USART_INT_TC);
     usart_enable(USART1);
 }
@@ -233,6 +244,8 @@ static void isp_usart_dma_config(void)
 
 		nvic_irq_enable(DMA0_Channel5_IRQn, 0, 0);
 		
+		dma_interrupt_flag_clear(DMA0, DMA_CH5, DMA_INT_FLAG_FTF);
+		
     /* enable DMA0 channel5 transfer complete interrupt */
     dma_interrupt_enable(DMA0, DMA_CH5, DMA_INT_FTF);
     /* enable DMA0 channel5 */
@@ -242,6 +255,8 @@ static void isp_usart_dma_config(void)
     usart_dma_transmit_config(USART1, USART_DENT_ENABLE);
 		
 		nvic_irq_enable(DMA0_Channel6_IRQn, 0, 0);
+		
+		dma_interrupt_flag_clear(DMA0, DMA_CH6, DMA_INT_FLAG_FTF);
 		
     /* enable DMA0 channel6 transfer complete interrupt */
     dma_interrupt_enable(DMA0, DMA_CH6, DMA_INT_FTF);
@@ -283,7 +298,8 @@ void dma_usart1_init(uint32_t baudval)
 /*DMA TX*/
 void DMA0_Channel6_IRQHandler(void)
 {
-    if(dma_interrupt_flag_get(DMA0, DMA_CH6, DMA_INT_FLAG_FTF)){     
+    if(dma_interrupt_flag_get(DMA0, DMA_CH6, DMA_INT_FLAG_FTF)){
+        dma_interrupt_flag_clear(DMA0, DMA_CH6, DMA_INT_FLAG_FTF);			
         dma_interrupt_flag_clear(DMA0, DMA_CH6, DMA_INT_FLAG_G);
     }
 }
@@ -291,7 +307,8 @@ void DMA0_Channel6_IRQHandler(void)
 /*DMA RX*/
 void DMA0_Channel5_IRQHandler(void)
 {
-    if(dma_interrupt_flag_get(DMA0, DMA_CH5, DMA_INT_FLAG_FTF)){     
+    if(dma_interrupt_flag_get(DMA0, DMA_CH5, DMA_INT_FLAG_FTF)){
+       dma_interrupt_flag_clear(DMA0, DMA_CH5, DMA_INT_FLAG_FTF);
 			 dma_interrupt_flag_clear(DMA0, DMA_CH5, DMA_INT_FLAG_G);
     }
 }

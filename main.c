@@ -290,7 +290,7 @@ static void CommunicationTask( void *pvParameters )
 {
 		while(pdTRUE)
 		{
-//			 timing_uploader();
+			 timing_uploader();
 			 active_uploader(DELAY_TIME_INTERVAL);
 			 
 			 DataFrame_Handle();
