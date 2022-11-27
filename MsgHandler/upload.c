@@ -19,6 +19,8 @@ typedef struct{
 	 uint16_t id;
 }Timeout_Couter;
 
+static int8_t key_type_backup = NO_PRESS;
+
 Timeout_Couter monitor[MONITOR_NUMBER] = 
 {
   {0,0,0,0,UPLOAD_KEY_TYPE}
@@ -75,6 +77,8 @@ void monitor_reset(int8_t index)
 	 monitor[index].retries = 0;
 	 monitor[index].status = 0;
 	 monitor[index].timer = 0;
+	 monitor[index].ack = 0;
+	 monitor[index].id = 0;
 }
 
 void monitor_update(uint8_t time_interval)
@@ -99,7 +103,7 @@ void monitor_update(uint8_t time_interval)
 				 switch(monitor[i].cmd)
 				 {
 					 case UPLOAD_KEY_TYPE:
-						 UserData[DataLength++] = get_key_type();
+						 UserData[DataLength++] = key_type_backup;
 						 Create_Date_Frame(sequence,UPLOAD_KEY_TYPE,UserData,DataLength);
 					 break;
 				 }
@@ -107,7 +111,7 @@ void monitor_update(uint8_t time_interval)
 				 monitor[i].retries++;
 				 monitor[i].id = sequence;
 				 
-				 robot_print("active upload wait for host cmd 0x%x ack timeout\n",monitor[i].cmd);
+				 robot_print("active upload wait for host cmd 0x%x ack\n",monitor[i].cmd);
 			}
 			else if((monitor[i].status == true) && (monitor[i].ack == true))
 		  {
@@ -128,12 +132,12 @@ void active_uploader(uint8_t time_interval)
 	 int8_t key_type = get_key_type();
 	 if(key_type)
 	 {
+		  key_type_backup = key_type;
 		  int8_t index = monitor_cmd_search(UPLOAD_KEY_TYPE);
 		  monitor_reset(index);
 		  monitor_status_update(true,index);
+		  set_key_type(NO_PRESS);
 	 }
 	 
-	 monitor_update(time_interval);
-	 
-	 set_key_type(NO_PRESS);
+	 monitor_update(time_interval);	 
 }

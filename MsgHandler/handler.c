@@ -159,7 +159,7 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 		 break;
 		
 		 case UPLOAD_ACK:
-			 ack_cmd = (UserData[2] << 8) | UserData[3];
+			 ack_cmd = (UserData[1] << 8) | UserData[2];
 		   if(ack_cmd == UPLOAD_KEY_TYPE)
 			 {
 				  monitor_ack_update(UPLOAD_KEY_TYPE,sequence);
