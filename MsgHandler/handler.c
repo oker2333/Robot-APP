@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "upload.h"
 #include "handler.h"
 #include "fifo.h"
 #include "ota.h"
@@ -150,6 +151,7 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 {
 	uint16_t ack_cmd = 0x00;
 	
+	
 	switch(cmd)
 	{
 		 case UPLOAD_KEY_TYPE:
@@ -159,7 +161,9 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 		 case UPLOAD_ACK:
 			 ack_cmd = (UserData[2] << 8) | UserData[3];
 		   if(ack_cmd == UPLOAD_KEY_TYPE)
-			   semaphore_post(KEY_ID);
+			 {
+				  monitor_ack_update(UPLOAD_KEY_TYPE,sequence);
+			 }
 		 break;
 	}
 	robot_print("[Upload_Handler]cmd = 0x%x\r\n",cmd);

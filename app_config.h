@@ -9,7 +9,7 @@
 #include "timers.h"
 #include "semphr.h"
 
-#define FIFO_DEBUG 1
+#define FIFO_DEBUG 0
 #define JSON	0
 
 #define BINARY_VERSION "V0.0.1"

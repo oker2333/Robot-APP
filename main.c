@@ -267,7 +267,7 @@ static void MPU6050Task( void *pvParameters )
 					 continue;
 				}
 
-				#if true
+				#if false
 				robot_print("\033[1;1Hmpu6050: fifo %d.\n", len);
 				robot_print("mpu6050: pitch[%d] is %0.2fdps. \n", len-1, gs_pitch[len-1]);
 				robot_print("mpu6050: roll[%d] is %0.2fdps. \n", len-1, gs_roll[len-1]);
@@ -284,16 +284,18 @@ static void MPU6050Task( void *pvParameters )
 		}
 }
 
+#define DELAY_TIME_INTERVAL 10
+
 static void CommunicationTask( void *pvParameters )
 {
 		while(pdTRUE)
 		{
-			 timing_uploader();
-			 active_uploader();
+//			 timing_uploader();
+			 active_uploader(DELAY_TIME_INTERVAL);
 			 
 			 DataFrame_Handle();
 			 DataFrame_Transmit();
-			 vTaskDelay(pdMS_TO_TICKS(10));
+			 vTaskDelay(pdMS_TO_TICKS(DELAY_TIME_INTERVAL));
 		}
 }
 

@@ -1,6 +1,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include "print.h"
 #include "timing.h"
 #include "app_config.h"
 

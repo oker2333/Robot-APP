@@ -92,10 +92,12 @@ void Key_Interrupt_FMS(void)
 		 case LOW_UP:
 		   if(press_time >= LONG_PRESS_TIME)
 			 {
+				  set_key_type(LONG_PRESS);
 				  robot_print("long press %d ms\r\n",press_time*10);
 			 }
 			 else
 			 {
+				  set_key_type(SHORT_PRESS);
 				  robot_print("short press %d ms\r\n",press_time*10);
 			 }
 			 press_time = 0;
