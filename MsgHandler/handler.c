@@ -66,7 +66,7 @@ void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t
 	 FIFO_Add(Queue_Usart1_TX, Data_Frame, DataLength+HEADER_BYTES+TAIL_BYTES+4);
 }
 
-bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len)
+bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len,uint32_t timeout_ms)
 {
 	robot_print("[datalink_frame_send]cmd = 0x%x\r\n",cmd);
 	uint16_t invoke_id = 0;
@@ -77,7 +77,7 @@ bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t l
 		invoke_id = find_free_invoke_id();
 		Create_Date_Frame(invoke_id,cmd,buffer,len);
 
-		if(semaphore_timed_wait(id)){
+		if(semaphore_timed_wait(id,timeout_ms)){
 			ret = true;
 			break;
 		}else{

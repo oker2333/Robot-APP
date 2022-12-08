@@ -1,5 +1,4 @@
 #include <stdbool.h>
-#include <stdint.h>
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -7,6 +6,7 @@
 #include "task.h"
 #include "timers.h"
 #include "semphr.h"
+#include "print.h"
 
 #include "synchronous.h"
 
@@ -54,7 +54,7 @@ static void free_semaphore(Sensor_Id_t id)
 	semaphore_unlock();
 }
 
-bool semaphore_timed_wait(Sensor_Id_t id)
+bool semaphore_timed_wait(Sensor_Id_t id, uint32_t timeout_ms)
 {
 	BaseType_t err = pdFALSE;
 	SemaphoreHandle_t sem_ptr = NULL;
@@ -65,7 +65,7 @@ bool semaphore_timed_wait(Sensor_Id_t id)
 		return false;
 	}
 	
-	err = xSemaphoreTake(sem_ptr, pdMS_TO_TICKS(TIMEOUT_MS));
+	err = xSemaphoreTake(sem_ptr, pdMS_TO_TICKS(timeout_ms));
 	if(err == pdFALSE){
 		free_semaphore(id);
 		robot_print("xSemaphoreTake error\r\n");

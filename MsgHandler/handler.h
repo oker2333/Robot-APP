@@ -40,7 +40,7 @@ typedef enum{
 
 uint16_t find_free_invoke_id(void);
 
-bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len);
+bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len,uint32_t timeout_ms);
 void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength);
 
 
