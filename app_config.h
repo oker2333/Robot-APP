@@ -39,11 +39,24 @@
 
 #define CONSOLE_BUFFER_LEN 256
 
+#define TIMING_UPLOAD_CYCLE 10
+
+#define ACTIVE_UPLOAD_TIMEOUT 200
+#define ACTIVE_UPLOAD_MAX_RETRIES 3
+
+#define MAX2(m,n) (((m) >= (n))?(m):(n))
+#define MIN2(m,n) (((m) <= (n))?(m):(n))
+
+#define MAX(x,y,z) MAX2(MAX2(x,y),z)
+#define MIN(x,y,z) MIN2(MIN2(x,y),z)
+
 extern uint8_t console_header;
 extern uint8_t console_tail;
 extern uint8_t console_buffer[CONSOLE_BUFFER_LEN];
 
 extern char* PowerOn_Time(void);
+
+extern uint32_t g_Timestamp;
 
 extern msg_handler_t Callback_Handler[CALLBACK_NUM];
 
@@ -51,10 +64,10 @@ extern FIFO_BUFFER *Queue_Usart1_RX;
 extern FIFO_BUFFER *Queue_Usart1_TX;
 extern FIFO_BUFFER *Queue_log;
 
-extern SemaphoreHandle_t Usart1TxSemaphore;
 extern SemaphoreHandle_t VL6180xSemaphore;
-
+extern SemaphoreHandle_t Usart1TxSemaphore;
 extern SemaphoreHandle_t Usar0TxSemaphore;
+extern SemaphoreHandle_t CommunicateSemaphore;
 
 extern uint16_t tof_mm;
 extern uint8_t ir_value;

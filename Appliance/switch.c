@@ -78,13 +78,14 @@ void Key_CallBack_FMS(void)
 
 void Key_Interrupt_FMS(void)
 {
-	 BaseType_t pxHigherPriorityTaskWoken;
-	 
+	 BaseType_t pxHigherPriorityTaskWoken_m;
+	 BaseType_t pxHigherPriorityTaskWoken_n;
+	
 	 switch(state)
 	 {
 		 case DOWN:
-			 xTimerStartFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
-			 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+			 xTimerStartFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken_m);
+			 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken_m);
 			 KEY_EXTI_OFF();
 			 state = PRESS;
 		 break;
@@ -101,8 +102,9 @@ void Key_Interrupt_FMS(void)
 				  robot_print("short press %d ms\r\n",press_time*10);
 			 }
 			 press_time = 0;
-			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken);
-		   portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
+			 xTimerResetFromISR(Key_Timer_Handle, &pxHigherPriorityTaskWoken_m);
+			 xSemaphoreGiveFromISR(CommunicateSemaphore, &pxHigherPriorityTaskWoken_n);
+		   portYIELD_FROM_ISR((pxHigherPriorityTaskWoken_m | pxHigherPriorityTaskWoken_n));
 		   KEY_EXTI_OFF();
 			 state = HIGH;
 		 break;

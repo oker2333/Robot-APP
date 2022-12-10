@@ -1,4 +1,3 @@
-#include <stdint.h>
 #include <stdio.h>
 
 #include "print.h"
@@ -77,6 +76,15 @@ uint8_t timing_upload_frame(SensorBit_t Bit,uint8_t* buffer,uint8_t index)
 
 void timing_uploader(void)
 {
+	 static uint32_t timestamp = 0; 
+	 
+	 uint32_t time_gap = g_Timestamp - timestamp;
+	 if(time_gap < TIMING_UPLOAD_CYCLE)
+	 {
+		  return;
+	 }
+	 timestamp = g_Timestamp;
+	
 	 uint8_t index = 0;
 	 uint8_t UserData[32] = {0};
 	 uint16_t sequence = find_free_invoke_id();

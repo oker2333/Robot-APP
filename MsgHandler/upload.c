@@ -7,8 +7,6 @@
 #include "print.h"
 
 #define MONITOR_NUMBER 10
-#define ACTIVE_UPLOAD_TIMEOUT 200
-#define MAX_RETRIES 3
 
 typedef struct{
    uint8_t timer;
@@ -89,12 +87,10 @@ void monitor_update(uint8_t time_interval)
 	 {
 		  if(((monitor[i].status == true) && 
 				(monitor[i].timer >= ACTIVE_UPLOAD_TIMEOUT) && 
-				(monitor[i].retries < MAX_RETRIES) && 
+				(monitor[i].retries < ACTIVE_UPLOAD_MAX_RETRIES) && 
 				(monitor[i].ack == false)) || 
 				((monitor[i].status == true) && 
-				(monitor[i].timer < ACTIVE_UPLOAD_TIMEOUT) && 
-				(monitor[i].retries == 0) && 
-				(monitor[i].ack == false)))
+				(monitor[i].retries == 0)))
 			{
 				 uint16_t sequence = find_free_invoke_id();
 				 uint8_t UserData[10] = {0};
@@ -118,7 +114,7 @@ void monitor_update(uint8_t time_interval)
 					monitor_status_update(false,i);
 				  robot_print("active upload get host ack 0x%x\n",monitor[i].cmd|0x8000);
 		  }
-			else if((monitor[i].status == true) && (monitor[i].retries >= MAX_RETRIES))
+			else if((monitor[i].status == true) && (monitor[i].retries >= ACTIVE_UPLOAD_MAX_RETRIES))
 		  {
 				  monitor_status_update(false,i);
 				  robot_print("active upload cmd 0x%x retries 3 times and failed\n",monitor[i].cmd);
@@ -126,8 +122,13 @@ void monitor_update(uint8_t time_interval)
 	 }
 }
 
-void active_uploader(uint8_t time_interval)
+void active_uploader(void)
 {
+	 static uint32_t timestamp = 0; 
+	 
+	 uint32_t time_gap = g_Timestamp - timestamp;
+	 timestamp = g_Timestamp;
+	 
    /*°´¼üÖµ¼à¿Ø*/
 	 int8_t key_type = get_key_type();
 	 if(key_type)
@@ -139,5 +140,5 @@ void active_uploader(uint8_t time_interval)
 		  set_key_type(NO_PRESS);
 	 }
 	 
-	 monitor_update(time_interval);	 
+	 monitor_update(time_gap);	 
 }

@@ -4,7 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-void active_uploader(uint8_t time_interval);
+void active_uploader(void);
 
 int8_t monitor_cmd_search(uint16_t command);
 void monitor_status_update(uint8_t status,int8_t index);

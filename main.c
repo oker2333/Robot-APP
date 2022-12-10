@@ -59,6 +59,7 @@
 SemaphoreHandle_t VL6180xSemaphore;
 SemaphoreHandle_t Usart1TxSemaphore;
 SemaphoreHandle_t Usar0TxSemaphore;
+SemaphoreHandle_t CommunicateSemaphore;
 
 /* FIFO Configure */
 #if FIFO_DEBUG
@@ -145,6 +146,7 @@ int main(void)
 		VL6180xSemaphore = xSemaphoreCreateBinary();
 		Usart1TxSemaphore = xSemaphoreCreateBinary();
 	  Usar0TxSemaphore = xSemaphoreCreateBinary();
+	  CommunicateSemaphore = xSemaphoreCreateBinary();
 
 		xTaskCreate(InitTask, "InitTask", INIT_TASK_STK_SIZE, NULL, INIT_TASK_PRIORITY, &InitTaskHanle);	
 	
@@ -284,18 +286,18 @@ static void MPU6050Task( void *pvParameters )
 		}
 }
 
-#define DELAY_TIME_INTERVAL 10
+#define COMMUNICATE_DELAY 1000
 
 static void CommunicationTask( void *pvParameters )
 {
 		while(pdTRUE)
 		{
 			 timing_uploader();
-			 active_uploader(DELAY_TIME_INTERVAL);
+			 active_uploader();
 			 
 			 DataFrame_Handle();
 			 DataFrame_Transmit();
-			 vTaskDelay(pdMS_TO_TICKS(DELAY_TIME_INTERVAL));
+			 xSemaphoreTake(CommunicateSemaphore, MIN(COMMUNICATE_DELAY,TIMING_UPLOAD_CYCLE,ACTIVE_UPLOAD_TIMEOUT));
 		}
 }
 

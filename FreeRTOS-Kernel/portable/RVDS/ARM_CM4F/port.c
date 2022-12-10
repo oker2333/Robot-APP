@@ -573,6 +573,8 @@ void PowerOn_Time_statistics(void)
 		}
 }
 
+uint32_t g_Timestamp = 0;
+
 void xPortSysTickHandler( void )
 {
     /* The SysTick runs at the lowest interrupt priority, so when this interrupt
@@ -581,6 +583,7 @@ void xPortSysTickHandler( void )
      * known - therefore the slightly faster vPortRaiseBASEPRI() function is used
      * in place of portSET_INTERRUPT_MASK_FROM_ISR(). */
 	  PowerOn_Time_statistics();
+	  g_Timestamp++;
     vPortRaiseBASEPRI();
     {
         /* Increment the RTOS tick. */
