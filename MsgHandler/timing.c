@@ -16,26 +16,26 @@ bit7:
 */
 
 typedef enum{
-	TOF_BIT,
-	IR_BIT,
-	HALL_ENCODER_BIT,
-	IMU_DATA_BIT,
-	IMU_EULAE_BIT,
-	ODOMETER_BIT,
-	BIT_MASK_NUM
+	TOF_BIT = 1 << 0,
+	IR_BIT = 1 << 1,
+	HALL_ENCODER_BIT = 1 << 2,
+	IMU_DATA_BIT = 1 << 3,
+	IMU_EULAE_BIT = 1 << 4,
+	ODOMETER_BIT = 1 << 5,
+	BIT_MASK_NUM = 6
 }BitMask_t;
 
-typedef int SensorBit_t;
+typedef int Sensor_Type_t;
 
 static uint16_t BitMask = 0x00FF;
 
 void BitMask_Set(uint16_t DataByte)
 {
 	 BitMask = DataByte;
-	 robot_print("BitMask = 0x%x\n",BitMask);
+	 robot_print("Set BitMask = 0x%x\n",BitMask);
 }
 
-uint8_t timing_upload_frame(SensorBit_t Bit,uint8_t* buffer,uint8_t index)
+static uint8_t timing_upload_frame(Sensor_Type_t Bit,uint8_t* buffer,uint8_t index)
 {
 	 switch(Bit){
 			case TOF_BIT:
@@ -92,9 +92,9 @@ void timing_uploader(void)
 	 UserData[index++] = (BitMask >> 8) & 0xFF;
 	 UserData[index++] = (BitMask >> 0) & 0xFF;
 	 
-	 for(SensorBit_t sensor_bit = 0;sensor_bit < BIT_MASK_NUM;sensor_bit++)
+	 for(Sensor_Type_t sensor_bit = 0;sensor_bit < BIT_MASK_NUM;sensor_bit++)
 	 {
-		  if(BitMask & (1 << sensor_bit))
+		  if(BitMask & sensor_bit)
 			{
 				 index = timing_upload_frame(sensor_bit,UserData,index);
 			}
