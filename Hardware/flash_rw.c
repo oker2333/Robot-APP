@@ -103,14 +103,29 @@ exit:
 
 void flash_read_buffer(uint32_t address, uint8_t *data,uint32_t data_len)
 {
-	  uint32_t* ptr = (uint32_t*)data;
+	  uint8_t* byte_ptr = (uint8_t*)data;
+	
+	  uint8_t remainder = address % 4;
+	  if(remainder)
+		{
+			 remainder = 4 - remainder;
+			 uint8_t minimum = (remainder > data_len)?data_len:remainder;
+			 for(uint8_t k = 0;k < minimum;k++)
+			 {
+				  *byte_ptr++ = (*((volatile uint8_t*)address++));
+			 }
+			 data_len -= minimum;
+		}
+	  
+		uint32_t* word_ptr = (uint32_t*)byte_ptr;
+
 		for(int i = 0;i < data_len/4;i++){
-				*ptr++ = (*((volatile uint32_t*)(uint32_t)address));
+				*word_ptr++ = (*((volatile uint32_t*)address));
 			  address += 4;
 		}
 		
-		uint8_t* byte_ptr = (uint8_t*)ptr;
-		
+		byte_ptr = (uint8_t*)word_ptr;
+				
 		for(int j = 0;j < data_len%4;j++)
 		{
 			 *byte_ptr++ = (*((volatile uint8_t*)(uint32_t)address++));

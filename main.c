@@ -286,10 +286,12 @@ static void MPU6050Task( void *pvParameters )
 		}
 }
 
-#define COMMUNICATE_DELAY 1000
+#define COMMUNICATE_DELAY 5
 
 static void CommunicationTask( void *pvParameters )
 {
+	  uint32_t timeout = MIN(COMMUNICATE_DELAY, TIMING_UPLOAD_CYCLE, ACTIVE_UPLOAD_TIMEOUT);
+	  
 		while(pdTRUE)
 		{
 			 timing_uploader();
@@ -297,7 +299,7 @@ static void CommunicationTask( void *pvParameters )
 			 
 			 DataFrame_Handle();
 			 DataFrame_Transmit();
-			 xSemaphoreTake(CommunicateSemaphore, MIN(COMMUNICATE_DELAY,TIMING_UPLOAD_CYCLE,ACTIVE_UPLOAD_TIMEOUT));
+			 xSemaphoreTake(CommunicateSemaphore, timeout);
 		}
 }
 
