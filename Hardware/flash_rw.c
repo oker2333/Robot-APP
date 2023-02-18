@@ -1,7 +1,7 @@
 #include "flash_rw.h"
 #include "app_config.h"
 
-void flash_write_pages(uint32_t address,uint32_t size)
+void flash_erase_pages(uint32_t address,uint32_t size)
 {
 	  fmc_unlock();
 	
@@ -101,7 +101,7 @@ exit:
 		return ret;
 }
 
-void flash_read_buffer(uint32_t address, uint8_t *data,uint32_t data_len)
+void flash_read_buffer(uint32_t address, void *data,uint32_t data_len)
 {
 	  uint8_t* byte_ptr = (uint8_t*)data;
 	
@@ -130,39 +130,6 @@ void flash_read_buffer(uint32_t address, uint8_t *data,uint32_t data_len)
 		{
 			 *byte_ptr++ = (*((volatile uint8_t*)(uint32_t)address++));
 		}
-}
-
-
-fmc_state_enum flash_write_word(uint32_t address, uint32_t data)
-{
-	  fmc_state_enum state;
-		
-    fmc_unlock();
-		state = fmc_word_program(address, data);
-	
-    fmc_flag_clear(FMC_FLAG_BANK0_END);
-    fmc_flag_clear(FMC_FLAG_BANK0_WPERR);
-    fmc_flag_clear(FMC_FLAG_BANK0_PGERR);
-	
-	  fmc_lock();
-		
-		return state;
-}
-
-fmc_state_enum flash_write_dword(uint32_t address, uint16_t data)
-{
-	  fmc_state_enum state;
-	
-    fmc_unlock();
-		state = fmc_halfword_program(address, data);
-
-    fmc_flag_clear(FMC_FLAG_BANK0_END);
-    fmc_flag_clear(FMC_FLAG_BANK0_WPERR);
-    fmc_flag_clear(FMC_FLAG_BANK0_PGERR);
-	
-	  fmc_lock();
-		
-		return state;
 }
 
 uint32_t flash_read_word(uint32_t address)
