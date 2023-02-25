@@ -27,7 +27,7 @@ typedef enum{
 
 typedef int Sensor_Type_t;
 
-static uint16_t BitMask = 0x00FF;
+static uint16_t BitMask = 0x000F;
 
 void BitMask_Set(uint16_t DataByte)
 {
@@ -77,6 +77,7 @@ static uint8_t timing_upload_frame(Sensor_Type_t Bit,uint8_t* buffer,uint8_t ind
 void timing_uploader(void)
 {
 	 static uint32_t timestamp = 0; 
+	 Sensor_Type_t sensor_type = 0;
 	 
 	 uint32_t time_gap = g_Timestamp - timestamp;
 	 if(time_gap < TIMING_UPLOAD_CYCLE)
@@ -92,11 +93,12 @@ void timing_uploader(void)
 	 UserData[index++] = (BitMask >> 8) & 0xFF;
 	 UserData[index++] = (BitMask >> 0) & 0xFF;
 	 
-	 for(Sensor_Type_t sensor_bit = 0;sensor_bit < BIT_MASK_NUM;sensor_bit++)
+	 for(int shift_bit = 0;shift_bit < BIT_MASK_NUM;shift_bit++)
 	 {
-		  if(BitMask & sensor_bit)
+		  sensor_type = 1 << shift_bit;
+		  if(BitMask & sensor_type)
 			{
-				 index = timing_upload_frame(sensor_bit,UserData,index);
+				 index = timing_upload_frame(sensor_type,UserData,index);
 			}
 	 }
 	 
