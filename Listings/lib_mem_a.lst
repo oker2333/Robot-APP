@@ -445,7 +445,7 @@ ARM Macro Assembler    Page 7
   311 00000220                 END
 Command Line: --debug --xref --diag_suppress=9931 --cpu=Cortex-M4.fp.sp --apcs=
 interwork --depend=.\objects\lib_mem_a.d -o.\objects\lib_mem_a.o -I.\RTE\_APP -
-IC:\Users\Joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\In
+IC:\Users\joker\AppData\Local\Arm\Packs\GigaDevice\GD32F30x_DFP\2.2.1\Device\In
 clude -IC:\Keil_v5\ARM\CMSIS\Include --predefine="__MICROLIB SETA 1" --predefin
 e="__UVISION_VERSION SETA 529" --predefine="GD32F30X_HD SETA 1" --list=.\listin
 gs\lib_mem_a.lst Common_API\lib_mem_a.asm

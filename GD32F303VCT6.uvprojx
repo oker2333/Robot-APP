@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_STDPERIPH_DRIVER,GD32F30X_HD,__TARGET_FPU_VFP</Define>
               <Undefine></Undefine>
-              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\MsgHandler;.\Appliance;.\MPU6050</IncludePath>
+              <IncludePath>..\Robot-APP;.\CMSIS;.\CMSIS\GD32F30x\Include;.\GD32F30x_standard_peripheral\Include;.\FreeRTOS-Kernel\include;.\FreeRTOS-Kernel\portable\RVDS\ARM_CM4F;.\FreeRTOS-Kernel;.\Hardware;.\vl6180x;.\CodeSamples\inc;.\Common_API;.\MsgHandler;.\Appliance;.\MPU6050;.\cm_backtrace;.\cm_backtrace\Languages\en-US;.\cm_backtrace\Languages\zh-CN;.\cm_backtrace</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -841,6 +841,21 @@
         </Group>
         <Group>
           <GroupName>EasyLogger</GroupName>
+        </Group>
+        <Group>
+          <GroupName>FaultTrace</GroupName>
+          <Files>
+            <File>
+              <FileName>cmb_fault.S</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\cm_backtrace\fault_handler\cmb_fault.S</FilePath>
+            </File>
+            <File>
+              <FileName>cm_backtrace.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\cm_backtrace\cm_backtrace.c</FilePath>
+            </File>
+          </Files>
         </Group>
       </Groups>
     </Target>
