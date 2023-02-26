@@ -5383,6 +5383,31 @@ static void prvAddCurrentTaskToDelayedList( TickType_t xTicksToWait,
  * especially where access to file scope functions and data is needed (for example
  * when performing module tests). */
 
+/*< Support For CmBacktrace >*/
+uint32_t * vTaskStackAddr()
+{
+    return pxCurrentTCB->pxStack;
+}
+
+uint32_t vTaskStackSize()
+{
+    #if ( ( portSTACK_GROWTH > 0 ) || ( configRECORD_STACK_HIGH_ADDRESS == 1 ) )
+    
+    return (pxCurrentTCB->pxEndOfStack - pxCurrentTCB->pxStack + 1);
+    
+    #else /* ( portSTACK_GROWTH > 0 )*/
+    
+    return pxCurrentTCB->uxSizeOfStack;
+    
+    #endif /* ( portSTACK_GROWTH > 0 )*/
+}
+
+char * vTaskName()
+{
+    return pxCurrentTCB->pcTaskName;
+}
+/*-----------------------------------------------------------*/
+
 #ifdef FREERTOS_MODULE_TEST
     #include "tasks_test_access_functions.h"
 #endif
