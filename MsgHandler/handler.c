@@ -166,7 +166,7 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 			 }
 		 break;
 	}
-	robot_print("[Upload_Handler]cmd = 0x%x\r\n",cmd);
+	print_info("[Upload_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)

@@ -107,17 +107,17 @@ void monitor_update(uint8_t time_interval)
 				 monitor[i].retries++;
 				 monitor[i].id = sequence;
 				 
-				 robot_print("active upload wait %d times for host cmd 0x%x ack\n",monitor[i].retries,monitor[i].cmd);
+				 print_info("active upload send cmd 0x%x for %d times\n",monitor[i].cmd,monitor[i].retries);
 			}
 			else if((monitor[i].status == true) && (monitor[i].ack == true))
 		  {
 					monitor_status_update(false,i);
-				  robot_print("active upload get host ack 0x%x\n",monitor[i].cmd|0x8000);
+				  print_info("active upload get host ack 0x%x\n",monitor[i].cmd|0x8000);
 		  }
 			else if((monitor[i].status == true) && (monitor[i].retries >= ACTIVE_UPLOAD_MAX_RETRIES))
 		  {
 				  monitor_status_update(false,i);
-				  robot_print("active upload cmd 0x%x retries 3 times and failed\n",monitor[i].cmd);
+				  print_info("active upload cmd 0x%x retries 3 times and failed\n",monitor[i].cmd);
 		  }
 	 }
 }

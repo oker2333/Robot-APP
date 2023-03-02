@@ -333,13 +333,14 @@ static void MPU6050Task( void *pvParameters )
 static void CommunicationTask( void *pvParameters )
 {
 	  uint32_t timeout = MIN(COMMUNICATE_DELAY, TIMING_UPLOAD_CYCLE, ACTIVE_UPLOAD_TIMEOUT);
+		robot_print("CommunicationTask timeout = %d ms\n",timeout);
 	  
 		while(pdTRUE)
 		{
 			 timing_uploader();
+			 DataFrame_Handle();
 			 active_uploader();
 			 
-			 DataFrame_Handle();
 			 DataFrame_Transmit();
 			 xSemaphoreTake(CommunicateSemaphore, timeout);
 		}
