@@ -114,7 +114,7 @@ void monitor_update(uint8_t time_interval)
 					monitor_status_update(false,i);
 				  print_info("active upload get host ack 0x%x\n",monitor[i].cmd|0x8000);
 		  }
-			else if((monitor[i].status == true) && (monitor[i].retries >= ACTIVE_UPLOAD_MAX_RETRIES))
+			else if((monitor[i].status == true) && (monitor[i].retries >= ACTIVE_UPLOAD_MAX_RETRIES) && (monitor[i].timer >= ACTIVE_UPLOAD_TIMEOUT))
 		  {
 				  monitor_status_update(false,i);
 				  print_info("active upload cmd 0x%x retries 3 times and failed\n",monitor[i].cmd);
