@@ -54,8 +54,6 @@ extern uint8_t console_header;
 extern uint8_t console_tail;
 extern uint8_t console_buffer[CONSOLE_BUFFER_LEN];
 
-extern char* PowerOn_Time(void);
-
 extern uint32_t g_Timestamp;
 
 extern msg_handler_t Callback_Handler[CALLBACK_NUM];

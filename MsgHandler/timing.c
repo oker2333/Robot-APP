@@ -3,6 +3,7 @@
 #include "print.h"
 #include "timing.h"
 #include "app_config.h"
+#include "time_counter.h"
 
 /*
 bit0:  TOFÊý¾Ý
@@ -79,12 +80,12 @@ void timing_uploader(void)
 	 static uint32_t timestamp = 0; 
 	 Sensor_Type_t sensor_type = 0;
 	 
-	 uint32_t time_gap = g_Timestamp - timestamp;
+	 uint32_t time_gap = TimeStamp_access() - timestamp;
 	 if(time_gap < TIMING_UPLOAD_CYCLE)
 	 {
 		  return;
 	 }
-	 timestamp = g_Timestamp;
+	 timestamp = TimeStamp_access();
 	
 	 uint8_t index = 0;
 	 uint8_t UserData[32] = {0};

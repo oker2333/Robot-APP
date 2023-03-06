@@ -812,6 +812,11 @@
               <FileType>1</FileType>
               <FilePath>.\Common_API\console.c</FilePath>
             </File>
+            <File>
+              <FileName>time_counter.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Common_API\time_counter.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

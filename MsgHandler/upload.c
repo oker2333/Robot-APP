@@ -5,6 +5,7 @@
 #include "handler.h"
 #include "switch.h"
 #include "print.h"
+#include "time_counter.h"
 
 #define MONITOR_NUMBER 10
 
@@ -126,8 +127,8 @@ void active_uploader(void)
 {
 	 static uint32_t timestamp = 0; 
 	 
-	 uint32_t time_gap = g_Timestamp - timestamp;
-	 timestamp = g_Timestamp;
+	 uint32_t time_gap = TimeStamp_access() - timestamp;
+	 timestamp = TimeStamp_access();
 	 
    /*°´¼üÖµ¼à¿Ø*/
 	 int8_t key_type = get_key_type();
