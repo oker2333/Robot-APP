@@ -3,6 +3,7 @@
 
 #include "upload.h"
 #include "handler.h"
+#include "timing.h"
 #include "fifo.h"
 #include "ota.h"
 #include "crc.h"
@@ -102,10 +103,9 @@ void Online_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 				do{
 					int index = 0;
 					uint8_t buffer[1] = {0};
-					
 					buffer[index++] = 0x00;
 					Create_Date_Frame(sequence,ONLINE_HEARTBEAT_ACK,buffer,index);
-					robot_print("Heart Beart From Host\r\n");
+					robot_print("Heart Beart From Host and reply\r\n");
 				}while(0);
 			break;
 			
@@ -128,29 +128,32 @@ void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 		{
 			case CONTROL_SPEED:
 				do{
-					int index = 0;
-					uint8_t buffer[3] = {0};
 					int16_t left_velocity = (UserData[1] << 8) | UserData[0];
 					int16_t right_velocity = (UserData[3] << 8) | UserData[2];
 					pid_motor_control(left_velocity,right_velocity);
-				 
+
+					int index = 0;
+					uint8_t buffer[3] = {0};
 					buffer[index++] = 0x00;
 					buffer[index++] = CONTROL_SPEED >> 8;
 					buffer[index++] = CONTROL_SPEED & 0xFF;
 					Create_Date_Frame(sequence,CONTROL_ACK,buffer,index);
-					robot_print("speed from host\r\n");
+					robot_print("speed from host and reply\r\n");
 				}while(0);
 			break;
 			
 			case CONTROL_TIMING_PARAM:
 				do{
+					uint16_t bit_mask = (UserData[1] << 8) | UserData[0];
+					TimingUpload_Set(bit_mask,&UserData[2]);
+					
 					int index = 0;
 					uint8_t buffer[3] = {0};
 					buffer[index++] = 0x00;
 					buffer[index++] = CONTROL_TIMING_PARAM >> 8;
 					buffer[index++] = CONTROL_TIMING_PARAM & 0xFF;
 					Create_Date_Frame(sequence,CONTROL_ACK,buffer,index);
-					robot_print("timing param from host\r\n");
+					robot_print("timing param from host and reply\r\n");
 				}while(0);
 			break;
 			

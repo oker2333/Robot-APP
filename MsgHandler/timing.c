@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "print.h"
 #include "timing.h"
@@ -17,26 +18,63 @@ bit7:
 */
 
 typedef enum{
-	TOF_BIT = 1 << 0,
-	IR_BIT = 1 << 1,
-	HALL_ENCODER_BIT = 1 << 2,
-	IMU_DATA_BIT = 1 << 3,
-	IMU_EULAE_BIT = 1 << 4,
-	ODOMETER_BIT = 1 << 5,
+	TOF_BIT = 0,
+	IR_BIT = 1,
+	HALL_ENCODER_BIT = 2,
+	IMU_DATA_BIT = 3,
+	IMU_EULAE_BIT = 4,
+	ODOMETER_BIT = 5,
 	BIT_MASK_NUM = 6
 }BitMask_t;
 
-typedef int Sensor_Type_t;
+static const uint16_t BitValue_List[BIT_MASK_NUM] = {1 << TOF_BIT,1 << IR_BIT,1 << HALL_ENCODER_BIT,1 << IMU_DATA_BIT,1 << IMU_EULAE_BIT,1 << ODOMETER_BIT};
 
-static uint16_t BitMask = 0x000F;
+/**********************定时上传计时器***********************/
 
-void BitMask_Set(uint16_t DataByte)
+static uint16_t TimingUpload_Timer[BIT_MASK_NUM] = {0};		/*基本单位:1ms*/
+
+static void UploadTimerUpdate(uint8_t bit_mask,uint16_t time_cycle)
 {
-	 BitMask = DataByte;
-	 robot_print("Set BitMask = 0x%x\n",BitMask);
+	 TimingUpload_Timer[bit_mask] += time_cycle;
 }
 
-static uint8_t timing_upload_frame(Sensor_Type_t Bit,uint8_t* buffer,uint8_t index)
+static void UploadTimerClear(uint8_t bit_mask)
+{
+	 TimingUpload_Timer[bit_mask] = 0x00;
+}
+
+static uint16_t UploadTimerAccess(uint8_t bit_mask)
+{
+	return TimingUpload_Timer[bit_mask];
+}
+
+/*******************定时上传参数(时间间隔)**************************/
+
+static uint8_t TimingUpload_Span[BIT_MASK_NUM] = {0};			/*基本单位:5ms*/
+
+static uint16_t UploadSpanAccess(uint8_t bit_mask)
+{
+	return TimingUpload_Span[bit_mask]*5;
+}
+
+static uint16_t BitMask = 0x0000;
+
+void TimingUpload_Set(uint16_t bit_mask,uint8_t* gap_buffer)
+{
+	BitMask = bit_mask;
+	Mem_Copy(TimingUpload_Span,gap_buffer,BIT_MASK_NUM);
+	
+	robot_print("BitMask = 0x%x;TimingUpload[] = {",BitMask);
+	for(int i = 0;i < BIT_MASK_NUM;i++)
+	{
+		 robot_print("%d ",TimingUpload_Span[i]);
+	}
+	robot_print("}\n");
+}
+
+/*********************定时上传功能API************************/
+
+static uint8_t timing_upload_frame(BitMask_t Bit,uint8_t* buffer,uint8_t index)
 {
 	 switch(Bit){
 			case TOF_BIT:
@@ -75,33 +113,46 @@ static uint8_t timing_upload_frame(Sensor_Type_t Bit,uint8_t* buffer,uint8_t ind
 	 return index;
 }
 
-void timing_uploader(void)
+static void timing_upload_unit(uint16_t bit_mask)
 {
-	 static uint32_t timestamp = 0; 
-	 Sensor_Type_t sensor_type = 0;
-	 
-	 uint32_t time_gap = TimeStamp_access() - timestamp;
-	 if(time_gap < TIMING_UPLOAD_CYCLE)
-	 {
-		  return;
-	 }
-	 timestamp = TimeStamp_access();
-	
 	 uint8_t index = 0;
 	 uint8_t UserData[32] = {0};
 	 uint16_t sequence = find_free_invoke_id();
 	 
-	 UserData[index++] = (BitMask >> 8) & 0xFF;
-	 UserData[index++] = (BitMask >> 0) & 0xFF;
+	 UserData[index++] = (bit_mask >> 8) & 0xFF;
+	 UserData[index++] = (bit_mask >> 0) & 0xFF;
 	 
-	 for(int shift_bit = 0;shift_bit < BIT_MASK_NUM;shift_bit++)
+	 for(BitMask_t shift_bit = TOF_BIT;shift_bit < BIT_MASK_NUM;shift_bit++)
 	 {
-		  sensor_type = 1 << shift_bit;
-		  if(BitMask & sensor_type)
+		  if(BitMask & BitValue_List[shift_bit])
 			{
-				 index = timing_upload_frame(sensor_type,UserData,index);
+				 index = timing_upload_frame(shift_bit,UserData,index);
 			}
 	 }
 	 
-	 Create_Date_Frame(sequence,TIMING_UPLOAD,UserData,index);
+	 Create_Date_Frame(sequence,TIMING_UPLOAD,UserData,index);	
+}
+
+void timing_uploader(void)
+{
+	 uint16_t Current_BitMask = 0x0000;
+
+	 static uint32_t timestamp = 0;
+	 uint32_t time_gap = TimeStamp_access() - timestamp;
+	 timestamp = TimeStamp_access();
+	 
+	 for(BitMask_t shift_bit = TOF_BIT;shift_bit < BIT_MASK_NUM;shift_bit++)
+	 {
+		 if(BitMask & BitValue_List[shift_bit])
+		 {
+			  UploadTimerUpdate(shift_bit,time_gap);
+			  
+			  if(UploadTimerAccess(shift_bit) >= UploadSpanAccess(shift_bit))
+				{
+					 Current_BitMask |= BitValue_List[shift_bit];
+					 UploadTimerClear(shift_bit);
+				}
+		 }
+	 }
+	 timing_upload_unit(Current_BitMask);
 }
