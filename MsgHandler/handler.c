@@ -68,7 +68,8 @@ void Create_Date_Frame(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t
 
 bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t len,uint32_t timeout_ms)
 {
-	robot_print("[datalink_frame_send]cmd = 0x%x\r\n",cmd);
+	print_info("[datalink_frame_send]cmd = 0x%x\r\n",cmd);
+	
 	uint16_t invoke_id = 0;
 	bool ret = false;
 	uint8_t fail_count = 0;
@@ -93,14 +94,19 @@ bool datalink_frame_send(msg_cmd_t cmd,Sensor_Id_t id,uint8_t* buffer,uint16_t l
 
 void Online_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
-	  int index = 0;
-	  uint8_t buffer[10] = {0};
+		print_info("[Online_Handler]cmd = 0x%x\r\n",cmd);
+		
 		switch(cmd)
 		{
 			case ONLINE_HEARTBEAT:
-				buffer[index++] = 0x00;
-			  Create_Date_Frame(sequence,ONLINE_HEARTBEAT_ACK,buffer,index);
-				print_info("Heart Beart From Host\r\n");
+				do{
+					int index = 0;
+					uint8_t buffer[1] = {0};
+					
+					buffer[index++] = 0x00;
+					Create_Date_Frame(sequence,ONLINE_HEARTBEAT_ACK,buffer,index);
+					robot_print("Heart Beart From Host\r\n");
+				}while(0);
 			break;
 			
 			case ONLINE_HEARTBEAT_ACK:
@@ -111,35 +117,47 @@ void Online_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 
 void Inquire_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
-
+		print_info("[Inquire_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
-{
-	  int index = 0;
-	  uint8_t buffer[10] = {0};
-		int16_t left_velocity = 0;
-		int16_t right_velocity = 0;
+{	
+	  print_info("[Control_Handler]cmd = 0x%x\r\n",cmd);
 		
 	  switch(cmd)
 		{
 			case CONTROL_SPEED:
-			  left_velocity = (UserData[1] << 8) | UserData[0];
-			  right_velocity = (UserData[3] << 8) | UserData[2];
-				pid_motor_control(left_velocity,right_velocity);
-			 
-				buffer[index++] = 0x00;
-				buffer[index++] = CONTROL_SPEED >> 8;
-				buffer[index++] = CONTROL_SPEED & 0xFF;
-			  Create_Date_Frame(sequence,CONTROL_ACK,buffer,index);
-				print_info("Speed From Host\r\n");
+				do{
+					int index = 0;
+					uint8_t buffer[3] = {0};
+					int16_t left_velocity = (UserData[1] << 8) | UserData[0];
+					int16_t right_velocity = (UserData[3] << 8) | UserData[2];
+					pid_motor_control(left_velocity,right_velocity);
+				 
+					buffer[index++] = 0x00;
+					buffer[index++] = CONTROL_SPEED >> 8;
+					buffer[index++] = CONTROL_SPEED & 0xFF;
+					Create_Date_Frame(sequence,CONTROL_ACK,buffer,index);
+					robot_print("speed from host\r\n");
+				}while(0);
+			break;
+			
+			case CONTROL_TIMING_PARAM:
+				do{
+					int index = 0;
+					uint8_t buffer[3] = {0};
+					buffer[index++] = 0x00;
+					buffer[index++] = CONTROL_TIMING_PARAM >> 8;
+					buffer[index++] = CONTROL_TIMING_PARAM & 0xFF;
+					Create_Date_Frame(sequence,CONTROL_ACK,buffer,index);
+					robot_print("timing param from host\r\n");
+				}while(0);
 			break;
 			
 			case CONTROL_ACK:
 				
 			break;
 		}
-		robot_print("[Control_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
@@ -149,8 +167,7 @@ void Timing_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 
 void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
-	uint16_t ack_cmd = 0x00;
-	
+	print_info("[Upload_Handler]cmd = 0x%x\r\n",cmd);	
 	
 	switch(cmd)
 	{
@@ -159,20 +176,21 @@ void Upload_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t Da
 		 break;
 		
 		 case UPLOAD_ACK:
-			 ack_cmd = (UserData[1] << 8) | UserData[2];
-		   if(ack_cmd == UPLOAD_KEY_TYPE)
-			 {
-				  monitor_ack_update(UPLOAD_KEY_TYPE,sequence);
-			 }
+			 do{
+				 uint16_t ack_cmd = (UserData[1] << 8) | UserData[2];
+				 if(ack_cmd == UPLOAD_KEY_TYPE)
+				 {
+						monitor_ack_update(UPLOAD_KEY_TYPE,sequence);
+				 }
+			 }while(0);
+
 		 break;
 	}
-	print_info("[Upload_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataLength)
 {
-	 int index = 0;
-	 uint8_t buffer[10] = {0};
+	 print_info("[OTA_Handler]cmd = 0x%x\r\n",cmd);
 
 	 static int8_t OTA_Device = -1;
 	 static uint16_t Binary_Version = 0x00;
@@ -181,47 +199,61 @@ void OTA_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t DataL
 	 switch(cmd)
 	 {
 		 case OTA_START:
-			 OTA_Device = UserData[0];
-		   Binary_Version = (UserData[1] << 8) | UserData[2];
-		   buffer[index++] = OTA_Device;
-		   buffer[index++] = SUCCEED;
-		   buffer[index++] = (cmd >> 8) & 0xff;
-		   buffer[index++] = (cmd >> 0) & 0xff;
-		   Create_Date_Frame(sequence,OTA_ACK,buffer,index);
+			 do{
+				 int index = 0;
+				 uint8_t buffer[4] = {0};
+				 
+				 OTA_Device = UserData[0];
+				 Binary_Version = (UserData[1] << 8) | UserData[2];
+				 buffer[index++] = OTA_Device;
+				 buffer[index++] = SUCCEED;
+				 buffer[index++] = (cmd >> 8) & 0xff;
+				 buffer[index++] = (cmd >> 0) & 0xff;
+				 Create_Date_Frame(sequence,OTA_ACK,buffer,index);
+			 }while(0);
 		 break;
 		 
 		 case OTA_FRAME:
-			 OTA_Device = UserData[0];
-		   uint32_t OTA_Offset = (UserData[1] << 24) | (UserData[2] << 16) | (UserData[3] << 8) | (UserData[4] << 0);
-		   uint32_t OTA_Length = (UserData[5] << 8) | (UserData[6] << 0);
-		   robot_print("OTA_Offset = %d,OTA_Length = %d\r\n",OTA_Offset,OTA_Length);
+			 do{
+				 int index = 0;
+				 uint8_t buffer[4] = {0};
+				 
+				 OTA_Device = UserData[0];
+				 uint32_t OTA_Offset = (UserData[1] << 24) | (UserData[2] << 16) | (UserData[3] << 8) | (UserData[4] << 0);
+				 uint32_t OTA_Length = (UserData[5] << 8) | (UserData[6] << 0);
+				 robot_print("OTA_Offset = %d,OTA_Length = %d\r\n",OTA_Offset,OTA_Length);
 
-		   OTA_Rev_Bytes = Download2Flash(OTA_Device,OTA_Offset,&UserData[7],OTA_Length);
-		   
-		   buffer[index++] = OTA_Device;
-		   buffer[index++] = SUCCEED;
-		   buffer[index++] = (cmd >> 8) & 0xff;
-		   buffer[index++] = (cmd >> 0) & 0xff;
-		   Create_Date_Frame(sequence,OTA_ACK,buffer,index);
+				 OTA_Rev_Bytes = Download2Flash(OTA_Device,OTA_Offset,&UserData[7],OTA_Length);
+				 
+				 buffer[index++] = OTA_Device;
+				 buffer[index++] = SUCCEED;
+				 buffer[index++] = (cmd >> 8) & 0xff;
+				 buffer[index++] = (cmd >> 0) & 0xff;
+				 Create_Date_Frame(sequence,OTA_ACK,buffer,index);
+			 }while(0);
 		 break;
 		 
 		 case OTA_END:
-			 OTA_Device = UserData[0];
-		   uint16_t CRC16 = (UserData[1] << 8) | (UserData[2] << 0);
-		   uint8_t OTA_Result = FlashBinaryCheck(OTA_Device,Binary_Version,CRC16,OTA_Rev_Bytes);
+			 do{
+				 int index = 0;
+				 uint8_t buffer[4] = {0};
+				 
+				 OTA_Device = UserData[0];
+				 uint16_t CRC16 = (UserData[1] << 8) | (UserData[2] << 0);
+				 uint8_t OTA_Result = FlashBinaryCheck(OTA_Device,Binary_Version,CRC16,OTA_Rev_Bytes);
 
-		   buffer[index++] = OTA_Device;
-		   buffer[index++] = OTA_Result;
-		   buffer[index++] = (cmd >> 8) & 0xff;
-		   buffer[index++] = (cmd >> 0) & 0xff;
-		   Create_Date_Frame(sequence,OTA_ACK,buffer,index);		 
+				 buffer[index++] = OTA_Device;
+				 buffer[index++] = OTA_Result;
+				 buffer[index++] = (cmd >> 8) & 0xff;
+				 buffer[index++] = (cmd >> 0) & 0xff;
+				 Create_Date_Frame(sequence,OTA_ACK,buffer,index);
+			 }while(0);
 		 break;
 		 
 		 case OTA_ACK:
 			 
 		 break;
 	 }	 
-	 robot_print("[OTA_Handler]cmd = 0x%x\r\n",cmd);
 }
 
 msg_handler_t Callback_Handler[CALLBACK_NUM] = {Online_Handler,Inquire_Handler,Control_Handler,Timing_Handler,Upload_Handler,OTA_Handler};

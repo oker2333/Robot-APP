@@ -71,7 +71,6 @@ uint32_t TimeStamp_access(void)
 	return g_Timer;
 }
 
-#if 0
 static uint32_t IR_Timer = 0;
 
 void IR_TimeStamp(void)
@@ -83,4 +82,3 @@ uint32_t IR_TimeSpan(void)
 {
 	 return g_Timer - IR_Timer;
 }
-#endif

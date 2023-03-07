@@ -762,6 +762,11 @@
               <FileType>1</FileType>
               <FilePath>.\MsgHandler\upload.c</FilePath>
             </File>
+            <File>
+              <FileName>param.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\MsgHandler\param.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

@@ -22,6 +22,7 @@ typedef enum{
 	
 	/* CONTROL */
 	CONTROL_SPEED = 0x0202,
+	CONTROL_TIMING_PARAM = 0x0206,
 	CONTROL_ACK = 0x8200,
 	
 	/* UPLOAD */
