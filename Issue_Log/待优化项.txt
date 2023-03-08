@@ -1,0 +1,1 @@
+主动上传---使用sequence，而不是command

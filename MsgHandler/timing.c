@@ -69,7 +69,7 @@ void TimingUpload_Set(uint16_t bit_mask,uint8_t* gap_buffer)
 	{
 		 robot_print("%d ",TimingUpload_Span[i]);
 	}
-	robot_print("}\n");
+	robot_print("}\r\n");
 }
 
 /*********************定时上传功能API************************/
@@ -78,32 +78,50 @@ static uint8_t timing_upload_frame(BitMask_t Bit,uint8_t* buffer,uint8_t index)
 {
 	 switch(Bit){
 			case TOF_BIT:
-				buffer[index++] = (tof_mm >> 0) & 0xFF;
-			  buffer[index++] = (tof_mm >> 8) & 0xFF;
+				do{
+					int16_t tof_mm = tof_mm_get();
+					buffer[index++] = (tof_mm >> 0) & 0xFF;
+					buffer[index++] = (tof_mm >> 8) & 0xFF;
+				}while(0);
 			break;
 
 			case IR_BIT:
-				buffer[index++] = (ir_value >> 0) & 0xFF;
+				do{
+					uint8_t ir_data = ir_value_get();
+					buffer[index++] = (ir_data >> 0) & 0xFF;
+				}while(0);
 			break;
 
 			case HALL_ENCODER_BIT:
-				buffer[index++] = (tof_mm >> 0) & 0xFF;
-			  buffer[index++] = (tof_mm >> 8) & 0xFF;
+				do{
+					int16_t tof_mm = tof_mm_get();
+					buffer[index++] = (tof_mm >> 0) & 0xFF;
+					buffer[index++] = (tof_mm >> 8) & 0xFF;
+				}while(0);
 			break;
 
 			case IMU_DATA_BIT:
-				buffer[index++] = (tof_mm >> 0) & 0xFF;
-			  buffer[index++] = (tof_mm >> 8) & 0xFF;
+				do{
+					int16_t tof_mm = tof_mm_get();
+					buffer[index++] = (tof_mm >> 0) & 0xFF;
+					buffer[index++] = (tof_mm >> 8) & 0xFF;
+				}while(0);
 			break;
 
 			case IMU_EULAE_BIT:
-				buffer[index++] = (tof_mm >> 0) & 0xFF;
-			  buffer[index++] = (tof_mm >> 8) & 0xFF;
+				do{
+					int16_t tof_mm = tof_mm_get();
+					buffer[index++] = (tof_mm >> 0) & 0xFF;
+					buffer[index++] = (tof_mm >> 8) & 0xFF;
+				}while(0);
 			break;
 
 			case ODOMETER_BIT:
-				buffer[index++] = (tof_mm >> 0) & 0xFF;
-			  buffer[index++] = (tof_mm >> 8) & 0xFF;
+				do{
+					int16_t tof_mm = tof_mm_get();
+					buffer[index++] = (tof_mm >> 0) & 0xFF;
+					buffer[index++] = (tof_mm >> 8) & 0xFF;
+				}while(0);
 			break;
 
 			default:

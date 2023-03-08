@@ -3,6 +3,7 @@
 
 #include "fifo.h"
 #include "handler.h"
+#include "sensor_param.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -66,9 +67,6 @@ extern SemaphoreHandle_t VL6180xSemaphore;
 extern SemaphoreHandle_t Usart1TxSemaphore;
 extern SemaphoreHandle_t Usar0TxSemaphore;
 extern SemaphoreHandle_t CommunicateSemaphore;
-
-extern uint16_t tof_mm;
-extern uint8_t ir_value;
 
 extern int16_t gs_accel_raw[MPU6050_BUFFER_SIZE][3];
 extern float gs_accel_g[MPU6050_BUFFER_SIZE][3];

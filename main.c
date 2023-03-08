@@ -346,7 +346,6 @@ static void CommunicationTask( void *pvParameters )
 		}
 }
 
-uint16_t tof_mm = 0;
 
 static void VL6180xTask( void *pvParameters )
 {
@@ -359,10 +358,10 @@ static void VL6180xTask( void *pvParameters )
 		    xSemaphoreTake(VL6180xSemaphore, portMAX_DELAY);
         VL6180x_RangeGetMeasurement(theVL6180xDev, &RangeData);
         if( RangeData.errorStatus == 0){
-					  tof_mm = RangeData.range_mm;
+						tof_mm_set(RangeData.range_mm);
         }
         else{
-            tof_mm = -1;
+            tof_mm_set(-1);
         }
 				VL6180x_RangeClearInterrupt(theVL6180xDev);
 				VL6180x_INT_Enable();
@@ -380,15 +379,13 @@ static void LogTask(void *pvParameters)
 }
 #endif
 
-uint8_t ir_value = NONE;
-
 static void RemoteControlTask(void *pvParameters)
 {
 	 int32_t VELOCITY = 80;
 
 	  while(pdTRUE)
 		{
-			 ir_value = IR_Key_Obtain();
+			 uint8_t ir_value = IR_Key_Obtain();
 			 
 			 switch(ir_value)
 			 {
@@ -425,7 +422,7 @@ static void RemoteControlTask(void *pvParameters)
 				 default:
 					 robot_print("unsupported ir key type\n");
 				 break;
-			 }			 
+			 }
 		}
 }
 

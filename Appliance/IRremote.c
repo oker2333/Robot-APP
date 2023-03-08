@@ -3,6 +3,7 @@
 
 #include "IRremote.h"
 #include "gd32f30x.h"
+#include "sensor_param.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -392,6 +393,7 @@ IR_Key_t IR_Key_Obtain(void)
 	 {
 		  if(key_value_array[i].value == ir_data.command_original)
 			{
+				 ir_value_set(key_value_array[i].key);
 				 return key_value_array[i].key;
 			}
 	 }

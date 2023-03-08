@@ -94,14 +94,16 @@ void monitor_update(uint8_t time_interval)
 				(monitor[i].retries == 0)))
 			{
 				 uint16_t sequence = find_free_invoke_id();
-				 uint8_t UserData[10] = {0};
-				 uint8_t DataLength = 0;
 				 
 				 switch(monitor[i].cmd)
 				 {
 					 case UPLOAD_KEY_TYPE:
-						 UserData[DataLength++] = key_type_backup;
-						 Create_Date_Frame(sequence,UPLOAD_KEY_TYPE,UserData,DataLength);
+						 do{
+							 uint8_t DataLength = 0;
+							 uint8_t UserData[1] = {0};
+							 UserData[DataLength++] = key_type_backup;
+							 Create_Date_Frame(sequence,UPLOAD_KEY_TYPE,UserData,DataLength);
+						 }while(0);
 					 break;
 				 }
 				 monitor[i].timer = 0;
