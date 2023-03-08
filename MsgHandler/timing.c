@@ -64,7 +64,7 @@ void TimingUpload_Set(uint16_t bit_mask,uint8_t* gap_buffer)
 	BitMask = bit_mask;
 	Mem_Copy(TimingUpload_Span,gap_buffer,BIT_MASK_NUM);
 	
-	robot_print("BitMask = 0x%x;TimingUpload[] = {",BitMask);
+	robot_print("BitMask = 0x%x,TimingUpload_Span[] = {",BitMask);
 	for(int i = 0;i < BIT_MASK_NUM;i++)
 	{
 		 robot_print("%d ",TimingUpload_Span[i]);
@@ -147,7 +147,8 @@ void timing_uploader(void)
 		 {
 			  UploadTimerUpdate(shift_bit,time_gap);
 			  
-			  if(UploadTimerAccess(shift_bit) >= UploadSpanAccess(shift_bit))
+			  if((UploadTimerAccess(shift_bit) >= UploadSpanAccess(shift_bit)) 
+					&& (UploadSpanAccess(shift_bit) != 0))
 				{
 					 Current_BitMask |= BitValue_List[shift_bit];
 					 UploadTimerClear(shift_bit);
