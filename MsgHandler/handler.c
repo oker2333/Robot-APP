@@ -156,6 +156,14 @@ void Control_Handler(uint16_t sequence,uint16_t cmd,uint8_t *UserData,uint16_t D
 					robot_print("timing param from host and reply\r\n");
 				}while(0);
 			break;
+				
+			case CONTROL_RESET:
+				do{
+					NVIC_SystemReset();
+					
+					robot_print("system reset from host and don't reply\r\n");
+				}while(0);
+			break;
 			
 			case CONTROL_ACK:
 				
