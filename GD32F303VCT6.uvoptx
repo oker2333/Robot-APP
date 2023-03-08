@@ -120,9 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name>燩鎤h
-?燩鎤h
-?</Name>
+          <Name>燩鎤??燩鎤??</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -1018,7 +1016,7 @@
 
   <Group>
     <GroupName>MsgHandler</GroupName>
-    <tvExp>1</tvExp>
+    <tvExp>0</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

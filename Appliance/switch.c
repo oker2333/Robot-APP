@@ -18,18 +18,6 @@
 #define keyENTER_CRITICAL_FROM_ISR() 	uint32_t ulReturn = taskENTER_CRITICAL_FROM_ISR()
 #define keyEXIT_CRITICAL_FROM_ISR() 	taskEXIT_CRITICAL_FROM_ISR(ulReturn)
 
-int8_t key_type = 0;
-
-void set_key_type(int8_t type)
-{
-	 key_type = type;
-}
-
-int8_t get_key_type(void)
-{
-	 return key_type;
-}
-
 typedef enum{
 	DOWN,
 	PRESS,

@@ -9,6 +9,7 @@ int16_t tof_mm_get(void);
 void ir_value_set(uint8_t data);
 uint8_t ir_value_get(void);
 
-
+void set_key_type(int8_t type);
+int8_t get_key_type(void);
 
 #endif

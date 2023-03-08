@@ -24,10 +24,20 @@ typedef enum{
 	IMU_DATA_BIT = 3,
 	IMU_EULAE_BIT = 4,
 	ODOMETER_BIT = 5,
-	BIT_MASK_NUM = 6
+	KEY_BIT = 6,
+	ORITENTION = 7,
+	BIT_MASK_NUM = 8
 }BitMask_t;
 
-static const uint16_t BitValue_List[BIT_MASK_NUM] = {1 << TOF_BIT,1 << IR_BIT,1 << HALL_ENCODER_BIT,1 << IMU_DATA_BIT,1 << IMU_EULAE_BIT,1 << ODOMETER_BIT};
+static const uint16_t BitValue_List[BIT_MASK_NUM] = 
+																	{1 << TOF_BIT,
+																	 1 << IR_BIT,
+																	 1 << HALL_ENCODER_BIT,
+																	 1 << IMU_DATA_BIT,
+																	 1 << IMU_EULAE_BIT,
+																	 1 << ODOMETER_BIT,
+																	 1 << KEY_BIT,
+																	 1 << ORITENTION};
 
 /**********************定时上传计时器***********************/
 
@@ -81,46 +91,50 @@ static uint8_t timing_upload_frame(BitMask_t Bit,uint8_t* buffer,uint8_t index)
 				do{
 					int16_t tof_mm = tof_mm_get();
 					buffer[index++] = (tof_mm >> 0) & 0xFF;
-					buffer[index++] = (tof_mm >> 8) & 0xFF;
+					buffer[index++] = (tof_mm >> 8) & 0xFF;					
 				}while(0);
 			break;
 
 			case IR_BIT:
 				do{
 					uint8_t ir_data = ir_value_get();
-					buffer[index++] = (ir_data >> 0) & 0xFF;
+					buffer[index++] = (ir_data >> 0) & 0xFF;					
 				}while(0);
 			break;
 
 			case HALL_ENCODER_BIT:
 				do{
-					int16_t tof_mm = tof_mm_get();
-					buffer[index++] = (tof_mm >> 0) & 0xFF;
-					buffer[index++] = (tof_mm >> 8) & 0xFF;
+					buffer[index++] = 0x22;
 				}while(0);
 			break;
 
 			case IMU_DATA_BIT:
 				do{
-					int16_t tof_mm = tof_mm_get();
-					buffer[index++] = (tof_mm >> 0) & 0xFF;
-					buffer[index++] = (tof_mm >> 8) & 0xFF;
+					buffer[index++] = 0x33;
 				}while(0);
 			break;
 
 			case IMU_EULAE_BIT:
 				do{
-					int16_t tof_mm = tof_mm_get();
-					buffer[index++] = (tof_mm >> 0) & 0xFF;
-					buffer[index++] = (tof_mm >> 8) & 0xFF;
+					buffer[index++] = 0x44;
 				}while(0);
 			break;
 
 			case ODOMETER_BIT:
 				do{
-					int16_t tof_mm = tof_mm_get();
-					buffer[index++] = (tof_mm >> 0) & 0xFF;
-					buffer[index++] = (tof_mm >> 8) & 0xFF;
+					buffer[index++] = 0x55;
+				}while(0);
+			break;
+				
+			case KEY_BIT:
+				do{
+					buffer[index++] = 0x66;
+				}while(0);
+			break;
+				
+			case ORITENTION:
+				do{
+					buffer[index++] = 0x77;
 				}while(0);
 			break;
 
@@ -133,16 +147,21 @@ static uint8_t timing_upload_frame(BitMask_t Bit,uint8_t* buffer,uint8_t index)
 
 static void timing_upload_unit(uint16_t bit_mask)
 {
+	 if(bit_mask == 0x00)
+	 {
+		  return;
+	 }
+
 	 uint8_t index = 0;
 	 uint8_t UserData[32] = {0};
 	 uint16_t sequence = find_free_invoke_id();
 	 
-	 UserData[index++] = (bit_mask >> 8) & 0xFF;
 	 UserData[index++] = (bit_mask >> 0) & 0xFF;
+	 UserData[index++] = (bit_mask >> 8) & 0xFF;
 	 
 	 for(BitMask_t shift_bit = TOF_BIT;shift_bit < BIT_MASK_NUM;shift_bit++)
 	 {
-		  if(BitMask & BitValue_List[shift_bit])
+		  if(bit_mask & BitValue_List[shift_bit])
 			{
 				 index = timing_upload_frame(shift_bit,UserData,index);
 			}

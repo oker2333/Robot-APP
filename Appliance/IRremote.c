@@ -4,6 +4,7 @@
 #include "IRremote.h"
 #include "gd32f30x.h"
 #include "sensor_param.h"
+#include "print.h"
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -218,7 +219,7 @@ void ir_state_machine (void)
 				 {
 					   ir_state = ADDRESS_REVERSE;
 					   ir_data.index = 0;
-					   robot_print("address_original = 0x%x\n",ir_data.address_original);
+					   print_info("address_original = 0x%x\n",ir_data.address_original);
 				 }
 		  break;
 
@@ -246,7 +247,7 @@ void ir_state_machine (void)
 				 {
 					   ir_state = COMMAND_ORIGINAL;
 					   ir_data.index = 0;
-					   robot_print("address_reverse = 0x%x\n",ir_data.address_reverse);
+					   print_info("address_reverse = 0x%x\n",ir_data.address_reverse);
 				 }
 		  break;
 
@@ -274,7 +275,7 @@ void ir_state_machine (void)
 				 {
 					   ir_state = COMMAND_REVERSE;
 					   ir_data.index = 0;
-					   robot_print("command_original = 0x%x\n",ir_data.command_original);
+					   print_info("command_original = 0x%x\n",ir_data.command_original);
 				 }
 		  break;
 
@@ -303,7 +304,7 @@ void ir_state_machine (void)
 					   ir_state = REPEAT_CODE_PRE;
 					   ir_data.index = 0;
 					   xSemaphoreGiveFromISR(IRSemaphore,&pxHigherPriorityTaskWoken);
-					   robot_print("command_reverse = 0x%x\n",ir_data.command_reverse);
+					   print_info("command_reverse = 0x%x\n",ir_data.command_reverse);
 				 }
 		  break;
 
@@ -331,7 +332,7 @@ void ir_state_machine (void)
 					  ir_data.repeat_conter++;
 					  ir_state = REPEAT_CODE_PRE;
 					  xSemaphoreGiveFromISR(IRSemaphore,&pxHigherPriorityTaskWoken);
-					  robot_print("repeat_conter = %d\n",ir_data.repeat_conter);
+					  print_info("repeat_conter = %d\n",ir_data.repeat_conter);
 				 }
 				 else
 				 {
@@ -341,7 +342,7 @@ void ir_state_machine (void)
 		  break;
 			
 		  default:
-			   robot_print("IR State Error\n");
+			   print_info("IR State Error\n");
 		  break;
 	 }
 	 portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);
