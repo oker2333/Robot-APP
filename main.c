@@ -117,20 +117,10 @@ static void VelocityMeasurementTask( void *pvParameters );
 TaskHandle_t VL6180xTaskHanle;
 static void VL6180xTask( void *pvParameters );
 
-#define TIMING_UPLOAD_TASK_PRIORITY 6
-#define TIMING_UPLOAD_TASK_STK_SIZE 1024
-TaskHandle_t TimingUploadTaskHanle;
-static void TimingUploadTask( void *pvParameters );
-
 #define COMMUNICATION_TASK_PRIORITY 7
 #define COMMUNICATION_TASK_STK_SIZE 1024
 TaskHandle_t CommunicationTaskHanle;
 static void CommunicationTask( void *pvParameters );
-
-#define ACTIVE_UPLOAD_TASK_PRIORITY 8
-#define ACTIVE_UPLOAD_TASK_STK_SIZE 1024
-TaskHandle_t ActiveUploadTaskHanle;
-static void ActiveUploadTask( void *pvParameters );
 
 #define CONSOLE_TASK_PRIORITY 9
 #define CONSOLE_TASK_STK_SIZE 512
@@ -260,8 +250,6 @@ static void InitTask( void *pvParameters )
 		#endif
 		xTaskCreate(RemoteControlTask, "RemoteControlTask", REMOTE_CONTROL_TASK_STK_SIZE, NULL, REMOTE_CONTROL_TASK_PRIORITY, &RemoteControlTaskHanle);
 		xTaskCreate(CommunicationTask, "CommunicationTask", COMMUNICATION_TASK_STK_SIZE, NULL, COMMUNICATION_TASK_PRIORITY, &CommunicationTaskHanle);
-		xTaskCreate(TimingUploadTask, "TimingUploadTask", TIMING_UPLOAD_TASK_STK_SIZE, NULL, TIMING_UPLOAD_TASK_PRIORITY, &TimingUploadTaskHanle);
-		xTaskCreate(ActiveUploadTask, "ActiveUploadTask", ACTIVE_UPLOAD_TASK_STK_SIZE, NULL, ACTIVE_UPLOAD_TASK_PRIORITY, &ActiveUploadTaskHanle);
 		xTaskCreate(ConsoleTask, "ConsoleTask", CONSOLE_TASK_STK_SIZE, NULL, CONSOLE_TASK_PRIORITY, &ConsoleTaskHanle);
 		
 		taskEXIT_CRITICAL();
@@ -450,22 +438,6 @@ static void VelocityMeasurementTask(void *pvParameters)
 			 free(cJSON_Str);
 		   #endif
 		}
-}
-
-static void TimingUploadTask(void *pvParameters)
-{
-	 while(pdTRUE)
-	 {
-		  vTaskDelay(pdMS_TO_TICKS(10));
-	 }
-}
-
-static void ActiveUploadTask(void *pvParameters)
-{
-	 while(pdTRUE)
-	 {
-		  vTaskDelay(pdMS_TO_TICKS(10));
-	 }
 }
 
 static void ConsoleTask( void *pvParameters )

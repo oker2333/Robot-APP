@@ -52,7 +52,7 @@ void monitor_ack_update(uint16_t command,uint16_t sequence)
 		  return;
 	 }
 	 
-	 if(monitor[index].id == sequence)
+	 if((monitor[index].id == sequence) || (monitor[index].cmd == command))
 		  monitor[index].ack = true;
 	 else
 		  monitor[index].ack = false;
