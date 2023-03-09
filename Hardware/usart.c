@@ -4,6 +4,7 @@
 #include "fifo.h"
 #include "gd32f30x_libopt.h"
 #include "app_config.h"
+#include "print.h"
 
 uint8_t console_buffer[CONSOLE_BUFFER_LEN] = {0};
 uint8_t console_header = 0;
@@ -282,6 +283,15 @@ uint16_t usart1_dma_recv(uint8_t *buffer)
 	uint16_t rx_len = ARRAYNUM(IAP_Buffer) - dma_transfer_number_get(DMA0, DMA_CH5);
 	Mem_Copy(buffer,IAP_Buffer,rx_len);
 	
+	#if PRINT_HOST_FRAME
+	print_info("[host]");
+	for(int i = 0;i < rx_len;i++)
+	{
+		 printf("0x%x ",IAP_Buffer[i]);
+	}
+	printf("\n");
+	#endif
+	
 	dma_memory_address_config(DMA0, DMA_CH5,(uint32_t)IAP_Buffer);
 	dma_transfer_number_config(DMA0, DMA_CH5, ARRAYNUM(IAP_Buffer));	
 	
@@ -316,14 +326,16 @@ void DMA0_Channel5_IRQHandler(void)
 /* USART */
 void USART1_IRQHandler(void)
 {
+	  BaseType_t pxHigherPriorityTaskWoken;
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_IDLE)){		//RX
 			  FIFO_Recv(Queue_Usart1_RX);
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_IDLE);
         USART_STAT0(USART1);
 			  USART_DATA(USART1);
+				xSemaphoreGiveFromISR(CommunicateSemaphore, &pxHigherPriorityTaskWoken);
+				portYIELD_FROM_ISR((pxHigherPriorityTaskWoken));
     }
     if(RESET != usart_interrupt_flag_get(USART1, USART_INT_FLAG_TC)){			//TX
-				BaseType_t pxHigherPriorityTaskWoken;
 				xSemaphoreGiveFromISR(Usart1TxSemaphore,&pxHigherPriorityTaskWoken);
 				usart_interrupt_flag_clear(USART1,USART_INT_FLAG_TC);
 				portYIELD_FROM_ISR(pxHigherPriorityTaskWoken);			

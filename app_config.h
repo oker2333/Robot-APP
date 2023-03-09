@@ -13,6 +13,8 @@
 #define FIFO_DEBUG 0
 #define JSON	0
 
+#define PRINT_HOST_FRAME 0
+
 #define BINARY_VERSION "V0.0.1"
 
 #define MPU6050_BUFFER_SIZE 10
